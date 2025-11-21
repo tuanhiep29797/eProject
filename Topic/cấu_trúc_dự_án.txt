@@ -1,0 +1,99 @@
+your_project/
+│── index.php
+│── config.php
+│── database/
+│     └── db.php
+│
+├── assets/
+│     ├── css/
+│     ├── img/
+│
+├── uploads/
+│     ├── product/
+│     ├── category/
+│     ├── brand/
+│     ├── review/
+│     └── gallery/
+│
+├── includes/
+│     ├── header.php
+│     ├── footer.php
+│     ├── nav.php
+│     ├── sidebar.php
+│     └── functions.php
+│
+├── pages/
+│     ├── home.php
+│     ├── category.php
+│     ├── brand.php
+│     ├── product_list.php
+│     ├── product_detail.php
+│     ├── cart.php
+│     ├── checkout.php
+│     ├── order_history.php
+│     ├── order_detail.php
+│     ├── review.php
+│     ├── contact.php
+|			|-- feedback.php // không cần đăng nhập cũng feedback được
+│     └── about.php
+			
+│
+├── modules/   (Backend xử lý)
+│     ├── user/
+│     │     ├── login.php
+│     │     ├── register.php
+│     │     ├── logout.php
+│     │     └── profile.php
+│     │
+│     ├── category/
+│     │     ├── add.php
+│     │     ├── edit.php
+│     │     ├── delete.php
+│     │     └── list.php
+│     │
+│     ├── brand/
+│     │     ├── add.php
+│     │     ├── edit.php
+│     │     ├── delete.php
+│     │     └── list.php
+│     │
+│     ├── product/
+│     │     ├── add.php
+│     │     ├── edit.php
+│     │     ├── delete.php
+│     │     └── list.php
+│     │
+│     ├── cart/
+│     │     ├── add.php
+│     │     ├── update.php
+│     │     └── delete.php
+│     │
+│     ├── review/
+│     │     ├── add.php
+│     │     └── delete.php
+│     │
+│     ├── order/
+│     │     ├── create.php
+│     │     ├── update_status.php
+│     │     └── list.php
+│
+├── admin/
+│     ├── home_admin.php
+│     ├── login.php
+│     ├── logout.php
+│     ├── header.php
+│     ├── sidebar.php
+│     ├── footer.php
+│     │
+│     ├── category.php
+│     ├── brand.php
+│     ├── product.php
+│     ├── order.php // sửa trạng thái đơn hàng , hủy đơn hàng 
+│     ├── review.php 
+│     └── feedback.php 
+│
+└── api/
+      ├── get_products.php
+      ├── get_categories.php
+      ├── add_cart.php
+      └── search.php
