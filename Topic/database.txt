@@ -66,21 +66,13 @@ B. Web
     quantity
     created_at
 
-8. Content (event)
+9. Review
 
-    content_id PK
-    sale
-    product_id
-    banner_id
-    banner_img
-
-9. Feedback
-
-    feedback_id PK
+    review_id PK
     order_id
     user_id 
     product_id
-    feedback_content
+    review_content
     rating
     is_public 
     created_at
@@ -89,7 +81,6 @@ B. Web
 
     order_id
     user_id
-    feedback_id
     order_status
     total_amount
     receiver
@@ -102,4 +93,12 @@ B. Web
     product_id
     quantity
     unit_price
+
+12. Feedback
+
+    feedback_id
+    username
+    email
+    phone_number
+    content
     created_at

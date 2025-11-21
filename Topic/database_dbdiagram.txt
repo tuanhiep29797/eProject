@@ -1,4 +1,6 @@
-link https://dbdiagram.io/d/69205523228c5bbc1ae9197f
+////////////////////////////////////////////////////
+// A. MEMBER
+////////////////////////////////////////////////////
 
 Table User {
   user_id int [pk, increment]
@@ -11,6 +13,10 @@ Table User {
   created_at datetime
   updated_at datetime
 }
+
+////////////////////////////////////////////////////
+// B. WEB
+////////////////////////////////////////////////////
 
 Table Category {
   category_id int [pk, increment]
@@ -52,6 +58,10 @@ Table Gallery {
   url varchar
 }
 
+////////////////////////////////////////////////////
+// CART
+////////////////////////////////////////////////////
+
 Table Cart {
   cart_id int [pk, increment]
   user_id int
@@ -60,29 +70,28 @@ Table Cart {
   created_at datetime
 }
 
-Table Content {
-  content_id int [pk, increment]
-  sale varchar
-  product_id int
-  banner_id int
-  banner_img varchar
-}
+////////////////////////////////////////////////////
+// REVIEW (đánh giá sản phẩm sau đơn hàng)
+////////////////////////////////////////////////////
 
-Table Feedback {
-  feedback_id int [pk, increment]
+Table Review {
+  review_id int [pk, increment]
   order_id int
   user_id int
   product_id int
-  feedback_content text
+  review_content text
   rating int
   is_public boolean
   created_at datetime
 }
 
+////////////////////////////////////////////////////
+// ORDER
+////////////////////////////////////////////////////
+
 Table Order {
   order_id int [pk, increment]
   user_id int
-  feedback_id int
   order_status varchar
   total_amount decimal
   receiver varchar
@@ -95,12 +104,28 @@ Table Order_detail {
   product_id int
   quantity int
   unit_price decimal
-  created_at datetime
 
   Indexes {
     (order_id, product_id) [pk]
   }
 }
+
+////////////////////////////////////////////////////
+// FEEDBACK (liên hệ người dùng - form liên hệ)
+////////////////////////////////////////////////////
+
+Table Feedback {
+  feedback_id int [pk, increment]
+  username varchar
+  email varchar
+  phone_number varchar
+  content text
+  created_at datetime
+}
+
+////////////////////////////////////////////////////
+// RELATIONSHIPS
+////////////////////////////////////////////////////
 
 Ref: Product.category_id > Category.category_id
 Ref: Product.brand_id > Brand.brand_id
@@ -111,14 +136,11 @@ Ref: Product_img.product_id > Product.product_id
 Ref: Cart.user_id > User.user_id
 Ref: Cart.product_id > Product.product_id
 
-Ref: Content.product_id > Product.product_id
-
-Ref: Feedback.order_id > Order.order_id
-Ref: Feedback.user_id > User.user_id
-Ref: Feedback.product_id > Product.product_id
+Ref: Review.order_id > Order.order_id
+Ref: Review.user_id > User.user_id
+Ref: Review.product_id > Product.product_id
 
 Ref: Order.user_id > User.user_id
-Ref: Order.feedback_id > Feedback.feedback_id
 
 Ref: Order_detail.order_id > Order.order_id
 Ref: Order_detail.product_id > Product.product_id
