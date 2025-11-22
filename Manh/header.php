@@ -102,22 +102,28 @@ $product = [
                 </div>
                 <!-- header right start -->
                 <div class="col-lg-2 header_right fs-4 d-flex gap-4">
-                    <a><i class="bi bi-search"></i></a>
+                    <div class="my-3">
+                        <a>
+                            <i class="bi bi-search"></i>
+                        </a>
+                    </div>
 
-                    <div class="header_account_wrap">
-                        <a class="account_icon text-">
-                            <i class="bi bi-person text-black"></i>
+                    <div class="header_account_wrap pb-3 mt-3">
+                        <a>
+                            <i class="bi bi-person account_icon"></i>
                         </a>
 
                         <div class="header_account">
                             <ul class="list-group">
-                                <li class="list-group-item"><a href>Register</a></li>
+                                <li class="list-group-item"><a>Register</a></li>
                                 <li class="list-group-item"><a>Login</a></li>
                             </ul>
                         </div>
                     </div>
 
-                    <a><i class="bi bi-cart"></i></a>
+                    <div class="my-3">
+                        <a><i class="bi bi-cart my-3"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
