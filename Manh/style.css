@@ -1,6 +1,6 @@
 #header_click{
     padding:15px;
-    margin: 10px;
+    margin:10px;
 }
 
 .header_menu a{
@@ -52,6 +52,24 @@
     display: block;
     animation: fadeIn 0.4s ease forwards;
 
+}
+.header_account_wrap{
+    position: relative;
+    color: black;
+}
+.account_icon i {
+    color: #000 !important;
+    transition: 0.2s ease;
+}
+.header_account{
+    font-size: 16px;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #ff8d8d;
+    border-radius: 6px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 
 @keyframes fadeIn {

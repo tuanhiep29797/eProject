@@ -3,9 +3,25 @@ include_once "changeLetter.php";
 
 $product = [
     "Đèn Nội Thất" => ["Đèn Led 1", "Đèn Led 2", "Đèn Treo Trần"],
-    "Đèn Ngoại Thất" => ["Đèn Năng Lượng Mặt Trời", "Đèn Hắt Trần", "Đèn Sân Vườn",
-    "Đèn Năng Lượng Mặt Trời", "Đèn Hắt Trần", "Đèn Sân Vườn","Đèn Năng Lượng Mặt Trời", "Đèn Hắt Trần", "Đèn Sân Vườn","Đèn Led 1", "Đèn Led 2", "Đèn Treo Trần","Đèn Led 1", "Đèn Led 2", "Đèn Treo Trần"],
-    "Đèn Trang Trí" => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"]
+    "Đèn Ngoại Thất" => [
+        "Đèn Năng Lượng Mặt Trời",
+        "Đèn Hắt Trần",
+        "Đèn Sân Vườn",
+        "Đèn Năng Lượng Mặt Trời",
+        "Đèn Hắt Trần",
+        "Đèn Sân Vườn",
+        "Đèn Năng Lượng Mặt Trời",
+        "Đèn Hắt Trần",
+        "Đèn Sân Vườn",
+        "Đèn Led 1",
+        "Đèn Led 2",
+        "Đèn Treo Trần",
+        "Đèn Led 1",
+        "Đèn Led 2",
+        "Đèn Treo Trần"
+    ],
+    "Đèn Trang Trí" => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"],
+    "Đèn Trang Trí " => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"]
 ];
 
 
@@ -13,6 +29,7 @@ $product = [
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,38 +38,39 @@ $product = [
     <link rel="stylesheet" href="./style.css">
     <title>Header</title>
 </head>
+
 <body class="bg-light">
     <header class="header header-index bg-white">
         <div class="container">
             <div class="row d-flex align-items-center">
-            <!-- header left start -->
+                <!-- header left start -->
                 <div class="header_left col-lg-1">
                     <a href="header.php">
-                        <img src="./img/img_logo.png" alt="Logo" width="90"/>
+                        <img src="./img/img_logo.png" alt="Logo" width="90" />
                     </a>
                 </div>
-            <!-- header menu start -->
+                <!-- header menu start -->
                 <div class="col-lg-9">
                     <div class="header_menu">
                         <nav class="navbar navbar-expand-lg p-0">
                             <ul class="navbar-nav gap-3 mx-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link text-success fw-bold" id ="header_click" href="#">Home</a>
+                                    <a class="nav-link text-success fw-bold" id="header_click" href="#">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id ="header_click">About Us</a>
+                                    <a class="nav-link" href="#" id="header_click">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id ="header_click">Gallery</a>
+                                    <a class="nav-link" href="#" id="header_click">Gallery</a>
                                 </li>
 
-                                <li class="nav-item position-static" id ="product_menu">
-                                    <a class="nav-link" href="#" id ="header_click">Product</a>
+                                <li class="nav-item position-static" id="product_menu">
+                                    <a class="nav-link" href="#" id="header_click">Product</a>
                                     <div class="nav-item_product px-3">
-                                        <?php foreach($product as $category => $items): ?>
-                                            <h5 class = "h5 text-success"><?= $category ?></h5>
-                                            <ul class= "nav nav-pills">
-                                                <?php foreach($items as $item): ?>
+                                        <?php foreach ($product as $category => $items): ?>
+                                            <h5 class="h5 text-success"><?= $category ?></h5>
+                                            <ul class="nav nav-pills">
+                                                <?php foreach ($items as $item): ?>
                                                     <li class="nav-item">
                                                         <a class="nav-link" href="/<?= slugify($item) ?>">
                                                             <?= $item ?>
@@ -64,10 +82,10 @@ $product = [
                                     </div>
 
                                 </li>
-                                <li class="nav-item position-relative" id ="category_menu">
-                                    <a class="nav-link" href="#" id ="header_click">Category</a>
+                                <li class="nav-item position-relative" id="category_menu">
+                                    <a class="nav-link" href="#" id="header_click">Category</a>
                                     <div class="nav-item_brand">
-                                        <?php foreach($product as $category => $items): ?>
+                                        <?php foreach ($product as $category => $items): ?>
                                             <a class="nav-link d-inline-block p-2 m-1" href="/<?= slugify($category) ?>">
                                                 <?= $category ?>
                                             </a>
@@ -76,18 +94,30 @@ $product = [
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id ="header_click">Contact Us</a>
+                                    <a class="nav-link" href="#" id="header_click">Contact Us</a>
                                 </li>
                             </ul>
                         </nav>
                     </div>
-                </div>  
+                </div>
                 <!-- header right start -->
                 <div class="col-lg-2 header_right fs-4 d-flex gap-4">
                     <a><i class="bi bi-search"></i></a>
-                    <a><i class="bi bi-person"></i></a>
+
+                    <div class="header_account_wrap">
+                        <a class="account_icon text-">
+                            <i class="bi bi-person text-black"></i>
+                        </a>
+
+                        <div class="header_account">
+                            <ul class="list-group">
+                                <li class="list-group-item"><a href>Register</a></li>
+                                <li class="list-group-item"><a>Login</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <a><i class="bi bi-cart"></i></a>
-                
                 </div>
             </div>
         </div>
@@ -95,5 +125,5 @@ $product = [
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
-</html>
 
+</html>
