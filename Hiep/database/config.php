@@ -1,0 +1,18 @@
+<?php
+    //create a sesstion
+    session_start();
+
+    //define var to connect database
+    define("HOST", "localhost:3307");
+    define("DBNAME", "db_notes");
+    define("USERNAME", "root");
+    define("PASSWORD", "");
+
+    //function check Login
+    function isLogin() {
+        if(isset($_SESSION['userInfo'])) {
+            return true;
+        }
+        return false;
+    }
+?>
