@@ -1,3 +1,11 @@
+.wpx{
+    width: 100%;
+    position: relative;
+    z-index: 0;
+    padding: 10px 24px;
+    height: 100%;
+}
+
 #header_click{
     padding:15px;
     margin:10px;
@@ -83,11 +91,89 @@
     animation: fadeIn 0.4s ease forwards;
 }
 
+.login{
+    margin:auto;
+}
+
+li.active:before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    left: 0px;
+    right: 0px;
+    bottom: -1px;
+    background-color: #26b66a;
+}
+li.active a{
+    color: #26b66a;
+}
+
+.login-button ul{
+    list-style: none;
+    display: flex;
+    height: 50px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+.login-button li{
+    flex:1;
+    text-align: center;
+    position: relative;   
+}
+.login-button a{
+    display: flex;
+    color:black;
+    font-size: 18px;
+    text-transform: uppercase;
+    align-items: center;
+    height: 100%;
+    width:100%;
+    justify-content: center;
+    font-weight: 600;
+}
+.input-test{
+    width: 100%;
+    border-radius: 4px;
+    height: 40px;
+    font-size: 15px;
+    border: 1px solid #e6e6e6 !important;
+    border-bottom: 2px solid #26b66a !important;
+    padding: 1px 10px;
+    margin-bottom: 10px;
+}
+
+#forget_password{
+    cursor: pointer;
+}
+#box_forget_password{
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+}
+.form-forget-password.show{
+    display: block !important;
+    animation: slideDown 0.4s ease forwards;
+}
+
+
 .header_right i:hover,
-.header_right a:hover{
+.header_right a:hover,
+.login-button a:hover,
+.forget_password:hover{
     color: RGB(38, 182, 106)!important; 
 }
+
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
