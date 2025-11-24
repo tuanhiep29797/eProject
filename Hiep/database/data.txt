@@ -1,0 +1,101 @@
+INSERT INTO brand (brand_id, brand_name, brand_thumbnail) VALUES
+(1, 'Philips', 'assets/img/brands/philips.png'),
+(2, 'Panasonic', 'assets/img/brands/panasonic.png'),
+(3, 'Hunter Fans', 'assets/img/brands/hunter.png'),
+(4, 'Rạng Đông', 'assets/img/brands/rangdong.png'),
+(5, 'ArtDecor', 'assets/img/brands/artdecor.png');
+
+
+INSERT INTO category (category_id, category_name, category_thumbnail) VALUES
+(1, 'CEILING LIGHTS', 'assets/img/cats/ceiling.jpg'),
+(2, 'WALL LIGHTS', 'assets/img/cats/wall.jpg'),
+(3, 'OUTDOOR LIGHTS', 'assets/img/cats/outdoor.jpg'),
+(4, 'FANS', 'assets/img/cats/fan.jpg'),
+(5, 'HOME ACCENTS', 'assets/img/cats/accent.jpg'),
+-- LED subcategories for easier filtering
+(6, 'LED - SPOTLIGHT', 'assets/img/cats/spotlight.jpg'),
+(7, 'LED - DECORATIVE LIGHTS', 'assets/img/cats/led-decor.jpg'),
+(8, 'LED - SMART LIGHTS', 'assets/img/cats/smart-led.jpg');
+
+
+
+INSERT INTO product 
+(product_id, product_title, product_description, product_price, product_quantity, product_thumbnail, category_id, brand_id, product_content) 
+VALUES 
+
+(1, 'Philips Luxury Crystal Chandelier', 'Luxury design for living rooms with sparkling light.', 5500000.00, 10, 'assets/img/products/den-chum-philips.jpg', 1, 1, 
+'<table class="table table-bordered">
+    <tr><td><strong>Power:</strong></td><td>60W</td></tr>
+    <tr><td><strong>Material:</strong></td><td>K9 Crystal, Gold-plated alloy frame</td></tr>
+    <tr><td><strong>Size:</strong></td><td>D800mm x H500mm</td></tr>
+    <tr><td><strong>Light color:</strong></td><td>Warm white (3000K)</td></tr>
+    <tr><td><strong>Warranty:</strong></td><td>24 months</td></tr>
+</table>'),
+
+
+(2, 'ArtDecor Gold Classic Wall Lamp', 'European classic design suitable for hallways and bedrooms.', 850000.00, 25, 'assets/img/products/den-tuong-art.jpg', 2, 5, 
+'<p>A refined decorative highlight for your wall.</p>
+<ul>
+    <li>Bulb base: E27 (Bulb not included)</li>
+    <li>Material: Solid cast brass</li>
+    <li>Protection rating: IP20</li>
+</ul>'),
+
+
+(3, 'Panasonic IP65 Garden Post Light', 'Fully waterproof with durable aluminum body.', 1200000.00, 15, 'assets/img/products/san-vuon-pana.jpg', 3, 2, 
+'<table class="table">
+    <tr><td>Power</td><td>12W LED</td></tr>
+    <tr><td>Protection rating</td><td>IP65 (Waterproof)</td></tr>
+    <tr><td>Height</td><td>60cm</td></tr>
+    <tr><td>Lifespan</td><td>30,000 hours</td></tr>
+</table>'),
+
+
+(4, 'Hunter Maribel Ceiling Fan With Light', 'Combines cooling and lighting with a quiet motor.', 4800000.00, 8, 'assets/img/products/quat-hunter.jpg', 4, 3, 
+'<p><strong>Key features:</strong> AirMax motor, ultra-durable, noise-free.</p>
+<ul>
+    <li>Blade span: 132cm</li>
+    <li>Blades: 5 composite wood blades</li>
+    <li>Integrated light: Yes (18W LED)</li>
+    <li>Control: Remote, 3 wind levels</li>
+</ul>'),
+
+
+(5, 'Nordic Floor Lamp for Sofa Corner', 'Minimalist design with an artistic curved frame.', 1950000.00, 12, 'assets/img/products/decor-cay-sofa.jpg', 5, 5, 
+'<p>Perfect for reading or decorating your living room corner.</p>
+<p>Height: 1.6m – 1.8m adjustable.<br>Material: Powder-coated steel + Marble base.</p>'),
+
+
+(6, 'Panasonic Magnetic Tracklight LED', 'Track spotlight with 360° adjustable angle.', 450000.00, 50, 'assets/img/products/led-spot-pana.jpg', 6, 2, 
+'<table class="table">
+    <tr><td><strong>Type:</strong></td><td>Spotlight</td></tr>
+    <tr><td><strong>Beam angle:</strong></td><td>24° / 36°</td></tr>
+    <tr><td><strong>CRI:</strong></td><td>>90 (High color accuracy)</td></tr>
+    <tr><td><strong>Application:</strong></td><td>Art lighting, product highlighting</td></tr>
+</table>'),
+
+
+(7, 'Rạng Đông Neon Flex 5M LED Strip', 'Flexible neon LED for bending into shapes or text.', 250000.00, 100, 'assets/img/products/led-neon-rd.jpg', 7, 4, 
+'<p>12V safe voltage. Bright and seamless LED. Suitable for gaming rooms or signage.</p>'),
+
+
+(8, 'Philips Hue Ambiance Smart Bulb', 'Control 16 million colors via app or voice.', 1650000.00, 20, 'assets/img/products/philips-hue.jpg', 8, 1, 
+'<ul>
+    <li><strong>Connection:</strong> Zigbee / Bluetooth</li>
+    <li><strong>Compatible with:</strong> Apple HomeKit, Google Home, Alexa</li>
+    <li><strong>Features:</strong> Sync with music/movies/games</li>
+</ul>');
+
+
+INSERT INTO product_img (product_id, url) VALUES 
+-- Images for Chandelier (ID 1)
+(1, 'assets/img/products/den-chum-detail-1.jpg'),
+(1, 'assets/img/products/den-chum-detail-2.jpg'),
+
+-- Images for Hunter Fan (ID 4)
+(4, 'assets/img/products/quat-hunter-canh.jpg'),
+(4, 'assets/img/products/quat-hunter-remote.jpg'),
+
+-- Images for Philips Hue LED (ID 8)
+(8, 'assets/img/products/philips-hue-app.jpg'),
+(8, 'assets/img/products/philips-hue-setup.jpg');
