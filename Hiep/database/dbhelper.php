@@ -65,14 +65,16 @@ const SQL_CREATE_TABLE_PRODUCT =
 		product_quantity INT NOT NULL DEFAULT 0,
 		product_thumbnail VARCHAR(255),
 
+		product_link
+
 		category_id INT,
 		brand_id INT,
 
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
-		FOREIGN KEY (category_id) REFERENCES category(category_id),
-		FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
+		FOREIGN KEY (category_id) REFERENCES category(category_id) ON DELETE CASCADE,
+		FOREIGN KEY (brand_id) REFERENCES brand(brand_id) ON DELETE CASCADE
 	)";
 
 const SQL_CREATE_TABLE_PRODUCT_IMG = 
@@ -82,7 +84,7 @@ const SQL_CREATE_TABLE_PRODUCT_IMG =
 		product_id INT NOT NULL,
 		url VARCHAR(255) NOT NULL,
 
-		FOREIGN KEY (product_id) REFERENCES product(product_id)
+		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
 const SQL_CREATE_TABLE_GALERRY = 
@@ -102,8 +104,8 @@ const SQL_CREATE_TABLE_CART =
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		
 		PRIMARY KEY (user_id, product_id),
-		FOREIGN KEY (user_id) REFERENCES user(user_id),
-		FOREIGN KEY (product_id) REFERENCES product(product_id)
+		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ,
+		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
 const SQL_CREATE_TABLE_ORDER = 
@@ -117,7 +119,7 @@ const SQL_CREATE_TABLE_ORDER =
 		address VARCHAR(255) NOT NULL,
 		order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-		FOREIGN KEY (user_id) REFERENCES user(user_id)
+		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE 
 	)";
 
 const SQL_CREATE_TABLE_ORDER_DETAIL = 
@@ -129,8 +131,8 @@ const SQL_CREATE_TABLE_ORDER_DETAIL =
 		unit_price DECIMAL(10, 2) NOT NULL,
 
 		PRIMARY KEY (order_id, product_id),
-		FOREIGN KEY (order_id) REFERENCES `order`(order_id),
-		FOREIGN KEY (product_id) REFERENCES product(product_id)
+		FOREIGN KEY (order_id) REFERENCES `order`(order_id) ON DELETE CASCADE,
+		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
 const SQL_CREATE_TABLE_REVIEW = 
@@ -145,9 +147,9 @@ const SQL_CREATE_TABLE_REVIEW =
 		is_public BOOLEAN DEFAULT TRUE,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-		FOREIGN KEY (order_id) REFERENCES `Order`(order_id),
-		FOREIGN KEY (user_id) REFERENCES User(user_id),
-		FOREIGN KEY (product_id) REFERENCES Product(product_id)
+		FOREIGN KEY (order_id) REFERENCES `Order`(order_id) ON DELETE CASCADE,
+		FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
+		FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE
 	)";
 
 const SQL_CREATE_TABLE_FEEDBACK = 
