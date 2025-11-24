@@ -1,5 +1,6 @@
 <?php
-session_start();
+
+// session_start();
 $error = [];
 if (!empty($_POST["form_type"])) {
     if($_POST["form_type"] === "login"){
