@@ -2,7 +2,7 @@ INSERT INTO brand (brand_id, brand_name, brand_thumbnail) VALUES
 (1, 'Philips', 'assets/img/brands/philips.png'),
 (2, 'Panasonic', 'assets/img/brands/panasonic.png'),
 (3, 'Hunter Fans', 'assets/img/brands/hunter.png'),
-(4, 'Rạng Đông', 'assets/img/brands/rangdong.png'),
+(4, 'Ledyi', 'assets/img/brands/Ledyi.png'),
 (5, 'ArtDecor', 'assets/img/brands/artdecor.png');
 
 
