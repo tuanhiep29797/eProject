@@ -20,9 +20,9 @@ function getConnectionInit()
 }
 
 //SQL
-const SQL_CREATE_DATABASE = "create database if not exists db_cl&d";
+const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
 
-const SQL_LOGIN = "select * from users where email = :email and password = :pwd";
+const SQL_LOGIN = "select * from user where email = :email and password = :password";
 
 const SQL_CREATE_TABLE_USER = 
 	"create table if not exists user 
@@ -65,8 +65,6 @@ const SQL_CREATE_TABLE_PRODUCT =
 		product_quantity INT NOT NULL DEFAULT 0,
 		product_thumbnail VARCHAR(255),
 
-		product_link
-
 		category_id INT,
 		brand_id INT,
 
@@ -87,8 +85,8 @@ const SQL_CREATE_TABLE_PRODUCT_IMG =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_GALERRY = 
-	"create table if not exists galerry 
+const SQL_CREATE_TABLE_GALLERY = 
+	"create table if not exists gallery 
 	(
 		img_id INT AUTO_INCREMENT PRIMARY KEY,
     	url VARCHAR(255) NOT NULL
@@ -97,13 +95,12 @@ const SQL_CREATE_TABLE_GALERRY =
 const SQL_CREATE_TABLE_CART = 
 	"create table if not exists cart 
 	(
-		cart_id INT AUTO_INCREMENT,
+		cart_id INT AUTO_INCREMENT PRIMARY KEY,
 		user_id INT NOT NULL,
 		product_id INT NOT NULL,
 		quantity INT NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 		
-		PRIMARY KEY (user_id, product_id),
 		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE ,
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
@@ -147,9 +144,9 @@ const SQL_CREATE_TABLE_REVIEW =
 		is_public BOOLEAN DEFAULT TRUE,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
 
-		FOREIGN KEY (order_id) REFERENCES `Order`(order_id) ON DELETE CASCADE,
-		FOREIGN KEY (user_id) REFERENCES User(user_id) ON DELETE CASCADE,
-		FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE
+		FOREIGN KEY (order_id) REFERENCES `order`(order_id) ON DELETE CASCADE,
+		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE,
+		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE
 	)";
 
 const SQL_CREATE_TABLE_FEEDBACK = 

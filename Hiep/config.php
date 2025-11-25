@@ -4,7 +4,7 @@
 
     //define var to connect database
     define("HOST", "localhost:3307");
-    define("DBNAME", "db_cl&d");
+    define("DBNAME", "db_cl_and_d");
     define("USERNAME", "root");
     define("PASSWORD", "");
 
