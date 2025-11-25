@@ -2,7 +2,7 @@
 include_once "../changeLetter.php";
 
 $product = [
-    "Đèn Nội Thất" => ["Đèn Led 1", "Đèn Led 2", "Đèn Treo Trần"],
+    "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
         "Đèn Năng Lượng Mặt Trời",
         "Đèn Hắt Trần",
@@ -23,9 +23,6 @@ $product = [
     "Đèn Trang Trí" => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"],
     "Đèn Trang Trí " => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"]
 ];
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +69,7 @@ $product = [
                                             <ul class="nav nav-pills">
                                                 <?php foreach ($items as $item): ?>
                                                     <li class="nav-item">
-                                                        <a class="nav-link" href="/<?= slugify($item) ?>">
+                                                        <a class="nav-link" href="/product.php/product=<?=(strtolower(str_replace(" ", "-", $item)))?>">
                                                             <?= $item ?>
                                                         </a>
                                                     </li>
@@ -86,10 +83,9 @@ $product = [
                                     <a class="nav-link" href="#" id="header_click">Category</a>
                                     <div class="nav-item_brand">
                                         <?php foreach ($product as $category => $items): ?>
-                                            <a class="nav-link d-inline-block p-2 m-1" href="/<?= slugify($category) ?>">
+                                            <a class="nav-link d-inline-block p-2 m-1" href="/product.php/product=<?=(strtolower(str_replace(" ", "-", $category)))?>">
                                                 <?= $category ?>
                                             </a>
-                                            <!-- <p class="d-inline-block p-2 m-1"><?= $category ?></p> -->
                                         <?php endforeach ?>
                                     </div>
                                 </li>
@@ -102,11 +98,6 @@ $product = [
                 </div>
                 <!-- header right start -->
                 <div class="col-lg-2 header_right fs-4 d-flex gap-4">
-                    <div class="my-3">
-                        <a>
-                            <i class="bi bi-search"></i>
-                        </a>
-                    </div>
 
                     <div class="header_account_wrap pb-3 mt-3">
                         <a>
@@ -115,8 +106,8 @@ $product = [
 
                         <div class="header_account">
                             <ul class="list-group">
-                                <li class="list-group-item"><a>Register</a></li>
                                 <li class="list-group-item"><a>Login</a></li>
+                                <li class="list-group-item"><a>Register</a></li>
                             </ul>
                         </div>
                     </div>
