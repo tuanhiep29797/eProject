@@ -30,7 +30,7 @@
 		$stmt = $conn->prepare(SQL_CREATE_TABLE_PRODUCT_IMG);
 		$stmt->execute();
 
-		$stmt = $conn->prepare(SQL_CREATE_TABLE_GALERRY);
+		$stmt = $conn->prepare(SQL_CREATE_TABLE_GALLERY);
 		$stmt->execute();
 
 		$stmt = $conn->prepare(SQL_CREATE_TABLE_CART);
