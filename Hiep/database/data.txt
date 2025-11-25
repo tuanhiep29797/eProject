@@ -1,0 +1,139 @@
+-- =============================================
+-- 1. INSERT BRANDS
+-- =============================================
+INSERT INTO brand (brand_id, brand_name, brand_thumbnail) VALUES
+    (1, 'Philips',      'assets/img/brands/philips.png'),
+    (2, 'Panasonic',    'assets/img/brands/panasonic.png'),
+    (3, 'Hunter Fans',  'assets/img/brands/hunter.png'),
+    (4, 'Ledyi',        'assets/img/brands/Ledyi.png'),
+    (5, 'ArtDecor',     'assets/img/brands/artdecor.png');
+
+-- =============================================
+-- 2. INSERT CATEGORIES
+-- =============================================
+INSERT INTO category (category_id, category_name, category_thumbnail) VALUES
+    (1, 'Ceiling Lights',           'assets/img/cats/ceiling.jpg'),
+    (2, 'Wall Lights',              'assets/img/cats/wall.jpg'),
+    (3, 'Outdoor Lights',           'assets/img/cats/outdoor.jpg'),
+    (4, 'Fans',                     'assets/img/cats/fan.jpg'),
+    (5, 'Home Accents',             'assets/img/cats/accent.jpg'),
+    (6, 'LED - Spotlights',         'assets/img/cats/spotlight.jpg'),
+    (7, 'LED - Decorative Lights',  'assets/img/cats/led-decor.jpg'),
+    (8, 'LED - Smart Lights',       'assets/img/cats/smart-led.jpg');
+
+-- =============================================
+-- 3. INSERT PRODUCTS
+-- =============================================
+INSERT INTO product (product_id, product_title, product_description, product_price, product_quantity, product_thumbnail, category_id, brand_id, product_content) VALUES
+
+    (
+        1, 
+        'Philips Luxury Crystal Chandelier', 
+        'Luxurious design for living rooms, sparkling light effect.', 
+        5500000.00, 
+        10, 
+        'assets/img/products/den-chum-philips.jpg', 
+        1, -- Cat: Ceiling Lights
+        1, -- Brand: Philips
+        '<table class="table table-bordered"> <tr><td><strong>Power:</strong></td><td>60W</td></tr> <tr><td><strong>Material:</strong></td><td>K9 Crystal, Gold-plated alloy frame</td></tr> <tr><td><strong>Dimensions:</strong></td><td>D800mm x H500mm</td></tr> <tr><td><strong>Light Color:</strong></td><td>Warm White (3000K)</td></tr> <tr><td><strong>Warranty:</strong></td><td>24 months</td></tr> </table>'
+    ),
+
+
+    (
+        2, 
+        'ArtDecor Gold Classic Wall Lamp', 
+        'European style, suitable for corridors and bedrooms.', 
+        850000.00, 
+        25, 
+        'assets/img/products/den-tuong-art.jpg', 
+        2, -- Cat: Wall Lights
+        5, -- Brand: ArtDecor
+        '<p>Creates a sophisticated accent for your wall.</p> <ul> <li>Socket: E27 (Bulb not included)</li> <li>Material: Solid cast brass</li> <li>Protection Standard: IP20</li> </ul>'
+    ),
+
+
+    (
+        3, 
+        'Panasonic IP65 Garden Bollard Light', 
+        'Absolute water resistance, durable cast aluminum housing.', 
+        1200000.00, 
+        15, 
+        'assets/img/products/san-vuon-pana.jpg', 
+        3, -- Cat: Outdoor
+        2, -- Brand: Panasonic
+        '<table class="table"> <tr><td>Power</td><td>12W LED</td></tr> <tr><td>Protection Index</td><td>IP65 (Rainproof)</td></tr> <tr><td>Height</td><td>60cm</td></tr> <tr><td>Lifespan</td><td>30,000 hours</td></tr> </table>'
+    ),
+
+
+    (
+        4, 
+        'Hunter Maribel Ceiling Fan with Light', 
+        'Combines cooling fan and lighting, quiet motor operation.', 
+        4800000.00, 
+        8, 
+        'assets/img/products/quat-hunter.jpg', 
+        4, -- Cat: Fans
+        3, -- Brand: Hunter Fans
+        '<p><strong>Highlights:</strong> Ultra-durable AirMax motor, noise-free.</p> <ul> <li>Blade Span: 132cm</li> <li>Blade Count: 5 composite wood blades</li> <li>Integrated Light: Yes (18W LED Bulb)</li> <li>Control: Remote with 3 wind speeds</li> </ul>'
+    ),
+
+
+    (
+        5, 
+        'Nordic Sofa Corner Decor Standing Lamp', 
+        'Minimalist design, artistic curved body creates a focal point.', 
+        1950000.00, 
+        12, 
+        'assets/img/products/decor-cay-sofa.jpg', 
+        5, -- Cat: Home Accents
+        5, -- Brand: ArtDecor
+        '<p>Suitable for reading or decorating living room corners.</p> <p>Height: 1.6m - 1.8m (adjustable).<br>Material: Powder-coated steel + Marble base.</p>'
+    ),
+
+
+    (
+        6, 
+        'Panasonic Magnetic LED Track Light', 
+        'Spotlight with flexible 360-degree adjustable angle.', 
+        450000.00, 
+        50, 
+        'assets/img/products/led-spot-pana.jpg', 
+        6, -- Cat: LED Spotlight
+        2, -- Brand: Panasonic
+        '<table class="table"> <tr><td><strong>Type:</strong></td><td>Spotlight</td></tr> <tr><td><strong>Beam Angle:</strong></td><td>24 degrees / 36 degrees</td></tr> <tr><td><strong>CRI:</strong></td><td>>90 (True Color)</td></tr> <tr><td><strong>Application:</strong></td><td>Art lighting, product lighting, accenting</td></tr> </table>'
+    ),
+
+
+    (
+        7, 
+        'Rang Dong LED Neon Flex Strip 5M', 
+        'Flexible, easy to bend for lettering or decor shapes.', 
+        250000.00, 
+        100, 
+        'assets/img/products/led-neon-rd.jpg', 
+        7, -- Cat: LED Decor
+        4, -- Brand: Ledyi
+        '<p>Safe 12V voltage. Vibrant colors, no visible LED dots. Suitable for Gaming room decoration or signage.</p>'
+    ),
+
+
+    (
+        8, 
+        'Philips Hue Ambiance Smart Bulb', 
+        'Control 16 million colors via phone or voice.', 
+        1650000.00, 
+        20, 
+        'assets/img/products/philips-hue.jpg', 
+        8, -- Cat: LED Smart
+        1, -- Brand: Philips
+        '<ul> <li><strong>Connection:</strong> Zigbee / Bluetooth</li> <li><strong>Compatibility:</strong> Apple HomeKit, Google Home, Alexa</li> <li><strong>Features:</strong> Sync light with music/movies/games</li> </ul>'
+    );
+
+
+INSERT INTO product_img (product_id, url) VALUES
+    (1, 'assets/img/products/den-chum-detail-1.jpg'),
+    (1, 'assets/img/products/den-chum-detail-2.jpg'),
+    (4, 'assets/img/products/quat-hunter-canh.jpg'),
+    (4, 'assets/img/products/quat-hunter-remote.jpg'),
+    (8, 'assets/img/products/philips-hue-app.jpg'),
+    (8, 'assets/img/products/philips-hue-setup.jpg');
