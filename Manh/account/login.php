@@ -1,11 +1,18 @@
 <?php
 require_once("../database/dbhelper.php");
 session_start();
-$error = [];
+$loginErrors = [];
 if (!empty($_POST["form_type"])) {
     if ($_POST["form_type"] === "login") {
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+        $email = trim($_POST["email"] ?? "");
+        $password = $_POST["password"] ?? "";
+
+        if ($email === "") $loginErrors[] = "Email is required.";
+        if ($password === "") $loginErrors[] = "Password is required.";
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $loginErrors[] = "Invalid email format.";
+        }
 
         try {
             $conn = getConnection();
@@ -17,10 +24,16 @@ if (!empty($_POST["form_type"])) {
             $dataList = $stmt->fetchAll();
 
             if ($dataList == null || count($dataList) == 0) {
-                $error['email'] = "Email or password is not correr";
-                $error['pwd'] = "Email or password is not correr";
+                $loginErrors[] = "Email or password is not correct.";
             } else {
-                $std = $dataList[0];
+                $user = $dataList[0];
+                if (!password_verify($password, $user['password'])) {
+                    $loginErrors[] = "Email or password is not correct.";
+                } else {
+                    $_SESSION['user'] = $user;
+                    header("Location: ../home.php"); 
+                    exit();
+                }
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -29,8 +42,10 @@ if (!empty($_POST["form_type"])) {
     }
 
     if ($_POST["form_type"] === "forget") {
-        $email_forget = $_POST["email_forget"];
-        $error['email_forget'] = "$email_forget A password reset email has been sent to the administrator. Thank you!";
+        $email_forget = trim($_POST["email_forget"] ?? "");
+   
+        $forgetErrors = "Hi $email_forget, A password reset email has been sent to the administrator. Thank you!";
+          
     }
 }
 
@@ -70,8 +85,12 @@ if (!empty($_POST["form_type"])) {
                                 <p id="forget_password">Forget Password?</p>
                                 <button class="btn btn-success w-100 mt-4" type="submit">Login</button>
                             </form>
-                            <?php if (isset($error["email"]) || isset($error["pwd"])): ?>
-                                <label class="text-danger mt-3"><?= htmlspecialchars($error['email'] ?? $error['pwd'] ?? '') ?></label>
+                            <?php if (!empty($loginErrors)): ?>
+                                <div class="text-danger mt-3">
+                                    <?php foreach ($loginErrors as $err): ?>
+                                        <p><?= htmlspecialchars($err) ?></p>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php endif; ?>
                             <div class="register-login d-flex mt-4 justify-content-between">
                                 <p style="cursor: pointer;">Don't have an Account?</p>
@@ -85,9 +104,9 @@ if (!empty($_POST["form_type"])) {
                                 <input type="email" placeholder="Email" name="email_forget" required class="input-login">
                                 <button class="btn btn-success w-100 fw-bold" type="submit">Submit</button>
                             </form>
-                            <?php if (isset($error['email_forget'])): ?>
+                            <?php if (!empty($forgetErrors)): ?>
                                 <script>
-                                    alert("<?php echo $error['email_forget']; ?>");
+                                    alert("<?= $forgetErrors?>");
                                 </script>
                             <?php endif; ?>
                         </div>
@@ -99,16 +118,16 @@ if (!empty($_POST["form_type"])) {
     <script>
         const forget_password = document.getElementById("forget_password");
         const box_forget_password = document.getElementById("box_forget_password");
-        
+
         const password = document.getElementById("password");
         const eye_icon = document.getElementById("eyeIcon");
 
         document.getElementById("togglePassword").onclick = function() {
-            if(password.type === "password"){
+            if (password.type === "password") {
                 password.type = "text"
                 eye_icon.classList.remove("bi-eye-slash");
                 eye_icon.classList.add("bi-eye");
-            }else {
+            } else {
                 password.type = "password"
                 eye_icon.classList.remove("bi-eye");
                 eye_icon.classList.add("bi-eye-slash");
