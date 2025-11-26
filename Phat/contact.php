@@ -5,12 +5,11 @@ require_once('./database/dbhelper.php');
 $msg = "";   
 $msgType = ""; 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['username'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $phone = $_POST['phone_number'] ?? '';
-    $content = $_POST['content'] ?? '';
-
+if (isset($_POST)) {
+    $name    = trim($_POST['username'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
+    $phone   = trim($_POST['phone_number'] ?? '');
+    $content = trim($_POST['content'] ?? '');
     if ($name && $email && $content) {
         try {
             $conn = getConnection();
