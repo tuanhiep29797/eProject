@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
@@ -21,6 +23,12 @@ $product = [
     "Đèn Trang Trí" => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"],
     "Đèn Trang Trí " => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"]
 ];
+$check_user = false;
+if(!empty($_SESSION["user"])){
+    $check_user = true;
+    $user = $_SESSION["user"];
+}
+$login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,8 +108,8 @@ $product = [
                         <a><i class="bi bi-cart my-3"></i></a>
                     </div>
                     <div class="header_account_wrap pb-3 mt-3" style="cursor: pointer;">
-                        <div class="header_account_login d-flex align-items-center gap-1">
-                            <span class="fs-6 header-login-text">Login/Register</span>
+                        <div class="header_account_login d-flex align-items-center gap-2">
+                            <span class="fs-6 header-login-text"><?= htmlspecialchars($login) ?></span>
                             <i class="bi bi-person account_icon"></i>
                         </div>
                         <div class="header_account">

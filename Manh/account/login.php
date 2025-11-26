@@ -31,7 +31,7 @@ if (!empty($_POST["form_type"])) {
                     $loginErrors[] = "Email or password is not correct.";
                 } else {
                     $_SESSION['user'] = $user;
-                    header("Location: ../home.php"); 
+                    header("Location: ../pages/home.php"); 
                     exit();
                 }
             }
