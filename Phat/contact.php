@@ -152,7 +152,7 @@ $company_info = [
                         <li class="mb-2"><i class="bi bi-envelope-fill me-2 text-success"></i> <?= $company_info['email'] ?></li>
                     </ul>
                     <div class="mt-3">
-                    <img src="./img/logo_bct.webp" width="150" alt="Ministry of Industry and Trade Notification">
+                    <img src="./img/image.png" width="150" alt="Ministry of Industry and Trade Notification">
                 </div>
                 </div>
 
