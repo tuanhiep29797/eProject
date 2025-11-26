@@ -38,7 +38,7 @@ VALUES
         'Elegant design for living room, sparkling light.',
         5500000.00,
         10,
-        'assets/img/products/p1.jpg',
+        'assets/img/product/1/1.png',
         1, -- Category: Ceiling Lights
         1, -- Brand: Philips
         '<table border="1"><tr><td>Power:</td><td>60W</td></tr><tr><td>Material:</td><td>K9 Crystal</td></tr></table>'
