@@ -99,16 +99,15 @@ $product = [
                     <div class="my-3">
                         <a><i class="bi bi-cart my-3"></i></a>
                     </div>
-                    <div class="header_account_wrap pb-3 mt-3 d-flex align-items-center gap-1" style="cursor: pointer;">
-                        <span class="fs-6 header-login-text">Login/Register</span>
-                        <a class="">
+                    <div class="header_account_wrap pb-3 mt-3" style="cursor: pointer;">
+                        <div class="header_account_login d-flex align-items-center gap-1">
+                            <span class="fs-6 header-login-text">Login/Register</span>
                             <i class="bi bi-person account_icon"></i>
-                        </a>
-
+                        </div>
                         <div class="header_account">
                             <ul class="list-group">
-                                <li class="list-group-item border-0"><a>Register</a></li>
                                 <li class="list-group-item border-0"><a>Login</a></li>
+                                <li class="list-group-item border-0"><a>Register</a></li>
                             </ul>
                         </div>
                     </div>
