@@ -15,7 +15,7 @@
             $stmt -> bindParam(':updated_at', $today);
             $stmt -> execute();
 
-            header('Location: ../../admin/php');
+            header('Location: ../../admin.php');
         }
         catch (PDOException $e)
         {
