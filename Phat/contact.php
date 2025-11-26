@@ -1,5 +1,4 @@
 <?php
-// --- 1. PHP LOGIC (XỬ LÝ GỬI FORM) ---
 session_start();
 require_once('./database/dbhelper.php'); 
 
@@ -32,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// --- 2. DATA FOR FOOTER ---
 $company_info = [
     "name" => "GS LIGHTING",
     "desc" => "Providing modern, energy-saving lighting solutions for your home.",
@@ -50,14 +48,11 @@ $company_info = [
     <title>Contact Us - GS Lighting</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    
-    <link rel="stylesheet" href="style.css">
-    
     <link rel="stylesheet" href="contact.css">
 </head>
 <body>
 
-    <?php include '../web dự án/index.php'; ?>
+    <?php include '../Manh/includes/header.php'; ?>
     <div class="contact-banner">
         <div class="container">
             <h2>Contact Us</h2>
