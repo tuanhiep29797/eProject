@@ -1,5 +1,4 @@
 <?php
-echo "tets";
 require_once("../database/dbhelper.php");
 session_start();
 $loginErrors = [];
