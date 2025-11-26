@@ -34,18 +34,18 @@ $product = [
     <title>Header</title>
 </head>
 
-<body class="bg-light">
-    <header class="header header-index bg-white">
+<body>
+    <header class="header">
         <div class="container">
-            <div class="row d-flex align-items-center">
+            <div class="row d-flex align-items-center header-index ">
                 <!-- header left start -->
-                <div class="header_left col-lg-1">
+                <div class="header_left col-lg-2 p-5 py-3">
                     <a href="header.php">
-                        <img src="../img/img_logo.png" alt="Logo" width="90" />
+                        <img src="../img/img_logo1.png" alt="Logo" class="logo-box"/>
                     </a>
                 </div>
                 <!-- header menu start -->
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <div class="header_menu">
                         <nav class="navbar navbar-expand-lg p-0">
                             <ul class="navbar-nav gap-3 mx-auto">
@@ -95,23 +95,22 @@ $product = [
                     </div>
                 </div>
                 <!-- header right start -->
-                <div class="col-lg-2 header_right fs-4 d-flex gap-4">
-
-                    <div class="header_account_wrap pb-3 mt-3">
-                        <a>
+                <div class="col-lg-2 header_right fs-4 d-flex gap-3 justify-content-end pe-5">
+                    <div class="my-3">
+                        <a><i class="bi bi-cart my-3"></i></a>
+                    </div>
+                    <div class="header_account_wrap pb-3 mt-3 d-flex align-items-center gap-1" style="cursor: pointer;">
+                        <span class="fs-6 header-login-text">Login/Register</span>
+                        <a class="">
                             <i class="bi bi-person account_icon"></i>
                         </a>
 
                         <div class="header_account">
                             <ul class="list-group">
-                                <li class="list-group-item"><a>Login</a></li>
-                                <li class="list-group-item"><a>Register</a></li>
+                                <li class="list-group-item border-0"><a>Register</a></li>
+                                <li class="list-group-item border-0"><a>Login</a></li>
                             </ul>
                         </div>
-                    </div>
-
-                    <div class="my-3">
-                        <a><i class="bi bi-cart my-3"></i></a>
                     </div>
                 </div>
             </div>
