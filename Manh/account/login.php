@@ -1,43 +1,59 @@
 <?php
+require_once("../database/dbhelper.php");
 session_start();
-$error = [];
+$loginErrors = [];
 if (!empty($_POST["form_type"])) {
-    if($_POST["form_type"] === "login"){
-        $email = $_POST["email"];
-        $password = $_POST["password"];
+    if ($_POST["form_type"] === "login") {
+        $email = trim($_POST["email"] ?? "");
+        $password = $_POST["password"] ?? "";
 
-        try{
+        if ($email === "") $loginErrors[] = "Email is required.";
+        if ($password === "") $loginErrors[] = "Password is required.";
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $loginErrors[] = "Invalid email format.";
+        }
+
+        try {
             $conn = getConnection();
             $stmt = $conn->prepare("select * from user where email = :email");
             $stmt->bindParam(":email", $email);
-		    $stmt->execute();
+            $stmt->execute();
 
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-		    $dataList = $stmt->fetchAll();
+            $dataList = $stmt->fetchAll();
 
-            if($dataList == null || count($dataList) == 0) {
-            $error['email'] = "Email or password is not correr";
-            $error['pwd'] = "Email or password is not correr";
-        }
-        $std = $dataList[0];
-
-        }catch(PDOException $e){
-            echo "Error: ".$e->getMessage();
+            if ($dataList == null || count($dataList) == 0) {
+                $loginErrors[] = "Email or password is not correct.";
+            } else {
+                $user = $dataList[0];
+                if (!password_verify($password, $user['password'])) {
+                    $loginErrors[] = "Email or password is not correct.";
+                } else {
+                    $_SESSION['user'] = $user;
+                    header("Location: ../home.php"); 
+                    exit();
+                }
+            }
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
         $conn = null;
     }
 
     if ($_POST["form_type"] === "forget") {
-        $email_forget = $_POST["email_forget"];
-
+        $email_forget = trim($_POST["email_forget"] ?? "");
+   
+        $forgetErrors = "Hi $email_forget, A password reset email has been sent to the administrator. Thank you!";
+          
     }
-
 }
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,40 +62,54 @@ if (!empty($_POST["form_type"])) {
     <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
     <title>Login</title>
 </head>
+
 <body>
-    <?php require "../includes/header.php"; ?>
-    <!-- Login start  -->
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12 col-md-6 col-12" style="margin:auto;">
-                <div class ="login wpx">
-                    <div class="login-button">
-                        <ul class="list-unstyled">
-                            <li class="active">
-                                <a href="#" class="text-decoration-none">Login</a>
-                            </li>
-                            <li>
-                                <a href="/account/register" class="text-decoration-none">Register</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="form-login">
-                        <form method="POST">
-                            <div class="form-group mb-3">
-                                <input type="hidden" name="form_type" value="login">
-                                <input type="email" placeholder="Email" name = "email" required class="form-control input-test">
-                                <input type="password" placeholder="Password" name = "password" required class="form-control input-test">
+    <div class="login">
+        <?php require "../includes/header.php"; ?>
+        <!-- Login start  -->
+        <div class="container">
+            <div class="row mt-5 pt-5 ">
+                <div class="col-lg-5 col-sm-12 col-md-6 col-12" style="margin:auto;">
+                    <div class="login-form wpx">
+                        <h3 class="text-center py-3">LOGIN</h3>
+                        <div class="form-login ">
+                            <form method="POST">
+                                <div class="form-group mb-3 fw-bold position-relative">
+                                    <input type="hidden" name="form_type" value="login">
+                                    <input type="email" placeholder="Email" name="email" required class="input-login">
+                                    <input type="password" placeholder="Password" name="password" id="password" required class="input-login mb-0">
+                                    <span id="togglePassword" class="togglePassword">
+                                        <i class="bi bi-eye-slash" id="eyeIcon"></i>
+                                    </span>
+                                </div>
+                                <p id="forget_password">Forget Password?</p>
+                                <button class="btn btn-success w-100 mt-4" type="submit">Login</button>
+                            </form>
+                            <?php if (!empty($loginErrors)): ?>
+                                <div class="text-danger mt-3">
+                                    <?php foreach ($loginErrors as $err): ?>
+                                        <p><?= htmlspecialchars($err) ?></p>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="register-login d-flex mt-4 justify-content-between">
+                                <p style="cursor: pointer;">Don't have an Account?</p>
+                                <a href="./register.php" class="text-decoration-none fw-semibold text-dark"><strong>Register</strong></a>
                             </div>
-                            <button class="btn btn-success w-100" type="submit">Login</button>
-                        </form>
-                        <p class="text-center my-3 forget_password" id ="forget_password">Forget Password?</p>
-                    </div>
-                    <div class="form-forget-password d-none" id="box_forget_password">
-                        <form method="POST">
-                            <input type="hidden" name="form_type" value="forget">
-                            <input type="email" placeholder="Email" name = "email_forget" required class="form-control input-test">
-                            <button class="btn btn-success w-100" type="submit">Retrieve Password</button>
-                        </form>
+                        </div>
+                        <div class="form-forget-password d-none" id="box_forget_password">
+                            <form method="POST">
+                                <h3 class="text-center">Retrieve Password</h3>
+                                <input type="hidden" name="form_type" value="forget">
+                                <input type="email" placeholder="Email" name="email_forget" required class="input-login">
+                                <button class="btn btn-success w-100 fw-bold" type="submit">Submit</button>
+                            </form>
+                            <?php if (!empty($forgetErrors)): ?>
+                                <script>
+                                    alert("<?= $forgetErrors?>");
+                                </script>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,9 +119,25 @@ if (!empty($_POST["form_type"])) {
         const forget_password = document.getElementById("forget_password");
         const box_forget_password = document.getElementById("box_forget_password");
 
-        forget_password.onclick = function(){
+        const password = document.getElementById("password");
+        const eye_icon = document.getElementById("eyeIcon");
+
+        document.getElementById("togglePassword").onclick = function() {
+            if (password.type === "password") {
+                password.type = "text"
+                eye_icon.classList.remove("bi-eye-slash");
+                eye_icon.classList.add("bi-eye");
+            } else {
+                password.type = "password"
+                eye_icon.classList.remove("bi-eye");
+                eye_icon.classList.add("bi-eye-slash");
+            }
+        }
+
+        forget_password.onclick = function() {
             box_forget_password.classList.toggle("show");
         }
     </script>
 </body>
+
 </html>
