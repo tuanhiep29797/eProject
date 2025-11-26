@@ -1,6 +1,4 @@
 <?php
-include_once "../changeLetter.php";
-
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
