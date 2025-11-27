@@ -1,7 +1,7 @@
 <?php
 
 $company_info = [
-    "name" => "GS LIGHTING",
+    "name" => "LICERIA & CO",
     "desc" => "We provide modern, energy-saving, and highly aesthetic lighting solutions for your home.",
     "address" => "No. 123, ABC Street, Hanoi City",
     "phone" => "(+84) 987 654 321",
