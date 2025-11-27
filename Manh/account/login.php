@@ -31,7 +31,7 @@ if (!empty($_POST["form_type"])) {
                     $loginErrors[] = "Email or password is not correct.";
                 } else {
                     $_SESSION['user'] = $user;
-                    header("Location: ../home.php"); 
+                    header("Location: ../pages/home.php"); 
                     exit();
                 }
             }
@@ -76,7 +76,8 @@ if (!empty($_POST["form_type"])) {
                             <form method="POST">
                                 <div class="form-group mb-3 fw-bold position-relative">
                                     <input type="hidden" name="form_type" value="login">
-                                    <input type="email" placeholder="Email" name="email" required class="input-login">
+                                    <label for='email' class="email_login"><i class="bi bi-envelope"></i></label>
+                                    <input type="email" placeholder="Email" name="email" id='email' required class="input-login">
                                     <input type="password" placeholder="Password" name="password" id="password" required class="input-login mb-0">
                                     <span id="togglePassword" class="togglePassword">
                                         <i class="bi bi-eye-slash" id="eyeIcon"></i>

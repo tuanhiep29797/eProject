@@ -1,5 +1,5 @@
 <?php
-include_once "../changeLetter.php";
+session_start();
 
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
@@ -23,6 +23,12 @@ $product = [
     "Đèn Trang Trí" => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"],
     "Đèn Trang Trí " => ["Đèn Neon", "Đèn Dây LED", "Đèn Cầu Vồng"]
 ];
+$check_user = false;
+if(!empty($_SESSION["user"])){
+    $check_user = true;
+    $user = $_SESSION["user"];
+}
+$login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,18 +42,18 @@ $product = [
     <title>Header</title>
 </head>
 
-<body class="bg-light">
-    <header class="header header-index bg-white">
+<body>
+    <header class="header">
         <div class="container">
-            <div class="row d-flex align-items-center">
+            <div class="row d-flex align-items-center header-index ">
                 <!-- header left start -->
-                <div class="header_left col-lg-1">
+                <div class="header_left col-lg-2 p-5 py-3">
                     <a href="header.php">
-                        <img src="../img/img_logo.png" alt="Logo" width="90" />
+                        <img src="../img/img_logo1.png" alt="Logo" class="logo-box"/>
                     </a>
                 </div>
                 <!-- header menu start -->
-                <div class="col-lg-9">
+                <div class="col-lg-8">
                     <div class="header_menu">
                         <nav class="navbar navbar-expand-lg p-0">
                             <ul class="navbar-nav gap-3 mx-auto">
@@ -97,23 +103,21 @@ $product = [
                     </div>
                 </div>
                 <!-- header right start -->
-                <div class="col-lg-2 header_right fs-4 d-flex gap-4">
-
-                    <div class="header_account_wrap pb-3 mt-3">
-                        <a>
-                            <i class="bi bi-person account_icon"></i>
-                        </a>
-
-                        <div class="header_account">
-                            <ul class="list-group">
-                                <li class="list-group-item"><a>Login</a></li>
-                                <li class="list-group-item"><a>Register</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
+                <div class="col-lg-2 header_right fs-4 d-flex gap-3 justify-content-end pe-5">
                     <div class="my-3">
                         <a><i class="bi bi-cart my-3"></i></a>
+                    </div>
+                    <div class="header_account_wrap pb-3 mt-3" style="cursor: pointer;">
+                        <div class="header_account_login d-flex align-items-center gap-2">
+                            <span class="fs-6 header-login-text"><?= htmlspecialchars($login) ?></span>
+                            <i class="bi bi-person account_icon"></i>
+                        </div>
+                        <div class="header_account">
+                            <ul class="list-group">
+                                <li class="list-group-item border-0"><a>Login</a></li>
+                                <li class="list-group-item border-0"><a>Register</a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
