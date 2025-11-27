@@ -60,12 +60,12 @@
                     <td><?= $item['brand_thumbnail'] ?>?></td>
                     <td>
                         <div class="d-flex gap-2 mb-3">
-                            <a href="edit_brand.php">
+                            <a href="edit_brand.php?id=<?= $item['brand_id'] ?>">
                                 <button class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                             </a>
-                            <a href="delete_brand.php">
+                            <a href="delete_brand.php?id=<?= $item['brand_id'] ?>">
                                 <button class="btn btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </button>

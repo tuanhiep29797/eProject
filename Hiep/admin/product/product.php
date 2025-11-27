@@ -71,12 +71,12 @@
                     <td><?= $item['brand_id'] ?>?></td>
                     <td>
                         <div class="d-flex gap-2 mb-3">
-                            <a href="edit_product.php">
+                            <a href="edit_product.php?id=<?= $item['product_id'] ?>">
                                 <button class="btn btn-primary">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
                             </a>
-                            <a href="delete_product.php">
+                            <a href="delete_product.php?id=<?= $item['product_id'] ?>">
                                 <button class="btn btn-outline-danger">
                                     <i class="bi bi-trash"></i>
                                 </button>

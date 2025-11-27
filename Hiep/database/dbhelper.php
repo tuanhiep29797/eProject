@@ -173,7 +173,12 @@ const SQL_CREATE_TABLE_FEEDBACK =
 
 	const SQL_GET_PRODUCT = "select * from product";
 	const SQL_GET_PRODUCT_BY_ID = "select * from product where id = :id";
+
+	const SQL_GET_FEEDBACK = "select * from feedback";
 	
+	const SQL_GET_ORDER = "select * from order";
+	const SQL_GET_ORDER_BY_ID = "select * from order where id = :id";
+
 	//SQL ADD TABLE
 
 	const SQL_ADD_CATEGORY = 
@@ -221,6 +226,12 @@ const SQL_CREATE_TABLE_FEEDBACK =
 		category_id = :category_id,
 		brand_id = :brand_id
 	where id = :id
+	";
+
+	const SQL_UPDATE_ORDER = 
+	"update from order 
+	set order_status = :order_status
+	where id = :id	
 	";
 
 	//SQL DELETE TABLE
