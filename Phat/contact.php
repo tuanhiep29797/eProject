@@ -47,7 +47,7 @@ $company_info = [
     <title>Contact Us - GS Lighting</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="./css/contact.css">
 </head>
 <body>
 
