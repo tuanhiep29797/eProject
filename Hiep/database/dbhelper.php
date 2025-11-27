@@ -177,9 +177,14 @@ const SQL_CREATE_TABLE_FEEDBACK =
 
 	//SQL UPDATE TABLE
 
-	const SQL_UPDATGE_CATEGORY = 
+	const SQL_UPDATE_CATEGORY = 
 	"update from category 
 	set category_name = :category_name, 
 		category_thumbnail = :category_thumbnail
 	where id = :id";
+
+	//SQL DELETE TABLE
+
+	const SQL_DELETE_CATEGORY = "delete from category where id = :id";
+
 ?>

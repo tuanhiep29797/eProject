@@ -2,8 +2,8 @@
 session_start();
 require_once('./database/dbhelper.php'); 
 
-$msg = "";   
-$msgType = ""; 
+$msg = "";
+$msgType = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['username'] ?? '';
