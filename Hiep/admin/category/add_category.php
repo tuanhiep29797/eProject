@@ -35,7 +35,7 @@
 </head>
 <body>
     <h1>ADD NEW CATEGORY</h1>
-    <a href="../home_admin.php"><button>ADMIN PAGE</button></a>
+    <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 
     <form method="post">
         <div class="mb-3">

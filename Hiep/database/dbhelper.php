@@ -167,6 +167,10 @@ const SQL_CREATE_TABLE_FEEDBACK =
 
 	const SQL_GET_CATEGORY = "select * from category where id = :id";
 
+	const SQL_GET_BRAND = "select * from brand where id = :id";
+
+	const SQL_GET_PRODUCT = "select * from product where id = :id";
+	
 	//SQL ADD TABLE
 
 	const SQL_ADD_CATEGORY = 
@@ -193,10 +197,34 @@ const SQL_CREATE_TABLE_FEEDBACK =
 	"update from category 
 	set category_name = :category_name, 
 		category_thumbnail = :category_thumbnail
-	where id = :id";
+	where id = :id
+	";
+
+	const SQL_UPDATE_BRAND = 
+	"update from brand 
+	set brand_name = :brand_name, 
+		brand_thumbnail = :brand_thumbnail
+	where id = :id
+	";
+
+	const SQL_UPDATE_PRODUCT = 
+	"update from product
+	set product_title = :product_title,
+		product_description = :product_description,
+		product_price = :product_price,
+		product_content = :product_content,
+		product_quantity = :product_quantity,
+		product_thumbnail = :product_thumbnail,
+		category_id = :category_id,
+		brand_id = :brand_id
+	where id = :id
+	";
 
 	//SQL DELETE TABLE
 
 	const SQL_DELETE_CATEGORY = "delete from category where id = :id";
 
+	const SQL_DELETE_BRAND = "delete from brand where id = :id";
+	
+	const SQL_DELETE_PRODUCT = "delete from product where id = :id";
 ?>
