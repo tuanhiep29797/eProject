@@ -2,25 +2,25 @@
 -- PHẦN 1: THÊM THƯƠNG HIỆU (BRANDS)
 -- ================================================================
 INSERT INTO brand (brand_id, brand_name, brand_thumbnail) VALUES
-    (1, 'Philips',      'assets/img/brands/philips.png'),
-    (2, 'Panasonic',    'assets/img/brands/panasonic.png'),
-    (3, 'Hunter Fans',  'assets/img/brands/hunter.png'),
-    (4, 'Ledyi',        'assets/img/brands/Ledyi.png'),
-    (5, 'ArtDecor',     'assets/img/brands/artdecor.png'),
-    (6, 'Xiaomi',       'assets/img/brands/xiaomi.png');
+    (1, 'Philips',      'assets/img/brand/philips/philips-brandlogo.png'),
+    (2, 'Panasonic',    'assets/img/brand/Panasonic/panasonic-logo.png'),
+    (3, 'Hunter Fans',  'assets/img/brand/Hunter Fans/hunter-fans-logo.png'),
+    (4, 'Ledyi',        'assets/img/brand/Ledyi/images.png'),
+    (5, 'ArtDecor',     'assets/img/brand/ArtDecor/LOGO_ARTDECO.png'),
+    (6, 'Xiaomi',       'assets/img/brand/Xiaomi/Xiaomi_ogo.png');
 
 -- ================================================================
 -- PHẦN 2: THÊM DANH MỤC (CATEGORIES)
 -- ================================================================
 INSERT INTO category (category_id, category_name, category_thumbnail) VALUES
-    (1, 'Ceiling Lights',           'assets/img/cats/ceiling.jpg'),
-    (2, 'Wall Lights',              'assets/img/cats/wall.jpg'),
-    (3, 'Outdoor Lights',           'assets/img/cats/outdoor.jpg'),
-    (4, 'Fans',                     'assets/img/cats/fan.jpg'),
-    (5, 'Home Accents',             'assets/img/cats/accent.jpg'),
-    (6, 'LED - Spotlights',         'assets/img/cats/spotlight.jpg'),
-    (7, 'LED - Decorative Lights',  'assets/img/cats/led-decor.jpg'),
-    (8, 'LED - Smart Lights',       'assets/img/cats/smart-led.jpg');
+    (1, 'Ceiling Lights',           'assets/img/category/Ceiling Light/1.png'),
+    (2, 'Wall Lights',              'assets/img/category/Wall Lights/1.png'),
+    (3, 'Outdoor Lights',           'assets/img/category/Outdoor lights/1.png'),
+    (4, 'Fans',                     'assets/img/category/Fans/1.png'),
+    (5, 'Home Accents',             'assets/img/category/Home Accents/1.png'),
+    (6, 'LED - Spotlights',         'assets/img/category/LED spot light/1.png'),
+    (7, 'LED - Decorative Lights',  'assets/img/category/LED Decorative Lights/1.png'),
+    (8, 'LED - Smart Lights',       'assets/img/category/LED Smart Lights/1.png');
 
 -- ================================================================
 -- PHẦN 3: THÊM SẢN PHẨM (PRODUCTS) - ĐỊNH DẠNG DỌC (VERTICAL)
@@ -39,8 +39,8 @@ VALUES
         5500000.00,
         10,
         'assets/img/product/1/1.png',
-        1, -- Category: Ceiling Lights
-        1, -- Brand: Philips
+        1, 
+        1,
         '<table border="1"><tr><td>Power:</td><td>60W</td></tr><tr><td>Material:</td><td>K9 Crystal</td></tr></table>'
     ),
     (
@@ -49,9 +49,9 @@ VALUES
         'Ultra-thin design, perfect for low ceilings.',
         1250000.00,
         30,
-        'assets/img/products/ceil-9.jpg',
-        1, -- Category: Ceiling Lights
-        2, -- Brand: Panasonic
+        'assets/img/product/9/1.png',
+        1,
+        2,
         '<p>Power: 36W. Diameter: 50cm. 3 Color Modes.</p>'
     ),
     (
@@ -60,9 +60,9 @@ VALUES
         'Black iron cage design, retro style.',
         450000.00,
         45,
-        'assets/img/products/ceil-10.jpg',
-        1, -- Category: Ceiling Lights
-        5, -- Brand: ArtDecor
+        'assets/img/product/10/1.png',
+        1,
+        5, 
         '<p>Material: Iron. Socket: E27. Cable length: 1m adjustable.</p>'
     ),
 
@@ -75,9 +75,9 @@ VALUES
         'European style, suitable for corridors and bedrooms.',
         850000.00,
         25,
-        'assets/img/products/p2.jpg',
-        2, -- Category: Wall Lights
-        5, -- Brand: ArtDecor
+        'assets/img/product/2/1.png',
+        2, 
+        5,
         '<p>Socket: E27. Material: Solid Cast Brass. IP20.</p>'
     ),
     (
@@ -86,9 +86,9 @@ VALUES
         'Modern waterproof light for exterior walls.',
         950000.00,
         20,
-        'assets/img/products/wall-11.jpg',
-        2, -- Category: Wall Lights
-        1, -- Brand: Philips
+        'assets/img/product/11/1.png',
+        2, 
+        1, 
         '<p>IP65 Waterproof. 2x5W LED. Aluminum body.</p>'
     ),
     (
@@ -97,9 +97,9 @@ VALUES
         'Focused reading light with USB port.',
         750000.00,
         40,
-        'assets/img/products/wall-12.jpg',
-        2, -- Category: Wall Lights
-        4, -- Brand: Ledyi
+        'assets/img/product/12/1.png',
+        2,
+        4,
         '<p>Flexible goose-neck. Built-in USB charger.</p>'
     ),
 
@@ -112,9 +112,9 @@ VALUES
         'Waterproof, durable cast aluminum shell.',
         1200000.00,
         15,
-        'assets/img/products/p3.jpg',
-        3, -- Category: Outdoor Lights
-        2, -- Brand: Panasonic
+        'assets/img/product/3/1.png',
+        3, 
+        2,
         '<table border="1"><tr><td>Power</td><td>12W LED</td></tr><tr><td>IP Rating</td><td>IP65</td></tr></table>'
     ),
     (
@@ -123,9 +123,9 @@ VALUES
         'Eco-friendly solar garden lights.',
         680000.00,
         60,
-        'assets/img/products/out-13.jpg',
-        3, -- Category: Outdoor Lights
-        4, -- Brand: Ledyi
+        'assets/img/product/13/1.png',
+        3, 
+        4,
         '<p>Auto on/off. No wiring needed. Stainless steel.</p>'
     ),
     (
@@ -134,9 +134,9 @@ VALUES
         'Security light for large backyards.',
         1500000.00,
         15,
-        'assets/img/products/out-14.jpg',
-        3, -- Category: Outdoor Lights
-        2, -- Brand: Panasonic
+        'assets/img/product/14/1.png',
+        3,
+        2,
         '<p>Brightness: 9000lm. IP66 rating. Cool White.</p>'
     ),
 
@@ -149,9 +149,9 @@ VALUES
         'Combines cooling fan and lighting, quiet motor.',
         4800000.00,
         8,
-        'assets/img/products/p4.jpg',
-        4, -- Category: Fans
-        3, -- Brand: Hunter Fans
+        'assets/img/product/4/1.png',
+        4,
+        3,
         '<p>AirMax motor. 5 composite wood blades. Integrated LED.</p>'
     ),
     (
@@ -160,9 +160,9 @@ VALUES
         'Luxury wood finish, silent operation.',
         5500000.00,
         5,
-        'assets/img/products/fan-15.jpg',
-        4, -- Category: Fans
-        3, -- Brand: Hunter Fans
+        'assets/img/product/15/1.png',
+        4,
+        3,
         '<p>Real wood blades. DC Motor (Energy saving).</p>'
     ),
     (
@@ -171,9 +171,9 @@ VALUES
         'Small diameter fan for smaller rooms.',
         2200000.00,
         10,
-        'assets/img/products/fan-16.jpg',
-        4, -- Category: Fans
-        2, -- Brand: Panasonic
+        'assets/img/product/16/1.png',
+        4,
+        2,
         '<p>Size: 36 inch. Integrated LED light. Remote.</p>'
     ),
 
@@ -186,9 +186,9 @@ VALUES
         'Minimalist design, artistic curved body.',
         1950000.00,
         12,
-        'assets/img/products/p5.jpg',
-        5, -- Category: Home Accents
-        5, -- Brand: ArtDecor
+        'assets/img/product/5/1.png',
+        5,
+        5,
         '<p>Height: 1m6 - 1m8. Material: Powder coated steel.</p>'
     ),
     (
@@ -197,9 +197,9 @@ VALUES
         'Handmade ceramic body, fabric shade.',
         1200000.00,
         12,
-        'assets/img/products/acc-17.jpg',
-        5, -- Category: Home Accents
-        5, -- Brand: ArtDecor
+        'assets/img/product/17/1.png',
+        5,
+        5,
         '<p>Height: 45cm. Perfect for living room side tables.</p>'
     ),
     (
@@ -208,9 +208,9 @@ VALUES
         'Natural bamboo legs, boho style.',
         1800000.00,
         8,
-        'assets/img/products/acc-18.jpg',
-        5, -- Category: Home Accents
-        5, -- Brand: ArtDecor
+        'assets/img/product/18/1.png',
+        5,
+        5,
         '<p>Sustainable material. Warm ambient lighting.</p>'
     ),
 
@@ -223,9 +223,9 @@ VALUES
         'Track light, 360 degree flexible angle.',
         450000.00,
         50,
-        'assets/img/products/p6.jpg',
-        6, -- Category: LED Spotlights
-        2, -- Brand: Panasonic
+        'assets/img/product/6/1.png',
+        6,
+        2,
         '<table border="1"><tr><td>Type</td><td>Spotlight</td></tr><tr><td>CRI</td><td>>90</td></tr></table>'
     ),
     (
@@ -234,9 +234,9 @@ VALUES
         'Anti-glare deep recessed spotlight.',
         180000.00,
         100,
-        'assets/img/products/spot-19.jpg',
-        6, -- Category: LED Spotlights
-        1, -- Brand: Philips
+        'assets/img/product/19/1.png',
+        6,
+        1,
         '<p>Beam angle: 36 deg. Cut-out: 90mm.</p>'
     ),
     (
@@ -245,9 +245,9 @@ VALUES
         'Cylindrical spotlight, no hole cutting.',
         250000.00,
         50,
-        'assets/img/products/spot-20.jpg',
-        6, -- Category: LED Spotlights
-        4, -- Brand: Ledyi
+        'assets/img/product/20/1.png',
+        6,
+        4,
         '<p>Black/White body housing. Easy installation.</p>'
     ),
 
@@ -260,9 +260,9 @@ VALUES
         'Flexible, easy to bend for lettering.',
         250000.00,
         100,
-        'assets/img/products/p7.jpg',
-        7, -- Category: LED Decorative
-        4, -- Brand: Ledyi
+        'assets/img/product/7.png',
+        7,
+        4,
         '<p>Safe 12V voltage. Vibrant colors. Gaming room decor.</p>'
     ),
     (
@@ -271,9 +271,9 @@ VALUES
         'App controlled color changing strip.',
         350000.00,
         80,
-        'assets/img/products/led-21.jpg',
-        7, -- Category: LED Decorative
-        4, -- Brand: Ledyi
+        'assets/img/product/21.png',
+        7,
+        4,
         '<p>Music sync mode. Wifi connection. 16 million colors.</p>'
     ),
     (
@@ -282,9 +282,9 @@ VALUES
         'Decorative filament bulbs (Pack of 3).',
         200000.00,
         40,
-        'assets/img/products/led-22.jpg',
-        7, -- Category: LED Decorative
-        5, -- Brand: ArtDecor
+        'assets/img/product/22/1.png',
+        7,
+        5,
         '<p>Warm amber glow. ST64 shape. E27 base.</p>'
     ),
 
@@ -297,9 +297,9 @@ VALUES
         'Control 16 million colors via phone.',
         1650000.00,
         20,
-        'assets/img/products/p8.jpg',
-        8, -- Category: LED Smart
-        1, -- Brand: Philips
+        'assets/img/product/8/1.png',
+        8,
+        1,
         '<ul><li>Connection: Zigbee/Bluetooth</li><li>Compat: Apple HomeKit, Alexa</li></ul>'
     ),
     (
@@ -308,9 +308,9 @@ VALUES
         'Adjust brightness/color via phone.',
         950000.00,
         25,
-        'assets/img/products/smart-23.jpg',
-        8, -- Category: LED Smart
-        6, -- Brand: Xiaomi
+        'assets/img/product/23/1.png',
+        8,
+        6,
         '<p>Works with Google Assistant/Alexa. Moonlight mode.</p>'
     ),
     (
@@ -319,9 +319,9 @@ VALUES
         'Backlight for TV and Gaming setup.',
         1400000.00,
         15,
-        'assets/img/products/smart-24.jpg',
-        8, -- Category: LED Smart
-        1, -- Brand: Philips
+        'assets/img/product/24/1.png',
+        8,
+        1,
         '<p>Syncs with screen content. Stand or stick to TV back.</p>'
     );
 
@@ -329,9 +329,9 @@ VALUES
 -- PHẦN 4: THÊM ẢNH CHI TIẾT (GALLERY)
 -- ================================================================
 INSERT INTO product_img (product_img_id, product_id, url) VALUES
-    (1, 1, 'assets/img/products/p1_detail1.jpg'),
-    (2, 1, 'assets/img/products/p1_detail2.jpg'),
-    (3, 4, 'assets/img/products/p4_detail.jpg'),
-    (4, 8, 'assets/img/products/p8_app.jpg'),
-    (5, 9, 'assets/img/products/ceil-9-d1.jpg'),
-    (6, 15, 'assets/img/products/fan-15-d1.jpg');
+    (1, 1, 'assets/img/product/1/1.png'),
+    (2, 1, 'assets/img/product/1/2.png'),
+    (3, 4, 'assets/img/product/4/4.png'),
+    (4, 8, 'assets/img/product/8/4.png'),
+    (5, 9, 'assets/img/product/9/1.png'),
+    (6, 15, 'assets/img/product/15/1.png');
