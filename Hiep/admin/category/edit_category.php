@@ -10,7 +10,7 @@
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_CATEGORY);
+        $stmt = $conn -> prepare(SQL_GET_CATEGORY_BY_ID);
         $stmt -> bindParam(':id', $id);
         $stmt -> execute();
 

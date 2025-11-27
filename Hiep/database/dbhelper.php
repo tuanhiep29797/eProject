@@ -165,11 +165,14 @@ const SQL_CREATE_TABLE_FEEDBACK =
 
 	//SQL GET TABLE
 
-	const SQL_GET_CATEGORY = "select * from category where id = :id";
+	const SQL_GET_CATEGORY = "select * from category";
+	const SQL_GET_CATEGORY_BY_ID = "select * from category where id = :id";
 
-	const SQL_GET_BRAND = "select * from brand where id = :id";
+	const SQL_GET_BRAND = "select * from brand";
+	const SQL_GET_BRAND_BY_ID = "select * from brand where id = :id";
 
-	const SQL_GET_PRODUCT = "select * from product where id = :id";
+	const SQL_GET_PRODUCT = "select * from product";
+	const SQL_GET_PRODUCT_BY_ID = "select * from product where id = :id";
 	
 	//SQL ADD TABLE
 

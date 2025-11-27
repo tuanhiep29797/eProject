@@ -10,7 +10,7 @@
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_BRAND);
+        $stmt = $conn -> prepare(SQL_GET_BRAND_BY_ID);
         $stmt -> bindParam(':id', $id);
         $stmt -> execute();
 

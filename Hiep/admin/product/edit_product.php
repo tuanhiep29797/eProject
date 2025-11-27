@@ -10,7 +10,7 @@
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_PRODUCT);
+        $stmt = $conn -> prepare(SQL_GET_PRODUCT_BY_ID);
         $stmt -> bindParam(':id', $id);
         $stmt -> execute();
 
