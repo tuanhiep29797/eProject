@@ -175,6 +175,18 @@ const SQL_CREATE_TABLE_FEEDBACK =
 	(:category_name, :category_thumbnail)
 	";
 
+	const SQL_ADD_BRAND = 
+	"insert into brand(brand_name, brand_thumbnail) 
+	values
+	(:brand_name, :brand_thumbnail)
+	";
+
+	const SQL_ADD_PRODUCT = 
+	"insert into product(product_title, product_description, product_price, product_content, product_quantity, product_thumbnail, category_id, brand_id) 
+	values
+	(:product_title, :product_description, :product_price, :product_content, :product_quantity, :product_thumbnail, :category_id, :brand_id)
+	";
+
 	//SQL UPDATE TABLE
 
 	const SQL_UPDATE_CATEGORY = 
