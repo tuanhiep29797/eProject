@@ -1,6 +1,4 @@
 <?php
-	require_once('dbhelper.php');
-
 	//Create database
 	try {
 		$conn = getConnectionInit();
