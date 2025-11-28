@@ -42,7 +42,7 @@ $guides = [
     <div class="container">
         <div class="row">
             
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-xl-4 col-md-6 mb-4">
                 <div class="mb-4">
                     <a href="index.php" class="text-decoration-none">
                         <h2 class="text-white m-0" style="font-family: 'Calistoga', serif; letter-spacing: 2px;">
@@ -59,7 +59,7 @@ $guides = [
                 </ul>
             </div>
 
-            <div class="col-lg-2 col-md-6 mb-4">
+            <div class="col-xl-2 col-md-6 mb-4">
                 <h5 class="footer-title">POLICIES</h5>
                 <ul class="list-unstyled">
                     <?php foreach($policies as $name => $link): ?>
@@ -68,7 +68,7 @@ $guides = [
                 </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-6 mb-4">
                 <h5 class="footer-title">SUPPORT</h5>
                 <ul class="list-unstyled">
                     <?php foreach($guides as $name => $link): ?>
@@ -77,7 +77,7 @@ $guides = [
                 </ul>
             </div>
 
-            <div class="col-lg-3 col-md-6 mb-4">
+            <div class="col-xl-3 col-md-6 mb-4">
                 <h5 class="footer-title">NEWSLETTER</h5>
                 <p class="small">Subscribe to receive the latest news.</p>
                 <form action="#" method="POST" class="mb-4">

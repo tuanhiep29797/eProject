@@ -76,7 +76,7 @@ if (isset($_POST)) {
 
             <div class="row g-5">
                 
-                <div class="col-lg-5"> 
+                <div class="col-xl-5"> 
                     <div class="black-border-box">
                         
                         <ul class="info-list">
@@ -108,7 +108,7 @@ if (isset($_POST)) {
                     </div>
                 </div>
 
-                <div class="col-lg-7"> 
+                <div class="col-xl-7"> 
                     <div class="black-border-box">
                         <h3 class="form-title">Send a Message</h3>
 

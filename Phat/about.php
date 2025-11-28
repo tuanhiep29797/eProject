@@ -33,12 +33,12 @@ session_start();
     </div>
     <div class="container about-section">
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-xl-6">
                 <div class="img-box">
                     <img src="./img/img_about_1.png" alt="GS Lighting Office">
                 </div>
             </div>
-            <div class="col-lg-6 ps-lg-5">
+            <div class="col-xl-6 ps-xl-5">
                 <div class="about-content">
                     <span class="sub-title">OUR STORY</span>
                     <h2 class="main-title">LICERIA & CO - Lighting Up Your World</h2>
@@ -56,7 +56,7 @@ session_start();
     <div class="why-section">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 pe-lg-5 order-2 order-lg-1">
+                <div class="col-xl-6 pe-xl-5 order-2 order-xl-1">
                     <div class="about-content">
                         <span class="sub-title">WHY CHOOSE US</span>
                         <h2 class="main-title">We Bring The Best For Your Home</h2>
@@ -72,7 +72,7 @@ session_start();
                     </div>
                 </div>
 
-                <div class="col-lg-6 order-1 order-lg-2">
+                <div class="col-xl-6 order-1 order-xl-2">
                     <div class="img-box">
                         <img src="./img/img_about_2.png" alt="Why Choose Us">
                     </div>
