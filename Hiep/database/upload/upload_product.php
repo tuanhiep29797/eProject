@@ -58,11 +58,11 @@
                 $product_title = $item[0];
                 $product_description = $item[1];
                 $product_price = $item[2];
-                $product_content = $item[3];
-                $product_quantity = $item[4];
-                $product_thumbnail = $item[7];
+                $product_quantity = $item[3];
+                $product_thumbnail = $item[4];
                 $category_id = $item[5];
                 $brand_id = $item[6];
+                $product_content = $item[7];
 
                 $stmt = $conn -> prepare(SQL_ADD_PRODUCT);
                 $stmt -> bindParam(':product_title', $product_title);        
