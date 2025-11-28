@@ -20,13 +20,12 @@ function getConnectionInit()
 }
 
 //SQL create database
-const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
+	const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
 
-const SQL_LOGIN = "select * from user where email = :email and password = :password";
-
+	const SQL_LOGIN = "select * from user where email = :email and password = :password";
 
 //SQL create table
-const SQL_CREATE_TABLE_USER = 
+	const SQL_CREATE_TABLE_USER = 
 	"create table if not exists user 
 	(
 		user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +39,7 @@ const SQL_CREATE_TABLE_USER =
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
-const SQL_CREATE_TABLE_CATEGORY = 
+	const SQL_CREATE_TABLE_CATEGORY = 
 	"create table if not exists category 
 	(
 		category_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,7 +47,7 @@ const SQL_CREATE_TABLE_CATEGORY =
 		category_thumbnail VARCHAR(255)
 	)";
 
-const SQL_CREATE_TABLE_BRAND = 
+	const SQL_CREATE_TABLE_BRAND = 
 	"create table if not exists brand 
 	(
 		brand_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,7 +55,7 @@ const SQL_CREATE_TABLE_BRAND =
 		brand_thumbnail VARCHAR(255)
 	)";
 
-const SQL_CREATE_TABLE_PRODUCT = 
+	const SQL_CREATE_TABLE_PRODUCT = 
 	"create table if not exists product 
 	(
 		product_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +76,7 @@ const SQL_CREATE_TABLE_PRODUCT =
 		FOREIGN KEY (brand_id) REFERENCES brand(brand_id) ON DELETE CASCADE
 	)";
 
-const SQL_CREATE_TABLE_PRODUCT_IMG = 
+	const SQL_CREATE_TABLE_PRODUCT_IMG = 
 	"create table if not exists product_img 
 	(
 		product_img_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,14 +86,14 @@ const SQL_CREATE_TABLE_PRODUCT_IMG =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_GALLERY = 
+	const SQL_CREATE_TABLE_GALLERY = 
 	"create table if not exists gallery 
 	(
 		img_id INT AUTO_INCREMENT PRIMARY KEY,
     	url VARCHAR(255) NOT NULL
 	)";
 
-const SQL_CREATE_TABLE_CART = 
+	const SQL_CREATE_TABLE_CART = 
 	"create table if not exists cart 
 	(
 		cart_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,7 +106,7 @@ const SQL_CREATE_TABLE_CART =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_ORDER = 
+	const SQL_CREATE_TABLE_ORDER = 
 	"create table if not exists `order`
 	(
 		order_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -121,7 +120,7 @@ const SQL_CREATE_TABLE_ORDER =
 		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_ORDER_DETAIL = 
+	const SQL_CREATE_TABLE_ORDER_DETAIL = 
 	"create table if not exists order_detail 
 	(
 		order_id INT NOT NULL,
@@ -134,7 +133,7 @@ const SQL_CREATE_TABLE_ORDER_DETAIL =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_REVIEW = 
+	const SQL_CREATE_TABLE_REVIEW = 
 	"create table if not exists review 
 	(
 		review_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -151,7 +150,7 @@ const SQL_CREATE_TABLE_REVIEW =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE
 	)";
 
-const SQL_CREATE_TABLE_FEEDBACK = 
+	const SQL_CREATE_TABLE_FEEDBACK = 
 	"create table if not exists feedback 
 	(
 		feedback_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -161,7 +160,6 @@ const SQL_CREATE_TABLE_FEEDBACK =
 		content TEXT NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	)";
-	
 
 	//SQL GET TABLE
 
