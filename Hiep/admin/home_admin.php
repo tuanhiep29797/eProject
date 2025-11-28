@@ -12,7 +12,7 @@
 <body>
     <?php include "header.php"?>
 
-    //Ảnh nền chưa có
+    <!-- Ảnh nền chưa có -->
     <img src="..." class="img-fluid" alt="Ảnh nền chưa có">
     <div class="container">
         <div class="row">
