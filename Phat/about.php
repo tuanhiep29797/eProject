@@ -35,7 +35,7 @@ session_start();
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="img-box">
-                    <img src="./img/image 37.png" alt="GS Lighting Office">
+                    <img src="./img/img_about_1.png" alt="GS Lighting Office">
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
@@ -74,7 +74,7 @@ session_start();
 
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="img-box">
-                        <img src="./img/image 38.png" alt="Why Choose Us">
+                        <img src="./img/img_about_2.png" alt="Why Choose Us">
                     </div>
                 </div>
             </div>
