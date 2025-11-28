@@ -5,7 +5,7 @@ $products = [
         "name" => "EGLO VINTAGE",
         "desc" => "Esse aliquam delectus",
         "price" => 1200000,
-        "quantity" => 12,
+        "quantity" => 100,
         "image" => "../img/test_product.png"
     ],
     [
@@ -43,11 +43,15 @@ if(!empty($_POST))
     {
         $id = $_POST["product_id"];
         $action = $_POST["action"];
-        switch ($action):
+        switch ($action){
             case "plus":
+                // update from product set quantity = new_quantity where id = :id
                 break;
             case "minus":
                 break;
+            default:
+                break;
+            }
     }
 
 
@@ -118,12 +122,11 @@ if(!empty($_POST))
                         <p class="">Quantity</p>
                         <form method="post" class="cart-item-form">
                             <input type="hidden" name="product_id" value="<?= $item['id'] ?>">
-                            <div class="sc-product-quantity-edit d-flex align-items-center">
-                                <input type="number" min="1" name="quantity" class="me-lg-5 text-right text-success input-qty" 
-                                    value="<?= $item['quantity']?>" />
+                            <div class="sc-product-quantity-edit d-flex align-items-center gap-2">
+                                <button type="button" class="btn btn-outline-dark btn-sm">−</button>
+                                <span class="text-success fw-semibold"> <?= $item['quantity'] ?></span>
+                                <button type="button" class="btn btn-outline-dark btn-sm" name="action" value="plus">+</button>
                             </div>
-                            <button type="submit" class="btn btn-success btn-confirm mt-1" name="action" value="plus" >+</button>
-                            <button type="submit" class="btn btn-success btn-confirm mt-1" name="action" value="minus" >-</button>
                         </form>
                     </div>
                     <div class="sc-product-total col-lg-2 text-right">
@@ -154,16 +157,5 @@ if(!empty($_POST))
             </div>
         </div>
     </div>
-<script>
-    document.querySelectorAll('.cart-item-form').forEach(form => {
-        const btnConfirm = form.querySelector('.product-quantity-btn');
-        const inputQty = form.querySelector('.input-qty');
-        
-        const showConfirm = () => btnConfirm.classList.add('active');
-        inputQty.addEventListener('input', showConfirm);
-});
-</script>
-
-    
 </body>
 </html>

@@ -114,8 +114,12 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                         </div>
                         <div class="header_account">
                             <ul class="list-group">
+                                <?php if($isLogin):?>
                                 <li class="list-group-item border-0"><a href='../account/login.php'>Login</a></li>
                                 <li class="list-group-item border-0"><a href='../account/register.php'>Register</a></li>
+                                <?php else:?>
+                                        
+                                <?php endif;?>
                             </ul>
                         </div>
                     </div>
