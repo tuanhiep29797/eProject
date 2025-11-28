@@ -1,5 +1,6 @@
 <?php
 require_once("../database/dbhelper.php");
+session_start();
 $loginErrors = [];
 if (!empty($_POST["form_type"])) {
     if ($_POST["form_type"] === "login") {

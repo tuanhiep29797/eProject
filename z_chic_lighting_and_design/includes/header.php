@@ -47,7 +47,7 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                 <!-- header left start -->
                 <div class="header_left col-lg-2 p-5 py-3">
                     <a href="header.php">
-                        <img src="../img/img_logo1.png" alt="Logo" class="logo-box"/>
+                        <img src="../assets/img/test_here/img_logo1.png" alt="Logo" class="logo-box"/>
                     </a>
                 </div>
                 <!-- header menu start -->
