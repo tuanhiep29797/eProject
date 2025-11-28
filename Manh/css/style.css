@@ -4,7 +4,11 @@
   --background-color-3: #f0f0f0;
   --background-color-4: #26b66a;
 }
-
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .wpx{
     width: 90% !important;
     position: relative;
@@ -222,6 +226,115 @@
     cursor: pointer;
     transition: color 0.01s ease; 
 }
+.header_right a{
+    color: black;
+    text-decoration: none;
+}
+/* cart-start */
+.cart{
+    background-image: url("../img/bg-cart.png") ;
+    position: relative;
+    height:350px;
+    background-size: cover;
+    padding-top: 1px;
+}
+.cart::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4); 
+    z-index: 1;
+}
+.cart-header{
+    position: relative;
+    z-index: 99;
+}
+.cart-header-text{
+    position: relative;
+    z-index: 2;
+}
+.text-center-bottom a{
+    color: white;
+    text-decoration: none;
+}
+.text-center-bottom a:hover{
+    color: var(--background-color-4);
+}
+.shopping-cart-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.shopping-cart-search_input{
+    position: relative;
+}
+.shopping-cart-search_input label{
+    position: absolute;
+    top:10px;
+    left:15px;
+    font-size: 20px;
+}
+.shopping-cart-search_input input{
+    padding:12px 85px 12px 40px;
+    width: 500px;
+    border-radius: 30px;
+    border: 1px solid rgb(219, 219, 219);
+}
+.sc-product-quantity-edit input{
+    width: 100%;
+    outline: none;
+    border: 1px solid;
+    padding: 3px;
+    border-radius: 10px;
+}
+.product-quantity-btn {
+    display: none; 
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.product-quantity-btn.active {
+    display: block;
+    opacity: 1;
+}
+.shopping-cart-search_input button{
+    position: absolute;
+    top:8px;
+    right:15px;
+    font-size: 16px;
+    padding:5px 8px;
+    border-radius: 10px;
+    border: none;
+    background-color: #000;
+    color: white;
+}
+.sc-product{
+    border: 1px solid #A1A1A1;
+    border-radius: 30px;
+}
+.sc-product-img img {
+    height: 120px;
+    width: 100%;
+    object-fit: cover;    
+    object-position: center;
+    overflow: hidden;
+}
+.sc-product-quantity-edit button{
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+.sc-product-action button{
+    border-radius: 20px;
+    padding: 10px 20px;
+}
+.sc-total{
+    width: 98%;
+    height: 100px;
+    border:1px solid #000;   
+    border-radius: 30px;
+}
+
 .header_account_login:hover,
 .header_account_login:hover span,
 .header_account_login:hover i {

@@ -105,7 +105,7 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                 <!-- header right start -->
                 <div class="col-lg-2 header_right fs-4 d-flex gap-3 justify-content-end pe-5">
                     <div class="my-3">
-                        <a><i class="bi bi-cart my-3"></i></a>
+                        <a href="../pages/cart.php"><i class="bi bi-cart my-3"></i></a>
                     </div>
                     <div class="header_account_wrap pb-3 mt-3" style="cursor: pointer;">
                         <div class="header_account_login d-flex align-items-center gap-2">
@@ -114,8 +114,8 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                         </div>
                         <div class="header_account">
                             <ul class="list-group">
-                                <li class="list-group-item border-0"><a>Login</a></li>
-                                <li class="list-group-item border-0"><a>Register</a></li>
+                                <li class="list-group-item border-0"><a href='../account/login.php'>Login</a></li>
+                                <li class="list-group-item border-0"><a href='../account/register.php'>Register</a></li>
                             </ul>
                         </div>
                     </div>
