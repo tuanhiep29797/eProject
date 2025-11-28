@@ -45,7 +45,6 @@ if(!empty($_POST))
         $action = $_POST["action"];
         switch ($action){
             case "plus":
-                // update from product set quantity = new_quantity where id = :id
                 break;
             case "minus":
                 break;
@@ -116,7 +115,7 @@ if(!empty($_POST))
                     </div>
                     <div class="sc-product-price col-lg-2 text-right">
                         <p class="">Price</p>
-                        <span class="text-success fw-semibold"> <?= number_format($item['price']) ?>đ</span>
+                        <span class="text-success fw-semibold"> <?= number_format($item['price']) ?><sup>đ</sup></span>
                     </div> 
                     <div class="sc-product-quantity col-lg-2 text-right">
                         <p class="">Quantity</p>
@@ -146,11 +145,11 @@ if(!empty($_POST))
                             <h3 class="fw-bold m-0">Total Amount:</h3>
                         </div>
                         <div class="sc-total-number col-lg-6 text-center">
-                            <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?>đ</span>
+                            <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>đ</sup></span>
                         </div>
-                        <div class="sc-total-action col-lg-4">
-                            <button class="btn btn-outline-dark ">Remove All</button>
-                            <button class="btn btn-outline-dark bg-dra">Check out</button>
+                        <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
+                            <button class="btn btn-outline-dark fw-bold">Remove All</button>
+                            <button class="btn btn-outline-white bg-dark text-light me-2 fw-bold">Check out</button>
                         </div>
                     </div>
                 </div>
