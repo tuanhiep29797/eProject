@@ -318,6 +318,7 @@
     object-fit: cover;    
     object-position: center;
     overflow: hidden;
+    border-radius: 10px;
 }
 .sc-product-quantity-edit button{
     border-radius: 50%;

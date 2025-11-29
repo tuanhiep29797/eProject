@@ -1,4 +1,6 @@
 <?php
+require_once("../database/dbhelper.php");
+
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
