@@ -179,6 +179,12 @@ function getConnectionInit()
 
 	//SQL ADD TABLE
 
+	const SQL_ADD_USER = 
+	"insert into user(fullname, username, email, phone_number, password, role)
+	values
+	(:fullname, :username, :email, :phone_number, :password, :role)
+	";
+
 	const SQL_ADD_CATEGORY = 
 	"insert into category(category_name, category_thumbnail) 
 	values
