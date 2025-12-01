@@ -163,6 +163,8 @@ function getConnectionInit()
 
 	//SQL GET TABLE
 
+	const SQL_GET_USER = "select * from user";
+
 	const SQL_GET_CATEGORY = "select * from category";
 	const SQL_GET_CATEGORY_BY_ID = "select * from category where id = :id";
 
