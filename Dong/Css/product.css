@@ -206,7 +206,7 @@ body {
 .btn-apply-filter {
   background-color: gray;
   border: 1px solid gray;
-  color: var(--primary-black);
+  color: black;
   padding: 12px 20px;
   font-size: 0.9rem;
   font-weight: 500;
@@ -314,9 +314,9 @@ body {
 
 .btn-add-cart {
   flex: 1;
-  background-color: var(--primary-white);
-  border: 1.5px solid var(--primary-black);
-  color: var(--primary-black);
+  background-color: white;
+  border: 1.5px solid black;
+  color: black;
   padding: 10px 15px;
   font-size: 0.8rem;
   font-weight: 500;
@@ -325,15 +325,15 @@ body {
 }
 
 .btn-add-cart:hover {
-  background-color: var(--primary-black);
-  color: var(--primary-white);
+  background-color:black;
+  color: white;
 }
 
 .btn-buy-now {
   flex: 1;
-  background-color: var(--primary-black);
-  border: 1.5px solid var(--primary-black);
-  color: var(--primary-white);
+  background-color: black;
+  border: 1.5px solid black;
+  color: white;
   padding: 10px 15px;
   font-size: 0.8rem;
   font-weight: 500;
@@ -342,11 +342,10 @@ body {
 }
 
 .btn-buy-now:hover {
-  background-color: #333;
-  border-color: #333;
+  background-color: #888888 ;
+  color: black ;
 }
 
-/* Pagination */
 .pagination-wrapper {
   margin-top: 40px;
   padding-top: 30px;
@@ -388,7 +387,6 @@ body {
   font-weight: 500;
 }
 
-/* No Products */
 .no-products {
   padding: 60px 20px;
 }
