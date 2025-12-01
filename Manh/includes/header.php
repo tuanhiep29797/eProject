@@ -1,6 +1,4 @@
 <?php
-require_once("../database/dbhelper.php");
-
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
@@ -47,15 +45,21 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
         <div class="container">
             <div class="row d-flex align-items-center header-index ">
                 <!-- header left start -->
-                <div class="header_left col-lg-2 p-5 py-3">
+                <div class="header_left col-6 col-sm-1 col-lg-2 p-3">
                     <a href="header.php">
                         <img src="../img/img_logo1.png" alt="Logo" class="logo-box"/>
                     </a>
                 </div>
                 <!-- header menu start -->
-                <div class="col-lg-8">
+                <div class="col-6 col-sm-8 col-lg-8">
                     <div class="header_menu">
                         <nav class="navbar navbar-expand-lg p-0">
+
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
+                                <i class="bi bi-list" style="font-size: 1.5rem; color: black;"></i>
+                            </button>
+
+                            <div class="collapse navbar-collapse" id="mainNavbar">
                             <ul class="navbar-nav gap-3 mx-auto">
                                 <li class="nav-item">
                                     <a class="nav-link text-success fw-bold" id="header_click" href="#">Home</a>
@@ -99,11 +103,12 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                                     <a class="nav-link" href="#" id="header_click">Contact Us</a>
                                 </li>
                             </ul>
+                            </div>
                         </nav>
                     </div>
                 </div>
                 <!-- header right start -->
-                <div class="col-lg-2 header_right fs-4 d-flex gap-3 justify-content-end pe-5">
+                <div class="col-lg-2 header_right fs-4 d-lg-flex gap-3 justify-content-end pe-5 sol-sm-7">
                     <div class="my-3">
                         <a href="../pages/cart.php"><i class="bi bi-cart my-3"></i></a>
                     </div>

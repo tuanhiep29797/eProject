@@ -9,6 +9,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+<<<<<<< HEAD
 .wpx {
   width: 90% !important;
   position: relative;
@@ -22,6 +23,13 @@
 
   background-color: #ffffffb3;
   border-radius: 40px !important;
+=======
+
+.header-index{
+    margin:40px 10px 0px 10px!important;
+    background-color: #ffffffB3;
+    border-radius: 40px !important;
+>>>>>>> 9599302 (Done cart)
 }
 .header_left {
   width: 200px;
@@ -37,11 +45,25 @@
   padding: 15px;
   margin: 10px;
 }
+.navbar-nav .dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
 
+<<<<<<< HEAD
 .header_menu a {
   color: black;
   transition: all 0.3s ease;
   font-size: 16px;
+=======
+.nav-item_product .nav {
+    flex-wrap: wrap;
+}
+.header_menu a{
+    color:black;
+    transition: all 0.3s ease;
+    font-size: 16px;
+>>>>>>> 9599302 (Done cart)
 }
 
 .header_menu a:hover,
@@ -313,12 +335,21 @@
   border-radius: 30px;
 }
 .sc-product-img img {
+<<<<<<< HEAD
   height: 120px;
   width: 100%;
   object-fit: cover;
   object-position: center;
   overflow: hidden;
   border-radius: 10px;
+=======
+    height: 120px;
+    width: 100%;
+    object-fit: cover;    
+    object-position: center;
+    overflow: hidden;
+    border-radius: 40px;
+>>>>>>> 9599302 (Done cart)
 }
 .sc-product-quantity-edit button {
   border-radius: 50%;

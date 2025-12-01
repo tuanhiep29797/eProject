@@ -99,7 +99,7 @@ if (!empty($_POST['action'])) {
         $stmt->bindParam(":cart_id", $cart_id);
         $stmt->execute();
 
-        header("Location: cart.php");
+        header("Location: cart.php#shopping-cart-".$cart_id);
         exit;
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -153,7 +153,7 @@ if (!empty($_POST['action'])) {
         </div>
         <div class="shopping-cart-product mt-4">
             <?php foreach ($products as $item): ?>
-                <div class="sc-product row align-items-center px-4 mx-5 mt-4">
+                <div class="sc-product row align-items-center px-4 mx-5 mt-4" id="shopping-cart<?= $item['cart_id']?>" >
                     <div class="sc-product-img col-lg-2 my-2">
                         <img src="<?= $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" />
                     </div>
