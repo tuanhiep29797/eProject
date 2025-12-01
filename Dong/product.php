@@ -133,14 +133,14 @@ $total_pages = 10;
 
 
   <main class="product-page">
-    <div class="container-fluid px-4 px-lg-5 py-4">
+    <div class="container-fluid px-4 px-xl-5 py-4">
       <!-- Page Header -->
       <div class="row align-items-center mb-4">
-        <div class="col-lg-6">
+        <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
           <h1 class="page-title">Product</h1>
         </div>
-        <div class="col-lg-6">
+        <div class="col-xl-6">
           <form action="" method="GET" class="search-form">
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
@@ -153,7 +153,7 @@ $total_pages = 10;
 
       <div class="row">
         <!-- Sidebar Filters -->
-        <div class="col-lg-3 col-md-4">
+        <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
             <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
 
@@ -217,17 +217,16 @@ $total_pages = 10;
         </div>
 
         <!-- Product Grid -->
-        <div class="col-lg-9 col-md-8">
+        <div class="col-xl-9 col-md-8">
           <div class="row g-4">
             <?php if ($products && count($products) > 0): ?>
               <?php foreach ($products as $product): ?>
                 <?php
-                // Use product thumbnail (can be URL or local path)
                 $image_path = $product['product_thumbnail'];
                 $rating = $product['rating'] ?? 4.8;
                 $reviews = $product['reviews'] ?? '1.2k';
                 ?>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
                       <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
@@ -337,8 +336,8 @@ $total_pages = 10;
     </div>
   </main>
 
-  <?php require_once "../Dong/footer.php"; ?>
-
+    <?php require_once("../Dong/footer.php"); ?>
+      
 </body>
 
 </html>
