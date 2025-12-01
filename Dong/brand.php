@@ -179,13 +179,13 @@ $total_pages = 10;
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
-                      <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                      <a href="<?= $product['product_id'] ?>">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
                       </a>
                     </div>
                     <div class="product-info">
                       <h5 class="product-name">
-                        <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a href="<?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>

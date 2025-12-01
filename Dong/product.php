@@ -229,13 +229,13 @@ $total_pages = 10;
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
-                      <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                      <a href="<?= $product['product_id'] ?>">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
                       </a>
                     </div>
                     <div class="product-info">
                       <h5 class="product-name">
-                        <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a href="<?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>
@@ -287,8 +287,7 @@ $total_pages = 10;
             <nav class="pagination-wrapper mt-5">
               <ul class="pagination justify-content-center">
                 <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                  <a class="page-link page-prev"
-                    href="?<?= http_build_query(array_merge($_GET, ['page' => $page - 1])) ?>">
+                  <a class="page-link page-prev">
                     Previous
                   </a>
                 </li>
