@@ -1,8 +1,8 @@
 <?php
-require_once("../Dong/database/config.php");
-require_once("../Dong/database/dbhelper.php");
+require_once("./database/config.php");
+require_once("./database/dbhelper.php");
 
-// Get filter parameters
+
 $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
 $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
 $min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
@@ -12,7 +12,7 @@ $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
 $per_page = 9;
 
 
-// Fake Categories
+
 $categories = [
   ['category_id' => 1, 'category_name' => 'Ceiling Lights'],
   ['category_id' => 2, 'category_name' => 'Wall Lights'],
@@ -24,7 +24,7 @@ $categories = [
   ['category_id' => 8, 'category_name' => 'LED - Smart Lights'],
 ];
 
-// Fake Brands
+
 $brands = [
   ['brand_id' => 1, 'brand_name' => 'Philips'],
   ['brand_id' => 2, 'brand_name' => 'Panasonic'],
@@ -34,7 +34,7 @@ $brands = [
   ['brand_id' => 6, 'brand_name' => 'Xiaomi'],
 ];
 
-// Fake Products with Unsplash images
+
 $products = [
   [
     'product_id' => 1,
@@ -126,7 +126,7 @@ $total_pages = 10;
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./Css/product.css">
+  <link rel="stylesheet" href="./Css/product.css?v=<?= time() ?>">
 </head>
 
 <body>
@@ -212,7 +212,7 @@ $total_pages = 10;
               </div>
             </div>
 
-            <button type="submit" class="btn btn-apply-filter w-100">Apply Filter</button>
+            <button type="submit" class="btn-apply-filter w-100">Apply Filter</button>
           </form>
         </div>
 
@@ -222,6 +222,7 @@ $total_pages = 10;
             <?php if ($products && count($products) > 0): ?>
               <?php foreach ($products as $product): ?>
                 <?php
+                // Use product thumbnail (can be URL or local path)
                 $image_path = $product['product_thumbnail'];
                 $rating = $product['rating'] ?? 4.8;
                 $reviews = $product['reviews'] ?? '1.2k';
@@ -229,13 +230,13 @@ $total_pages = 10;
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
-                      <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                      <a <?= $product['product_id'] ?>">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
                       </a>
                     </div>
                     <div class="product-info">
                       <h5 class="product-name">
-                        <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a <?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>
@@ -260,10 +261,10 @@ $total_pages = 10;
                         $<?= number_format($product['product_price'], 2) ?>
                       </div>
                       <div class="product-actions">
-                        <button class="btn btn-add-cart" onclick="addToCart(<?= $product['product_id'] ?>)">
+                        <button class="btn-add-cart" onclick="addToCart(<?= $product['product_id'] ?>)">
                           Add To Cart
                         </button>
-                        <button class="btn btn-buy-now" onclick="buyNow(<?= $product['product_id'] ?>)">
+                        <button class="btn-buy-now" onclick="buyNow(<?= $product['product_id'] ?>)">
                           Buy Now
                         </button>
                       </div>
@@ -336,8 +337,8 @@ $total_pages = 10;
     </div>
   </main>
 
-    <?php require_once("../Dong/footer.php"); ?>
-      
+  <?php require_once "../Dong/footer.php"; ?>
+
 </body>
 
 </html>

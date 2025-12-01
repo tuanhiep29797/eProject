@@ -126,7 +126,7 @@ $total_pages = 10;
       <div class="row align-items-center mb-4">
         <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
-          <h1 class="page-title">Product</h1>
+          <h1 class="page-title">Brand</h1>
         </div>
         <div class="col-xl-6">
           <form action="" method="GET" class="search-form">
@@ -179,13 +179,13 @@ $total_pages = 10;
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
-                      <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                      <a href="<?= $product['product_id'] ?>">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
                       </a>
                     </div>
                     <div class="product-info">
                       <h5 class="product-name">
-                        <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a href="<?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>
