@@ -129,7 +129,7 @@ $total_pages = 10;
       <div class="row align-items-center mb-4">
         <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
-          <h1 class="page-title">Product</h1>
+          <h1 class="page-title">Category</h1>
         </div>
         <div class="col-xl-6">
           <form action="" method="GET" class="search-form">
