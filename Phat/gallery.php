@@ -3,15 +3,15 @@ session_start();
 require_once('./database/dbhelper.php'); 
 
 $gallery_images = [
-    "img/image_1.png",
-    "img/image_2.png",
-    "img/image_1.png",
-    "img/image_2.png",
-    "img/image_1.png",
-    "img/image_2.png",
-    "img/image_1.png",
-    "img/image_2.png",
-    "img/image_1.png",
+    "img/img_about_1.png",
+    "img/img_about_2.png",
+    "img/img_about_1.png",
+    "img/img_about_2.png",
+    "img/img_about_1.png",
+    "img/img_about_2.png",
+    "img/img_about_1.png",
+    "img/img_about_2.png",
+    "img/img_about_1.png",
 ];
 
 
