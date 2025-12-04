@@ -60,7 +60,7 @@
 	"create table if not exists product 
 	(
 		product_id INT AUTO_INCREMENT PRIMARY KEY,
-		product_title VARCHAR(255) NOT NULL,
+		product_title VARCHAR(255) UNIQUE NOT NULL,
 		product_description TEXT,
 		product_price DECIMAL(10, 2) NOT NULL,
 		product_content TEXT,
@@ -82,7 +82,7 @@
 	(
 		product_img_id INT AUTO_INCREMENT PRIMARY KEY,
 		product_id INT NOT NULL,
-		url VARCHAR(255) NOT NULL,
+		url VARCHAR(255) UNIQUE NOT NULL,
 
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
@@ -91,7 +91,7 @@
 	"create table if not exists gallery 
 	(
 		img_id INT AUTO_INCREMENT PRIMARY KEY,
-    	url VARCHAR(255) NOT NULL
+    	url VARCHAR(255) UNIQUE NOT NULL
 	)";
 
 	const SQL_CREATE_TABLE_CART = 

@@ -48,14 +48,14 @@
     {
         $conn = getConnection();
         foreach ($users as $user) {
-            $admin["password"] = password_hash($admin["password"], PASSWORD_DEFAULT);
+            $user["password"] = password_hash($user["password"], PASSWORD_DEFAULT);
             $stmt = $conn -> prepare(SQL_ADD_USER);
-            $stmt -> bindParam(":fullname", $admin["fullname"]);
-            $stmt -> bindParam(":username", $admin["username"]);
-            $stmt -> bindParam(":email", $admin["email"]);
-            $stmt -> bindParam(":phone_number", $admin["phone_number"]);
-            $stmt -> bindParam(":password", $admin["password"]);
-            $stmt -> bindParam(":role", $admin["role"]);
+            $stmt -> bindParam(":fullname", $user["fullname"]);
+            $stmt -> bindParam(":username", $user["username"]);
+            $stmt -> bindParam(":email", $user["email"]);
+            $stmt -> bindParam(":phone_number", $user["phone_number"]);
+            $stmt -> bindParam(":password", $user["password"]);
+            $stmt -> bindParam(":role", $user["role"]);
             $stmt -> execute();
         }
     }
@@ -66,3 +66,4 @@
 
     $conn = null;
 ?>
+

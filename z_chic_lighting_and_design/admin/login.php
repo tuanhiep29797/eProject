@@ -1,6 +1,7 @@
 <?php
 require_once("../database/dbhelper.php");
 
+var_dump($_SESSION);
 //tạo biến lỗi đăng nhập
 $loginErrors = [];
 
