@@ -10,35 +10,43 @@
     <title>Admin</title>
 </head>
 <body>
-    <?php include "header.php"?>
-
-    <!-- Ảnh nền chưa có -->
-    <img src="..." class="img-fluid" alt="Ảnh nền chưa có">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <img src="..." class="rounded mx-auto d-block" alt="...">
-                <a href="/category/category.php"><button>Category Manage</button></a>
-            </div>
-            <div class="col">
-                <img src="..." class="rounded mx-auto d-block" alt="...">
-                <a href="/brand/brand.php"><button>Brand Manage</button></a>
-            </div>
-            <div class="col">
-                <img src="..." class="rounded mx-auto d-block" alt="...">
-                <a href="/product/product.php"><button>Product Manage</button></a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <img src="..." class="rounded mx-auto d-block" alt="...">
-                <a href="/order/order.php"><button>Order Manage</button></a>
-            </div>
-            <div class="col">
-                <img src="..." class="rounded mx-auto d-block" alt="...">
-                <a href="/feedback/feedback.php"><button>Feedback Manage</button></a>
+    <div class="ratio" style="--bs-aspect-ratio: 50%;">
+        <div class="bg-cover bg-darkuuu">
+            <?php include "header.php"?>
+            <div class="container">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-people text-success fs-1 p-3"></i>
+                        <a href="/user/user.php" class="btn btn-primary mb-2">User Management</a>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-cart4 text-info fs-1 p-3"></i>
+                        <a href="/order/order.php" class="btn btn-primary mb-2">Order Management</a>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-chat-left-text text-danger fs-1 p-3"></i>
+                        <a href="/feedback/feedback.php" class="btn btn-primary mb-2">Feedback Management</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1"></div> 
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-archive text-primary fs-1 p-3"></i>
+                        <a href="/category/category.php" class="btn btn-primary mb-2">Category Management</a>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-boxes text-primary fs-1 p-3"></i>
+                        <a href="/brand/brand.php" class="btn btn-primary mb-2">Brand Management</a>
+                    </div>
+                    <div class="col-3 d-flex flex-column align-items-center border border-dark rounded-2 m-3">
+                        <i class="bi bi-clipboard-data text-primary fs-1 p-3"></i>
+                        <a href="/product/product.php" class="btn btn-primary mb-2">Product Management</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    
 </body>
 </html>

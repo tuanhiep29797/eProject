@@ -23,11 +23,13 @@
                     <div class="header_menu">
                         <nav class="navbar navbar-expand-lg p-0">
                             <ul class="navbar-nav gap-3 mx-auto">
-                                <li class="nav-item">
-                                    <a class="nav-link text-success fw-bold" id="header_click" href="#">Home</a>
+                                <li class="nav-item d-flex align-items-center fs-3">
+                                    <i class="bi bi-house-fill text-success "></i>
+                                    <a class="nav-link text-success" id="header_click" href="#">Home</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#" id="header_click">Admin</a>
+                                <li class="nav-item d-flex align-items-center fs-3">
+                                    <i class="bi bi-person-fill-gear text-primary"></i>
+                                    <a class="nav-link text-primary fw-bold" href="#" id="header_click">Admin</a>
                                 </li>                       
                             </ul>
                         </nav>

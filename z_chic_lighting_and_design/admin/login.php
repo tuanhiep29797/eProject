@@ -1,46 +1,77 @@
 <?php
 require_once("../database/dbhelper.php");
-session_start();
+
+//tạo biến lỗi đăng nhập
 $loginErrors = [];
-if (!empty($_POST["form_type"])) {
-    if ($_POST["form_type"] === "login") {
-        $email = trim($_POST["email"] ?? "");
+
+//kiểm tra form_type
+if (!empty($_POST["form_type"])) 
+    {
+
+    //xử lý form login
+    if ($_POST["form_type"] === "login") 
+    {
+        $email = trim($_POST["account"] ?? "");
         $password = $_POST["password"] ?? "";
 
-        if ($email === "") $loginErrors[] = "Email is required.";
+        if ($email === "") $loginErrors[] = "Email or Username is required.";
         if ($password === "") $loginErrors[] = "Password is required.";
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $loginErrors[] = "Invalid email format.";
-        }
-
-        try {
+        try 
+        {
+            //tìm kiếm account trong bảng user
             $conn = getConnection();
-            $stmt = $conn->prepare("select * from user where email = :email");
-            $stmt->bindParam(":email", $email);
+            $stmt = $conn->prepare(SQL_SEARCH_USER);
+            $stmt->bindParam(":account", $account);
             $stmt->execute();
 
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $dataList = $stmt->fetchAll();
 
-            if ($dataList == null || count($dataList) == 0) {
-                $loginErrors[] = "Email or password is not correct.";
-            } else {
+            if ($dataList == null || count($dataList) == 0) 
+            {
+                $loginErrors[] = "Username or Password incorrect.";
+            }
+            else
+            {
                 $user = $dataList[0];
-                if (!password_verify($password, $user['password'])) {
-                    $loginErrors[] = "Email or password is not correct.";
-                } else {
-                    $_SESSION['user'] = $user;
-                    header("Location: ../pages/home.php"); 
-                    exit();
+
+                //kiểm tra password đã được mã hóa
+                if (!password_verify($password, $user["password"])) 
+                {
+                    $loginErrors[] = "Username or Password incorrect.";
+                } 
+                else 
+                {
+                    //lưu thông tin người dùng
+                    $_SESSION["username"] = $user["username"];
+                    $_SESSION["email"] = $user["email"];
+                    $_SESSION["role"] = $user["role"];
+
+                    //kiểm tra role
+                    switch ($user["role"])
+                    {
+                        case "admin":
+                            header("Location: home_admin.php");
+                            exit();
+                        case "user":
+                            header("Location: ../pages/home.php");
+                            exit();
+                        default:
+                            break;
+                    }
                 }
             }
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
         }
         $conn = null;
     }
 
+
+    //xử lý form forget password
     if ($_POST["form_type"] === "forget") {
         $email_forget = trim($_POST["email_forget"] ?? "");
    
@@ -76,8 +107,8 @@ if (!empty($_POST["form_type"])) {
                             <form method="POST">
                                 <div class="form-group mb-3 fw-bold position-relative">
                                     <input type="hidden" name="form_type" value="login">
-                                    <label for='email' class="email_login"><i class="bi bi-envelope"></i></label>
-                                    <input type="email" placeholder="Email" name="email" id='email' required class="input-login">
+                                    <label for='account' class="email_login"><i class="bi bi-envelope"></i></label>
+                                    <input type="text" placeholder="Email or Username" name="account" id='account' required class="input-login">
                                     <input type="password" placeholder="Password" name="password" id="password" required class="input-login mb-0">
                                     <span id="togglePassword" class="togglePassword">
                                         <i class="bi bi-eye-slash" id="eyeIcon"></i>

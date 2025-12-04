@@ -1,32 +1,32 @@
 <?php
-require_once('../config.php');
+	require_once __DIR__ ."/../config.php";
 
-//function get connection to database
-function getConnection() 
-{
-	$conn = new PDO("mysql:host=".HOST.";dbname=".DBNAME, USERNAME, PASSWORD);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	//function get connection to server and create database
+	function getConnectionInit() 
+	{
+		$conn = new PDO("mysql:host=".HOST, USERNAME, PASSWORD);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	return $conn;
-}
+		return $conn;
+	}
 
-//function get connection to server and create database
-function getConnectionInit() 
-{
-	$conn = new PDO("mysql:host=".HOST, USERNAME, PASSWORD);
-	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	//function get connection to database
+	function getConnection() 
+	{
+		$conn = new PDO("mysql:host=".HOST.";dbname=".DBNAME, USERNAME, PASSWORD);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	return $conn;
-}
-
-//SQL create database
-const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
-
-const SQL_LOGIN = "select * from user where email = :email and password = :password";
+		return $conn;
+	}
 
 
-//SQL create table
-const SQL_CREATE_TABLE_USER = 
+	//SQL create database
+	const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
+
+	const SQL_LOGIN = "select * from user where email = :email and password = :password";
+
+	//SQL create table
+	const SQL_CREATE_TABLE_USER = 
 	"create table if not exists user 
 	(
 		user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -40,7 +40,7 @@ const SQL_CREATE_TABLE_USER =
 		updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 	)";
 
-const SQL_CREATE_TABLE_CATEGORY = 
+	const SQL_CREATE_TABLE_CATEGORY = 
 	"create table if not exists category 
 	(
 		category_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -48,7 +48,7 @@ const SQL_CREATE_TABLE_CATEGORY =
 		category_thumbnail VARCHAR(255)
 	)";
 
-const SQL_CREATE_TABLE_BRAND = 
+	const SQL_CREATE_TABLE_BRAND = 
 	"create table if not exists brand 
 	(
 		brand_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -56,7 +56,7 @@ const SQL_CREATE_TABLE_BRAND =
 		brand_thumbnail VARCHAR(255)
 	)";
 
-const SQL_CREATE_TABLE_PRODUCT = 
+	const SQL_CREATE_TABLE_PRODUCT = 
 	"create table if not exists product 
 	(
 		product_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -77,7 +77,7 @@ const SQL_CREATE_TABLE_PRODUCT =
 		FOREIGN KEY (brand_id) REFERENCES brand(brand_id) ON DELETE CASCADE
 	)";
 
-const SQL_CREATE_TABLE_PRODUCT_IMG = 
+	const SQL_CREATE_TABLE_PRODUCT_IMG = 
 	"create table if not exists product_img 
 	(
 		product_img_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -87,14 +87,14 @@ const SQL_CREATE_TABLE_PRODUCT_IMG =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_GALLERY = 
+	const SQL_CREATE_TABLE_GALLERY = 
 	"create table if not exists gallery 
 	(
 		img_id INT AUTO_INCREMENT PRIMARY KEY,
     	url VARCHAR(255) NOT NULL
 	)";
 
-const SQL_CREATE_TABLE_CART = 
+	const SQL_CREATE_TABLE_CART = 
 	"create table if not exists cart 
 	(
 		cart_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -107,7 +107,7 @@ const SQL_CREATE_TABLE_CART =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_ORDER = 
+	const SQL_CREATE_TABLE_ORDER = 
 	"create table if not exists `order`
 	(
 		order_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -121,7 +121,7 @@ const SQL_CREATE_TABLE_ORDER =
 		FOREIGN KEY (user_id) REFERENCES user(user_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_ORDER_DETAIL = 
+	const SQL_CREATE_TABLE_ORDER_DETAIL = 
 	"create table if not exists order_detail 
 	(
 		order_id INT NOT NULL,
@@ -134,7 +134,7 @@ const SQL_CREATE_TABLE_ORDER_DETAIL =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE 
 	)";
 
-const SQL_CREATE_TABLE_REVIEW = 
+	const SQL_CREATE_TABLE_REVIEW = 
 	"create table if not exists review 
 	(
 		review_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -151,7 +151,7 @@ const SQL_CREATE_TABLE_REVIEW =
 		FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE
 	)";
 
-const SQL_CREATE_TABLE_FEEDBACK = 
+	const SQL_CREATE_TABLE_FEEDBACK = 
 	"create table if not exists feedback 
 	(
 		feedback_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -161,9 +161,12 @@ const SQL_CREATE_TABLE_FEEDBACK =
 		content TEXT NOT NULL,
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	)";
-	
 
 	//SQL GET TABLE
+
+	const SQL_SEARCH_USER = "select * from user where email = :account or username = :account";
+
+	const SQL_GET_USER = "select * from user";
 
 	const SQL_GET_CATEGORY = "select * from category";
 	const SQL_GET_CATEGORY_BY_ID = "select * from category where id = :id";
@@ -181,6 +184,12 @@ const SQL_CREATE_TABLE_FEEDBACK =
 
 	//SQL ADD TABLE
 
+	const SQL_ADD_USER = 
+	"insert into user(fullname, username, email, phone_number, password, role)
+	values
+	(:fullname, :username, :email, :phone_number, :password, :role)
+	";
+
 	const SQL_ADD_CATEGORY = 
 	"insert into category(category_name, category_thumbnail) 
 	values
@@ -197,6 +206,12 @@ const SQL_CREATE_TABLE_FEEDBACK =
 	"insert into product(product_title, product_description, product_price, product_content, product_quantity, product_thumbnail, category_id, brand_id) 
 	values
 	(:product_title, :product_description, :product_price, :product_content, :product_quantity, :product_thumbnail, :category_id, :brand_id)
+	";
+
+	const SQL_ADD_FEEDBACK = 
+	"insert into feedback(username, email, phone_number,content)
+	values
+	(:username, :email, :phone_number, :content)
 	";
 
 	//SQL UPDATE TABLE

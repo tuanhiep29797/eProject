@@ -114,6 +114,7 @@ function getConnectionInit()
 		order_status ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled') NOT NULL DEFAULT 'pending',
 		total_amount DECIMAL(10, 2) NOT NULL,
 		receiver VARCHAR(255) NOT NULL,
+		receiver_phone_number VARCHAR(20) ,
 		address VARCHAR(255) NOT NULL,
 		order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 
