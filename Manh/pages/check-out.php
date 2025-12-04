@@ -82,7 +82,6 @@ if (!empty($_POST)) {
         $stmt->bindParam(":unit_price", $item['product_price']);
 
         $stmt->execute();
-
         }
 
     } catch (PDOException $e) {
