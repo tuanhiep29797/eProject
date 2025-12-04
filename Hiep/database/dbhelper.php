@@ -205,6 +205,12 @@ function getConnectionInit()
 	(:product_title, :product_description, :product_price, :product_content, :product_quantity, :product_thumbnail, :category_id, :brand_id)
 	";
 
+	const SQL_ADD_FEEDBACK = 
+	"insert into feedback(username, email, phone_number,content)
+	values
+	(:username, :email, :phone_number, :content)
+	";
+
 	//SQL UPDATE TABLE
 
 	const SQL_UPDATE_CATEGORY = 
