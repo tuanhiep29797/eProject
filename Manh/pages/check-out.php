@@ -19,6 +19,14 @@ if (!empty($_SESSION['user']) && isset($_SESSION['user']['user_id'])) {
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $products = $stmt->fetchAll();
+
+        if ($products == null || count($products) == 0) {
+        echo '<script>
+                alert("Please add product to cart.");
+                window.location.href = "../pages/home.php";
+            </script>';
+        }
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
@@ -34,6 +42,7 @@ if (!empty($_SESSION['user']) && isset($_SESSION['user']['user_id'])) {
 foreach ($products as $item) {
     $total += $item['product_price'] * $item['quantity'];
 }
+
 if (!empty($_POST)) {
     $fullname = $_POST['fullname'];
     $phone = $_POST['phone'];
@@ -41,30 +50,45 @@ if (!empty($_POST)) {
 
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("INSERT INTO order (user_id, total_amount, receiver, phone_number, address)
-                    VALUES (:user_id, :total_amount, :receiver, :phone_number, :address)");
+        $stmt = $conn->prepare("
+            INSERT INTO `order` (user_id, total_amount, receiver, address)
+            VALUES (:user_id, :total_amount, :receiver, :address)
+        ");
         $stmt->bindParam(":user_id", $user_id);
         $stmt->bindParam(":total_amount", $total);
         $stmt->bindParam(":receiver", $fullname);
-        $stmt->bindParam(":phone_number", $phone);
         $stmt->bindParam(":address", $address);
         $stmt->execute();
 
+        $stmt = $conn->prepare("
+            SELECT *
+            FROM `order`
+            WHERE user_id = :user_id
+            ORDER BY order_id DESC
+            LIMIT 1
+        ");
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+        $order = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        $orderID = $order['order_id'];
 
+        foreach ($products as $item) {
+        $stmt = $conn->prepare("INSERT INTO order_detail (order_id, product_id, quantity, unit_price)
+                VALUES (:order_id, :product_id, :quantity, :unit_price)");
+        $stmt->bindParam(":order_id", $orderID);
+        $stmt->bindParam(":product_id", $item['product_id']);
+        $stmt->bindParam(":quantity", $item['quantity']);
+        $stmt->bindParam(":unit_price", $item['product_price']);
 
+        $stmt->execute();
+
+        }
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
     $conn = null;
-
-
-
-    echo '<script>
-    alert("Please log in to view your cart.");
-    window.location.href = "../account/login.php";
-    </script>';
 }
 ?>
 
