@@ -80,13 +80,13 @@ if (!empty($_POST['action'])) {
             }
             break;
 
-        case "check-out":
-            echo "<script>
-                alert('Thank you for your purchase. Your order will be delivered soon.');
-                window.location.href = '../pages/home.php';
-            </script>";
-            exit;
-            break;
+        // case "check-out":
+        //     echo "<script>
+        //         alert('Thank you for your purchase. Your order will be delivered soon.');
+        //         window.location.href = '../pages/home.php';
+        //     </script>";
+        //     exit;
+        //     break;
         default:
             header("Location: cart.php");
             exit;
@@ -99,7 +99,7 @@ if (!empty($_POST['action'])) {
         $stmt->bindParam(":cart_id", $cart_id);
         $stmt->execute();
 
-        header("Location: cart.php#shopping-cart-".$cart_id);
+        header("Location: cart.php#shopping-cart-$cart_id");
         exit;
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
@@ -153,7 +153,7 @@ if (!empty($_POST['action'])) {
         </div>
         <div class="shopping-cart-product mt-4">
             <?php foreach ($products as $item): ?>
-                <div class="sc-product row align-items-center px-4 mx-5 mt-4" id="shopping-cart<?= $item['cart_id']?>" >
+                <div class="sc-product row align-items-center px-4 mx-5 mt-4" id="shopping-cart-<?= $item['cart_id']?>" >
                     <div class="sc-product-img col-lg-2 my-2">
                         <img src="<?= $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" />
                     </div>
@@ -202,9 +202,9 @@ if (!empty($_POST['action'])) {
                     </div>
                     <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
                         <form method="POST">
-                            <button class="btn btn-outline-dark fw-bold" name="action" value="remove-all">Remove All</button>
-                            <button class="btn btn-outline-white bg-dark text-light me-2 fw-bold" name="action" value="check-out">Check out</button>
+                            <button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;" name="action" value="remove-all">Remove All</button>
                         </form>
+                            <a href="./check-out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;" name="action" value="check-out">Check out</button></a>
                     </div>
                 </div>
             </div>
