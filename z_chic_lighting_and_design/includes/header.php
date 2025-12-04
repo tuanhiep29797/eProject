@@ -56,17 +56,17 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                         <nav class="navbar navbar-expand-lg p-0">
                             <ul class="navbar-nav gap-3 mx-auto">
                                 <li class="nav-item">
-                                    <a class="nav-link text-success fw-bold" id="header_click" href="#">Home</a>
+                                    <a class="nav-link text-success fw-bold" id="header_click" href="../pages/home.php">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id="header_click">About Us</a>
+                                    <a class="nav-link" href="../pages/about.php" id="header_click">About Us</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id="header_click">Gallery</a>
+                                    <a class="nav-link" href="../pages/gallery.php" id="header_click">Gallery</a>
                                 </li>
 
                                 <li class="nav-item position-static" id="product_menu">
-                                    <a class="nav-link" href="#" id="header_click">Product</a>
+                                    <a class="nav-link" href="../pages/product.php" id="header_click">Product</a>
                                     <div class="nav-item_product px-3">
                                         <?php foreach ($product as $category => $items): ?>
                                             <h5 class="h5 text-success"><?= $category ?></h5>
@@ -84,7 +84,7 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
 
                                 </li>
                                 <li class="nav-item position-relative" id="category_menu">
-                                    <a class="nav-link" href="#" id="header_click">Category</a>
+                                    <a class="nav-link" href="../pages/category.php" id="header_click">Category</a>
                                     <div class="nav-item_brand">
                                         <?php foreach ($product as $category => $items): ?>
                                             <a class="nav-link d-inline-block p-2 m-1" href="/product.php/product=<?=(strtolower(str_replace(" ", "-", $category)))?>">
@@ -94,7 +94,7 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                                     </div>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#" id="header_click">Contact Us</a>
+                                    <a class="nav-link" href="../pages/contact.php" id="header_click">Contact Us</a>
                                 </li>
                             </ul>
                         </nav>

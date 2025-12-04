@@ -1,35 +1,35 @@
 <?php
-session_start();
-require_once('./database/dbhelper.php'); 
+// session_start();
+// require_once('./database/dbhelper.php'); 
 
-$msg = "";
-$msgType = "";
+// $msg = "";
+// $msgType = "";
 
-if (isset($_POST)) {
-    $name    = trim($_POST['username'] ?? '');
-    $email   = trim($_POST['email'] ?? '');
-    $phone   = trim($_POST['phone_number'] ?? '');
-    $content = trim($_POST['content'] ?? '');
+// if (isset($_POST)) {
+//     $name    = trim($_POST['username'] ?? '');
+//     $email   = trim($_POST['email'] ?? '');
+//     $phone   = trim($_POST['phone_number'] ?? '');
+//     $content = trim($_POST['content'] ?? '');
 
-    if ($name && $email && $content) {
-        try {
-            $conn = getConnection();
-            $sql = "INSERT INTO feedback (username, email, phone_number, content) 
-                    VALUES (:n, :e, :p, :c)";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute([':n' => $name, ':e' => $email, ':p' => $phone, ':c' => $content]);
+//     if ($name && $email && $content) {
+//         try {
+//             $conn = getConnection();
+//             $sql = "INSERT INTO feedback (username, email, phone_number, content) 
+//                     VALUES (:n, :e, :p, :c)";
+//             $stmt = $conn->prepare($sql);
+//             $stmt->execute([':n' => $name, ':e' => $email, ':p' => $phone, ':c' => $content]);
             
-            $msg = "Message sent successfully!";
-            $msgType = "success";
-        } catch (Exception $e) {
-            $msg = "Error: " . $e->getMessage();
-            $msgType = "danger";
-        }
-    } else {
-        $msg = "Please fill in required fields!";
-        $msgType = "warning";
-    }
-}
+//             $msg = "Message sent successfully!";
+//             $msgType = "success";
+//         } catch (Exception $e) {
+//             $msg = "Error: " . $e->getMessage();
+//             $msgType = "danger";
+//         }
+//     } else {
+//         $msg = "Please fill in required fields!";
+//         $msgType = "warning";
+//     }
+// }
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +40,7 @@ if (isset($_POST)) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/contact.css">
+    <link rel="stylesheet" href="../assets/css/contact.css">
 
 </head>
 <body>
