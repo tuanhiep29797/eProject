@@ -1,40 +1,26 @@
 <?php
 session_start();
 require_once('./database/dbhelper.php'); 
-
-$gallery_images = [
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-];
-
-
-$total_images = count($gallery_images);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Gallery - LICERIA & CO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - GS LIGHTING</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/gallery.css">
+    <link rel="stylesheet" href="./css/gallery.css"> 
+
+
 </head>
 <body>
 
-
-
-    <div class="gallery-banner">
-        <div class="container">
-            <h2>Our Gallery</h2>
+    <div class="banner">
+        <div class="banner-content">
+            <h1>Gallery</h1>
             <div class="banner-breadcrumb">
                 <a href="index.php">Home</a>
                 <i class="bi bi-chevron-right"></i>
@@ -43,56 +29,47 @@ $total_images = count($gallery_images);
         </div>
     </div>
 
-    <div class="container gallery-section">
-        <div class="gallery-header">
-            <h3>Latest Projects</h3>
-            <p>Explore our beautiful lighting collections</p>
+    <div class="gallery-section">
+        
+        <div class="container">
+            <?php
+            $characters1 = [
+                ['name' => 'Living Room', 'img' => 'https://images.unsplash.com/photo-1567767292278-a4f21aa2d36e?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Modern Lamp', 'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0MkLVctCofrGdJwr8iXxjQMcwp7xLSAZ-Gw&s'],
+                ['name' => 'Cozy Sofa',   'img' => 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Wall Art',    'img' => 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQbsjZbCxrz9V9vWvC_YY3R0XvLLUQESP0l4Q&s'],
+                ['name' => 'Minimalist',  'img' => 'https://images.unsplash.com/photo-1484101403633-562f891dc89a?q=80&w=600&auto=format&fit=crop']
+            ];
+
+            foreach ($characters1 as $char) {
+                echo '<div class="card">';
+                echo '   <img src="' . htmlspecialchars($char['img']) . '" alt="' . htmlspecialchars($char['name']) . '">';
+                echo '   <div class="card-title">' . htmlspecialchars($char['name']) . '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div> 
+        <div class="container">
+            <?php
+            $characters2 = [
+                ['name' => 'Bedroom',    'img' => 'https://images.unsplash.com/photo-1616594039964-40891a90b81f?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Kitchen',    'img' => 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Office',     'img' => 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Garden',     'img' => 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=600&auto=format&fit=crop'],
+                ['name' => 'Bathroom',   'img' => 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=600&auto=format&fit=crop']
+            ];
+
+            foreach ($characters2 as $char) {
+                echo '<div class="card">';
+                echo '   <img src="' . htmlspecialchars($char['img']) . '" alt="' . htmlspecialchars($char['name']) . '">';
+                echo '   <div class="card-title">' . htmlspecialchars($char['name']) . '</div>';
+                echo '</div>';
+            }
+            ?>
+        </div>
         </div>
 
-        <div class="row">
-            <?php foreach($gallery_images as $index => $img): ?>
-                <div class="col-xl-4 col-md-6">
-                    <a class="gallery-item" href="#img-<?= $index ?>">
-                        <img src="<?= $img ?>" alt="Gallery Image">
-                        <div class="gallery-overlay">
-                            <i class="bi bi-zoom-in"></i>
-                        </div>
-                    </a>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </div>
-
-    <?php foreach($gallery_images as $index => $img): ?>
-        <?php
-            $prev_index = ($index == 0) ? $total_images - 1 : $index - 1;
-            
-            // điều kiện ? đúng : sai
-
-            $next_index = ($index == $total_images - 1) ? 0 : $index + 1;
-        ?>
-
-        <div class="lightbox-target" id="img-<?= $index ?>">
-            
-            <img src="<?= $img ?>" class="lightbox-content" alt="Full Image">
-            
-            <a class="lightbox-close" href="#gallery-section">&times;</a>
-            
-            <a class="lightbox-nav lightbox-prev" href="#img-<?= $prev_index ?>">
-                &#10094;
-            </a>
-            
-            <a class="lightbox-nav lightbox-next" href="#img-<?= $next_index ?>">
-                &#10095;
-            </a>
-            
-            <a href="#gallery-section" style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:9998; cursor:default;"></a>
-        </div>
-    <?php endforeach; ?>
-
-    <div id="gallery-section"></div>
-
-    <?php require_once "footer.php"; ?>
+    <?php include 'footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
