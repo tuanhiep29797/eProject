@@ -1,8 +1,8 @@
 <?php
-    require_once('../database/dbhelper.php');
+    require_once __DIR__."/../../database/dbhelper.php";
     if(empty($_GET))
     {
-        header("Location: ../home_admin.php");
+        header("Location: brand.php");
     }
 
     $id = $_GET['id'];
@@ -11,10 +11,10 @@
     {
         $conn = getConnection();
         $stmt = $conn -> prepare(SQL_DELETE_BRAND);
-        $stmt -> bindParam(':id', $id);
+        $stmt -> bindParam(':brand_id', $id);
         $stmt -> execute();
 
-        header("Location: ../home_admin.php");
+        header("Location: brand.php");
     }
     catch (PDOException $e)
     {

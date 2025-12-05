@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
     
     try
     {
@@ -29,6 +29,7 @@
 </head>
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <h1>FEEDBACK LIST</h1>
 
     <table class="table table-borderless">
@@ -43,14 +44,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($datalist as $index => $item):?>
+            <?php foreach($data_list as $index => $item):?>
                 <tr>
-                    <th scope="row"><?= $index + 1 ?>?></td>
-                    <td><?= $item['username'] ?>?></td>
-                    <td><?= $item['email'] ?>?></td>
-                    <td><?= $item['phone_number'] ?>?></td>
-                    <td><?= $item['content'] ?>?></td>
-                    <td><?= $item['created_at'] ?>?></td>
+                    <th scope="row"><?= $index + 1 ?></td>
+                    <td><?= $item['username'] ?></td>
+                    <td><?= $item['email'] ?></td>
+                    <td><?= $item['phone_number'] ?></td>
+                    <td><?= $item['content'] ?></td>
+                    <td><?= $item['created_at'] ?></td>
                 </tr>
             <?php endforeach;?>
         </tbody>

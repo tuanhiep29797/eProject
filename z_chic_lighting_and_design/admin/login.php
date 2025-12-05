@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__."/../database/dbhelper.php";
 
-var_dump($_SESSION);
 //error variable
 $loginErrors = "";
 
@@ -12,10 +11,10 @@ if (!empty($_POST["form_type"]))
     //handle form login
     if ($_POST["form_type"] === "login") 
     {
-        $email = trim($_POST["account"] ?? "");
+        $account = trim($_POST["account"] ?? "");
         $password = $_POST["password"] ?? "";
 
-        if ($email === "") $loginErrors = "Email or Username is required.";
+        if ($account === "") $loginErrors = "Email or Username is required.";
         if ($password === "") $loginErrors = "Password is required.";
 
         try 
@@ -31,7 +30,7 @@ if (!empty($_POST["form_type"]))
 
             if ($dataList == null || count($dataList) == 0) 
             {
-                $loginErrors[] = "Username or Password incorrect.";
+                $loginErrors = "Username or Password incorrect.";
             }
             else
             {
@@ -40,7 +39,7 @@ if (!empty($_POST["form_type"]))
                 //verify password
                 if (!password_verify($password, $user["password"])) 
                 {
-                    $loginErrors[] = "Username or Password incorrect.";
+                    $loginErrors = "Username or Password incorrect.";
                 } 
                 else 
                 {
@@ -118,7 +117,7 @@ if (!empty($_POST["form_type"]))
                                 <p id="forget_password">Forget Password?</p>
                                 <button class="btn btn-success w-100 mt-4" type="submit">Login</button>
                             </form>
-                            <?php if (!empty($loginErrors)): ?>
+                            <?php if (isset($loginErrors)): ?>
                                 <div class="text-danger mt-3">
                                         <p><?= htmlspecialchars($loginErrors) ?></p>
                                 </div>

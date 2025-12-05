@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
 
     if(!empty($_POST))
     {
@@ -46,6 +46,7 @@
 
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <h1>ADD NEW PRODUCT</h1>
     <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 

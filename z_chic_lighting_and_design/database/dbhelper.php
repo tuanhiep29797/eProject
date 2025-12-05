@@ -165,22 +165,24 @@
 	//SQL GET TABLE
 
 	const SQL_SEARCH_USER = "select * from user where email = :account or username = :account";
+	const SQL_SEARCH_USER_BY_EMAIL ="select * from user where email = :email";
+	const SQL_SEARCH_USER_BY_USERNAME ="select * from user where username = :username";
 
 	const SQL_GET_USER = "select * from user";
 
 	const SQL_GET_CATEGORY = "select * from category";
-	const SQL_GET_CATEGORY_BY_ID = "select * from category where id = :id";
+	const SQL_GET_CATEGORY_BY_ID = "select * from category where category_id = :id";
 
 	const SQL_GET_BRAND = "select * from brand";
-	const SQL_GET_BRAND_BY_ID = "select * from brand where id = :id";
+	const SQL_GET_BRAND_BY_ID = "select * from brand where brand_id = :id";
 
 	const SQL_GET_PRODUCT = "select * from product";
-	const SQL_GET_PRODUCT_BY_ID = "select * from product where id = :id";
+	const SQL_GET_PRODUCT_BY_ID = "select * from product where product_id = :id";
 
 	const SQL_GET_FEEDBACK = "select * from feedback";
 	
-	const SQL_GET_ORDER = "select * from order";
-	const SQL_GET_ORDER_BY_ID = "select * from order where id = :id";
+	const SQL_GET_ORDER = "select * from `order`";
+	const SQL_GET_ORDER_BY_ID = "select * from `order` where order_id = :id";
 
 	//SQL ADD TABLE
 
@@ -188,6 +190,12 @@
 	"insert into user(fullname, username, email, phone_number, password, role)
 	values
 	(:fullname, :username, :email, :phone_number, :password, :role)
+	";
+
+	const SQL_ADD_USER_REGISTER = 
+	"insert into user(fullname, username, email, phone_number, password)
+	values
+	(:fullname, :username, :email, :phone_number, :password)
 	";
 
 	const SQL_ADD_CATEGORY = 
@@ -220,14 +228,14 @@
 	"update from category 
 	set category_name = :category_name, 
 		category_thumbnail = :category_thumbnail
-	where id = :id
+	where category_id = :id
 	";
 
 	const SQL_UPDATE_BRAND = 
 	"update from brand 
 	set brand_name = :brand_name, 
 		brand_thumbnail = :brand_thumbnail
-	where id = :id
+	where brand_id = :id
 	";
 
 	const SQL_UPDATE_PRODUCT = 
@@ -240,20 +248,20 @@
 		product_thumbnail = :product_thumbnail,
 		category_id = :category_id,
 		brand_id = :brand_id
-	where id = :id
+	where product_id = :id
 	";
 
 	const SQL_UPDATE_ORDER = 
-	"update from order 
+	"update from `order` 
 	set order_status = :order_status
-	where id = :id	
+	where order_id = :id	
 	";
 
 	//SQL DELETE TABLE
 
-	const SQL_DELETE_CATEGORY = "delete from category where id = :id";
+	const SQL_DELETE_CATEGORY = "delete from category where category_id = :id";
 
-	const SQL_DELETE_BRAND = "delete from brand where id = :id";
+	const SQL_DELETE_BRAND = "delete from brand where brand_id = :id";
 	
-	const SQL_DELETE_PRODUCT = "delete from product where id = :id";
+	const SQL_DELETE_PRODUCT = "delete from product where product_id = :id";
 ?>

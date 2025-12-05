@@ -1,5 +1,5 @@
 <?php
-    require_once('../database/dbhelper.php');
+    require_once __DIR__."/../../database/dbhelper.php";
     if(empty($_GET))
     {
         header("Location: ../home_admin.php");
@@ -59,6 +59,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <h1>EDIT ORDER</h1>
     <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 

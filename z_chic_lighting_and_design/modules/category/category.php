@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
     
     try
     {
@@ -29,6 +29,7 @@
 </head>
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -53,11 +54,11 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($datalist as $item):?>
+            <?php foreach($data_list as $item):?>
                 <tr>
-                    <th scope="row"><?= $item['category_id'] ?>?></td>
-                    <td><?= $item['category_name'] ?>?></td>
-                    <td><?= $item['category_thumbnail'] ?>?></td>
+                    <th scope="row"><?= $item['category_id'] ?></td>
+                    <td><?= $item['category_name'] ?></td>
+                    <td><img src="<?= $item['category_thumbnail'] ?>" alt="Chưa có ảnh"></td>
                     <td>
                         <div class="d-flex gap-2 mb-3">
                             <a href="edit_category.php?id=<?= $item['category_id'] ?>">

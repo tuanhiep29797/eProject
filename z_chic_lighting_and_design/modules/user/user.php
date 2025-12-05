@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
     
     try
     {
@@ -29,6 +29,7 @@
 </head>
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <div class="container">
         <div class="row">
             <div class="col">
@@ -52,30 +53,17 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($datalist as $item):?>
+            <?php foreach($data_list as $item):?>
                 <tr>
-                    <th scope="row"><?= $item['user_id'] ?>?></td>
+                    <th scope="row"><?= $item['user_id'] ?></td>
                     <td><?= $item['fullname'] ?></td>
                     <td><?= $item['username'] ?></td>
                     <td><?= $item['email'] ?></td>
                     <td><?= $item['phone_number'] ?></td>
                     <td><?= $item['role'] ?></td>
                     <td><?= $item['created_at'] ?></td>
-                    <td><?= $item['category_id'] ?></td>
                     <td><?= $item['updated_at'] ?></td>
-                    <td>
-                        <div class="d-flex gap-2 mb-3">
-                            <a href="edit_product.php?id=<?= $item['product_id'] ?>">
-                                <button class="btn btn-primary">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                            </a>
-                            <a href="delete_product.php?id=<?= $item['product_id'] ?>">
-                                <button class="btn btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </a>
-                        </div>                        
+                    <td>                       
                     </td>
                 </tr>
             <?php endforeach;?>

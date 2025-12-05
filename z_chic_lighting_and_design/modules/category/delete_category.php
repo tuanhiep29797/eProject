@@ -1,5 +1,5 @@
 <?php
-    require_once('../database/dbhelper.php');
+    require_once __DIR__."/../../database/dbhelper.php";
     if(empty($_GET))
     {
         header("Location: ../home_admin.php");

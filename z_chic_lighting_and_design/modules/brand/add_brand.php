@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
 
     if(!empty($_POST))
     {
@@ -14,7 +14,7 @@
             $stmt -> bindParam(':brand_thumbnail', $brand_thumbnail);        
             $stmt -> execute();
 
-            header('Location: ../home_admin.php');
+            header('Location: brand.php');
         }
         catch (PDOException $e)
         {
@@ -34,8 +34,9 @@
 
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <h1>ADD NEW BRAND</h1>
-    <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
+    <a href="../../admin/home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 
     <form method="post">
         <div class="mb-3">

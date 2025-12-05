@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
     
     try
     {
@@ -29,6 +29,7 @@
 </head>
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <div class="container">
         <div class="row">
             <div class="col">

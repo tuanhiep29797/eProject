@@ -7,9 +7,10 @@ if ($isLogin)
 }
 
 $errors = [];
-$isRegister = true;
 
 if (!empty($_POST)) {
+
+    //get data
     $fullname = trim($_POST["fullname"] ?? "");
     $username = trim($_POST["username"] ?? "");
     $phone = trim($_POST["phone"] ?? "");
@@ -17,27 +18,24 @@ if (!empty($_POST)) {
     $password = $_POST["password"] ?? "";
     $confirm_password = $_POST["confirm_password"] ?? "";
 
-    if ($fullname === "") $errors[] = "Fullname is required.";
-    if ($username === "") $errors[] = "Username is required.";
-    if ($phone === "") $errors[] = "Phone number is required.";
-    if ($email === "") $errors[] = "Email is required.";
-    if ($password === "") $errors[] = "Password is required.";
-    if ($confirm_password === "") $errors[] = "Confirm password is required.";
+    //check error
+    if ($fullname === "") $errors["fullname"] = "Fullname is required.";
+    if ($username === "") $errors["username"] = "Username is required.";
+    if ($phone === "") $errors["phone_number"] = "Phone number is required.";
+    if ($email === "") $errors["email"] = "Email is required.";
+    if ($password === "") $errors["password"] = "Password is required.";
+    if ($confirm_password === "") $errors["confirm_password"] = "Confirm password is required.";
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Invalid email format.";
+        $errors["email"] = "Invalid email format.";
     }
 
     if ($password !== $confirm_password){
-        $errors[] = "Password and confirm password do not match.";
+        $errors["confirm_password"] = "Password and confirm password do not match.";
     }
-    
-    if(empty($errors))
-    {   
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
         $conn = getConnection();
-        $check = $conn->prepare("SELECT * FROM user WHERE email = :email");
+        $check = $conn->prepare(SQL_SEARCH_USER_BY_EMAIL);
         $check->bindParam(":email", $email);
         $check->execute();
 
@@ -45,18 +43,30 @@ if (!empty($_POST)) {
 		$dataList = $check->fetchAll();
 
         if($dataList != null && count($dataList) > 0){
-            $errors[] = "This email is already registered.";
-            $isRegister = false;
+            $errors["email"] = "This email is already registered.";
         }
-        else {
+
+        $check = $conn->prepare(SQL_SEARCH_USER_BY_USERNAME);
+        $check->bindParam(":username", $username);
+        $check->execute();
+
+        $result = $check->setFetchMode(PDO::FETCH_ASSOC);
+		$dataList = $check->fetchAll();
+
+        if($dataList != null && count($dataList) > 0){
+            $errors["username"] = "This email is already registered.";
+        }
+    
+    if(empty($errors))
+    {   
+        $passwordHash = password_hash($password, PASSWORD_DEFAULT);    
             try {
                 $conn = getConnection();
-                $stmt = $conn->prepare("INSERT INTO user (fullname, username, phone_number, email, password)
-                    VALUES (:fullname, :username, :phone_number, :email, :password)");
+                $stmt = $conn->prepare(SQL_ADD_USER_REGISTER);
                 $stmt->bindParam(":fullname", $fullname);
                 $stmt->bindParam(":username", $username);
-                $stmt->bindParam(":phone_number", $phone);
                 $stmt->bindParam(":email", $email);
+                $stmt->bindParam(":phone_number", $phone);
                 $stmt->bindParam(":password", $passwordHash);
                 $stmt->execute();
 
@@ -66,7 +76,6 @@ if (!empty($_POST)) {
                 echo "Error: " . $e->getMessage();
             }
             $conn = null;
-        }
     }
 }
 ?>

@@ -1,5 +1,5 @@
 <?php
-    require_once("../database/dbhelper.php");
+    require_once __DIR__."/../../database/dbhelper.php";
     
     try
     {
@@ -29,16 +29,17 @@
 </head>
 </head>
 <body>
+    <?php require_once __DIR__."/../../admin/header.php";?>
     <div class="container">
         <div class="row">
             <div class="col">
                 <h1>Brand Manager</h1>
             </div>
             <div class="col">
-                <button class="btn btn-success">
+                <a href="add_brand.php" class="btn btn-success">
                     <i class="bi bi-plus-circle"></i>
                       Add New Brand
-                </button>
+                </a>
             </div>
         </div>
     </div>
@@ -53,24 +54,21 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($datalist as $item):?>
+            <?php foreach($data_list as $item):?>
                 <tr>
-                    <th scope="row"><?= $item['brand_id'] ?>?></td>
-                    <td><?= $item['brand_name'] ?>?></td>
-                    <td><?= $item['brand_thumbnail'] ?>?></td>
+                    <th scope="row"><?= $item['brand_id'] ?></td>
+                    <td><?= $item['brand_name'] ?></td>
+                    <td><img src="<?= $item['brand_thumbnail'] ?>" alt="Chưa có ảnh"></td>
                     <td>
                         <div class="d-flex gap-2 mb-3">
-                            <a href="edit_brand.php?id=<?= $item['brand_id'] ?>">
-                                <button class="btn btn-primary">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
+                            <a href="edit_brand.php?id=<?= $item['brand_id'] ?>" class="btn btn-primary">
+                                <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a href="delete_brand.php?id=<?= $item['brand_id'] ?>">
-                                <button class="btn btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+
+                            <a href="delete_brand.php?id=<?= $item['brand_id'] ?>" class="btn btn-outline-danger">
+                                <i class="bi bi-trash"></i>
                             </a>
-                        </div>                        
+                        </div>
                     </td>
                 </tr>
             <?php endforeach;?>
