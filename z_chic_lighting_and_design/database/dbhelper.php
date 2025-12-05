@@ -168,6 +168,8 @@
 	const SQL_SEARCH_USER_BY_EMAIL ="select * from user where email = :email";
 	const SQL_SEARCH_USER_BY_USERNAME ="select * from user where username = :username";
 
+	const SQL_GET_USER_BY_ID = "select * from user where user_id = :user_id";
+
 	const SQL_GET_USER = "select * from user";
 
 	const SQL_GET_CATEGORY = "select * from category";
@@ -224,22 +226,32 @@
 
 	//SQL UPDATE TABLE
 
+	const SQL_UPDATE_USER = 
+	"update user
+	set fullname = :fullname,
+		username = :username,
+		email = :email,
+		phone_number = :phone_number,
+		role = :role
+	where user_id = :user_id
+	";
+
 	const SQL_UPDATE_CATEGORY = 
-	"update from category 
+	"update category 
 	set category_name = :category_name, 
 		category_thumbnail = :category_thumbnail
-	where category_id = :id
+	where category_id = :category_id
 	";
 
 	const SQL_UPDATE_BRAND = 
-	"update from brand 
+	"update brand 
 	set brand_name = :brand_name, 
 		brand_thumbnail = :brand_thumbnail
-	where brand_id = :id
+	where brand_id = :brand_id
 	";
 
 	const SQL_UPDATE_PRODUCT = 
-	"update from product
+	"update product
 	set product_title = :product_title,
 		product_description = :product_description,
 		product_price = :product_price,
@@ -248,20 +260,22 @@
 		product_thumbnail = :product_thumbnail,
 		category_id = :category_id,
 		brand_id = :brand_id
-	where product_id = :id
+	where product_id = :product_id
 	";
 
 	const SQL_UPDATE_ORDER = 
-	"update from `order` 
+	"update `order` 
 	set order_status = :order_status
-	where order_id = :id	
+	where order_id = :order_id	
 	";
 
 	//SQL DELETE TABLE
 
-	const SQL_DELETE_CATEGORY = "delete from category where category_id = :id";
+	const SQL_DELETE_USER = "delete from user where user_id = :user_id";
 
-	const SQL_DELETE_BRAND = "delete from brand where brand_id = :id";
+	const SQL_DELETE_CATEGORY = "delete from category where category_id = :category_id";
+
+	const SQL_DELETE_BRAND = "delete from brand where brand_id = :brand_id";
 	
-	const SQL_DELETE_PRODUCT = "delete from product where product_id = :id";
+	const SQL_DELETE_PRODUCT = "delete from product where product_id = :product_id";
 ?>

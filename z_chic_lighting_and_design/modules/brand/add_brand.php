@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__."/../../database/dbhelper.php";
+    require_once BASE_URL."database/dbhelper.php";
 
     if(!empty($_POST))
     {

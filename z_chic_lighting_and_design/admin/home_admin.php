@@ -1,7 +1,6 @@
 <?php
-    
+    require_once (__DIR__."/../config.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +11,9 @@
 <body>
     <div class="ratio" style="--bs-aspect-ratio: 50%;">
         <div class="bg-cover bg-darkuuu">
-            <?php include "header.php"?>
+            <?php
+                require_once ("admin_header.php");
+            ?>
             <div class="container">
                 <div class="row">
                     <div class="col-1"></div>

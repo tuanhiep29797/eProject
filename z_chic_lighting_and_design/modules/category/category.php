@@ -36,7 +36,7 @@
                 <h1>Category Manager</h1>
             </div>
             <div class="col">
-                <a class="btn btn-success">
+                <a href="add_category.php" class="btn btn-success">
                     <i class="bi bi-plus-circle"></i>
                       Add New Category
                 </a>

@@ -8,7 +8,8 @@
     define("USERNAME", "root");
     define("PASSWORD", "");
 
-    define("BASE_URL", "http://localhost/PHP/eProject/z_chic_lighting_and_design/");
+    // define("BASE_URL", "http://localhost/PHP/eProject/z_chic_lighting_and_design/");
+    define("BASE_URL", "http://localhost/eProject/z_chic_lighting_and_design/");
 
     //function check Login
     function isLogin() {
