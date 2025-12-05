@@ -1,26 +1,26 @@
 <?php
-require_once("../database/dbhelper.php");
+require_once __DIR__."/../database/dbhelper.php";
 
 var_dump($_SESSION);
-//tạo biến lỗi đăng nhập
-$loginErrors = [];
+//error variable
+$loginErrors = "";
 
-//kiểm tra form_type
+//check form_type
 if (!empty($_POST["form_type"])) 
     {
 
-    //xử lý form login
+    //handle form login
     if ($_POST["form_type"] === "login") 
     {
         $email = trim($_POST["account"] ?? "");
         $password = $_POST["password"] ?? "";
 
-        if ($email === "") $loginErrors[] = "Email or Username is required.";
-        if ($password === "") $loginErrors[] = "Password is required.";
+        if ($email === "") $loginErrors = "Email or Username is required.";
+        if ($password === "") $loginErrors = "Password is required.";
 
         try 
         {
-            //tìm kiếm account trong bảng user
+            //search account
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_SEARCH_USER);
             $stmt->bindParam(":account", $account);
@@ -37,19 +37,19 @@ if (!empty($_POST["form_type"]))
             {
                 $user = $dataList[0];
 
-                //kiểm tra password đã được mã hóa
+                //verify password
                 if (!password_verify($password, $user["password"])) 
                 {
                     $loginErrors[] = "Username or Password incorrect.";
                 } 
                 else 
                 {
-                    //lưu thông tin người dùng
+                    //save user infomation
                     $_SESSION["username"] = $user["username"];
                     $_SESSION["email"] = $user["email"];
                     $_SESSION["role"] = $user["role"];
 
-                    //kiểm tra role
+                    //check role
                     switch ($user["role"])
                     {
                         case "admin":
@@ -72,11 +72,11 @@ if (!empty($_POST["form_type"]))
     }
 
 
-    //xử lý form forget password
+    //handle form forget password
     if ($_POST["form_type"] === "forget") {
         $email_forget = trim($_POST["email_forget"] ?? "");
    
-        $forgetErrors = "Hi $email_forget, A password reset email has been sent to the administrator. Thank you!";
+        $forgetErrors = "Hi $email_forget, A password reset email has been sent to your email. Thank you!";
           
     }
 }
@@ -92,12 +92,12 @@ if (!empty($_POST["form_type"]))
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
-    <title>Login</title>
+    <title>Login Page</title>
 </head>
 
 <body>
     <div class="login">
-        <?php require "../includes/header.php"; ?>
+        <?php require_once __DIR__ . "/../includes/header.php"; ?>
         <!-- Login start  -->
         <div class="container">
             <div class="row mt-5 pt-5 ">
@@ -120,9 +120,7 @@ if (!empty($_POST["form_type"]))
                             </form>
                             <?php if (!empty($loginErrors)): ?>
                                 <div class="text-danger mt-3">
-                                    <?php foreach ($loginErrors as $err): ?>
-                                        <p><?= htmlspecialchars($err) ?></p>
-                                    <?php endforeach; ?>
+                                        <p><?= htmlspecialchars($loginErrors) ?></p>
                                 </div>
                             <?php endif; ?>
                             <div class="register-login d-flex mt-4 justify-content-between">
