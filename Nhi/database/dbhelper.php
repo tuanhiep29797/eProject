@@ -16,21 +16,6 @@ function getConnection() {
     }
 }
 
-function getConnectionInit() {
-    try {
-        $conn = new PDO(
-            "mysql:host=" . HOST,
-            USERNAME,
-            PASSWORD,
-            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
-        );
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        return $conn;
-    } catch (PDOException $e) {
-        die("Init connection failed: " . $e->getMessage());
-    }
-}
-
 function executeQuery($sql, $params = []) {
     try {
         $conn = getConnection();

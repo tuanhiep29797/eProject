@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+
+:root {
+  --footer-bg: #111;
+  --footer-text: #b0b0b0;
+  --footer-highlight: #8B5A2B;
+}
+
+.footer-section {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  font-size: 14px;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-family: 'Arial', sans-serif;
+  margin-top: 0;
+}
+
+
+.footer-title {
+  color: #ffffff;
+  font-family: 'Calistoga', serif;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+
+.footer-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 2px;
+  background-color: var(--footer-highlight);
+  margin-top: 10px;
+}
+
+
+.footer-link {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+
+.footer-link:hover {
+  color: var(--footer-highlight) !important;
+  padding-left: 5px;
+}
+
+
+.footer-icon {
+  font-size: 16px;
+  margin-right: 12px;
+  color: var(--footer-highlight);
+  vertical-align: middle;
+}
+
+
+.newsletter-input {
+  background-color: #2c2c2c;
+  border: 1px solid #444;
+  color: white;
+  height: 45px;
+  border-radius: 0;
+}
+
+.newsletter-input:focus {
+  background-color: #333;
+  border-color: var(--footer-highlight);
+  box-shadow: none;
+}
+
+.btn-newsletter {
+  background-color: var(--footer-highlight);
+  color: white;
+  border: none;
+  height: 45px;
+  padding: 0 20px;
+  border-radius: 0;
+  transition: 0.3s;
+}
+
+.btn-newsletter:hover {
+  background-color: #fff;
+  color: var(--footer-highlight);
+}
+
+
+.social-icons a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-radius: 50%;
+  margin-right: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+
+.social-icons a:hover {
+  background-color: var(--footer-highlight);
+  transform: translateY(-3px);
+}
+
+
+.payment-icons i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: #fff;
+  opacity: 0.6;
+}
+
+
+.copyright-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 50px;
+  padding-top: 25px;
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.copyright-section strong {
+  color: #fff;
+}
