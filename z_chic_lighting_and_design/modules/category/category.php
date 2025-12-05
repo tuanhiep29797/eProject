@@ -36,10 +36,10 @@
                 <h1>Category Manager</h1>
             </div>
             <div class="col">
-                <button class="btn btn-success">
+                <a class="btn btn-success">
                     <i class="bi bi-plus-circle"></i>
                       Add New Category
-                </button>
+                </a>
             </div>
         </div>
     </div>
