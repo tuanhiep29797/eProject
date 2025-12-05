@@ -1,4 +1,5 @@
 <?php
+
 $product = [
     "Đèn Nội Thất" => ["Lamp ABC XYZ", "Đèn Led 2", "Đèn Treo Trần"],
     "Đèn Ngoại Thất" => [
@@ -118,10 +119,18 @@ $login = $check_user ? "Hi, ".$user["username"] : "Login/Register";
                             <i class="bi bi-person account_icon"></i>
                         </div>
                         <div class="header_account">
+                        <?php if(empty($_SESSION["user"])): ?>
                             <ul class="list-group">
                                 <li class="list-group-item border-0"><a href='../account/login.php'>Login</a></li>
                                 <li class="list-group-item border-0"><a href='../account/register.php'>Register</a></li>
                             </ul>
+                        <?php else: ?>
+                            <ul class="list-group">
+                                <li class="list-group-item border-0"><a href='../account/account.php'>Account</a></li>
+                                <li class="list-group-item border-0"><a href='../pages/order_history.php'>OrderHistory</a></li>
+                                <li class="list-group-item border-0"><a href='../account/logout.php'>Log Out</a></li>
+                            </ul>
+                        <?php endif; ?>
                         </div>
                     </div>
                 </div>

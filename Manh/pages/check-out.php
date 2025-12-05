@@ -84,6 +84,17 @@ if (!empty($_POST)) {
         $stmt->execute();
         }
 
+        $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+
+        echo '<script>
+        alert("Thanks you for your payment 😘😘😘");
+        window.location.href = "../pages/home.php";
+        </script>';
+        exit();
+
+
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
     }
