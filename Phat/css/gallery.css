@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
 
 * {
@@ -10,7 +11,7 @@
 body {
     background-color: #f4f4f4;
 
-    display: block; 
+    display: block;
 }
 
 
@@ -20,7 +21,7 @@ header {
     align-items: center;
     padding: 15px 50px;
     background-color: #e8e4dc;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -68,7 +69,10 @@ header {
 .banner::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: rgba(0, 0, 0, 0.3);
 }
 
@@ -80,9 +84,9 @@ header {
 
 .banner-content h1 {
     font-size: 4rem;
-    font-family: 'Times New Roman', serif; 
+    font-family: 'Times New Roman', serif;
     margin-bottom: 10px;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .breadcrumb {
@@ -93,18 +97,18 @@ header {
 
 .gallery-section {
     display: flex;
-    flex-direction: column; 
-    align-items: center;   
-    gap: 30px;             
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
     padding: 50px 0;
 }
 
 .container {
-    
+
     display: flex;
     width: 90%;
-    max-width: 1200px; 
-    height: 400px;     
+    max-width: 1200px;
+    height: 400px;
     gap: 10px;
 }
 
@@ -115,7 +119,7 @@ header {
     overflow: hidden;
     cursor: pointer;
     transition: all 0.5s ease-in-out;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .card img {
