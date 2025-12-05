@@ -1,222 +1,155 @@
-@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
 
-:root {
-    --main-brown: #8B5A2B;
-    --text-black: #000;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f4;
+
+    display: block; 
 }
 
 
-.gallery-banner {
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 50px;
+    background-color: #e8e4dc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 
-    background-image: url('img/img_thubnail.png');
+.logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.icons {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+}
+
+
+.banner {
+    width: 100%;
+    height: 400px;
+    background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     position: relative;
-    padding: 260px 0;
-    text-align: center;
-    color: #fff;
-    margin-bottom: 60px;
-}
-
-.gallery-banner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-}
-
-.gallery-banner .container {
-    position: relative;
-    z-index: 1;
-}
-
-.gallery-banner h2 {
-    font-size: 42px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 15px;
-}
-
-.banner-breadcrumb {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.banner-breadcrumb a {
-    color: #ccc;
-    text-decoration: none;
-    transition: 0.3s;
-}
-
-.banner-breadcrumb a:hover {
-    color: #fff;
-}
-
-.banner-breadcrumb i {
-    font-size: 12px;
-    color: var(--main-brown);
-    margin: 0 15px;
-}
-
-.banner-breadcrumb .active {
-    color: #fff;
-    font-weight: 700;
-}
-
-
-
-.gallery-header {
     text-align: center;
-    margin-bottom: 50px;
-}
-
-.gallery-header h3 {
-    font-family: 'Calistoga', serif;
-    font-size: 36px;
-    color: var(--text-black);
-}
-
-.gallery-header p {
-    color: #666;
-    font-size: 16px;
 }
 
 
-.gallery-item {
+.banner::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.banner-content {
     position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 30px;
-    height: 300px;
-    display: block;
+    z-index: 1;
+    color: white;
 }
 
-.gallery-item img {
+.banner-content h1 {
+    font-size: 4rem;
+    font-family: 'Times New Roman', serif; 
+    margin-bottom: 10px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.breadcrumb {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+
+.gallery-section {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;   
+    gap: 30px;             
+    padding: 50px 0;
+}
+
+.container {
+    
+    display: flex;
+    width: 90%;
+    max-width: 1200px; 
+    height: 400px;     
+    gap: 10px;
+}
+
+.card {
+    position: relative;
+    flex: 1;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.5s;
 }
 
+.card:hover {
+    flex: 4;
+}
 
-.gallery-item:hover img {
+.container:hover .card:not(:hover) {
+    filter: grayscale(100%) brightness(0.7);
+    opacity: 0.8;
+}
+
+.card:hover img {
     transform: scale(1.1);
 }
 
-
-.gallery-overlay {
+.card-title {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.gallery-item:hover .gallery-overlay {
-    opacity: 1;
-}
-
-.gallery-overlay i {
-    color: #fff;
-    font-size: 30px;
-    background: var(--main-brown);
-    padding: 15px;
-    border-radius: 50%;
-}
-
-
-
-
-.lightbox-target {
-    position: fixed;
-    top: -100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    width: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    overflow: hidden;
-    z-index: 9999;
-}
-
-
-.lightbox-target:target {
-    opacity: 1;
-    top: 0;
-    bottom: 0;
-    left: 0;
-}
-
-
-.lightbox-content {
-    margin: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-height: 85vh;
-    max-width: 90%;
-    border: 5px solid #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
-
-.lightbox-close {
-    display: block;
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    color: #fff;
-    font-size: 40px;
-    text-decoration: none;
-    transition: 0.3s;
-    z-index: 10001;
-}
-
-.lightbox-close:hover {
-    color: var(--main-brown);
-}
-
-
-.lightbox-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 50px;
-    text-decoration: none;
-    padding: 20px;
-    transition: 0.3s;
-    z-index: 10000;
-}
-
-.lightbox-nav:hover {
-    color: var(--main-brown);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.lightbox-prev {
+    bottom: 20px;
     left: 20px;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.5s;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px black;
 }
 
-.lightbox-next {
-    right: 20px;
+.card:hover .card-title {
+    opacity: 1;
 }
