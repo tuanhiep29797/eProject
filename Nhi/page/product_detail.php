@@ -199,7 +199,7 @@ for ($i = 1; $i <= 8; $i++) {
 
         </div>
     </div>
-    
+
     <!-- REVIEW FORM -->
     <div class="review-box p-4 bg-white rounded shadow-sm mt-5">
         <h4 class="fw-bold">Đánh giá sản phẩm</h4>

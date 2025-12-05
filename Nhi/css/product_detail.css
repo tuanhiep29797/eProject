@@ -15,8 +15,8 @@ body {
     background-position: center;
     z-index: -1;
 
-    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 90%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 90%);
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 80%);
 }
 
 /* BACK BUTTON */
@@ -110,7 +110,8 @@ body {
 
 /* RECOMMEND */
 .rec-header {
-    margin-top: 60px;
+    margin-top: 150px;
+    margin-bottom: 35px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -123,7 +124,7 @@ body {
 }
 .rec-card {
     width: 23%;
-    background: #f3efea;
+    background: #f8f8f8;
     border-radius: 20px;
 }
 .rec-img {
