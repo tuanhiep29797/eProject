@@ -1,6 +1,11 @@
 <?php
-require_once("../database/dbhelper.php");
-session_start();
+require_once __DIR__ ."/../database/dbhelper.php";
+
+if ($isLogin) 
+{
+    header("Location: ../pages/home.php");
+}
+
 $errors = [];
 $isRegister = true;
 
