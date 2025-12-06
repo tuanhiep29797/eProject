@@ -18,9 +18,8 @@
 }
 .header-index{
     margin:40px 10px 0px 10px!important;
-
     background-color: #ffffffB3;
-    border-radius: 40px !important;
+    border-radius: 20px !important; 
 }
 .header_left{
     width: 200px;
