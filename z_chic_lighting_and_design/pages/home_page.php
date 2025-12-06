@@ -43,6 +43,7 @@
     ?>
 
     <div class="page-banner">
+
         <div class="container text-center banner-content">
             <h2 class="display-4 fw-bold mb-3">Chic Lighting & Design</h2>
             <p class="mb-4 text-white-50 mx-auto" style="max-width: 600px;">
@@ -52,6 +53,7 @@
                 <a href="../pages/product.php" class="text-decoration-none text-dark fw-bold text-uppercase small">To Order <i class="bi bi-arrow-right ms-1"></i></a>
             </div>
         </div>
+
     </div>
 
     <div class="container py-5 my-3 my-md-5">
@@ -64,10 +66,10 @@
             <div class="col-lg-6">
                 <div class="ps-lg-4 text-secondary">
                     <p class="lh-xl mb-3">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos non, optio totam quasi delectus blanditiis repellendus voluptates aliquam, repellat, praesentium nemo possimus.
+                        <p>Welcome to Chic Lighting & Design where we believe that lighting is not merely functional, but an art form. We specialize in providing high-end, unique decorative lighting fixtures, carefully curated from leading designers, aiming to create an inspirational, luxurious, and distinctly personalized living and working environment for you.</p>
                     </p>
-                    <p class="lh-xl">
-                        Provident consequatur deserunt voluptates repellat excepturi placeat optio tempore esse atque reiciendis minus ipsum commodi accusamus fugit.
+                    <p class="lh-xl mb-3">
+                        Premium Quality: Every lighting product we offer undergoes rigorous inspection for material quality, durability, and lighting performance, ensuring lasting value for our customers.
                     </p>
                 </div>
             </div>
@@ -76,11 +78,11 @@
         <div class="row align-items-center mt-5 gx-lg-5">
             <div class="col-lg-6 order-2 order-lg-1">
                 <div class="pe-lg-4 text-secondary">
-                    <p class="lh-xl mb-3">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos non, optio totam quasi delectus blanditiis repellendus voluptates aliquam, repellat.
+                    <p class="lh-xl">
+                        Groundbreaking Design: From the minimalist Scandinavian style and edgy Industrial lamps to dazzling classic crystal chandeliers, we constantly update the latest design trends to suit every aesthetic taste and interior structure.
                     </p>
                     <p class="lh-xl">
-                        Provident consequatur deserunt voluptates deserunt voluptates repellat excepturi placeat optio tempore esse atque reiciendis minus.
+                        Customer Experience: We don't just sell lights; we sell lighting solutions. Our team of experts is dedicated to providing thoughtful consultation to help you find the perfect light source, suitable for every corner of your home and every moment of your life.
                     </p>
                 </div>
             </div>

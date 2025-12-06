@@ -74,7 +74,7 @@
                         <ul class="navbar-nav gap-3 mx-auto">
 
                             <li class="nav-item">
-                                <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home.php">Home</a>
+                                <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home_page.php">Home</a>
                             </li>
 
                             <li class="nav-item">
