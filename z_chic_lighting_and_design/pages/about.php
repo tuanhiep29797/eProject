@@ -20,7 +20,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
-    <div class="page-banner">
+    <div class="page-banner" style="background-image: url('../assets/img/home/img_banner.png');">
         <div class="container">
             <h2>About Us</h2>
             
@@ -38,7 +38,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="img-box">
-                    <img src="./img/image 37.png" alt="Chic Lighting & Design">
+                    <img src="../assets/img/home/img_about_1.png" alt="Chic Lighting & Design">
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
@@ -77,7 +77,7 @@
 
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="img-box">
-                        <img src="./img/image 38.png" alt="Why Choose Us">
+                        <img src="../assets/img/home/img_about_2.png" alt="Why Choose Us">
                     </div>
                 </div>
             </div>
