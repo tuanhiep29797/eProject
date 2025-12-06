@@ -1,32 +1,26 @@
 <?php
     require_once (__DIR__.'/../database/dbhelper.php'); 
+    
+    //get connection to data base
+    try 
+    {
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_PRODUCT);
+        $stmt->execute();
 
-    $products = [
-        [
-            'name' => 'BLOSSI LAMP',
-            'desc' => 'Modern design for living room',
-            'price' => 399,
-            'img'   => '../assets/img/home/image_03.png' 
-        ],
-        [
-            'name' => 'URBAN LAMP',
-            'desc' => 'Industrial style hanging light',
-            'price' => 399,
-            'img'   => '../assets/img/home/image_04.png'
-        ],
-        [
-            'name' => 'EDISSON LAMP',
-            'desc' => 'Classic vintage warm light',
-            'price' => 399,
-            'img'   => '../assets/img/home/image_05.png'
-        ],
-        [
-            'name' => 'EGLO VINTAGE',
-            'desc' => 'Unique bamboo style lamp',
-            'price' => 399,
-            'img'   => '../assets/img/home/image_06.png'
-        ]
-    ];
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $data_list = $stmt->fetchAll();
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
+    }
+
+    $products = [];
+    for ($i = 1; $i <= 4; $i++)
+    {
+        $products[] = $data_list[rand(0, count($data_list))];
+    }
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +49,7 @@
                 Where Light Becomes Art — A Touch That Illuminates Your Soul
             </p>
             <div class="d-inline-block bg-white px-4 py-2 rounded-pill shadow-sm">
-                <a href="index.php" class="text-decoration-none text-dark fw-bold text-uppercase small">To Order <i class="bi bi-arrow-right ms-1"></i></a>
+                <a href="../pages/product.php" class="text-decoration-none text-dark fw-bold text-uppercase small">To Order <i class="bi bi-arrow-right ms-1"></i></a>
             </div>
         </div>
     </div>
@@ -107,18 +101,18 @@
                 <div class="col-md-6"> <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
                         <div class="row align-items-center h-100">
                             <div class="col-5 col-sm-4">
-                                <img src="<?php echo $prod['img']; ?>" class="img-fluid" alt="<?php echo $prod['name']; ?>">
+                                <img src="<?php echo $prod['product_thumbnail']; ?>" class="img-fluid" alt="<?php echo $prod['product_title']; ?>">
                             </div>
                             
                             <div class="col-7 col-sm-8 ps-3 ps-md-4">
-                                <h5 class="fw-bold font-serif mb-2 text-truncate"><?php echo $prod['name']; ?></h5>
+                                <h5 class="fw-bold font-serif mb-2 text-truncate"><?php echo $prod['product_title']; ?></h5>
                                 <p class="text-muted small mb-3 d-none d-sm-block">
-                                    <?php echo $prod['desc']; ?>
+                                    <?php echo $prod['product_description']; ?>
                                 </p>
                                 <p class="text-muted small mb-2 d-block d-sm-none text-truncate">Description here...</p>
 
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mt-auto">
-                                    <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?php echo $prod['price']; ?></span>
+                                    <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?php echo $prod['product_price']; ?></span>
                                     
                                     <div class="d-flex align-items-center gap-2">
                                         <a href="#" class="btn btn-dark btn-sm rounded-0 px-3 py-1 text-uppercase" style="font-size: 12px;">Buy</a>
@@ -135,7 +129,7 @@
             </div>
 
             <div class="text-center mt-5">
-                <a href="shop.php" class="btn btn-outline-dark rounded-pill px-5 py-2 fw-bold text-uppercase">
+                <a href="../pages/product.php" class="btn btn-outline-dark rounded-pill px-5 py-2 fw-bold text-uppercase">
                     View More <i class="bi bi-arrow-right ms-2"></i>
                 </a>
             </div>
