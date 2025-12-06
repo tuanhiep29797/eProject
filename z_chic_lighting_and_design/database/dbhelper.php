@@ -159,6 +159,7 @@
 		email VARCHAR(255),
 		phone_number VARCHAR(20),
 		content TEXT NOT NULL,
+		status ENUM('new', 'readed') NOT NULL DEFAULT 'new',
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	)";
 
@@ -167,6 +168,8 @@
 	const SQL_SEARCH_USER = "select * from user where email = :account or username = :account";
 	const SQL_SEARCH_USER_BY_EMAIL ="select * from user where email = :email";
 	const SQL_SEARCH_USER_BY_USERNAME ="select * from user where username = :username";
+
+	const SQL_GET_USER_BY_ID = "select * from user where user_id = :user_id";
 
 	const SQL_GET_USER = "select * from user";
 
@@ -183,6 +186,13 @@
 	
 	const SQL_GET_ORDER = "select * from `order`";
 	const SQL_GET_ORDER_BY_ID = "select * from `order` where order_id = :id";
+
+	const SQL_GET_CATEGORY_AS_PRODUCT = 
+	"select c.category_name, p.product_title
+	from category c join product p
+	on c.category_id = p.category_id
+	order by c.category_name, p.product_title
+	";
 
 	//SQL ADD TABLE
 
@@ -224,22 +234,32 @@
 
 	//SQL UPDATE TABLE
 
+	const SQL_UPDATE_USER = 
+	"update user
+	set fullname = :fullname,
+		username = :username,
+		email = :email,
+		phone_number = :phone_number,
+		role = :role
+	where user_id = :user_id
+	";
+
 	const SQL_UPDATE_CATEGORY = 
-	"update from category 
+	"update category 
 	set category_name = :category_name, 
 		category_thumbnail = :category_thumbnail
-	where category_id = :id
+	where category_id = :category_id
 	";
 
 	const SQL_UPDATE_BRAND = 
-	"update from brand 
+	"update brand 
 	set brand_name = :brand_name, 
 		brand_thumbnail = :brand_thumbnail
-	where brand_id = :id
+	where brand_id = :brand_id
 	";
 
 	const SQL_UPDATE_PRODUCT = 
-	"update from product
+	"update product
 	set product_title = :product_title,
 		product_description = :product_description,
 		product_price = :product_price,
@@ -248,20 +268,31 @@
 		product_thumbnail = :product_thumbnail,
 		category_id = :category_id,
 		brand_id = :brand_id
-	where product_id = :id
+	where product_id = :product_id
 	";
 
 	const SQL_UPDATE_ORDER = 
-	"update from `order` 
-	set order_status = :order_status
-	where order_id = :id	
+	"update `order` 
+	set order_status = :order_status,
+		receiver = :receiver,
+		phone_number = :phone_number,
+		address = :address
+	where order_id = :order_id	
+	";
+
+	const SQL_UPDATE_FEEDBACK_STATUS =
+	"update feedback
+	set status = :status
+	where feedback_id = :feedback_id
 	";
 
 	//SQL DELETE TABLE
 
-	const SQL_DELETE_CATEGORY = "delete from category where category_id = :id";
+	const SQL_DELETE_USER = "delete from user where user_id = :user_id";
 
-	const SQL_DELETE_BRAND = "delete from brand where brand_id = :id";
+	const SQL_DELETE_CATEGORY = "delete from category where category_id = :category_id";
+
+	const SQL_DELETE_BRAND = "delete from brand where brand_id = :brand_id";
 	
-	const SQL_DELETE_PRODUCT = "delete from product where product_id = :id";
+	const SQL_DELETE_PRODUCT = "delete from product where product_id = :product_id";
 ?>

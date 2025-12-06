@@ -1,6 +1,5 @@
 <?php
-require_once("../Dong/database/config.php");
-require_once("../Dong/database/dbhelper.php");
+require_once(__DIR__."/../database/dbhelper.php");
 
 // Get filter parameters
 $category_filter = isset($_GET['category']) ? $_GET['category'] : [];

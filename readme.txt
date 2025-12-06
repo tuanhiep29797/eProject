@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 1. Lệnh để up lên git 
 
 git init
@@ -11,3 +12,5 @@ git push -u origin main
 git pull origin main --rebase
 git add .
 git push origin main
+=======
+>>>>>>> 10f6aedbf2a3b82d4e95b2db83964a61fbbacc06

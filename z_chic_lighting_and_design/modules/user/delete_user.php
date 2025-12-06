@@ -1,21 +1,22 @@
 <?php
     require_once (__DIR__."/../../database/dbhelper.php");
+
     if(empty($_GET))
     {
-        header("Location: ../home_admin.php");
+        header("Location: user.php");
     }
 
     $id = $_GET['id'];
 
-    //connection to database and delete category
+    //connection to database and delete user
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_DELETE_CATEGORY);
-        $stmt -> bindParam(':id', $id);
+        $stmt = $conn -> prepare(SQL_DELETE_USER);
+        $stmt -> bindParam(':user_id', $id);
         $stmt -> execute();
 
-        header("Location: ../home_admin.php");
+        header("Location: user.php");
     }
     catch (PDOException $e)
     {

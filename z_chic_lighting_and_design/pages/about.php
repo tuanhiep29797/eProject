@@ -1,6 +1,5 @@
 <?php
-session_start();
-// require_once('./database/dbhelper.php'); 
+    require_once (__DIR__.'/../database/dbhelper.php'); 
 ?>
 
 <!DOCTYPE html>
@@ -8,25 +7,29 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - GS Lighting</title>
+    <title>About Us</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="./css/about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/about.css">
 </head>
 <body>
+    <!-- include header -->
+    <?php
+        require_once (__DIR__."/../includes/home_header.php");
+    ?>
 
-
-    <div class="page-banner">
+    <div class="page-banner" style="background-image: url('../assets/img/home/img_banner.png');">
         <div class="container">
             <h2>About Us</h2>
             
             <div class="banner-breadcrumb">
-                <a href="index.php">Home</a>
+                <a href="home_page.php">Home</a>
                 
                 <i class="bi bi-chevron-right"></i>
         
-                <a href="cart.php">Cart</a>
+                <a href="#">About Us</a>
                 
             </div>
         </div>
@@ -35,15 +38,15 @@ session_start();
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="img-box">
-                    <img src="./img/image 37.png" alt="GS Lighting Office">
+                    <img src="../assets/img/home/img_about_1.png" alt="Chic Lighting & Design">
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
                 <div class="about-content">
                     <span class="sub-title">OUR STORY</span>
-                    <h2 class="main-title">LICERIA & CO - Lighting Up Your World</h2>
+                    <h2 class="main-title">CHIC LIGHTING & DESIGN</h2>
                     <p class="desc">
-                        Welcome to <strong>LICERIA & CO</strong>. We are a passionate team dedicated to providing modern, energy-efficient, and aesthetically pleasing lighting solutions.
+                        Welcome to <strong>LCHIC LIGHTING & DESIGN</strong>. We are a passionate team dedicated to providing modern, energy-efficient, and aesthetically pleasing lighting solutions.
                     </p>
                     <p class="desc">
                         We believe that lighting is not just about visibility; it is the soul of your home. Our mission is to transform your living spaces with the perfect blend of technology and design.
@@ -74,7 +77,7 @@ session_start();
 
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="img-box">
-                        <img src="./img/image 38.png" alt="Why Choose Us">
+                        <img src="../assets/img/home/img_about_2.png" alt="Why Choose Us">
                     </div>
                 </div>
             </div>
@@ -92,8 +95,11 @@ session_start();
     </div>
 
 
-    <?php require_once "footer.php"; ?>
+    <!-- include footer -->
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

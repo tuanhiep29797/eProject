@@ -1,18 +1,19 @@
 <?php
-    require_once __DIR__."/../../database/dbhelper.php";
+    require_once (__DIR__."/../../database/dbhelper.php");
     
-    try
+    // connect database and get category table
+    try 
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_CATEGORY);
-        $stmt -> execute();
+        $stmt = $conn->prepare(SQL_GET_CATEGORY);
+        $stmt->execute();
 
-        $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt -> fetchAll();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $data_list = $stmt->fetchAll();
     }
-    catch (PDOException $e)
+    catch (PDOException $e) 
     {
-        echo $e -> getMessage();
+        echo $e->getMessage();
     }
 
     $conn = null;
@@ -24,60 +25,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Category Manager</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../assets/css/modules.css">
 </head>
-</head>
+
 <body>
-    <?php require_once __DIR__."/../../admin/header.php";?>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>Category Manager</h1>
-            </div>
-            <div class="col">
-                <a class="btn btn-success">
-                    <i class="bi bi-plus-circle"></i>
-                      Add New Category
-                </a>
-            </div>
+
+    <!-- include header -->
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
+    ?>
+
+    <!-- breadcrumb -->
+    <?php
+        $breadcrumb = [
+            ["icon" => "bi-house-fill", "label" => "Admin", "url" => "../../admin/home_admin.php"],
+            ["icon" => "bi-tag-fill", "label" => "Category Management"]
+        ];
+        require_once (__DIR__."/../../admin/admin_breadcrumb.php"); 
+    ?>
+
+    <!-- body category management page -->
+    <div class="container table-container mt-4">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="page-title">
+                <i class="bi bi-tags-fill me-2"></i>
+                Category Management
+            </h2>
+
+            <a href="add_category.php" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i>
+                Add New Category
+            </a>
         </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Thumbnail</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php foreach($data_list as $item): ?>
+                        <tr>
+                            <th><?= $item['category_id'] ?></th>
+                            <td><?= $item['category_name'] ?></td>
+
+                            <td>
+                                <img src="<?= $item['category_thumbnail'] ?>" 
+                                     alt="Category Image"
+                                     style="width: 70px; height: 70px; object-fit: cover;"
+                                     class="rounded border">
+                            </td>
+
+                            <td>
+                                <div class="d-flex gap-2">
+
+                                    <a href="edit_category.php?id=<?= $item['category_id'] ?>" 
+                                       class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+
+                                    <a href="delete_category.php?id=<?= $item['category_id'] ?>" 
+                                       class="btn btn-outline-danger btn-sm"
+                                       onclick="return confirm('Delete category: <?= $item['category_name'] ?> ?');">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+
+            </table>
+        </div>
+
     </div>
 
-    <table class="table table-borderless">
-        <thead>
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Thumbnail</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach($data_list as $item):?>
-                <tr>
-                    <th scope="row"><?= $item['category_id'] ?></td>
-                    <td><?= $item['category_name'] ?></td>
-                    <td><img src="<?= $item['category_thumbnail'] ?>" alt="Chưa có ảnh"></td>
-                    <td>
-                        <div class="d-flex gap-2 mb-3">
-                            <a href="edit_category.php?id=<?= $item['category_id'] ?>">
-                                <button class="btn btn-primary">
-                                    <i class="bi bi-pencil-square"></i>
-                                </button>
-                            </a>
-                            <a href="delete_category.php?id=<?= $item['category_id'] ?>">
-                                <button class="btn btn-outline-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </a>
-                        </div>                        
-                    </td>
-                </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
