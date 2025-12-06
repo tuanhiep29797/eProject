@@ -115,6 +115,7 @@
 		order_status ENUM('pending', 'processing', 'shipped', 'delivered', 'cancelled') NOT NULL DEFAULT 'pending',
 		total_amount DECIMAL(15, 2) NOT NULL,
 		receiver VARCHAR(255) NOT NULL,
+		phone_number VARCHAR(20) NOT NULL,
 		address VARCHAR(255) NOT NULL,
 		order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
 
@@ -232,6 +233,36 @@
 	"insert into feedback(username, email, phone_number,content)
 	values
 	(:username, :email, :phone_number, :content)
+	";
+
+	const SQL_ADD_CART = 
+	"insert into cart(user_id, product_id, quantity)
+	values
+	(:user_id, :product_id, :quantity)
+	";
+
+	const SQL_ADD_ORDER = 
+    "insert into `order` (user_id, order_status, total_amount, receiver, phone_number, address) 
+    values 
+	(:user_id, :order_status, :total_amount, :receiver, :phone_number, :address)
+	";
+
+	const SQL_ADD_ORDER_DETAIL = 
+    "insert into order_detail (order_id, product_id, quantity, unit_price) 
+    values
+	(:order_id, :product_id, :quantity, :unit_price)
+	";
+
+	const SQL_ADD_REVIEW = 
+    "insert into review (order_id, user_id, product_id, review_content, rating, is_public) 
+    values 
+	(:order_id, :user_id, :product_id, :review_content, :rating, :is_public)
+	";
+
+	const SQL_ADD_GALLERY = 
+	"insert into galerry(url)
+	values
+	(:url)
 	";
 
 	//SQL UPDATE TABLE

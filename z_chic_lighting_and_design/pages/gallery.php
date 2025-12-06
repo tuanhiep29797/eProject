@@ -16,13 +16,13 @@
         echo $e->getMessage();
     }
 
-    $data_list = [];
-    for ($i = 1; $i <= 4; $i++)
+    $gallery_images = [];
+    for ($i = 1; $i <= 10; $i++)
     {
-        $data_list[] = $data_list[rand(0, count($data_list))];
+        $gallery_images[] = $data_list[rand(0, count($data_list))];
     }
 
-$total_images = count($gallery_images);
+    $total_images = count($gallery_images);
 ?>
 
 <!DOCTYPE html>
