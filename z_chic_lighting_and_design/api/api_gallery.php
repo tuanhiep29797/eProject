@@ -6,7 +6,7 @@
         {
             for ($j = 1; $j <= 4; $j++)
             {
-                $url = BASE_URL."assets/img/product/" . $i ."/" . $j .".png";
+                $url = BASE_URL."assets/img/product/$i/$j.png";
                 $stmt = $conn -> prepare(SQL_ADD_GALLERY);
                 $stmt -> bindParam(":url", $url);
                 $stmt -> execute();

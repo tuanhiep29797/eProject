@@ -260,7 +260,7 @@
 	";
 
 	const SQL_ADD_GALLERY = 
-	"insert into galerry(url)
+	"insert into gallery (url)
 	values
 	(:url)
 	";
