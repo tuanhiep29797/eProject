@@ -11,5 +11,3 @@ git push -u origin main
 git pull origin main --rebase
 git add .
 git push origin main
-
-2.
