@@ -12,9 +12,15 @@
     define("BASE_URL", "http://localhost/eProject/z_chic_lighting_and_design/");
 
     //function check Login
-    function isLogin() {
-        if(isset($_SESSION['username'])) {
+    function is_login() {
+        if(isset($_SESSION["username"])) {
             return true;
         }
         return false;
+    }
+
+    //function check Admin
+    function is_admin() 
+    {
+        return is_login() && $_SESSION["role"] === "admin";
     }
