@@ -87,7 +87,7 @@
 
                             <!-- product dropdown -->
                             <li class="nav-item dropdown position-static">
-                                <a class="nav-link dropdown-hover" href="<?= BASE_URL ?>pages/product.php" data-bs-hover="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
                                     Product
                                 </a>
 
@@ -160,8 +160,8 @@
                     <div class="dropdown d-inline-block">
                         <a class="dropdown-toggle text-dark text-decoration-none fs-5"
                         href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-person"></i>
-                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $_SESSION["fullname"] : "Login/Register") ?>
+                            <i class="bi bi-person-circle text-primary"></i>
+                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $_SESSION["fullname"] : "") ?>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow">
