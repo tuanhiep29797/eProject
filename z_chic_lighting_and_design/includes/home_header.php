@@ -52,54 +52,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/style.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/header.css">
     <title>Home Header</title>
 </head>
 
 <body>
     <header class="header shadow-sm">
         <div class="container">
-            <div class="row align-items-center py-3">
-
+            <div class="row align-items-center">
                 <!-- logo -->
-                <div class="col-lg-2 col-6">
+                <div class="col-lg-2 col-sm-12 col-12 py-3 text-sm-center">
                     <a href="../pages/home.php">
                         <img src="<?= BASE_URL ?>/../assets/img/home/img_logo.png" alt="Logo" class="img-fluid" style="max-height: 60px;">
                     </a>
                 </div>
 
                 <!-- menu -->
-                <div class="col-lg-8 d-none d-lg-block">
+                <div class="col-lg-8 col-sm-6 col-6">
                     <nav class="navbar navbar-expand-lg p-0">
-                        <ul class="navbar-nav gap-3 mx-auto">
 
+<<<<<<< HEAD
                             <li class="nav-item">
                                 <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home_page.php">Home</a>
+=======
+                    <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#mainNavbar">
+                        <i class="bi bi-list fs-2 text-dark"></i>
+                    </button>
+
+                        <div class="collapse navbar-collapse" id="mainNavbar">
+                        <ul class="navbar-nav gap-3 mx-auto">
+                            <li class="nav-item py-3 mx-2">
+                                <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home.php">Home</a>
+>>>>>>> 236a9ba (button open menu fix)
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item py-3 mx-2">
                                 <a class="nav-link" href="<?= BASE_URL?>/../pages/about.php">About Us</a>
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item py-3 mx-2">
                                 <a class="nav-link" href="<?= BASE_URL?>/../pages/gallery.php">Gallery</a>
                             </li>
 
                             <!-- product dropdown -->
-                            <li class="nav-item dropdown position-static">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <li class="nav-item position-static py-3 mx-2" id="product_menu">
+                                <a class="nav-link" href="<?= BASE_URL?>/../pages/product.php">
                                     Product
                                 </a>
 
-                                <div class="dropdown-menu w-100 p-3">
+                                <div class="nav-item_product w-100 p-3">
                                     <div class="row">
                                         <?php foreach ($category_list as $category => $items): ?>
                                             <div class="col-4">
-                                                <h6 class="fw-bold text-success"><?= $category ?></h6>
+                                                <h6 class="fw-bold text-success my-2"><?= $category ?></h6>
                                                 <ul class="list-unstyled">
                                                     <?php foreach ($items as $item): ?>
-                                                        <li>
-                                                            <a class="dropdown-item"
+                                                        <li class="nav-item">
+                                                            <a class="nav-link"
                                                             href="/product.php/product=<?= strtolower(str_replace(' ', '-', $item)) ?>">
                                                                 <?= $item ?>
                                                             </a>
@@ -113,14 +124,14 @@
                             </li>
 
                             <!-- category -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <li class="nav-item py-3 mx-2 position-relative" id="category_menu">
+                                <a class="nav-link" href="<?= BASE_URL?>/../pages/category.php">
                                     Category
                                 </a>
-                                <div class="dropdown-menu p-2">
+                                <div class="p-2 nav-item_category">
                                     <?php foreach ($category_list as $category => $items): ?>
-                                        <a class="dropdown-item"
-                                        href="<?= BASE_URL?>/pages/category.php/category=<?= strtolower(str_replace(' ', '-', $category)) ?>">
+                                        <a class="dropdown-item py-2"
+                                        href="<?= BASE_URL?>/pages/category.php/category=<?= $category ?>">
                                             <?= $category ?>
                                         </a>
                                     <?php endforeach ?>
@@ -128,13 +139,13 @@
                             </li>
 
                             <!-- brand -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            <li class="nav-item py-3 mx-2 position-relative" id="brand_menu">
+                                <a class="nav-link" href="<?= BASE_URL?>/../pages/brand.php" >
                                     Brand
                                 </a>
-                                <div class="dropdown-menu p-2">
+                                <div class=" p-2 nav-item_brand">
                                     <?php foreach ($brand_list as $brand): ?>
-                                        <a class="dropdown-item"
+                                        <a class="dropdown-item py-2"
                                         href="<?= BASE_URL?>/pages/brand.php/brand=<?= strtolower(str_replace(' ', '-', $brand["brand_name"])) ?>">
                                             <?= $brand["brand_name"] ?>
                                         </a>
@@ -142,43 +153,41 @@
                                 </div>
                             </li>
 
-                            <li class="nav-item">
+                            <li class="nav-item py-3">
                                 <a class="nav-link" href="<?= BASE_URL?>/../pages/contact.php">Contact Us</a>
                             </li>
-
                         </ul>
+                        </div>
                     </nav>
                 </div>
 
-                <div class="col-lg-2 col-6 text-end">
+                <div class="col-lg-2 col-sm-6 col-6 text-end header_right" style="font-size: 20px;">
 
-                    <a href="../pages/cart.php" class="me-3 fs-4 text-dark">
-                        <i class="bi bi-cart"></i>
+                    <a href="../pages/cart.php" class="me-3 fs-4 text-dark text-decoration-none">
+                        <i class="bi bi-cart my-3"></i>
                     </a>
 
                     <!-- account  -->
-                    <div class="dropdown d-inline-block">
-                        <a class="dropdown-toggle text-dark text-decoration-none fs-5"
-                        href="#" data-bs-toggle="dropdown">
-                            <i class="bi bi-person-circle text-primary"></i>
+                    <div class="dropdown d-inline-block position-relative py-3 px-2" id="header_account">
+                        <a class="text-dark text-decoration-none fs-5" href="#">
                             <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $_SESSION["fullname"] : "") ?>
+                            <i class="bi bi-person-circle text-dark"></i>
                         </a>
 
-                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <ul class="dropdown-menu dropdown-menu-end shadow header_account_item">
 
                             <?php if(empty($_SESSION["username"])): ?>
 
-                                <li><a class="dropdown-item" href="<?= BASE_URL?>/../admin/login.php">Login</a></li>
-                                <li><a class="dropdown-item" href="<?= BASE_URL?>/../admin/register.php">Register</a></li>
+                                <li><a class="dropdown-item py-2" href="<?= BASE_URL?>/../admin/login.php">Login</a></li>
+                                <li><a class="dropdown-item py-2" href="<?= BASE_URL?>/../admin/register.php">Register</a></li>
 
                             <?php else: ?>
                                 <?php if (is_admin()):?>
-                                    <li><a class="dropdown-item" href="<?= BASE_URL?>/../admin/home_admin.php">Admin Page</a></li>
+                                    <li><a class="dropdown-item py-2" href="<?= BASE_URL?>/../admin/home_admin.php">Admin Page</a></li>
                                 <?php endif;?>
-                                <li><a class="dropdown-item" href="<?= BASE_URL?>/../pages/account.php">Account</a></li>
-                                <li><a class="dropdown-item" href="<?= BASE_URL?>/../pages/order_history.php">Order History</a></li>
-                                <li><a class="dropdown-item text-danger" href="<?= BASE_URL?>/../admin/logout.php">Log Out</a></li>
-
+                                <li><a class="dropdown-item py-2" href="<?= BASE_URL?>/../pages/account.php">Account</a></li>
+                                <li><a class="dropdown-item py-2" href="<?= BASE_URL?>/../pages/order_history.php">Order History</a></li>
+                                <li><a class="dropdown-item text-danger py-2" href="<?= BASE_URL?>/../admin/logout.php">Log Out</a></li>
                             <?php endif; ?>
 
                         </ul>
@@ -189,5 +198,7 @@
             </div>
         </div>
     </header>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
