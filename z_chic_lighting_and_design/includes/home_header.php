@@ -24,6 +24,23 @@
 
     $conn = null;
 
+    // get brand
+    try 
+    {
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_BRAND);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $brand_list = $stmt->fetchAll();
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
+    }
+
+    $conn = null;
+
     // user login (avoid undefined variable)
     $user = $_SESSION["user"] ?? null;
 ?>
@@ -44,14 +61,14 @@
         <div class="container">
             <div class="row align-items-center py-3">
 
-                <!-- LEFT LOGO -->
+                <!-- logo -->
                 <div class="col-lg-2 col-6">
                     <a href="../pages/home.php">
                         <img src="<?= BASE_URL ?>/../assets/img/home/img_logo.png" alt="Logo" class="img-fluid" style="max-height: 60px;">
                     </a>
                 </div>
 
-                <!-- MENU CENTER -->
+                <!-- menu -->
                 <div class="col-lg-8 d-none d-lg-block">
                     <nav class="navbar navbar-expand-lg p-0">
                         <ul class="navbar-nav gap-3 mx-auto">
@@ -68,9 +85,9 @@
                                 <a class="nav-link" href="<?= BASE_URL?>/../pages/gallery.php">Gallery</a>
                             </li>
 
-                            <!-- PRODUCT DROPDOWN -->
+                            <!-- product dropdown -->
                             <li class="nav-item dropdown position-static">
-                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                <a class="nav-link dropdown-hover" href="<?= BASE_URL ?>pages/product.php" data-bs-hover="dropdown">
                                     Product
                                 </a>
 
@@ -103,8 +120,23 @@
                                 <div class="dropdown-menu p-2">
                                     <?php foreach ($category_list as $category => $items): ?>
                                         <a class="dropdown-item"
-                                        href="<?= BASE_URL?>/pages/product.php/product=<?= strtolower(str_replace(' ', '-', $category)) ?>">
+                                        href="<?= BASE_URL?>/pages/category.php/category=<?= strtolower(str_replace(' ', '-', $category)) ?>">
                                             <?= $category ?>
+                                        </a>
+                                    <?php endforeach ?>
+                                </div>
+                            </li>
+
+                            <!-- brand -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                                    Brand
+                                </a>
+                                <div class="dropdown-menu p-2">
+                                    <?php foreach ($brand_list as $brand): ?>
+                                        <a class="dropdown-item"
+                                        href="<?= BASE_URL?>/pages/brand.php/brand=<?= strtolower(str_replace(' ', '-', $brand["brand_name"])) ?>">
+                                            <?= $brand["brand_name"] ?>
                                         </a>
                                     <?php endforeach ?>
                                 </div>
@@ -157,9 +189,5 @@
             </div>
         </div>
     </header>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

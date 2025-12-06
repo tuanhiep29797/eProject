@@ -26,7 +26,7 @@
 
             <div class="col-xl-10 col-md-9 col-12 d-flex justify-content-xl-end justify-content-md-end justify-content-start gap-3">
 
-                <a href="<?= BASE_URL ?>pages/home.php" class="header-btn">
+                <a href="<?= BASE_URL ?>pages/home_page.php" class="header-btn">
                     <i class="bi bi-house-door-fill"></i> Home
                 </a>
 

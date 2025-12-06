@@ -56,7 +56,7 @@ if (!empty($_POST["form_type"]))
                             header("Location: home_admin.php");
                             exit();
                         case "user":
-                            header("Location: ../pages/home.php");
+                            header("Location: ../pages/home_page.php");
                             exit();
                         default:
                             break;
