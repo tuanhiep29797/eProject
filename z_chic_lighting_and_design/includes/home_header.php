@@ -71,21 +71,17 @@
                 <div class="col-lg-8 col-sm-6 col-6">
                     <nav class="navbar navbar-expand-lg p-0">
 
-<<<<<<< HEAD
-                            <li class="nav-item">
-                                <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home_page.php">Home</a>
-=======
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavbar">
-                        <i class="bi bi-list fs-2 text-dark"></i>
-                    </button>
+                        <button class="navbar-toggler" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#mainNavbar">
+                            <i class="bi bi-list fs-2 text-dark"></i>
+                        </button>
 
                         <div class="collapse navbar-collapse" id="mainNavbar">
                         <ul class="navbar-nav gap-3 mx-auto">
                             <li class="nav-item py-3 mx-2">
                                 <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>/../pages/home.php">Home</a>
->>>>>>> 236a9ba (button open menu fix)
+
                             </li>
 
                             <li class="nav-item py-3 mx-2">
