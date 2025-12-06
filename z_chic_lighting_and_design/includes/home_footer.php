@@ -1,28 +1,28 @@
 <?php
 
 $company_info = [
-    "name" => "LICERIA & CO",
-    "desc" => "We provide modern, energy-saving, and highly aesthetic lighting solutions for your home.",
-    "address" => "No. 123, ABC Street, Hanoi City",
+    "name" => "CHIC LIGHTING & DESIGN",
+    "desc" => "Where Light Becomes Art — A Touch That Illuminates Your Soul!",
+    "address" => "No. 160, Tran Duy Hung Street, Hanoi City",
     "phone" => "(+84) 987 654 321",
-    "email" => "support@liceria&co.vn",
-    "website" => "liceria&co.vn"
+    "email" => "support@cl&d.vn",
+    "website" => "chiclighting&design.vn"
 ];
 
 $policies = [
-    "Warranty Policy" => "#",
-    "Return & Exchange" => "#",
-    "Shipping Policy" => "#",
-    "Privacy Policy" => "#",
-    "Terms of Use" => "#"
+    "Warranty Policy" => __DIR__."/../pages/home_page.php",
+    "Return & Exchange" => __DIR__."/../pages/home_page.php",
+    "Shipping Policy" => __DIR__."/../pages/home_page.php",
+    "Privacy Policy" => __DIR__."/../pages/home_page.php",
+    "Terms of Use" => __DIR__."/../pages/home_page.php"
 ];
 
 $guides = [
-    "Shopping Guide" => "#",
-    "Payment Guide" => "#",
-    "Installation Guide" => "#",
-    "FAQs" => "#",
-    "Download Catalogue" => "#"
+    "Shopping Guide" => __DIR__."/../pages/home_page.php",
+    "Payment Guide" => __DIR__."/../pages/home_page.php",
+    "Installation Guide" => __DIR__."/../pages/home_page.php",
+    "FAQs" => __DIR__."/../pages/home_page.php",
+    "Download Catalogue" => __DIR__."/../pages/home_page.php"
 ];
 ?>
 
