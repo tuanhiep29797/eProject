@@ -9,4 +9,5 @@
     require_once (__DIR__. "/api_order_detail.php");
     require_once (__DIR__. "/api_review.php");
     require_once (__DIR__. "/api_feedback.php");
+    require_once (__DIR__. "/api_gallery.php");
 ?>

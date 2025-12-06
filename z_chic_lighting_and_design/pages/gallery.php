@@ -19,7 +19,7 @@
     $gallery_images = [];
     for ($i = 1; $i <= 10; $i++)
     {
-        $gallery_images[] = $data_list[rand(0, count($data_list))];
+        $gallery_images[] = $data_list[rand(0, count($data_list) - 1)];
     }
 
     $total_images = count($gallery_images);
