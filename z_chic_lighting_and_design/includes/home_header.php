@@ -128,7 +128,7 @@ $user = $_SESSION["user"] ?? null;
                     <a class="dropdown-toggle text-dark text-decoration-none fs-5"
                        href="#" data-bs-toggle="dropdown">
                         <i class="bi bi-person"></i>
-                        <?= htmlspecialchars($user["username"] ?? "Login/Register") ?>
+                        <?= htmlspecialchars($_SESSION["fullname"] ?? "Login/Register") ?>
                     </a>
 
                     <ul class="dropdown-menu dropdown-menu-end shadow">
