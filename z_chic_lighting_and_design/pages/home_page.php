@@ -1,7 +1,7 @@
 <?php
     require_once (__DIR__.'/../database/dbhelper.php'); 
     
-    //get connection to data base
+    //connection to data base
     try 
     {
         $conn = getConnection();

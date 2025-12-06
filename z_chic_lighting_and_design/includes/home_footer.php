@@ -46,7 +46,7 @@ $guides = [
                 <div class="mb-4">
                     <a href="index.php" class="text-decoration-none">
                         <h2 class="text-white m-0" style="font-family: 'Calistoga', serif; letter-spacing: 2px;">
-                            LICERIA & CO
+                            CHIC LIGHTING & DESIGN
                         </h2>
                     </a>
                 </div>

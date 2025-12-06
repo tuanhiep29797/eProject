@@ -1,19 +1,26 @@
 <?php
-session_start();
-require_once('./database/dbhelper.php'); 
+    require_once (__DIR__.'/../database/dbhelper.php');
 
-$gallery_images = [
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-    "img/img_about_2.png",
-    "img/img_about_1.png",
-];
+    //connection to data base and get gallery data
+    try 
+    {
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_GALLERY);
+        $stmt->execute();
 
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $data_list = $stmt->fetchAll();
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
+    }
+
+    $data_list = [];
+    for ($i = 1; $i <= 4; $i++)
+    {
+        $data_list[] = $data_list[rand(0, count($data_list))];
+    }
 
 $total_images = count($gallery_images);
 ?>
@@ -22,15 +29,18 @@ $total_images = count($gallery_images);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Gallery - LICERIA & CO</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Gallery</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/gallery.css">
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/gallery.css">
 </head>
 <body>
 
-
+    <!-- include header -->
+    <?php
+        require_once (__DIR__."/../includes/home_header.php");
+    ?>
 
     <div class="gallery-banner">
         <div class="container">
@@ -67,8 +77,6 @@ $total_images = count($gallery_images);
         <?php
             $prev_index = ($index == 0) ? $total_images - 1 : $index - 1;
             
-            // điều kiện ? đúng : sai
-
             $next_index = ($index == $total_images - 1) ? 0 : $index + 1;
         ?>
 
@@ -92,8 +100,11 @@ $total_images = count($gallery_images);
 
     <div id="gallery-section"></div>
 
-    <?php require_once "footer.php"; ?>
+    <!-- include footer -->
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
