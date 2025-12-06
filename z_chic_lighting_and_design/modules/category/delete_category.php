@@ -1,5 +1,5 @@
 <?php
-    require_once __DIR__."/../../database/dbhelper.php";
+    require_once (__DIR__."/../../database/dbhelper.php");
     if(empty($_GET))
     {
         header("Location: ../home_admin.php");
@@ -7,6 +7,7 @@
 
     $id = $_GET['id'];
 
+    //connection to database and delete category
     try
     {
         $conn = getConnection();

@@ -1,6 +1,6 @@
 <?php
     require_once (__DIR__."/../../database/dbhelper.php");
-    
+
     // connect database and get user table
     try 
     {
@@ -8,7 +8,7 @@
         $stmt = $conn->prepare(SQL_GET_USER);
         $stmt->execute();
 
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $data_list = $stmt->fetchAll();
     }
     catch (PDOException $e) 
@@ -33,8 +33,8 @@
 
 <body>
     <!-- include header -->
-    <?php
-        require_once __DIR__."/../../admin/admin_header.php"; 
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
     ?>
 
     <!-- breadcrumb -->
@@ -44,74 +44,68 @@
             ["icon" => "bi-house-fill", "label" => "Admin", "url" => "../../admin/home_admin.php"],
             ["icon" => "bi-people-fill", "label" => "User Management"]
         ];
-        require_once __DIR__."/../../admin/admin_breadcrumb.php"; 
+        require_once (__DIR__."/../../admin/admin_breadcrumb.php"); 
     ?>
 
-    <!-- body user page -->
-    <div class="container table-container">
+    <!-- body user management page -->
+    <div class="container table-container mt-4">
 
-        <div class="row justify-content-center">
-            <div class="col-xl-10 col-md-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="page-title">
+                <i class="bi bi-boxes me-2"></i>
+                User Management
+            </h2>
 
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 class="page-title">
-                        <i class="bi bi-person-circle me-2"></i>
-                        User Management
-                    </h2>
+            <a href="add_user.php" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i>
+                Add New User
+            </a>
+        </div>
 
-                    <a href="add_user.php" class="btn btn-success">
-                        <i class="bi bi-plus-circle"></i> 
-                        Add New User
-                    </a>
-                </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Fullname</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Role</th>
+                        <th>Updated At</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
 
-                <!-- data table -->
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped align-middle">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">Fullname</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone Number</th>
-                                <th scope="col">Role</th>
-                                <th scope="col">Updated At</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
+                <tbody>
+                    <?php foreach($data_list as $item): ?>
+                        <tr>
+                            <th><?= $item['user_id'] ?></th>
+                            <td><?= $item['fullname'] ?></td>
+                            <td><?= $item['username'] ?></td>
+                            <td><?= $item['email'] ?></td>
+                            <td><?= $item['phone_number'] ?></td>
+                            <td><?= $item['role'] ?></td>
+                            <td><?= date("H:i:s d/m/Y", strtotime($item["created_at"])) ?></td>
+                            <td>
+                                <div class="d-flex gap-2">
+                                    <a href="edit_user.php?id=<?= $item['user_id'] ?>" 
+                                       class="btn btn-primary btn-sm">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
 
-                        <tbody>
-                            <?php foreach($data_list as $item): ?>
-                                <tr>
-                                    <th scope="row"><?= $item["user_id"] ?></th>
-                                    <td><?= $item["fullname"] ?></td>
-                                    <td><?= $item["username"] ?></td>
-                                    <td><?= $item["email"] ?></td>
-                                    <td><?= $item["phone_number"] ?></td>
-                                    <td><?= $item["role"] ?></td>
-                                    <td><?= date("H:i:s d/m/Y", strtotime($item["updated_at"])) ?></td>
+                                    <a href="delete_user.php?id=<?= $item['user_id'] ?>" 
+                                       class="btn btn-outline-danger btn-sm"
+                                       onclick="return confirm('Delete user: <?= $item['fullname'] ?> ?');">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
 
-                                    <td>
-                                        <div class="d-flex gap-2">
-                                            <a href="edit_user.php?id=<?= $item["user_id"] ?>" class="btn btn-primary btn-sm">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-
-                                            <a href="delete_user.php?id=<?= $item["user_id"] ?>" class="btn btn-outline-danger btn-sm"
-                                            onclick="return confirm('Are you sure you want to delete user: <?= $item["fullname"] ?>?');">
-                                                <i class="bi bi-trash"></i>
-                                            </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-
-                    </table>
-                </div>
-
-            </div>
+            </table>
         </div>
     </div>
 

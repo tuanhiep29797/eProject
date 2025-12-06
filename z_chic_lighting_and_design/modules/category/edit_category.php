@@ -1,83 +1,128 @@
 <?php
-    require_once __DIR__."/../../database/dbhelper.php";
-    if(empty($_GET))
+    require_once (__DIR__."/../../database/dbhelper.php");
+
+    if (!isset($_GET["id"])) 
     {
-        header("Location: ../home_admin.php");
+        header("Location: category.php");
+        exit;
     }
 
-    $id = $_GET['id'];
+    $id = $_GET["id"];
 
-    try
+    //connection to database and get category by id
+    try 
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_CATEGORY_BY_ID);
-        $stmt -> bindParam(':id', $id);
-        $stmt -> execute();
+        $stmt = $conn->prepare(SQL_GET_CATEGORY_BY_ID);
+        $stmt->bindParam(":category_id", $id);
+        $stmt->execute();
 
-        $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt -> fetchAll();
+        $item = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        $item = $data_list[0];
+        if (!$item) {
+            header("Location: category.php");
+            exit;
+        }
     }
-    catch (PDOException $e)
-    {
-        echo $e -> getMessage();
+    catch (PDOException $e) {
+        die($e->getMessage());
     }
 
     $conn = null;
 
-    if (!empty($_POST))
+    if (!empty($_POST)) 
     {
-        $category_name = $_POST['category_name'];
-        $category_thumbnail = $_POST['category_thumbnail'];
+        //get new data
+        $category_name      = $_POST["category_name"];
+        $category_thumbnail = $_POST["category_thumbnail"];
 
-        try
+        //connection to database and update category
+        try 
         {
             $conn = getConnection();
-            $stmt = $conn -> prepare(SQL_UPDATE_CATEGORY);
-            $stmt -> bindParam(':category_name', $category_name);
-            $stmt -> bindParam(':category_thumbnail', $category_thumbnail);
-            $stmt -> bindParam(':id', $id);
-            $stmt -> execute();
+            $stmt = $conn->prepare(SQL_UPDATE_CATEGORY);
 
-            header("Location: ../home_admin.php");
+            $stmt->bindParam(":category_name", $category_name);
+            $stmt->bindParam(":category_thumbnail", $category_thumbnail);
+            $stmt->bindParam(":category_id", $id);
+
+            $stmt->execute();
+
+            header("Location: category.php");
+            exit;
         }
-        catch (PDOException $e)
+        catch (PDOException $e) 
         {
-            echo $e -> getMessage();
+            echo $e->getMessage();
         }
 
         $conn = null;
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Category</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../assets/css/modules.css">
 </head>
+
 <body>
-    <?php require_once __DIR__."/../../admin/header.php";?>
-    <h1>EDIT CATEGORY</h1>
-    <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 
-    <form method="post">
-        <div class="mb-3">
-            <label for="category_name" class="form-label">Name </label>
-            <input type="text" class="form-control" name="category_name" value=<?=$item['category_name']?>>
+    <!-- include header -->
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
+    ?>
+
+    <!-- breadcrumb -->
+    <?php
+        $breadcrumb = [
+            ["icon" => "bi-house-fill",  "label" => "Admin",              "url" => "../../admin/home_admin.php"],
+            ["icon" => "bi-archive",     "label" => "Category Management","url" => "category.php"],
+            ["icon" => "bi-pencil-square","label" => "Edit Category"]
+        ];
+        require_once (__DIR__."/../../admin/admin_breadcrumb.php");
+    ?>
+
+    <!-- body -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-8">
+
+                <h2 class="page-title">
+                    <i class="bi bi-pencil-square me-2"></i>
+                    Edit Category
+                </h2>
+
+                <!-- edit form -->
+                <form method="post" class="card-form">
+
+                    <div class="mb-3">
+                        <label class="form-label">Category Name</label>
+                        <input type="text" class="form-control" name="category_name"
+                               value="<?= htmlspecialchars($item["category_name"]) ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input type="text" class="form-control" name="category_thumbnail"
+                               value="<?= htmlspecialchars($item["category_thumbnail"]) ?>">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                    <a href="category.php" class="btn btn-secondary ms-2">Cancel</a>
+
+                </form>
+
+            </div>
         </div>
+    </div>
 
-        <div class="mb-3">
-            <label for="category_thumbnail" class="form-label">Thumbnail </label>
-            <input type="text" class="form-control" name="category_thumbnail" value=<?=$item['category_thumbnail']?>>
-        </div>
-        
-        <button type="submit" class="btn btn-primary">Save Category</button>
-    </form>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

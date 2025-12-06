@@ -1,6 +1,14 @@
 <?php
     $users = [
         [
+            "fullname" => "User",
+            "username" => "user",
+            "email" => "user@gmail.com",
+            "phone_number" => "0123456789",
+            "password" => "user",
+            "role" => "user"
+        ],
+        [
             "fullname" => "Nguyen Tuan Hiep",
             "username" => "nguyentuanhiep",
             "email" => "nguyentuanhiep@gmail.com",

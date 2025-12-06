@@ -1,24 +1,30 @@
 <?php
-    require_once __DIR__."/../../database/dbhelper.php";
+    require_once (__DIR__."/../../database/dbhelper.php");
 
     if(!empty($_POST))
-    {
+    {   
+        // get data from form
         $category_name = $_POST['category_name'];
         $category_thumbnail = $_POST['category_thumbnail'];
 
-        try
+
+        //connection to database and add new category
+        try 
         {
             $conn = getConnection();
-            $stmt = $conn -> prepare(SQL_ADD_CATEGORY);
-            $stmt -> bindParam(':category_name', $category_name);        
-            $stmt -> bindParam(':category_thumbnail', $category_thumbnail);        
-            $stmt -> execute();
+            $stmt = $conn->prepare(SQL_ADD_CATEGORY);
 
-            header('Location: ../home_admin.php');
+            $stmt->bindParam(':category_name', $category_name);
+            $stmt->bindParam(':category_thumbnail', $category_thumbnail);
+
+            $stmt->execute();
+
+            header("Location: category.php");
+            exit;
         }
-        catch (PDOException $e)
+        catch (PDOException $e) 
         {
-            $e -> getMessage();
+            echo $e->getMessage();
         }
 
         $conn = null;
@@ -29,29 +35,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Cateogry</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Add Category</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../assets/css/modules.css">
 </head>
+
 <body>
-    <?php require_once __DIR__."/../../admin/header.php";?>
-    <h1>ADD NEW CATEGORY</h1>
-    <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 
-    <form method="post">
-        <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
-            <input type="text" class="form-control" id="name" name="category_name">
+    <!-- include header -->
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
+    ?>
+
+    <!-- breadcrumb -->
+    <?php
+        $breadcrumb = [
+            ["icon" => "bi-house-fill", "label" => "Admin", "url" => "../../admin/home_admin.php"],
+            ["icon" => "bi-archive", "label" => "Category Management", "url" => "category.php"],
+            ["icon" => "bi-plus-circle", "label" => "Add Category"]
+        ];
+        require_once (__DIR__."/../../admin/admin_breadcrumb.php");
+    ?>
+
+    <!-- body -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-md-10">
+
+                <h2 class="page-title">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add New Category
+                </h2>
+
+                <!-- add form -->
+                <form method="post" class="card-form">
+
+                    <div class="mb-3">
+                        <label class="form-label">Category Name</label>
+                        <input type="text" class="form-control" name="category_name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input type="text" class="form-control" name="category_thumbnail">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                    <a href="category.php" class="btn btn-secondary ms-2">Cancel</a>
+
+                </form>
+
+            </div>
         </div>
+    </div>
 
-        <div class="mb3">
-            <label for="thumbnail" class="form-label">Thumbnail</label>
-            <input type="text" class="form-control" id="thumbnail" name="category_thumbnail">
-        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-        <button type="submit" class="btn btn-primary">Add New Category</button>
-    </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 </html>

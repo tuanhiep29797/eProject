@@ -1,99 +1,137 @@
 <?php
     require_once __DIR__."/../../database/dbhelper.php";
 
-    if(!empty($_POST))
+    if (!empty($_POST)) 
     {
-        $product_title = $_POST['product_title'];
-        $product_description = $_POST['product_description'];
-        $product_price = $_POST['product_price'];
-        $product_content = $_POST['product_content'];
-        $product_quantity = $_POST['product_quantity'];
-        $product_thumbnail = $_POST['product_thumbnail'];
-        $category_id = $_POST['category_id'];
-        $brand_id = $_POST['brand_id'];
+        // get data from form
+        $product_title       = $_POST["product_title"];
+        $product_description = $_POST["product_description"];
+        $product_price       = $_POST["product_price"];
+        $product_content     = $_POST["product_content"];
+        $product_quantity    = $_POST["product_quantity"];
+        $product_thumbnail   = $_POST["product_thumbnail"];
+        $category_id         = $_POST["category_id"];
+        $brand_id            = $_POST["brand_id"];
 
-        try
-        {
+        //connection to database and add product
+        try {
             $conn = getConnection();
-            $stmt = $conn -> prepare(SQL_ADD_PRODUCT);
-            $stmt -> bindParam(':product_title', $product_title);        
-            $stmt -> bindParam(':product_description', $product_description);        
-            $stmt -> bindParam(':product_price', $product_price);        
-            $stmt -> bindParam(':product_content', $product_content);        
-            $stmt -> bindParam(':product_quantity', $product_quantity);        
-            $stmt -> bindParam(':product_thumbnail', $product_thumbnail);        
-            $stmt -> bindParam(':category_id', $category_id);        
-            $stmt -> bindParam(':brand_id', $brand_id);        
-            $stmt -> execute();
+            $stmt = $conn->prepare(SQL_ADD_PRODUCT);
 
-            header('Location: ../home_admin.php');
+            $stmt->bindParam(":product_title", $product_title);
+            $stmt->bindParam(":product_description", $product_description);
+            $stmt->bindParam(":product_price", $product_price);
+            $stmt->bindParam(":product_content", $product_content);
+            $stmt->bindParam(":product_quantity", $product_quantity);
+            $stmt->bindParam(":product_thumbnail", $product_thumbnail);
+            $stmt->bindParam(":category_id", $category_id);
+            $stmt->bindParam(":brand_id", $brand_id);
+
+            $stmt->execute();
+
+            header("Location: product.php");
+            exit;
         }
-        catch (PDOException $e)
+        catch (PDOException $e) 
         {
-            $e -> getMessage();
+            echo $e->getMessage();
         }
 
         $conn = null;
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Add New Product</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../assets/css/modules.css">
 </head>
+
 <body>
-    <?php require_once __DIR__."/../../admin/header.php";?>
-    <h1>ADD NEW PRODUCT</h1>
-    <a href="../home_admin.php"><button class="btn btn-primary">ADMIN PAGE</button></a>
 
-    <form method="post">
-        <div class="mb-3">
-            <label for="product_title" class="form-label">Title</label>
-            <input type="text" class="form-control" id="product_title" name="product_title">
+    <!-- include header -->
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
+        ?>
+
+    <!-- breadcrumb -->
+    <?php
+        $breadcrumb = [
+            ["icon" => "bi-house-fill", "label" => "Admin", "url" => "../../admin/home_admin.php"],
+            ["icon" => "bi-boxes", "label" => "Product Management", "url" => "product.php"],
+            ["icon" => "bi-plus-circle", "label" => "Add Product"]
+        ];
+        require_once __DIR__."/../../admin/admin_breadcrumb.php";
+    ?>
+
+    <!-- body -->
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-md-10">
+
+                <h2 class="page-title">
+                    <i class="bi bi-plus-circle me-2"></i>
+                    Add New Product
+                </h2>
+                
+                <!-- add form -->
+                <form method="post" class="card-form">
+
+                    <div class="mb-3">
+                        <label class="form-label">Product Title</label>
+                        <input type="text" class="form-control" name="product_title" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-control" name="product_description"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" class="form-control" name="product_price" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Content</label>
+                        <textarea class="form-control" name="product_content"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" class="form-control" name="product_quantity" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input type="text" class="form-control" name="product_thumbnail">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Category ID</label>
+                        <input type="number" class="form-control" name="category_id" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Brand ID</label>
+                        <input type="number" class="form-control" name="brand_id" required>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Product</button>
+                    <a href="product.php" class="btn btn-secondary ms-2">Cancel</a>
+
+                </form>
+
+            </div>
         </div>
+    </div>
 
-        <div class="mb3">
-            <label for="product_description" class="form-label">Description</label>
-            <input type="text" class="form-control" id="product_description" name="product_description">
-        </div>
-
-        <div class="mb3">
-            <label for="product_price" class="form-label">Price</label>
-            <input type="number" class="form-control" id="product_price" name="product_price">
-        </div>
-
-        <div class="mb3">
-            <label for="product_content" class="form-label">Content</label>
-            <input type="text" class="form-control" id="product_content" name="product_content">
-        </div>
-
-        <div class="mb3">
-            <label for="product_quantity" class="form-label">Quantity</label>
-            <input type="number" class="form-control" id="product_quantity" name="product_quantity">
-        </div>
-
-        <div class="mb3">
-            <label for="product_thumbnail" class="form-label">Thumbnail</label>
-            <input type="text" class="form-control" id="product_thumbnail" name="product_thumbnail">
-        </div>
-
-        <div class="mb3">
-            <label for="category_id" class="form-label">Category</label>
-            <input type="text" class="form-control" id="category_id" name="category_id">
-        </div>
-
-        <div class="mb3">
-            <label for="brand_id" class="form-label">Brand</label>
-            <input type="text" class="form-control" id="brand_id" name="brand_id">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Add New Brand</button>
-    </form>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

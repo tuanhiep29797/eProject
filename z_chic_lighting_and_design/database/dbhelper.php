@@ -159,6 +159,7 @@
 		email VARCHAR(255),
 		phone_number VARCHAR(20),
 		content TEXT NOT NULL,
+		status ENUM('new', 'readed') NOT NULL DEFAULT 'new',
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	)";
 
@@ -265,8 +266,17 @@
 
 	const SQL_UPDATE_ORDER = 
 	"update `order` 
-	set order_status = :order_status
+	set order_status = :order_status,
+		receiver = :receiver,
+		phone_number = :phone_number,
+		address = :address
 	where order_id = :order_id	
+	";
+
+	const SQL_UPDATE_FEEDBACK_STATUS =
+	"update feedback
+	set status = :status
+	where feedback_id = :feedback_id
 	";
 
 	//SQL DELETE TABLE

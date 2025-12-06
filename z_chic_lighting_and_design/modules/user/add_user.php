@@ -1,114 +1,110 @@
 <?php
     require_once (__DIR__."/../../database/dbhelper.php");
 
-    if(!empty($_POST))
+    if (!empty($_POST)) 
     {
-        //get data from form input
-        $fullname = $_POST['fullname'];
-        $username = $_POST['username'];
-        $email = $_POST['email'];
-        $phone_number = $_POST['phone_number'];
-        $password = $_POST['password'];
-        $role = $_POST['role'];
+        // get data from form
+        $fullname     = $_POST["fullname"];
+        $username     = $_POST["username"];
+        $email        = $_POST["email"];
+        $phone_number = $_POST["phone_number"];
+        $password     = $_POST["password"];
+        $role         = $_POST["role"];
 
-        //password encryption
+        // password encrypt
         $password = password_hash($password, PASSWORD_DEFAULT);
 
-        //connect to database and push data to database
-        try
+        //connection to database and add new user
+        try 
         {
             $conn = getConnection();
-            $stmt = $conn -> prepare(SQL_ADD_USER);
-            $stmt -> bindParam(':fullname', $fullname);                
-            $stmt -> bindParam(':username', $username);                
-            $stmt -> bindParam(':email', $email);                
-            $stmt -> bindParam(':phone_number', $phone_number);                
-            $stmt -> bindParam(':password', $password);                
-            $stmt -> bindParam(':role', $role);                
-            $stmt -> execute();
+            $stmt = $conn->prepare(SQL_ADD_USER);
 
-            header('Location: user.php');
+            $stmt->bindParam(":fullname", $fullname);
+            $stmt->bindParam(":username", $username);
+            $stmt->bindParam(":email", $email);
+            $stmt->bindParam(":phone_number", $phone_number);
+            $stmt->bindParam(":password", $password);
+            $stmt->bindParam(":role", $role);
+
+            $stmt->execute();
+
+            header("Location: user.php");
+            exit;
         }
-        catch (PDOException $e)
-        {
-            $e -> getMessage();
+        catch (PDOException $e) {
+            echo $e->getMessage();
         }
 
         $conn = null;
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add User</title>
+    <title>Add New User</title>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../../assets/css/modules.css">
 </head>
+
 <body>
+
     <!-- include header -->
-    <?php
-        require_once __DIR__."/../../admin/admin_header.php"; 
+    <?php 
+        require_once (__DIR__."/../../admin/admin_header.php"); 
     ?>
 
-    <!-- body user page -->
-    <div class="container table-container">
+    <!-- breadcrumb -->
+    <?php
+        $breadcrumb = [
+            ["icon" => "bi-house-fill", "label" => "Admin", "url" => "../../admin/home_admin.php"],
+            ["icon" => "bi-people-fill", "label" => "User Management", "url" => "user.php"],
+            ["icon" => "bi-person-fill", "label" => "Add User"]
+        ];
+        require_once (__DIR__."/../../admin/admin_breadcrumb.php");
+    ?>
 
-        <!-- breadcrumb -->
-        <div class="mt-3">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb align-items-center">
-                    <li class="breadcrumb-item">
-                        <a href="../../admin/home_admin.php" class="d-flex align-items-center text-decoration-none">
-                            <i class="bi bi-house-door me-1"></i> Admin
-                        </a>
-                    </li>
-
-                    <li class="breadcrumb-item">
-                        <a href="user.php" class="d-flex align-items-center text-decoration-none">
-                            <i class="bi bi-people-fill me-1"></i> User Management
-                        </a>
-                    </li>
-
-                    <li class="breadcrumb-item active d-flex align-items-center" aria-current="page">
-                        <i class="bi bi-person-fill me-1"></i> Add User
-                    </li>
-                </ol>
-            </nav>
-        </div>
-
-        <!-- body -->
+    <!-- body -->
+    <div class="container mt-4">
         <div class="row justify-content-center">
-            <div class="col-xl-10 col-md-12">
+            <div class="col-xl-8 col-md-10">
 
                 <h2 class="page-title">
                     <i class="bi bi-person-circle me-2"></i>
                     Add New User
                 </h2>
 
-                <!-- input form -->
+                <!-- add form -->
                 <form method="post" class="card-form">
 
                     <div class="mb-3">
                         <label class="form-label">Fullname</label>
-                        <input type="text" class="form-control" name="fullname">
+                        <input type="text" class="form-control" name="fullname" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username">
+                        <input type="text" class="form-control" name="username" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email">
+                        <input type="email" class="form-control" name="email" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="phone_number">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" required>
                     </div>
 
                     <div class="mb-4">
@@ -128,10 +124,12 @@
                     <a href="user.php" class="btn btn-secondary ms-2">Cancel</a>
 
                 </form>
+
             </div>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
