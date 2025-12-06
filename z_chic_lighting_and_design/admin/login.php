@@ -45,6 +45,7 @@ if (!empty($_POST["form_type"]))
                 {
                     //save user infomation
                     $_SESSION["username"] = $user["username"];
+                    $_SESSION["fullname"] = $user["fullname"];
                     $_SESSION["email"] = $user["email"];
                     $_SESSION["role"] = $user["role"];
 
@@ -96,7 +97,7 @@ if (!empty($_POST["form_type"]))
 
 <body>
     <div class="login">
-        <?php require_once __DIR__ . "/../includes/header.php"; ?>
+        <?php require_once __DIR__ . "/../includes/home_header.php"; ?>
         <!-- Login start  -->
         <div class="container">
             <div class="row mt-5 pt-5 ">

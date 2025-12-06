@@ -187,6 +187,13 @@
 	const SQL_GET_ORDER = "select * from `order`";
 	const SQL_GET_ORDER_BY_ID = "select * from `order` where order_id = :id";
 
+	const SQL_GET_CATEGORY_AS_PRODUCT = 
+	"select c.category_name, p.product_title
+	from category c join product p
+	on c.category_id = p.category_id
+	order by c.category_name, p.product_title
+	";
+
 	//SQL ADD TABLE
 
 	const SQL_ADD_USER = 
