@@ -47,6 +47,7 @@ if (!empty($_POST["form_type"]))
                     $_SESSION["username"] = $user["username"];
                     $_SESSION["fullname"] = $user["fullname"];
                     $_SESSION["email"] = $user["email"];
+                    $_SESSION["id"] = $user["user_id"];
                     $_SESSION["role"] = $user["role"];
 
                     //check role

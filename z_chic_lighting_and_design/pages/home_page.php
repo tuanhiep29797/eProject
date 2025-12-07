@@ -154,15 +154,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <?php endforeach; ?>
             </div>
+                <?php endforeach; ?>
+        </div>
 
-            <div class="text-center mt-5">
-                <a href="../pages/product.php" class="btn btn-outline-dark rounded-pill px-5 py-2 fw-bold text-uppercase">
-                    View More <i class="bi bi-arrow-right ms-2"></i>
-                </a>
+                <div class="text-center mt-5">
+                    <a href="../pages/product.php" class="btn btn-outline-dark rounded-pill px-5 py-2 fw-bold text-uppercase">
+                        View More <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
