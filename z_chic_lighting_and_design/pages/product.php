@@ -150,8 +150,8 @@ $total_products = count($products);
         <!-- Sidebar Filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-
-          <!-- Filter by Category -->
+            
+            <!-- Filter by Category -->
             <div class="filter-section mb-4">
               <h6 class="filter-title">Filter by category:</h6>
               <div class="filter-options">
@@ -212,23 +212,6 @@ $total_products = count($products);
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>
-                      <div class="product-rating">
-                        <div class="stars">
-                          <?php
-                          $full_stars = floor($rating);
-                          $half_star = ($rating - $full_stars) >= 0.5;
-                          for ($s = 0; $s < $full_stars; $s++): ?>
-                            <i class="bi bi-star-fill"></i>
-                          <?php endfor; ?>
-                          <?php if ($half_star): ?>
-                            <i class="bi bi-star-half"></i>
-                          <?php endif; ?>
-                          <?php for ($s = $full_stars + ($half_star ? 1 : 0); $s < 5; $s++): ?>
-                            <i class="bi bi-star"></i>
-                          <?php endfor; ?>
-                        </div>
-                        <span class="review-count"><?= $rating ?> (<?= $reviews ?> Reviews)</span>
-                      </div>
                       <div class="product-price">
                         $<?= number_format($product['product_price'], 2) ?>
                       </div>
