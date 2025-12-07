@@ -10,19 +10,19 @@ $company_info = [
 ];
 
 $policies = [
-    "Warranty Policy" => __DIR__."/../pages/home_page.php",
-    "Return & Exchange" => __DIR__."/../pages/home_page.php",
-    "Shipping Policy" => __DIR__."/../pages/home_page.php",
-    "Privacy Policy" => __DIR__."/../pages/home_page.php",
-    "Terms of Use" => __DIR__."/../pages/home_page.php"
+    "Warranty Policy" => BASE_URL."pages/home_page.php",
+    "Return & Exchange" => BASE_URL."pages/home_page.php",
+    "Shipping Policy" => BASE_URL."pages/home_page.php",
+    "Privacy Policy" => BASE_URL."pages/home_page.php",
+    "Terms of Use" => BASE_URL."pages/home_page.php"
 ];
 
 $guides = [
-    "Shopping Guide" => __DIR__."/../pages/home_page.php",
-    "Payment Guide" => __DIR__."/../pages/home_page.php",
-    "Installation Guide" => __DIR__."/../pages/home_page.php",
-    "FAQs" => __DIR__."/../pages/home_page.php",
-    "Download Catalogue" => __DIR__."/../pages/home_page.php"
+    "Shopping Guide" => BASE_URL."pages/home_page.php",
+    "Payment Guide" => BASE_URL."pages/home_page.php",
+    "Installation Guide" => BASE_URL."pages/home_page.php",
+    "FAQs" => BASE_URL."pages/home_page.php",
+    "Download Catalogue" => BASE_URL."pages/home_page.php"
 ];
 ?>
 

@@ -1,25 +1,13 @@
-/* ==========================================
-   ABOUT PAGE – CLEAN & SYSTEMIZED VERSION
-   ========================================== */
-
-/* Không cần khai báo :root nữa vì đã có variables.css */
-
 body {
   font-family: "Exo 2", sans-serif;
   color: var(--text-primary);
 }
 
-/* ==========================
-   SECTIONS
-   ========================== */
 .about-section,
 .why-section {
   padding-bottom: 80px;
 }
 
-/* ==========================
-   TITLES & TEXT
-   ========================== */
 .sub-title {
   color: var(--text-secondary);
   font-weight: 700;
@@ -45,9 +33,6 @@ body {
   font-size: 16px;
 }
 
-/* ==========================
-   CHECK LIST
-   ========================== */
 .check-list {
   margin-top: 15px;
 }

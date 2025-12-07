@@ -1,4 +1,3 @@
-/* admin header */
 .admin-header {
   background: #ffffff;
   padding: 14px 0;
@@ -27,7 +26,6 @@
   text-decoration: none;
 }
 
-/* admin home */
 .admin-card {
   transition: 0.25s ease;
   cursor: pointer;
