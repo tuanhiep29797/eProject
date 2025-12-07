@@ -1,111 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
 
 :root {
   --background-color-1: #000000;
   --background-color-2: #ffffff;
   --background-color-3: #f0f0f0;
   --background-color-4: #26b66a;
-      --main-brown: #8B5A2B;
-    --text-black: #000;
-    --bg-body: #fff;
+  --main-brown: #8b5a2b;
+  --text-black: #000;
+  --bg-body: #fff;
 }
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    color: #000 !important;
+  font-family: "Arial", sans-serif;
+  color: #000 !important;
 }
-header{
-    /* margin:40px 10px 0px 10px!important; */
-    background-color: #ffffffB3;
-    border-radius: 20px !important; 
+header {
+  /* margin:40px 10px 0px 10px!important; */
+  background-color: #ffffffb3;
+  border-radius: 20px !important;
 }
 #product_menu:hover .nav-item_product {
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
 .navbar-toggler {
-    width: auto !important;
-    padding: 4px 8px;        
-    border: none;        
+  width: auto !important;
+  padding: 4px 8px;
+  border: none;
 }
-
 
 .nav-item_product {
-    display: none;
-    position: absolute;
-    left: 0;       
-    top: 100%;     
-    width: 100%;   
-    background: #fff; 
-    color: #333;
-    z-index: 999;
-    padding: 25px 30px;
-    border-radius: 8px; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  z-index: 999;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-.nav-item a{
-    color:var(--background-color-1);
+.nav-item a {
+  color: var(--background-color-1);
 }
-.nav-item_category{
-    display:none;
-    position: absolute;
-    left: -50px;       
-    top: 95%;
-    z-index: 9999;
-    background: white; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
-    transition: opacity 0.3s ease;
-    font-size: 15px;
-    cursor: pointer;
-}
-
-#category_menu:hover .nav-item_category{
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
+.nav-item_category {
+  display: none;
+  position: absolute;
+  left: -50px;
+  top: 95%;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+  font-size: 15px;
+  cursor: pointer;
 }
 
-.nav-item_brand{
-    display:none;
-    position: absolute;
-    left: -30px;       
-    top: 95%;
-    z-index: 9999;
-    background: white; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
-    transition: opacity 0.3s ease;
-    font-size: 15px;
-    cursor: pointer;
+#category_menu:hover .nav-item_category {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
+}
+
+.nav-item_brand {
+  display: none;
+  position: absolute;
+  left: -30px;
+  top: 95%;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+  font-size: 15px;
+  cursor: pointer;
 }
 
 #brand_menu:hover .nav-item_brand {
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
-.header_account_item{
-    display:none;
-    position: absolute;
-    right: 0px;       
-    top: 90%;
-    z-index: 9999;
-    background: white; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
-    transition: opacity 0.3s ease;
-    font-size: 15px;
-    cursor: pointer;
+.header_account_item {
+  display: none;
+  position: absolute;
+  right: 0px;
+  top: 90%;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+  font-size: 15px;
+  cursor: pointer;
 }
-#header_account:hover .header_account_item{
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
+#header_account:hover .header_account_item {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
 
 .nav-item a:hover,
 .nav-item_product a:hover,
 .header_right a:hover,
-.header_right i:hover{
-    color:var(--background-color-4) !important;
+.header_right i:hover {
+  color: var(--background-color-4) !important;
 }
