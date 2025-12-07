@@ -1,118 +1,118 @@
 <?php
-require_once(__DIR__."/../database/dbhelper.php");
+require_once(__DIR__ . "/../database/dbhelper.php");
+
+try {
+  $conn = getConnection();
+  $stmt = $conn->prepare("SELECT * FROM category");
+  $stmt->execute();
+
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $categories = $stmt->fetchAll();
+
+  $stmt = $conn->prepare("SELECT * FROM brand");
+  $stmt->execute();
+
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $brands = $stmt->fetchAll();
+} catch (PDOException $e) {
+  echo "Error: " . $e->getMessage();
+}
+$conn = null;
 
 // Get filter parameters
+
+
 $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
 $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
 $min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
-$max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 500;
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$per_page = 9;
+$max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 50000000;
 
 
-// Fake Categories
-$categories = [
-  ['category_id' => 1, 'category_name' => 'Ceiling Lights'],
-  ['category_id' => 2, 'category_name' => 'Wall Lights'],
-  ['category_id' => 3, 'category_name' => 'Outdoor Lights'],
-  ['category_id' => 4, 'category_name' => 'Fans'],
-  ['category_id' => 5, 'category_name' => 'Home Accents'],
-  ['category_id' => 6, 'category_name' => 'LED - Spotlights'],
-  ['category_id' => 7, 'category_name' => 'LED - Decorative Lights'],
-  ['category_id' => 8, 'category_name' => 'LED - Smart Lights'],
-];
+if (!empty($_GET['action'])) {
 
-// Fake Brands
-$brands = [
-  ['brand_id' => 1, 'brand_name' => 'Philips'],
-  ['brand_id' => 2, 'brand_name' => 'Panasonic'],
-  ['brand_id' => 3, 'brand_name' => 'Hunter Fans'],
-  ['brand_id' => 4, 'brand_name' => 'Ledyi'],
-  ['brand_id' => 5, 'brand_name' => 'ArtDecor'],
-  ['brand_id' => 6, 'brand_name' => 'Xiaomi'],
-];
+  switch ($_GET['action']) {
+    case 'filter':
+      try {
+        $conn = getConnection();
 
-// Fake Products with Unsplash images
-$products = [
-  [
-    'product_id' => 1,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 2,
-    'product_title' => 'Pendant Lighting',
-    'product_price' => 12.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.6,
-    'reviews' => '856'
-  ],
-  [
-    'product_id' => 3,
-    'product_title' => 'Dusk to Dawn lighting',
-    'product_price' => 39.50,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.2,
-    'reviews' => '1.7k'
-  ],
-  [
-    'product_id' => 4,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 5,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 6,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 7,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 8,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 9,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-];
+        $sql = "SELECT p.*, c.category_name, b.brand_name
+                FROM product p
+                INNER JOIN category c ON p.category_id = c.category_id
+                INNER JOIN brand b ON p.brand_id = b.brand_id
+                WHERE 1";
+        $params = [];
+
+        if (!empty($_GET['category'])) {
+          $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
+          $sql .= " AND p.category_id IN ($placeholders)";
+          $params = array_merge($params, $category_filter);
+        }
+
+        if (!empty($_GET['brand'])) {
+          $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
+          $sql .= " AND p.brand_id IN ($placeholders)";
+          $params = array_merge($params, $brand_filter);
+        }
+
+        $sql .= " AND p.product_price BETWEEN ? AND ?";
+        $params[] = (float)$min_price;
+        $params[] = (float)$max_price;
+
+      $stmt = $conn->prepare($sql);
+      $stmt->execute($params);
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $products = $stmt->fetchAll();
+      } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+      $conn = null;
+      break;
+
+    case 'search':
+    $search = $_GET['search'] ?? '';
+
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("
+            SELECT * FROM product
+            WHERE product_title LIKE :search
+        ");
+      $stmt->execute([
+                  ':search' => '%' . $search . '%'
+              ]);
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $products = $stmt->fetchAll();
+      } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+      }
+      $conn = null;
+      break;
+
+    default:
+      header("Location: #");
+      break;
+  }
+} else {
+  try {
+    $conn = getConnection();
+    $stmt = $conn->prepare("SELECT * FROM product");
+    $stmt->execute();
+
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $products = $stmt->fetchAll();
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
+}
 
 $total_products = count($products);
-$total_pages = 10;
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,11 +125,13 @@ $total_pages = 10;
   <link
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./Css/product.css">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/product.css?v=<?= time() ?>">
 </head>
 
 <body>
-
+  <?php
+  require_once(__DIR__ . "/../includes/home_header.php");
+  ?>
 
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
@@ -144,7 +146,7 @@ $total_pages = 10;
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
                 value="<?= htmlspecialchars($search) ?>">
-              <button class="btn btn-dark" type="submit">Search</button>
+              <button class="btn btn-dark" type="submit" name='action' value='search'>Search</button>
             </div>
           </form>
         </div>
@@ -160,17 +162,15 @@ $total_pages = 10;
             <div class="filter-section mb-4">
               <h6 class="filter-title">Filter by category:</h6>
               <div class="filter-options">
-                <?php if ($categories): ?>
-                  <?php foreach ($categories as $cat): ?>
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" name="category[]" value="<?= $cat['category_id'] ?>"
-                        id="cat_<?= $cat['category_id'] ?>" <?= in_array($cat['category_id'], $category_filter) ? 'checked' : '' ?>>
-                      <label class="form-check-label" for="cat_<?= $cat['category_id'] ?>">
-                        <?= htmlspecialchars($cat['category_name']) ?>
-                      </label>
-                    </div>
-                  <?php endforeach; ?>
-                <?php endif; ?>
+                <?php foreach ($categories as $cat): ?>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="category[]" value="<?= $cat['category_id'] ?>"
+                      id="cat_<?= $cat['category_id'] ?>" <?= in_array($cat['category_id'], $category_filter) ? 'checked' : '' ?>>
+                    <label class="form-check-label" for="cat_<?= $cat['category_id'] ?>">
+                      <?= htmlspecialchars($cat['category_name']) ?>
+                    </label>
+                  </div>
+                <?php endforeach; ?>
               </div>
             </div>
 
@@ -199,19 +199,19 @@ $total_pages = 10;
                 <div class="d-flex gap-2 mb-3">
                   <div class="price-input">
                     <span>$</span>
-                    <input type="number" name="min_price" id="minPrice" value="<?= $min_price ?>" min="0" max="500">
+                    <input type="number" name="min_price" id="minPrice" value="<?= $min_price ?>" min="0" max="50000000">
                   </div>
                   <div class="price-input">
                     <span>$</span>
-                    <input type="number" name="max_price" id="maxPrice" value="<?= $max_price ?>" min="0" max="500">
+                    <input type="number" name="max_price" id="maxPrice" value="<?= $max_price ?>" min="0" max="50000000">
                   </div>
                 </div>
-                <input type="range" class="form-range price-slider" id="priceRange" min="0" max="500"
+                <input type="range" class="form-range price-slider" id="priceRange" min="0" max="50000000"
                   value="<?= $max_price ?>">
               </div>
             </div>
 
-            <button type="submit" class="btn btn-apply-filter w-100">Apply Filter</button>
+            <button type="submit" class="btn bg-dark text-white w-100" name='action' value='filter'>Apply Filter</button>
           </form>
         </div>
 
@@ -237,7 +237,7 @@ $total_pages = 10;
                         <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
-                       </h5>
+                      </h5>
                       <div class="product-rating">
                         <div class="stars">
                           <?php
@@ -333,10 +333,10 @@ $total_pages = 10;
         </div>
       </div>
     </div>
+    <?php
+    require_once(__DIR__ . "/../includes/home_footer.php.php");
+    ?>
   </main>
-
-    <?php require_once("../Dong/footer.php"); ?>
-      
 </body>
 
 </html>
