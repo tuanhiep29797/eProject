@@ -1,105 +1,93 @@
 <?php
+  require_once(__DIR__ . "/../database/dbhelper.php");
+
+  try 
+  {
+  $conn = getConnection();
+  $stmt = $conn->prepare(SQL_GET_CATEGORY);
+  $stmt->execute();
+
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $categories = $stmt->fetchAll();
+  } 
+  catch (PDOException $e) 
+  {
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
+
   // Get filter parameters
+
   $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
-  $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
-  $min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
-  $max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 500;
-  $search = isset($_GET['search']) ? $_GET['search'] : '';
-  $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-  $per_page = 9;
 
+  if (isset($_GET['action'])) {
 
+    switch ($_GET['action']) {
+      case 'filter':
+        try {
+          $conn = getConnection();
 
-  $categories = [
-    ['category_id' => 1, 'category_name' => 'Ceiling Lights'],
-    ['category_id' => 2, 'category_name' => 'Wall Lights'],
-    ['category_id' => 3, 'category_name' => 'Outdoor Lights'],
-    ['category_id' => 4, 'category_name' => 'Fans'],
-    ['category_id' => 5, 'category_name' => 'Home Accents'],
-    ['category_id' => 6, 'category_name' => 'LED - Spotlights'],
-    ['category_id' => 7, 'category_name' => 'LED - Decorative Lights'],
-    ['category_id' => 8, 'category_name' => 'LED - Smart Lights'],
-  ];
+          $sql = "SELECT p.*, c.category_name
+                  FROM product p
+                  INNER JOIN category c ON p.category_id = c.category_id
+                  WHERE 1";
+          $params = [];
 
+          if (!empty($_GET['category'])) {
+            $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
+            $sql .= " AND p.category_id IN ($placeholders)";
+            $params = array_merge($params, $category_filter);
+          }
 
-  // Fake Products with Unsplash images
-  $products = [
-    [
-      'product_id' => 1,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 2,
-      'product_title' => 'Pendant Lighting',
-      'product_price' => 12.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.6,
-      'reviews' => '856'
-    ],
-    [
-      'product_id' => 3,
-      'product_title' => 'Dusk to Dawn lighting',
-      'product_price' => 39.50,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.2,
-      'reviews' => '1.7k'
-    ],
-    [
-      'product_id' => 4,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 5,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 6,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 7,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 8,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-    [
-      'product_id' => 9,
-      'product_title' => 'Log Barn vanity lights',
-      'product_price' => 29.90,
-      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-      'rating' => 4.8,
-      'reviews' => '1.2k'
-    ],
-  ];
-  $total_products = count($products);
-  $total_pages = 10;
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
 
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      case 'search':
+      $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+      try {
+          $conn = getConnection();
+          $stmt = $conn->prepare("
+              SELECT * FROM product
+              WHERE product_title LIKE :search
+          ");
+          $stmt->execute([
+                    ':search' => '%' . $search . '%'
+                ]);
+
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      default:
+        header("Location: #");
+        break;
+    }
+  } else {
+    try {
+      $conn = getConnection();
+      $stmt = $conn->prepare(SQL_GET_PRODUCT);
+      $stmt->execute();
+
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -149,8 +137,8 @@
           <form action="" method="GET" class="search-form">
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
-                value="<?= htmlspecialchars($search) ?>">
-              <button class="btn btn-dark" type="submit">Search</button>
+                value="<?= htmlspecialchars($search ?? "") ?>">
+              <button class="btn btn-dark" type="submit" name="action" value="search">Search</button>
             </div>
           </form>
         </div>
@@ -160,11 +148,10 @@
         <!-- Sidebar Filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
 
             <!-- Filter by Category -->
             <div class="filter-section mb-4">
-              <h6 class="filter-title">Filter by category:</h6>
+              <h6 class="filter-title">Category:</h6>
               <div class="filter-options">
                 <?php if ($categories): ?>
                   <?php foreach ($categories as $cat): ?>
@@ -180,7 +167,7 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-apply-filter w-100">Apply Filter</button>
+            <button type="submit" class="btn bg-dark text-white w-100" name="action" value="filter">Apply Filter</button>
           </form>
         </div>
 

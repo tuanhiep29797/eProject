@@ -1,105 +1,93 @@
 <?php
-  require_once (__DIR__.'/../database/dbhelper.php');
+  require_once(__DIR__ . "/../database/dbhelper.php");
 
-// Get filter parameters
-$category_filter = isset($_GET['category']) ? $_GET['category'] : [];
-$brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
-$min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
-$max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 500;
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$per_page = 9;
+  try 
+  {
+  $conn = getConnection();
+  $stmt = $conn->prepare(SQL_GET_BRAND);
+  $stmt->execute();
 
+  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+  $brands = $stmt->fetchAll();
+  } 
+  catch (PDOException $e) 
+  {
+    echo "Error: " . $e->getMessage();
+  }
+  $conn = null;
 
+  // Get filter parameters
 
-$brands = [
-  ['brand_id' => 1, 'brand_name' => 'Philips'],
-  ['brand_id' => 2, 'brand_name' => 'Panasonic'],
-  ['brand_id' => 3, 'brand_name' => 'Hunter Fans'],
-  ['brand_id' => 4, 'brand_name' => 'Ledyi'],
-  ['brand_id' => 5, 'brand_name' => 'ArtDecor'],
-  ['brand_id' => 6, 'brand_name' => 'Xiaomi'],
-];
+  $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
 
+  if (isset($_GET['action'])) {
 
-$products = [
-  [
-    'product_id' => 1,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 2,
-    'product_title' => 'Pendant Lighting',
-    'product_price' => 12.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.6,
-    'reviews' => '856'
-  ],
-  [
-    'product_id' => 3,
-    'product_title' => 'Dusk to Dawn lighting',
-    'product_price' => 39.50,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.2,
-    'reviews' => '1.7k'
-  ],
-  [
-    'product_id' => 4,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 5,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 6,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 7,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 8,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 9,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../Dong/img/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-];
+    switch ($_GET['action']) {
+      case 'filter':
+        try {
+          $conn = getConnection();
 
-$total_products = count($products);
-$total_pages = 10;
+          $sql = "SELECT p.*, c.brand_name
+                  FROM product p
+                  INNER JOIN brand c ON p.brand_id = c.brand_id
+                  WHERE 1";
+          $params = [];
 
+          if (!empty($_GET['brand'])) {
+            $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
+            $sql .= " AND p.brand_id IN ($placeholders)";
+            $params = array_merge($params, $brand_filter);
+          }
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
+
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      case 'search':
+      $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+      try {
+          $conn = getConnection();
+          $stmt = $conn->prepare("
+              SELECT * FROM product
+              WHERE product_title LIKE :search
+          ");
+          $stmt->execute([
+                    ':search' => '%' . $search . '%'
+                ]);
+
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      default:
+        header("Location: #");
+        break;
+    }
+  } else {
+    try {
+      $conn = getConnection();
+      $stmt = $conn->prepare(SQL_GET_PRODUCT);
+      $stmt->execute();
+
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,14 +98,33 @@ $total_pages = 10;
   <title>Product - Chic Lighting</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="./Css/product.css">
+    <link rel="stylesheet" href="../assets/css/banner.css">
+  <link rel="stylesheet" href="../assets/css/product.css">
 </head>
 
 <body>
 
+  <!-- include header -->
+  <?php
+      require_once (__DIR__."/../includes/home_header.php");
+  ?>
+
+  <div class="page-banner">
+      <div class="container">
+          <h2>Brand</h2>
+          
+          <div class="banner-breadcrumb">
+              <a href="home_page.php">Home</a>
+              
+              <i class="bi bi-chevron-right"></i>
+      
+              <a href="#">Brand</a>
+              
+          </div>
+      </div>
+  </div>
 
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
@@ -125,14 +132,14 @@ $total_pages = 10;
       <div class="row align-items-center mb-4">
         <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
-          <h1 class="page-title">Product</h1>
+          <h1 class="page-title">Brand</h1>
         </div>
         <div class="col-xl-6">
           <form action="" method="GET" class="search-form">
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
-                value="<?= htmlspecialchars($search) ?>">
-              <button class="btn btn-dark" type="submit">Search</button>
+                value="<?= htmlspecialchars($search ?? "") ?>">
+              <button class="btn btn-dark" type="submit" name="action" value="search">Search</button>
             </div>
           </form>
         </div>
@@ -142,7 +149,6 @@ $total_pages = 10;
         <!-- Sidebar Filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
 
             <!-- Filter by Brand -->
             <div class="filter-section mb-4">
@@ -161,7 +167,7 @@ $total_pages = 10;
                 <?php endif; ?>
               </div>
                   </div>
-            <button type="submit" class="btn btn-apply-filter w-100">Apply Filter</button>
+            <button type="submit" class="btn bg-dark text-white w-100" name="action" value="filter">Apply Filter</button>
           </form>
         </div>
 
@@ -285,7 +291,10 @@ $total_pages = 10;
     </div>
   </main>
 
-    <?php require_once("../Dong/footer.php"); ?>
+    <!-- include footer -->
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
       
 </body>
 

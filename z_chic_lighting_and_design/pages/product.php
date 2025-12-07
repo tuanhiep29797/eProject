@@ -3,13 +3,13 @@ require_once(__DIR__ . "/../database/dbhelper.php");
 
 try {
   $conn = getConnection();
-  $stmt = $conn->prepare("SELECT * FROM category");
+  $stmt = $conn->prepare(SQL_GET_CATEGORY);
   $stmt->execute();
 
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
   $categories = $stmt->fetchAll();
 
-  $stmt = $conn->prepare("SELECT * FROM brand");
+  $stmt = $conn->prepare(SQL_GET_BRAND);
   $stmt->execute();
 
   $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -90,7 +90,7 @@ if (isset($_GET['action'])) {
 } else {
   try {
     $conn = getConnection();
-    $stmt = $conn->prepare("SELECT * FROM product");
+    $stmt = $conn->prepare(SQL_GET_PRODUCT);
     $stmt->execute();
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -150,10 +150,10 @@ $total_products = count($products);
         <!-- Sidebar Filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-            
+
             <!-- Filter by Category -->
             <div class="filter-section mb-4">
-              <h6 class="filter-title">Filter by category:</h6>
+              <h6 class="filter-title">Category:</h6>
               <div class="filter-options">
                 <?php foreach ($categories as $cat): ?>
                   <div class="form-check">
@@ -169,7 +169,7 @@ $total_products = count($products);
 
             <!-- Filter by Brand -->
             <div class="filter-section mb-4">
-              <h6 class="filter-title">Filter by brand:</h6>
+              <h6 class="filter-title">Brand:</h6>
               <div class="filter-options">
                 <?php if ($brands): ?>
                   <?php foreach ($brands as $brand): ?>
