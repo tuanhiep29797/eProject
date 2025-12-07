@@ -17,9 +17,10 @@
     }
 
     $products = [];
-    for ($i = 1; $i <= 4; $i++)
+    for ($i = 20; $i <= 23; $i++)
     {
-        $products[] = $data_list[rand(0, count($data_list) - 1)];
+        // $products[] = $data_list[rand(0, count($data_list) - 1)];
+        $products[] = $data_list[$i];
     }
 ?>
 

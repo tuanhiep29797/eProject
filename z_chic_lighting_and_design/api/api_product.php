@@ -4,7 +4,7 @@
         [
             "Philips Luxury Crystal Chandelier",
             "Elegant design for living room, sparkling light.",
-            5500000.00,
+            5500.00,
             10,
             "../assets/img/product/1/1.png",
             1,
@@ -19,7 +19,7 @@
         [
             "ArtDecor Classic Gold Wall Lamp",
             "European style, suitable for corridors and bedrooms.",
-            850000.00,
+            85.00,
             25,
             "../assets/img/product/2/1.png",
             2,
@@ -34,7 +34,7 @@
         [
             "Panasonic IP65 Garden Post Light",
             "Waterproof, durable cast aluminum shell.",
-            1200000.00,
+            120.00,
             15,
             "../assets/img/product/3/1.png",
             3,
@@ -49,7 +49,7 @@
         [
             "Hunter Maribel Ceiling Fan Light",
             "Combines cooling fan and lighting, quiet motor.",
-            4800000.00,
+            480.00,
             8,
             "../assets/img/product/4/1.png",
             4,
@@ -64,7 +64,7 @@
         [
             "Nordic Corner Floor Lamp",
             "Minimalist design, artistic curved body.",
-            1950000.00,
+            195.00,
             12,
             "../assets/img/product/5/1.png",
             5,
@@ -79,7 +79,7 @@
         [
             "Panasonic Magnetic Track Light",
             "Track light, 360 degree flexible angle.",
-            450000.00,
+            45.00,
             50,
             "../assets/img/product/6/1.png",
             6,
@@ -94,9 +94,9 @@
         [
             "Rang Dong LED Neon Flex 5M",
             "Flexible, easy to bend for lettering.",
-            250000.00,
+            25.00,
             100,
-            "../assets/img/product/7.png",
+            "../assets/img/product/7/1.png",
             7,
             4,
             "<ul>
@@ -109,7 +109,7 @@
         [
             "Philips Hue Ambiance Bulb",
             "Control 16 million colors via phone.",
-            1650000.00,
+            165.00,
             20,
             "../assets/img/product/8/1.png",
             8,
@@ -124,7 +124,7 @@
         [
             "Modern Minimalist Ceiling LED",
             "Ultra-thin design, perfect for low ceilings.",
-            1250000.00,
+            1250.00,
             30,
             "../assets/img/product/9/1.png",
             1,
@@ -139,7 +139,7 @@
         [
             "Industrial Vintage Pendant",
             "Black iron cage design, retro style.",
-            450000.00,
+            45.00,
             45,
             "../assets/img/product/10/1.png",
             1,
@@ -154,7 +154,7 @@
         [
             "Outdoor Up-Down Wall Sconce",
             "Modern waterproof light for exterior walls.",
-            950000.00,
+            95.00,
             20,
             "../assets/img/product/11/1.png",
             2,
@@ -169,7 +169,7 @@
         [
             "Reading Bedside Wall Lamp",
             "Focused reading light with USB port.",
-            750000.00,
+            75.00,
             40,
             "../assets/img/product/12/1.png",
             2,
@@ -184,7 +184,7 @@
         [
             "Solar Pathway Light Set (4pcs)",
             "Eco-friendly solar garden lights.",
-            680000.00,
+            68.00,
             60,
             "../assets/img/product/13/1.png",
             3,
@@ -199,7 +199,7 @@
         [
             "High Power Floodlight 100W",
             "Security light for large backyards.",
-            1500000.00,
+            150.00,
             15,
             "../assets/img/product/14/1.png",
             3,
@@ -214,7 +214,7 @@
         [
             "Wooden Blade Ceiling Fan",
             "Luxury wood finish, silent operation.",
-            5500000.00,
+            550.00,
             5,
             "../assets/img/product/15/1.png",
             4,
@@ -229,7 +229,7 @@
         [
             "Compact Bedroom Fan Light",
             "Small diameter fan for smaller rooms.",
-            2200000.00,
+            220.00,
             10,
             "../assets/img/product/16/1.png",
             4,
@@ -244,7 +244,7 @@
         [
             "Ceramic Table Lamp Blue",
             "Handmade ceramic body, fabric shade.",
-            1200000.00,
+            120.00,
             12,
             "../assets/img/product/17/1.png",
             5,
@@ -258,7 +258,7 @@
         [
             "Bamboo Tripod Floor Lamp",
             "Natural bamboo legs, boho style.",
-            1800000.00,
+            180.00,
             8,
             "../assets/img/product/18/1.png",
             5,
@@ -272,7 +272,7 @@
         [
             "Recessed COB Downlight 10W",
             "Anti-glare deep recessed spotlight.",
-            180000.00,
+            18.00,
             100,
             "../assets/img/product/19/1.png",
             6,
@@ -287,7 +287,7 @@
         [
             "Surface Mounted Tube Light",
             "Cylindrical spotlight, no hole cutting.",
-            250000.00,
+            25.00,
             50,
             "../assets/img/product/20/1.png",
             6,
@@ -301,9 +301,9 @@
         [
             "RGB Smart Strip Light 10M",
             "App controlled color changing strip.",
-            350000.00,
+            35.00,
             80,
-            "../assets/img/product/21.png",
+            "../assets/img/product/21/1.png",
             7,
             4,
             "<ul>
@@ -315,7 +315,7 @@
         [
             "Vintage Edison Bulb Set",
             "Decorative filament bulbs (Pack of 3).",
-            200000.00,
+            20.00,
             40,
             "../assets/img/product/22/1.png",
             7,
@@ -329,7 +329,7 @@
         [
             "Smart Wifi Ceiling Light",
             "Adjust brightness/color via phone.",
-            950000.00,
+            950.00,
             25,
             "../assets/img/product/23/1.png",
             8,
@@ -343,7 +343,7 @@
         [
             "Ambient Play Bar Light",
             "Backlight for TV and Gaming setup.",
-            1400000.00,
+            140.00,
             15,
             "../assets/img/product/24/1.png",
             8,
