@@ -1,10 +1,10 @@
 <?php
-require_once("../database/dbhelper.php");
+require_once(__DIR__ . "/../database/dbhelper.php");
 
 $products = [];
 $total = 0;
-if (!empty($_SESSION['user']) && isset($_SESSION['user']['user_id'])) {
-    $user_id = $_SESSION['user']['user_id'];
+if (isset($_SESSION["id"])) {
+    $user_id = $_SESSION["id"];
 
     try {
         $conn = getConnection();
@@ -26,7 +26,7 @@ if (!empty($_SESSION['user']) && isset($_SESSION['user']['user_id'])) {
 } else {
     echo '<script>
         alert("Please log in to view your cart.");
-        window.location.href = "../account/login.php";
+        window.location.href = "../admin/login.php";
     </script>';
     exit();
 }
@@ -73,20 +73,13 @@ if (!empty($_POST['action'])) {
                 $stmt->bindParam(":user_id", $user_id);
                 $stmt->execute();
 
-                header("Location: ../pages/home.php");
+                header("Location: home_page.php");
                 exit;
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
             }
             break;
 
-        // case "check-out":
-        //     echo "<script>
-        //         alert('Thank you for your purchase. Your order will be delivered soon.');
-        //         window.location.href = '../pages/home.php';
-        //     </script>";
-        //     exit;
-        //     break;
         default:
             header("Location: cart.php");
             exit;
@@ -115,23 +108,25 @@ if (!empty($_POST['action'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/style.css?v=<?= time() ?>">
     <title>Cart</title>
 </head>
 
 <body>
     <div class="cart">
         <div class="cart-header">
-            <?php require_once "../includes/header.php"; ?>
+            <?php
+                require_once (__DIR__."/../includes/home_header.php");
+            ?>
         </div>
         <div class="text-center text-white cart-header-text mt-5">
             <h1 style="font-size:48px">Cart</h1>
             <div class="d-flex justify-content-center align-items-center gap-3 text-center-bottom" style="cursor:pointer">
-                <a href="../pages/home.php">
+                <a href="home_page.php">
                     <h4 style="color:#26b66a">Home</h4>
                 </a>
                 <h4>></h4>
-                <a href="../pages/cart.php">
+                <a href="#">
                     <h4>Cart</h4>
                 </a>
             </div>
@@ -163,7 +158,7 @@ if (!empty($_POST['action'])) {
                     </div>
                     <div class="sc-product-price col-lg-2 text-right">
                         <p class="">Price</p>
-                        <span class="text-success fw-semibold"> <?= number_format($item['product_price']) ?><sup>đ</sup></span>
+                        <span class="text-success fw-semibold"> <?= number_format($item['product_price']) ?><sup>$</sup></span>
                     </div>
                     <div class="sc-product-quantity col-lg-2 text-right">
                         <p class="">Quantity</p>
@@ -198,7 +193,7 @@ if (!empty($_POST['action'])) {
                         <h3 class="fw-bold m-0">Total Amount:</h3>
                     </div>
                     <div class="sc-total-number col-lg-6 text-center">
-                        <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>đ</sup></span>
+                        <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>$</sup></span>
                     </div>
                     <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
                         <form method="POST">
@@ -211,6 +206,10 @@ if (!empty($_POST['action'])) {
         </div>
     </div>
     </div>
+        <!-- include footer -->
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
 </body>
 
 </html>

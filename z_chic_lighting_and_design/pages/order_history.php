@@ -1,10 +1,10 @@
 <?php
-require_once("../database/dbhelper.php");
+require_once(__DIR__ . "/../database/dbhelper.php");
 
 $products = [];
 $count=0;
-if (isset($_SESSION['user_name'])) {
-    $user_id = $_SESSION['user_name'];
+if (isset($_SESSION["id"])) {
+    $user_id = $_SESSION["id"];
 
     try {
         $conn = getConnection();
@@ -27,7 +27,7 @@ if (isset($_SESSION['user_name'])) {
 } else {
     echo '<script>
         alert("Please log in");
-        window.location.href = "../account/login.php";
+        window.location.href = "../admin/login.php";
     </script>';
     exit();
 }
@@ -44,24 +44,26 @@ if (isset($_SESSION['user_name'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/style.css?v=<?= time() ?>">
     <title>Order History</title>
 </head>
 
 <body>
     <div class="cart">
         <div class="cart-header">
-            <?php require_once "../includes/header.php"; ?>
+        <?php
+                require_once (__DIR__."/../includes/home_header.php");
+        ?>
         </div>
         <div class="text-center text-white cart-header-text mt-5">
-            <h1 style="font-size:48px">Cart</h1>
+            <h1 style="font-size:48px">Order History</h1>
             <div class="d-flex justify-content-center align-items-center gap-3 text-center-bottom" style="cursor:pointer">
-                <a href="../pages/home.php">
+                <a href="home_page.php">
                     <h4 style="color:#26b66a">Home</h4>
                 </a>
                 <h4>></h4>
-                <a href="../pages/cart.php">
-                    <h4>Cart</h4>
+                <a href="#">
+                    <h4>Order History</h4>
                 </a>
             </div>
         </div>
@@ -108,11 +110,13 @@ if (isset($_SESSION['user_name'])) {
                     </tr>
                         <?php endforeach; ?>
                 </tbody>
-            </table>
-            
+            </table>   
         </div>
     </div>
     </div>
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
 </body>
 
 </html>
