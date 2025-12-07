@@ -1,5 +1,5 @@
 /* Product Page Styles */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap");
 
 :root {
   --primary-black: #1a1a1a;
@@ -8,8 +8,8 @@
   --gray-border: #e5e5e5;
   --gray-text: #666666;
   --accent-yellow: #d4a853;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
 }
 
 * {

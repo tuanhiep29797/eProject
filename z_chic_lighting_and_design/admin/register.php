@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ ."/../database/dbhelper.php";
 
-if ($isLogin) 
+if (is_login()) 
 {
     header("Location: ../pages/home.php");
 }
@@ -88,14 +88,19 @@ if (!empty($_POST)) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../css/style.css?v=<?= time() ?>">
-    <title>Login</title>
+    <link rel="stylesheet" href="../assets/css/style.css?v=<?= time() ?>">
+    <title><i class="ri-registered-fill"></i></title>
 </head>
 
 <body>
     <div class="login">
-        <?php require "../includes/header.php"; ?>
-        <!-- Login start  -->
+
+        <!-- include header -->
+        <?php 
+            require_once __DIR__ . "/../includes/home_header.php";
+        ?>
+
+        <!-- register start  -->
         <div class="container">
             <div class="row mt-3">
                 <div class="col-lg-5 col-sm-12 col-md-6 col-12" style="margin:auto;">
@@ -137,6 +142,11 @@ if (!empty($_POST)) {
             </div>
         </div>
     </div>
+
+    <!-- include footer -->
+    <?php
+        require_once __DIR__ . "/../includes/home_footer.php";
+    ?>
     <script>
     function setupToggle(passId, iconId, toggleId) {
         const pass = document.getElementById(passId);

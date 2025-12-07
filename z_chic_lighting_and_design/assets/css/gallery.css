@@ -7,21 +7,6 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-body {
-  background-color: #f4f4f4;
-
-  display: block;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 50px;
-  background-color: #e8e4dc;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-}
-
 .logo {
   font-weight: bold;
   font-size: 1.2rem;
@@ -49,42 +34,6 @@ header {
   cursor: pointer;
 }
 
-.banner {
-  width: 100%;
-  height: 400px;
-  background-image: url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop");
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.banner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.banner-content {
-  position: relative;
-  z-index: 1;
-  color: white;
-}
-
-.banner-content h1 {
-  font-size: 4rem;
-  font-family: "Times New Roman", serif;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
 .breadcrumb {
   font-size: 1.2rem;
   font-weight: 500;
@@ -98,7 +47,7 @@ header {
   padding: 50px 0;
 }
 
-.container {
+.container_gallery {
   display: flex;
   width: 90%;
   max-width: 1200px;
@@ -150,4 +99,70 @@ header {
 
 .card:hover .card-title {
   opacity: 1;
+}
+
+.page-banner {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 250px 0;
+  margin-bottom: 60px;
+  text-align: center;
+  color: #fff;
+}
+
+.page-banner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.page-banner .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-banner h2 {
+  text-transform: uppercase;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: 3px;
+  font-size: 48px;
+  margin-bottom: 15px;
+}
+
+.banner-breadcrumb {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.banner-breadcrumb a {
+  color: #ccc;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.banner-breadcrumb a:hover {
+  color: #fff;
+}
+
+.banner-breadcrumb i {
+  font-size: 12px;
+  color: #fff;
+  margin: 0 15px;
+}
+
+.banner-breadcrumb .active {
+  color: #fff;
+  font-weight: 700;
+  border-bottom: 2px solid #fff;
 }

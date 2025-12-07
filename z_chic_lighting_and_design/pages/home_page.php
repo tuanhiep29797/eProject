@@ -117,7 +117,7 @@
                                     <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?php echo $prod['product_price']; ?></span>
                                     
                                     <div class="d-flex align-items-center gap-2">
-                                        <a href="product_detail.php?id=<?= $products["product_id"] ?>?>" class="btn btn-dark btn-sm rounded-0 px-3 py-1 text-uppercase" style="font-size: 12px;">Buy</a>
+                                        <a href="product_detail.php?id=<?= $prod["product_id"] ?>" class="btn btn-dark btn-sm rounded-0 px-3 py-1 text-uppercase" style="font-size: 12px;">Buy</a>
                                         <a href="#" class="btn btn-light btn-sm rounded-circle border d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
                                             <i class="bi bi-heart-fill text-muted" style="font-size: 14px;"></i>
                                         </a>

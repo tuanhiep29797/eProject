@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap");
 :root {
   --background-color-1: #000000;
   --background-color-2: #ffffff;
@@ -5,364 +6,371 @@
   --background-color-4: #26b66a;
 }
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Exo 2", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
 }
-.wpx{
-    width: 90% !important;
-    position: relative;
-    z-index: 0;
-    padding: 10px 20px;
-    height: 100%;
+.wpx {
+  width: 90% !important;
+  position: relative;
+  z-index: 0;
+  padding: 10px 20px;
+  height: 100%;
 }
-.header-index{
-    margin:40px 10px 0px 10px!important;
+.header-index {
+  margin: 40px 10px 0px 10px !important;
 
-    background-color: #ffffffB3;
-    border-radius: 40px !important;
+  background-color: #ffffffb3;
+  border-radius: 40px !important;
 }
-.header_left{
-    width: 200px;
-    height: 80px;
-    overflow: hidden;         
+.header_left {
+  width: 200px;
+  height: 80px;
+  overflow: hidden;
 }
 .logo-box {
-    width: 150px;
-    object-fit: cover;     
-    object-position: center; 
+  width: 150px;
+  object-fit: cover;
+  object-position: center;
 }
-#header_click{
-    padding:15px;
-    margin:10px;
+#header_click {
+  padding: 15px;
+  margin: 10px;
 }
 
-.header_menu a{
-    color:black;
-    transition: all 0.3s ease;
-    font-size: 16px;
+.header_menu a {
+  color: black;
+  transition: all 0.3s ease;
+  font-size: 16px;
 }
 
 .header_menu a:hover,
 .header_menu a:focus {
-    color: RGB(38, 182, 106)!important; 
+  color: RGB(38, 182, 106) !important;
 }
 .nav-item_product {
-    display: none;
-    position: absolute;
-    left: 0;       
-    top: 100%;     
-    width: 100%;   
-    background: #fff; 
-    color: #333;
-    z-index: 999;
-    padding: 25px 30px;
-    border-radius: 8px; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: 100%;
+  background: #fff;
+  color: #333;
+  z-index: 999;
+  padding: 25px 30px;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 #product_menu:hover .nav-item_product {
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
 .nav-item_brand {
-    display:none;
-    position: absolute;
-    left: 0;       
-    top: 100%;
-    z-index: 9999;
-    background: white; 
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
-    transition: opacity 0.3s ease;
-    font-size: 15px;
-    width: 150px;
-    cursor: pointer;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 9999;
+  background: white;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: opacity 0.3s ease;
+  font-size: 15px;
+  width: 150px;
+  cursor: pointer;
 }
-.nav-item_brand p:hover{
-    color: RGB(38, 182, 106)!important; 
+.nav-item_brand p:hover {
+  color: RGB(38, 182, 106) !important;
 }
-#category_menu:hover .nav-item_brand{
-    display: block;
-    animation: fadeIn 0.4s ease forwards;
-
+#category_menu:hover .nav-item_brand {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
-.header_account_wrap{
-    position: relative;
+.header_account_wrap {
+  position: relative;
 }
-.account_icon{
-    color: #000;
-    transition: 0.2s ease;
+.account_icon {
+  color: #000;
+  transition: 0.2s ease;
 }
-.header_account{
-    font-size: 16px;
-    position: absolute;
-    right: 0;
-    top: 80%;  
-    border: none !important;      
-    background: #ffffff;
-    border-radius: 6px;
-    cursor: pointer;
-    display: none;
-    z-index: 999;
-    padding: 5px 15px;
+.header_account {
+  font-size: 16px;
+  position: absolute;
+  right: 0;
+  top: 80%;
+  border: none !important;
+  background: #ffffff;
+  border-radius: 6px;
+  cursor: pointer;
+  display: none;
+  z-index: 999;
+  padding: 5px 15px;
 }
 .header_account::before {
-    content: "";
-    position: absolute;
-    top: -10px;                  
-    right: 6px;  
-    border-width: 0 10px 10px 10px; 
-    border-style: solid;
-    border-color: transparent transparent #ffffff transparent;
+  content: "";
+  position: absolute;
+  top: -10px;
+  right: 6px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #ffffff transparent;
 }
-.header_account_wrap:hover .header_account{
-    display:block;
-    animation: fadeIn 0.4s ease forwards;
+.header_account_wrap:hover .header_account {
+  display: block;
+  animation: fadeIn 0.4s ease forwards;
 }
-.login{
-    background-image: url("../assets/img/test_here/bg-login.png");
-    width: 100vw;
-    height: 100vh; 
-    background-size: cover;
-    background-position: center;
-    overflow: hidden;
+.login {
+  background-image: url("../assets/img/test_here/bg-login.png");
+  width: 100vw;
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
 }
-.login-form{
-    background: #f0f0f099;
-    padding:20px 60px 30px 60px !important;
-    border-radius:20px;
-    color:var(--background-color-1);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); 
+.login-form {
+  background: #f0f0f099;
+  padding: 20px 60px 30px 60px !important;
+  border-radius: 20px;
+  color: var(--background-color-1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
-.login-button ul{
-    list-style: none;
-    display: flex;
-    height: 50px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #eee;
+.login-button ul {
+  list-style: none;
+  display: flex;
+  height: 50px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
 }
-.login-button li{
-    flex:1;
-    text-align: center;
-    position: relative;   
+.login-button li {
+  flex: 1;
+  text-align: center;
+  position: relative;
 }
-.login-button a{
-    display: flex;
-    color:black;
-    font-size: 18px;
-    text-transform: uppercase;
-    align-items: center;
-    height: 100%;
-    width:100%;
-    justify-content: center;
-    font-weight: 600;
+.login-button a {
+  display: flex;
+  color: black;
+  font-size: 18px;
+  text-transform: uppercase;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  font-weight: 600;
 }
-.input-login{
-    width: 100%;
-    border: none !important;
-    border-bottom: 2px solid var(--background-color-4) !important;
-    background: transparent !important;
-    color: black !important;
-    outline: none !important;
-    font-size: 16px;
-    margin: 10px 0px!important;
-    padding: 10px 5px!important;
+.input-login {
+  width: 100%;
+  border: none !important;
+  border-bottom: 2px solid var(--background-color-4) !important;
+  background: transparent !important;
+  color: black !important;
+  outline: none !important;
+  font-size: 16px;
+  margin: 10px 0px !important;
+  padding: 10px 5px !important;
 }
-.input-login::placeholder{
-    color: var(--background-color-1) !important;
+.input-login::placeholder {
+  color: var(--background-color-1) !important;
 }
 .register-login a:hover {
-    color: var(--background-color-4) !important;
+  color: var(--background-color-4) !important;
 }
-#forget_password{
-    cursor: pointer;
-    font-size: 14px;
-    position: absolute;
-    right: 58px;
-    top:230px !important;
+#forget_password {
+  cursor: pointer;
+  font-size: 14px;
+  position: absolute;
+  right: 58px;
+  top: 230px !important;
 }
-#forget_password:hover{
-    color:var(--background-color-4);
+#forget_password:hover {
+  color: var(--background-color-4);
 }
-#box_forget_password{
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
+#box_forget_password {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: all 0.3s ease;
 }
-.form-forget-password.show{
-    display: block !important;
-    animation: slideDown 0.4s ease forwards;
+.form-forget-password.show {
+  display: block !important;
+  animation: slideDown 0.4s ease forwards;
 }
-.email_login{
-    position: absolute;
-    cursor: pointer;
-    right:3px;
-    top:20px;
-    font-size: 18px;
+.email_login {
+  position: absolute;
+  cursor: pointer;
+  right: 3px;
+  top: 20px;
+  font-size: 18px;
 }
-.togglePassword{
-    font-size: 20px !important;
-    cursor:pointer;
-    position: absolute;
-    top: 85px !important;
-    right: 5px;
+.togglePassword {
+  font-size: 20px !important;
+  cursor: pointer;
+  position: absolute;
+  top: 85px !important;
+  right: 5px;
 }
-.togglePassword1{
-    font-size: 20px !important;
-    cursor:pointer;
-    position: absolute;
-    top:360px !important;
-    right:60px;
+.togglePassword1 {
+  font-size: 20px !important;
+  cursor: pointer;
+  position: absolute;
+  top: 360px !important;
+  right: 60px;
 }
-.togglePassword2{
-    font-size: 20px !important;
-    cursor:pointer;
-    position: absolute;
-    top:425px !important;
-    right:60px;
+.togglePassword2 {
+  font-size: 20px !important;
+  cursor: pointer;
+  position: absolute;
+  top: 425px !important;
+  right: 60px;
 }
 .header_account_login {
-    color: #000000; 
-    cursor: pointer;
-    transition: color 0.01s ease; 
+  color: #000000;
+  cursor: pointer;
+  transition: color 0.01s ease;
 }
-.header_right a{
-    color: black;
-    text-decoration: none;
+.header_right a {
+  color: black;
+  text-decoration: none;
 }
 /* cart-start */
-.cart{
-    background-image: url("../assets/img/test_here/bg-cart.png");
-    position: relative;
-    height:350px;
-    background-size: cover;
-    padding-top: 1px;
+.cart {
+  background-image: url("../assets/img/test_here/bg-cart.png");
+  position: relative;
+  height: 350px;
+  background-size: cover;
+  padding-top: 1px;
 }
 .cart::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4); 
-    z-index: 1;
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
 }
-.cart-header{
-    position: relative;
-    z-index: 99;
+.cart-header {
+  position: relative;
+  z-index: 99;
 }
-.cart-header-text{
-    position: relative;
-    z-index: 2;
+.cart-header-text {
+  position: relative;
+  z-index: 2;
 }
-.text-center-bottom a{
-    color: white;
-    text-decoration: none;
+.text-center-bottom a {
+  color: white;
+  text-decoration: none;
 }
-.text-center-bottom a:hover{
-    color: var(--background-color-4);
+.text-center-bottom a:hover {
+  color: var(--background-color-4);
 }
-.shopping-cart-search{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.shopping-cart-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.shopping-cart-search_input{
-    position: relative;
+.shopping-cart-search_input {
+  position: relative;
 }
-.shopping-cart-search_input label{
-    position: absolute;
-    top:10px;
-    left:15px;
-    font-size: 20px;
+.shopping-cart-search_input label {
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  font-size: 20px;
 }
-.shopping-cart-search_input input{
-    padding:12px 85px 12px 40px;
-    width: 500px;
-    border-radius: 30px;
-    border: 1px solid rgb(219, 219, 219);
+.shopping-cart-search_input input {
+  padding: 12px 85px 12px 40px;
+  width: 500px;
+  border-radius: 30px;
+  border: 1px solid rgb(219, 219, 219);
 }
-.sc-product-quantity-edit input{
-    width: 100%;
-    outline: none;
-    border: 1px solid;
-    padding: 3px;
-    border-radius: 10px;
+.sc-product-quantity-edit input {
+  width: 100%;
+  outline: none;
+  border: 1px solid;
+  padding: 3px;
+  border-radius: 10px;
 }
 .product-quantity-btn {
-    display: none; 
-    transition: all 0.3s ease;
-    opacity: 0;
+  display: none;
+  transition: all 0.3s ease;
+  opacity: 0;
 }
 
 .product-quantity-btn.active {
-    display: block;
-    opacity: 1;
+  display: block;
+  opacity: 1;
 }
-.shopping-cart-search_input button{
-    position: absolute;
-    top:8px;
-    right:15px;
-    font-size: 16px;
-    padding:5px 8px;
-    border-radius: 10px;
-    border: none;
-    background-color: #000;
-    color: white;
+.shopping-cart-search_input button {
+  position: absolute;
+  top: 8px;
+  right: 15px;
+  font-size: 16px;
+  padding: 5px 8px;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: white;
 }
-.sc-product{
-    border: 1px solid #A1A1A1;
-    border-radius: 30px;
+.sc-product {
+  border: 1px solid #a1a1a1;
+  border-radius: 30px;
 }
 .sc-product-img img {
-    height: 120px;
-    width: 100%;
-    object-fit: cover;    
-    object-position: center;
-    overflow: hidden;
+  height: 120px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
 }
-.sc-product-quantity-edit button{
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+.sc-product-quantity-edit button {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
 }
-.sc-product-action button{
-    border-radius: 20px;
-    padding: 10px 20px;
+.sc-product-action button {
+  border-radius: 20px;
+  padding: 10px 20px;
 }
-.sc-total{
-    width: 98%;
-    height: 100px;
-    border:1px solid #000;   
-    border-radius: 30px;
+.sc-total {
+  width: 98%;
+  height: 100px;
+  border: 1px solid #000;
+  border-radius: 30px;
 }
 
 .header_account_login:hover,
 .header_account_login:hover span,
 .header_account_login:hover i {
-    color: var(--background-color-4) !important;
+  color: var(--background-color-4) !important;
 }
 .togglePassword i:hover,
 .email_login:hover,
-.togglePassword1:hover, 
-.togglePassword2:hover{
-    color:var(--background-color-4) !important;
-} 
+.togglePassword1:hover,
+.togglePassword2:hover {
+  color: var(--background-color-4) !important;
+}
 .header_right a:hover,
 .login-button a:hover,
-.forget_password:hover{
-    color: RGB(38, 182, 106)!important; 
+.forget_password:hover {
+  color: RGB(38, 182, 106) !important;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 @keyframes slideDown {
-    0% {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
