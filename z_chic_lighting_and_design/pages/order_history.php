@@ -3,8 +3,8 @@ require_once("../database/dbhelper.php");
 
 $products = [];
 $count=0;
-if (!empty($_SESSION['user']) && isset($_SESSION['user']['user_id'])) {
-    $user_id = $_SESSION['user']['user_id'];
+if (isset($_SESSION['user_name'])) {
+    $user_id = $_SESSION['user_name'];
 
     try {
         $conn = getConnection();
