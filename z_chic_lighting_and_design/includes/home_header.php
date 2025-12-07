@@ -52,7 +52,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/variables.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/fonts.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/header.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/banner.css">
     <title>Home Header</title>
 </head>
 
@@ -62,7 +65,7 @@
             <div class="row align-items-center">
                 <!-- logo -->
                 <div class="col-lg-2 col-sm-12 col-12 py-3 text-sm-center">
-                    <a href="../pages/home.php">
+                    <a href="<?= BASE_URL ?>pages/home_page.php">
                         <img src="<?= BASE_URL ?>assets/img/home/img_logo.png" alt="Logo" class="img-fluid" style="max-height: 60px;">
                     </a>
                 </div>

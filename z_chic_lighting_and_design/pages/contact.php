@@ -1,30 +1,37 @@
 <?php
-    require_once (__DIR__.'/../database/dbhelper.php'); 
-
+    require_once (__DIR__.'/../database/dbhelper.php');
+ 
     $msg = "";
     $msgType = "";
 
-    if (isset($_POST)) {
+    if (!empty($_POST)) {
         $name    = trim($_POST['username'] ?? '');
         $email   = trim($_POST['email'] ?? '');
         $phone   = trim($_POST['phone_number'] ?? '');
         $content = trim($_POST['content'] ?? '');
 
-        if ($name && $email && $content) {
-            try {
+        if ($name && $email && $phone && $content) 
+        {
+            try 
+            {
                 $conn = getConnection();
-                $sql = "INSERT INTO feedback (username, email, phone_number, content) 
-                        VALUES (:n, :e, :p, :c)";
-                $stmt = $conn->prepare($sql);
-                $stmt->execute([':n' => $name, ':e' => $email, ':p' => $phone, ':c' => $content]);
+                $stmt = $conn->prepare(SQL_ADD_FEEDBACK);
+                $stmt -> bindParam(":username", $username);
+                $stmt -> bindParam(":email", $email);
+                $stmt -> bindParam(":phone", $phone);
+                $stmt -> bindParam(":content", $content);
+                $stmt->execute();
                 
                 $msg = "Message sent successfully!";
                 $msgType = "success";
-            } catch (Exception $e) {
+            } catch (Exception $e) 
+            {
                 $msg = "Error: " . $e->getMessage();
                 $msgType = "danger";
             }
-        } else {
+        } 
+        else 
+        {
             $msg = "Please fill in required fields!";
             $msgType = "warning";
         }
@@ -35,7 +42,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Liceria & Co</title>
+    <title>Contact Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
@@ -49,7 +56,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
-    <div class="contact-banner" style="background-image: url('../assets/img/home/img_banner.png');">
+    <div class="page-banner">
         <div class="container">
             <h2>CONTACT US</h2>
             <div class="banner-breadcrumb">
@@ -85,7 +92,7 @@
                         
                         <ul class="info-list">
                             <li class="info-item-vertical">
-                            <img src="img/instagram-circle.png" class="img-icon-custom" alt="Address">
+                            <img src="../assets/img/home/img_contact_us_instagram.png" class="img-icon-custom" alt="Address">
                                 <div class="info-content">
                                     <h5>Info</h5>
                                     <p>Chic Lighting & Design</p> 
@@ -93,7 +100,7 @@
                                 </div>                           
                             </li>
                             <li class="info-item-vertical">
-                                <img src="img/map.png" class="img-icon-custom" alt="Address">
+                                <img src="../assets/img/home/img_contact_us_map.png" class="img-icon-custom" alt="Address">
                                 <div class="info-content">
                                     <h5>Address</h5>
                                     <p>No. 160, Tran Duy Hung Street, Hanoi City</p>
@@ -101,10 +108,10 @@
                             </li>
 
                             <li class="info-item-vertical">
-                                <img src="img/whatsapp-circle.png" class="img-icon-custom" alt="Phone">
+                                <img src="../assets/img/home/img_contact_us_whatsapp.png" class="img-icon-custom" alt="Phone">
                                 <div class="info-content">
                                     <h5>Phone</h5>
-                                    <p>(+84) 912 345 678</p>
+                                    <p>(+84) 123 456 789</p>
                                 </div>
                             </li>
 
@@ -117,10 +124,10 @@
                         <h3 class="form-title">Send a Message</h3>
 
                         <?php if ($msg): ?>
-                            <div class="alert alert-<?php echo $msgType; ?>"><?php echo $msg; ?></div>
+                            <div class="alert alert-<?= $msgType ?>"><?= $msg ?></div>
                         <?php endif; ?>
 
-                        <form method="POST" action="">
+                        <form method="POST">
                             <div class="row">
                                 <div class="col-md-6 form-group-custom">
                                     <label class="form-label">Full Name</label>
@@ -143,7 +150,7 @@
                             </div>
 
                             <button type="submit" name="btn_send" class="btn-submit-black">
-                                 Submit
+                                 Send Feedback
                             </button>
                         </form>
                     </div>

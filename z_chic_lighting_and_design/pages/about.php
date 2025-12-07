@@ -20,7 +20,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
-    <div class="page-banner" style="background-image: url('../assets/img/home/img_banner.png');">
+    <div class="page-banner">
         <div class="container">
             <h2>About Us</h2>
             

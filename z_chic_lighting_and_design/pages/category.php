@@ -1,104 +1,104 @@
 <?php
-// Get filter parameters
-$category_filter = isset($_GET['category']) ? $_GET['category'] : [];
-$brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
-$min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
-$max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 500;
-$search = isset($_GET['search']) ? $_GET['search'] : '';
-$page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
-$per_page = 9;
+  // Get filter parameters
+  $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
+  $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
+  $min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
+  $max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 500;
+  $search = isset($_GET['search']) ? $_GET['search'] : '';
+  $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+  $per_page = 9;
 
 
 
-$categories = [
-  ['category_id' => 1, 'category_name' => 'Ceiling Lights'],
-  ['category_id' => 2, 'category_name' => 'Wall Lights'],
-  ['category_id' => 3, 'category_name' => 'Outdoor Lights'],
-  ['category_id' => 4, 'category_name' => 'Fans'],
-  ['category_id' => 5, 'category_name' => 'Home Accents'],
-  ['category_id' => 6, 'category_name' => 'LED - Spotlights'],
-  ['category_id' => 7, 'category_name' => 'LED - Decorative Lights'],
-  ['category_id' => 8, 'category_name' => 'LED - Smart Lights'],
-];
+  $categories = [
+    ['category_id' => 1, 'category_name' => 'Ceiling Lights'],
+    ['category_id' => 2, 'category_name' => 'Wall Lights'],
+    ['category_id' => 3, 'category_name' => 'Outdoor Lights'],
+    ['category_id' => 4, 'category_name' => 'Fans'],
+    ['category_id' => 5, 'category_name' => 'Home Accents'],
+    ['category_id' => 6, 'category_name' => 'LED - Spotlights'],
+    ['category_id' => 7, 'category_name' => 'LED - Decorative Lights'],
+    ['category_id' => 8, 'category_name' => 'LED - Smart Lights'],
+  ];
 
 
-// Fake Products with Unsplash images
-$products = [
-  [
-    'product_id' => 1,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 2,
-    'product_title' => 'Pendant Lighting',
-    'product_price' => 12.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.6,
-    'reviews' => '856'
-  ],
-  [
-    'product_id' => 3,
-    'product_title' => 'Dusk to Dawn lighting',
-    'product_price' => 39.50,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.2,
-    'reviews' => '1.7k'
-  ],
-  [
-    'product_id' => 4,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 5,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 6,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 7,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 8,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-  [
-    'product_id' => 9,
-    'product_title' => 'Log Barn vanity lights',
-    'product_price' => 29.90,
-    'product_thumbnail' => '../assets/img/test_here/Product_img.png',
-    'rating' => 4.8,
-    'reviews' => '1.2k'
-  ],
-];
-$total_products = count($products);
-$total_pages = 10;
+  // Fake Products with Unsplash images
+  $products = [
+    [
+      'product_id' => 1,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 2,
+      'product_title' => 'Pendant Lighting',
+      'product_price' => 12.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.6,
+      'reviews' => '856'
+    ],
+    [
+      'product_id' => 3,
+      'product_title' => 'Dusk to Dawn lighting',
+      'product_price' => 39.50,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.2,
+      'reviews' => '1.7k'
+    ],
+    [
+      'product_id' => 4,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 5,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 6,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 7,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 8,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+    [
+      'product_id' => 9,
+      'product_title' => 'Log Barn vanity lights',
+      'product_price' => 29.90,
+      'product_thumbnail' => '../assets/img/test_here/Product_img.png',
+      'rating' => 4.8,
+      'reviews' => '1.2k'
+    ],
+  ];
+  $total_products = count($products);
+  $total_pages = 10;
 
 ?>
 <!DOCTYPE html>
@@ -107,20 +107,36 @@ $total_pages = 10;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product - Chic Lighting</title>
+  <title>Category</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/banner.css">
   <link rel="stylesheet" href="../assets/css/product.css">
 </head>
 
 <body>
-  <div class="header">
-    <?php require_once "../includes/header.php"?>
+
+  <!-- include header -->
+  <?php
+      require_once (__DIR__."/../includes/home_header.php");
+  ?>
+
+  <div class="page-banner">
+      <div class="container">
+          <h2>Category</h2>
+          
+          <div class="banner-breadcrumb">
+              <a href="home_page.php">Home</a>
+              
+              <i class="bi bi-chevron-right"></i>
+      
+              <a href="#">Category</a>
+              
+          </div>
+      </div>
   </div>
+
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
       <!-- Page Header -->
@@ -286,7 +302,12 @@ $total_pages = 10;
         </div>
       </div>
     </div>
-  </main>      
+  </main>
+  
+    <!-- include footer -->
+    <?php
+        require_once (__DIR__."/../includes/home_footer.php");
+    ?>
 </body>
 
 </html>

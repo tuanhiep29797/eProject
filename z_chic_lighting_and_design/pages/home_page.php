@@ -17,10 +17,9 @@
     }
 
     $products = [];
-    for ($i = 20; $i <= 23; $i++)
+    for ($i = 1; $i <= 4; $i++)
     {
-        // $products[] = $data_list[rand(0, count($data_list) - 1)];
-        $products[] = $data_list[$i];
+        $products[] = $data_list[rand(0, count($data_list) - 1)];
     }
 ?>
 
@@ -34,6 +33,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/banner.css">
     <link rel="stylesheet" href="../assets/css/home.css">
 </head>
 <body>
@@ -45,9 +45,9 @@
 
     <div class="page-banner">
 
-        <div class="container text-center banner-content">
-            <h2 class="display-4 fw-bold mb-3">Chic Lighting & Design</h2>
-            <p class="mb-4 text-white-50 mx-auto" style="max-width: 600px;">
+        <div class="container">
+            <h2>Chic Lighting & Design</h2>
+            <p class="mb-4 text-white-50 mx-auto">
                 Where Light Becomes Art — A Touch That Illuminates Your Soul
             </p>
             <div class="d-inline-block bg-white px-4 py-2 rounded-pill shadow-sm">

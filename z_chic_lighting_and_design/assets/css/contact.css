@@ -1,82 +1,7 @@
-@import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
-
-:root {
-  --main-brown: #8b5a2b;
-  --text-black: #000;
-  --bg-body: #fff;
-}
-
 body {
-  background-color: var(--bg-body);
-  font-family: "Arial", sans-serif;
-}
-
-.contact-banner {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  padding-top: 240px;
-  padding-bottom: 200px;
-  text-align: center;
-  color: #fff;
-  z-index: 1;
-}
-
-.contact-banner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: -1;
-}
-
-.contact-banner .container {
-  position: relative;
-  z-index: 1;
-}
-
-.contact-banner h2 {
-  font-size: 42px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin: 0 0 15px 0;
-  color: #fff;
-}
-
-.banner-breadcrumb {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 15px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.banner-breadcrumb a {
-  color: #ccc;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.banner-breadcrumb a:hover {
-  color: #fff;
-}
-
-.banner-breadcrumb i {
-  font-size: 12px;
-  color: var(--main-brown);
-  margin: 0 15px;
-}
-
-.banner-breadcrumb .active {
-  color: #fff;
-  font-weight: 700;
+  background-color: var(--bg-main);
+  font-family: "Exo 2", sans-serif;
+  color: var(--text-primary);
 }
 
 .top-map-section {
@@ -91,8 +16,8 @@ body {
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
   height: 450px;
-  border: 5px solid #fff;
-  background: #fff;
+  border: 5px solid var(--bg-main);
+  background: var(--bg-main);
 }
 
 .map-frame iframe {
@@ -108,25 +33,23 @@ body {
 }
 
 .section-header-text h3 {
-  font-family: "Calistoga", serif;
-  font-size: 42px;
-  color: #000;
-  margin-bottom: 10px;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--text-primary);
 }
 
 .section-header-text p {
   font-size: 16px;
-  color: #666;
+  color: var(--text-secondary);
   font-weight: 500;
 }
-
 .contact-main-section {
   padding-bottom: 100px;
 }
 
 .black-border-box {
-  border: 2px solid #000;
-  background-color: #fff;
+  border: 2px solid var(--text-primary);
+  background-color: var(--bg-main);
   border-radius: 20px;
   padding: 60px 40px;
   height: 100%;
@@ -136,11 +59,12 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
+.form-title,
 .contact-title {
-  font-family: "Calistoga", serif;
   font-size: 32px;
-  color: #000;
-  margin-bottom: 50px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -165,24 +89,17 @@ body {
 }
 
 .info-content h5 {
-  font-family: "Calistoga", serif;
   font-size: 22px;
+  font-weight: 700;
   margin-bottom: 10px;
-  color: #000;
+  color: var(--text-primary);
 }
 
 .info-content p {
   margin: 0;
-  color: #555;
+  color: var(--text-secondary);
   font-size: 16px;
   line-height: 1.6;
-}
-
-.form-title {
-  font-family: "Calistoga", serif;
-  font-size: 32px;
-  margin-bottom: 40px;
-  color: #000;
 }
 
 .form-group-custom {
@@ -194,7 +111,7 @@ body {
   text-transform: uppercase;
   font-size: 12px;
   letter-spacing: 1px;
-  color: #000;
+  color: var(--text-primary);
   margin-bottom: 10px;
   display: block;
 }
@@ -204,24 +121,24 @@ body {
   padding: 18px 20px;
   border-radius: 8px;
   font-size: 15px;
-  background: #fff;
+  background: var(--bg-main);
   transition: 0.3s;
 }
 
 .form-control:focus {
-  background: #fff;
-  border-color: #000;
+  background: var(--bg-main);
+  border-color: var(--text-primary);
   box-shadow: none;
 }
 
 .btn-submit-black {
-  background-color: #000;
-  color: #fff;
+  background-color: var(--main-color);
+  color: var(--text-light);
   width: 100%;
   padding: 18px;
   font-weight: 700;
   text-transform: uppercase;
-  border: 2px solid #000;
+  border: 2px solid var(--main-color);
   border-radius: 8px;
   margin-top: 20px;
   transition: 0.3s;
@@ -229,6 +146,16 @@ body {
 }
 
 .btn-submit-black:hover {
-  background-color: #fff;
-  color: #000;
+  background-color: var(--text-light);
+  color: var(--main-color);
+}
+
+@media (max-width: 768px) {
+  .map-frame {
+    height: 300px;
+  }
+
+  .black-border-box {
+    padding: 40px 25px;
+  }
 }

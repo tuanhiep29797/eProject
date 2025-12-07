@@ -230,7 +230,7 @@
 	";
 
 	const SQL_ADD_FEEDBACK = 
-	"insert into feedback(username, email, phone_number,content)
+	"insert into feedback(username, email, phone_number, content)
 	values
 	(:username, :email, :phone_number, :content)
 	";

@@ -10,8 +10,10 @@
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $data_list = $stmt->fetchAll();
+        // var_dump($data_list);
 
-        $row = ceil(count($data_list) - 1);
+        $total = count($data_list);
+        $row = ceil($total / 5);
 
     }
     catch (PDOException $e) 
@@ -20,8 +22,6 @@
     }
 
     $conn = null;
-
-
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
     <title>Gallery</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link href="https://fonts.googleapis.com/css2?family=Calistoga&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/banner.css">
     <link rel="stylesheet" href="../assets/css/gallery.css"> 
 
 
@@ -44,7 +44,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
-    <div class="page-banner" style="background-image: url('../assets/img/home/img_banner.png');">
+    <div class="page-banner">
         <div class="container">
             <h2>GALLERY</h2>
             
@@ -59,17 +59,20 @@
         </div>
     </div>
 
-    <div class="gallery-section">
-        
-        <div class="container_gallery">
-            <?php for ($i = 1; $i <= $row; $i++): ?>
+    <div class="gallery-section">     
+        <?php for ($i = 0; $i < $row; $i++): ?>
+            <div class="container_gallery">
                 <?php for ($j = 0; $j <= 4; $j++): ?>
+                    <?php 
+                        $index = $i * 5 + $j;
+                        if ($index >= $total) break; 
+                    ?>
                     <div class="card">
-                       <img src="<?= htmlspecialchars($data_list[($i - 1) * 5 + $j]["url"]) ?>" alt="img_gallery">
+                        <img src="<?= BASE_URL.htmlspecialchars($data_list[$index]['url']) ?>" alt="img_gallery">
                     </div>
                 <?php endfor;?>
-            <?php endfor;?>
-        </div>
+                </div>
+        <?php endfor;?>
     </div>
 
     <!-- include footer -->

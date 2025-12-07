@@ -1,42 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Calistoga&display=swap");
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  font-size: 0.9rem;
-}
-
-.icons {
-  display: flex;
-  gap: 20px;
-  cursor: pointer;
-}
-
-.breadcrumb {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-family: "Exo 2", sans-serif;
 }
 
 .gallery-section {
@@ -45,6 +11,7 @@
   align-items: center;
   gap: 30px;
   padding: 50px 0;
+  background: var(--bg-main);
 }
 
 .container_gallery {
@@ -52,7 +19,6 @@
   width: 90%;
   max-width: 1200px;
   height: 400px;
-  object-fit: cover;
   gap: 10px;
 }
 
@@ -64,20 +30,21 @@
   cursor: pointer;
   transition: all 0.5s ease-in-out;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  background: var(--bg-main);
 }
 
 .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s;
+  transition: transform 0.5s ease;
 }
 
 .card:hover {
   flex: 4;
 }
 
-.container:hover .card:not(:hover) {
+.container_gallery:hover .card:not(:hover) {
   filter: grayscale(100%) brightness(0.7);
   opacity: 0.8;
 }
@@ -90,80 +57,14 @@
   position: absolute;
   bottom: 20px;
   left: 20px;
-  color: white;
+  color: var(--text-light);
   opacity: 0;
-  transition: opacity 0.5s;
+  transition: opacity 0.5s ease;
   font-size: 1.5rem;
-  font-weight: bold;
+  font-weight: 800;
   text-shadow: 1px 1px 5px black;
 }
 
 .card:hover .card-title {
   opacity: 1;
-}
-
-.page-banner {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  padding: 250px 0;
-  margin-bottom: 60px;
-  text-align: center;
-  color: #fff;
-}
-
-.page-banner::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-}
-
-.page-banner .container {
-  position: relative;
-  z-index: 1;
-}
-
-.page-banner h2 {
-  text-transform: uppercase;
-  font-weight: 800;
-  margin: 0;
-  letter-spacing: 3px;
-  font-size: 48px;
-  margin-bottom: 15px;
-}
-
-.banner-breadcrumb {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.banner-breadcrumb a {
-  color: #ccc;
-  text-decoration: none;
-  transition: 0.3s;
-}
-.banner-breadcrumb a:hover {
-  color: #fff;
-}
-
-.banner-breadcrumb i {
-  font-size: 12px;
-  color: #fff;
-  margin: 0 15px;
-}
-
-.banner-breadcrumb .active {
-  color: #fff;
-  font-weight: 700;
-  border-bottom: 2px solid #fff;
 }
