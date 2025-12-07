@@ -1,7 +1,7 @@
 <?php
     require_once (__DIR__.'/../database/dbhelper.php'); 
     
-    //connection to data base
+    //connection to data base and get product
     try 
     {
         $conn = getConnection();
@@ -16,10 +16,27 @@
         echo $e->getMessage();
     }
 
+    // select random product
     $products = [];
     for ($i = 1; $i <= 4; $i++)
     {
         $products[] = $data_list[rand(0, count($data_list) - 1)];
+    }
+
+
+    //connection to data base and get brand
+    try 
+    {
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_BRAND);
+        $stmt->execute();
+
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $brand_list = $stmt->fetchAll();
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
     }
 ?>
 
@@ -44,7 +61,7 @@
     ?>
 
     <div class="page-banner">
-
+        
         <div class="container">
             <h2>Chic Lighting & Design</h2>
             <p class="mb-4 text-white-50 mx-auto">
@@ -66,6 +83,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="ps-lg-4 text-secondary">
+                    <h2>CHIC LIGHTING & DESIGN</h2>
                     <p class="lh-xl mb-3">
                         <p>Welcome to Chic Lighting & Design where we believe that lighting is not merely functional, but an art form. We specialize in providing high-end, unique decorative lighting fixtures, carefully curated from leading designers, aiming to create an inspirational, luxurious, and distinctly personalized living and working environment for you.</p>
                     </p>
@@ -76,46 +94,56 @@
             </div>
         </div>
 
-        <div class="row align-items-center mt-5 gx-lg-5">
-            <div class="col-lg-6 order-2 order-lg-1">
-                <div class="pe-lg-4 text-secondary">
-                    <p class="lh-xl">
-                        Groundbreaking Design: From the minimalist Scandinavian style and edgy Industrial lamps to dazzling classic crystal chandeliers, we constantly update the latest design trends to suit every aesthetic taste and interior structure.
-                    </p>
-                    <p class="lh-xl">
-                        Customer Experience: We don't just sell lights; we sell lighting solutions. Our team of experts is dedicated to providing thoughtful consultation to help you find the perfect light source, suitable for every corner of your home and every moment of your life.
-                    </p>
+    <div class="catalog-section py-5 bg-light-subtle">
+
+        <div class="container">
+            <h2 class="section-title fw-bold mb-4 mb-md-5 font-serif text-uppercase text-center text-md-start">BRANDS</h2>
+
+            <div class="row g-4 justify-content-center">
+            <?php foreach ($brand_list as $item): ?>
+            <div class="col-6 col-md-4 col-lg-2 text-center">
+
+                <div class="brand-card p-3 bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center justify-content-center">
+
+                    <img src="<?= BASE_URL . $item["brand_thumbnail"] ?>"
+                         alt="<?= $item["brand_name"] ?>"
+                         class="img-fluid mb-3 brand-img">
+
+                    <a href="brand.php?id=<?= $item["brand_id"] ?>"
+                       class="fw-semibold text-decoration-none brand-link">
+                        <?= $item["brand_name"] ?>
+                    </a>
+                    
                 </div>
+
             </div>
-            <div class="col-lg-6 order-1 order-lg-2 mb-4 mb-lg-0">
-                <div class="img-wrapper">
-                     <img src="../assets/img/home/image_02.png" alt="Hanging Lamp" class="story-img shadow-sm">
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
+        </div>
+            
     </div>
 
     <div class="catalog-section py-5 bg-light-subtle">
         <div class="container">
-            <h2 class="section-title fw-bold mb-4 mb-md-5 font-serif text-uppercase text-center text-md-start">Catalog</h2>
+            <h2 class="section-title fw-bold mb-4 mb-md-5 font-serif text-uppercase text-center text-md-start">BEST SELLER</h2>
             
             <div class="row g-4">
                 <?php foreach($products as $prod): ?>
                 <div class="col-md-6"> <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
                         <div class="row align-items-center h-100">
                             <div class="col-5 col-sm-4">
-                                <img src="<?php echo $prod['product_thumbnail']; ?>" class="img-fluid" alt="<?php echo $prod['product_title']; ?>">
+                                <img src="<?= $prod['product_thumbnail']; ?>" class="img-fluid" alt="<?= $prod['product_title']; ?>">
                             </div>
                             
                             <div class="col-7 col-sm-8 ps-3 ps-md-4">
-                                <h5 class="fw-bold font-serif mb-2 text-truncate"><?php echo $prod['product_title']; ?></h5>
+                                <h5 class="fw-bold font-serif mb-2 text-truncate"><?= $prod['product_title']; ?></h5>
                                 <p class="text-muted small mb-3 d-none d-sm-block">
-                                    <?php echo $prod['product_description']; ?>
+                                    <?= $prod['product_description']; ?>
                                 </p>
                                 <p class="text-muted small mb-2 d-block d-sm-none text-truncate">Description here...</p>
 
                                 <div class="d-flex flex-wrap align-items-center justify-content-between mt-auto">
-                                    <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?php echo $prod['product_price']; ?></span>
+                                    <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?= $prod['product_price']; ?></span>
                                     
                                     <div class="d-flex align-items-center gap-2">
                                         <a href="product_detail.php?id=<?= $prod["product_id"] ?>" class="btn btn-dark btn-sm rounded-0 px-3 py-1 text-uppercase" style="font-size: 12px;">Buy</a>

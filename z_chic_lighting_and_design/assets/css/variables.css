@@ -9,4 +9,8 @@
   --bg-main: #ffffff;
   --bg-light: #f9f9f9;
   --bg-dark: #000000;
+
+  --header-bg: #ffffffb3;
+  --header-text: #000000;
+  --header-hover: #26b66a;
 }

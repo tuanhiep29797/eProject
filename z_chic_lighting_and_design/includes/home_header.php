@@ -13,8 +13,8 @@
 
         $category_list = [];
         foreach ($data_list as $item)
-        {
-            $category_list[$item["category_name"]][] = $item["product_title"];
+        {   $category_list[$item["category_id"]]["category_name"] = $item["category_name"];
+            $category_list[$item["category_id"]]["product"][$item["product_id"]] = $item["product_title"];
         } 
     }
     catch (PDOException $e) 
@@ -103,21 +103,21 @@
 
                                 <div class="nav-item_product w-100 p-3">
                                     <div class="row">
-                                        <?php foreach ($category_list as $category => $items): ?>
+                                        <?php foreach ($category_list as $index_category_id => $items): ?>
                                             <div class="col-4">
-                                                <h6 class="fw-bold text-success my-2"><?= $category ?></h6>
+                                                <h6 class="fw-bold text-success my-2"><?= htmlspecialchars($items["category_name"]) ?></h6>
                                                 <ul class="list-unstyled">
-                                                    <?php foreach ($items as $item): ?>
+                                                    <?php foreach ($items["product"] as $product_id => $product_title): ?>
                                                         <li class="nav-item">
                                                             <a class="nav-link"
-                                                            href="/product.php/product=<?= strtolower(str_replace(' ', '-', $item)) ?>">
-                                                                <?= $item ?>
+                                                            href="<?= BASE_URL ?>pages/product_detail.php?product=<?= $product_id ?>">
+                                                                <?= htmlspecialchars($product_title) ?>
                                                             </a>
                                                         </li>
-                                                    <?php endforeach ?>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </div>
-                                        <?php endforeach ?>
+                                        <?php endforeach; ?>
                                     </div>
                                 </div>
                             </li>
@@ -128,10 +128,10 @@
                                     Category
                                 </a>
                                 <div class="p-2 nav-item_category">
-                                    <?php foreach ($category_list as $category => $items): ?>
+                                    <?php foreach ($category_list as $index_category_id => $items): ?>
                                         <a class="dropdown-item py-2"
-                                        href="<?= BASE_URL?>pages/category.php/category=<?= $category ?>">
-                                            <?= $category ?>
+                                        href="<?= BASE_URL?>pages/category.php?category=<?= $index_category_id ?>">
+                                            <?= htmlspecialchars($items["category_name"]) ?>
                                         </a>
                                     <?php endforeach ?>
                                 </div>
@@ -145,8 +145,8 @@
                                 <div class=" p-2 nav-item_brand">
                                     <?php foreach ($brand_list as $brand): ?>
                                         <a class="dropdown-item py-2"
-                                        href="<?= BASE_URL?>/pages/brand.php/brand=<?= strtolower(str_replace(' ', '-', $brand["brand_name"])) ?>">
-                                            <?= $brand["brand_name"] ?>
+                                        href="<?= BASE_URL?>/pages/brand.php?brand=<?= $brand["brand_id"] ?>">
+                                            <?= htmlspecialchars($brand["brand_name"]) ?>
                                         </a>
                                     <?php endforeach ?>
                                 </div>

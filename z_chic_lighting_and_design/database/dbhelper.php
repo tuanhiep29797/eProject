@@ -191,7 +191,7 @@
 	const SQL_GET_GALLERY = "select * from gallery";
 
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
-	"select c.category_name, p.product_title
+	"select c.category_id, c.category_name, p.product_id, p.product_title
 	from category c join product p
 	on c.category_id = p.category_id
 	order by c.category_name, p.product_title
