@@ -9,10 +9,9 @@
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt->fetchAll();
-        // var_dump($data_list);
+        $img_list = $stmt->fetchAll();
 
-        $total = count($data_list);
+        $total = count($img_list);
         $row = ceil($total / 5);
 
     }
@@ -68,7 +67,7 @@
                         if ($index >= $total) break; 
                     ?>
                     <div class="card">
-                        <img src="<?= BASE_URL.htmlspecialchars($data_list[$index]['url']) ?>" alt="img_gallery">
+                        <img src="<?= BASE_URL.htmlspecialchars($img_list[$index]['url']) ?>" alt="img_gallery">
                     </div>
                 <?php endfor;?>
                 </div>

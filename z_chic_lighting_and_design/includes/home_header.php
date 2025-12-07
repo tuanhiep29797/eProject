@@ -9,10 +9,10 @@
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt->fetchAll();
+        $header_list = $stmt->fetchAll();
 
         $category_list = [];
-        foreach ($data_list as $item)
+        foreach ($header_list as $item)
         {   $category_list[$item["category_id"]]["category_name"] = $item["category_name"];
             $category_list[$item["category_id"]]["product"][$item["product_id"]] = $item["product_title"];
         } 
