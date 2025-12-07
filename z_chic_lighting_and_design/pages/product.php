@@ -24,11 +24,8 @@ $conn = null;
 
 $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
 $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
-$min_price = isset($_GET['min_price']) ? (float) $_GET['min_price'] : 0;
-$max_price = isset($_GET['max_price']) ? (float) $_GET['max_price'] : 50000000;
 
-
-if (!empty($_GET['action'])) {
+if (isset($_GET['action'])) {
 
   switch ($_GET['action']) {
     case 'filter':
@@ -53,11 +50,7 @@ if (!empty($_GET['action'])) {
           $sql .= " AND p.brand_id IN ($placeholders)";
           $params = array_merge($params, $brand_filter);
         }
-
-        $sql .= " AND p.product_price BETWEEN ? AND ?";
-        $params[] = (float)$min_price;
-        $params[] = (float)$max_price;
-
+        
       $stmt = $conn->prepare($sql);
       $stmt->execute($params);
 
@@ -70,7 +63,7 @@ if (!empty($_GET['action'])) {
       break;
 
     case 'search':
-    $search = $_GET['search'] ?? '';
+    $search = isset($_GET['search']) ? $_GET['search'] : '';
 
     try {
         $conn = getConnection();
@@ -78,7 +71,7 @@ if (!empty($_GET['action'])) {
             SELECT * FROM product
             WHERE product_title LIKE :search
         ");
-      $stmt->execute([
+        $stmt->execute([
                   ':search' => '%' . $search . '%'
               ]);
 
@@ -122,16 +115,17 @@ $total_products = count($products);
   <title>Product - Chic Lighting</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/banner.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/product.css?v=<?= time() ?>">
 </head>
 
 <body>
-  <?php
-  require_once(__DIR__ . "/../includes/home_header.php");
-  ?>
+
+  <!-- include header -->
+    <?php
+        require_once (__DIR__."/../includes/home_header.php");
+    ?>
 
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
@@ -145,7 +139,7 @@ $total_products = count($products);
           <form action="" method="GET" class="search-form">
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
-                value="<?= htmlspecialchars($search) ?>">
+                value="<?= htmlspecialchars($search ?? "") ?>">
               <button class="btn btn-dark" type="submit" name='action' value='search'>Search</button>
             </div>
           </form>
@@ -156,9 +150,8 @@ $total_products = count($products);
         <!-- Sidebar Filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-            <input type="hidden" name="search" value="<?= htmlspecialchars($search) ?>">
 
-            <!-- Filter by Category -->
+          <!-- Filter by Category -->
             <div class="filter-section mb-4">
               <h6 class="filter-title">Filter by category:</h6>
               <div class="filter-options">
@@ -189,25 +182,6 @@ $total_products = count($products);
                     </div>
                   <?php endforeach; ?>
                 <?php endif; ?>
-              </div>
-            </div>
-
-            <!-- Filter by Price -->
-            <div class="filter-section mb-4">
-              <h6 class="filter-title">Filter by price:</h6>
-              <div class="price-range">
-                <div class="d-flex gap-2 mb-3">
-                  <div class="price-input">
-                    <span>$</span>
-                    <input type="number" name="min_price" id="minPrice" value="<?= $min_price ?>" min="0" max="50000000">
-                  </div>
-                  <div class="price-input">
-                    <span>$</span>
-                    <input type="number" name="max_price" id="maxPrice" value="<?= $max_price ?>" min="0" max="50000000">
-                  </div>
-                </div>
-                <input type="range" class="form-range price-slider" id="priceRange" min="0" max="50000000"
-                  value="<?= $max_price ?>">
               </div>
             </div>
 
@@ -333,8 +307,10 @@ $total_products = count($products);
         </div>
       </div>
     </div>
+    
+    <!-- include footer -->
     <?php
-    require_once(__DIR__ . "/../includes/home_footer.php.php");
+        require_once (__DIR__."/../includes/home_footer.php");
     ?>
   </main>
 </body>
