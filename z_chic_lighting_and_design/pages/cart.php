@@ -1,103 +1,99 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../database/dbhelper.php");
 
-$products = [];
-$total = 0;
-if (isset($_SESSION["user_id"])) {
-    $user_id = $_SESSION["user_id"];
+    $products = [];
+    $total = 0;
+    if (isset($_SESSION["user_id"])) {
+        $user_id = $_SESSION["user_id"];
 
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare("
-        select p.*, c.quantity, c.cart_id, c.user_id
-        from product p
-        inner join cart c on c.product_id = p.product_id
-        inner join user u on  u.user_id = c.user_id
-        where u.user_id = :user_id");
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
+        try {
+            $conn = getConnection();
+            $stmt = $conn->prepare(SQL_GET_CART_BY_USER_ID);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
 
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $products = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+    } else {
+        echo '<script>
+            alert("Please log in to view your cart.");
+            window.location.href = "../admin/login.php";
+        </script>';
+        exit();
     }
-    $conn = null;
-} else {
-    echo '<script>
-        alert("Please log in to view your cart.");
-        window.location.href = "../admin/login.php";
-    </script>';
-    exit();
-}
 
-foreach ($products as $item) {
-    $total += $item['product_price'] * $item['quantity'];
-}
-if (!empty($_POST['action'])) {
-    $cart_id = $_POST["cart_id"];
     foreach ($products as $item) {
-        if ($item['cart_id'] == $cart_id) {
-            $quantity = $item['quantity'];
-            break;
+        $total += $item['product_price'] * $item['quantity'];
+    }
+    if (!empty($_POST['action'])) {
+        $cart_id = $_POST["cart_id"];
+        foreach ($products as $item) {
+            if ($item['cart_id'] == $cart_id) {
+                $quantity = $item['quantity'];
+                break;
+            }
+        }
+        $action = $_POST["action"];
+        switch ($action) {
+            case "plus":
+                $quantity += 1;
+                break;
+
+            case "minus":
+                if ($quantity > 1) {
+                    $quantity -= 1;
+                }
+                break;
+            case "remove":
+                try {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_DELETE_CART);
+                    $stmt->bindParam(":cart_id", $cart_id);
+                    $stmt->execute();
+
+                    header("Location: cart.php");
+                    exit;
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+                break;
+            case "remove_all":
+                try {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_DELETE_CART_BY_USER_ID);
+                    $stmt->bindParam(":user_id", $user_id);
+                    $stmt->execute();
+
+                    header("Location: cart.php");
+                    exit;
+                } catch (PDOException $e) {
+                    echo "Error: " . $e->getMessage();
+                }
+                break;
+
+            default:
+                header("Location: cart.php");
+                exit;
+                break;
+        }
+        try {
+            $conn = getConnection();
+            $stmt = $conn->prepare(SQL_UPDATE_CART);
+            $stmt->bindParam(":quantity", $quantity);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->bindParam(":cart_id", $cart_id);
+            $stmt->execute();
+
+            header("Location: cart.php#shopping-cart-$cart_id");
+            exit;
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
     }
-    $action = $_POST["action"];
-    switch ($action) {
-        case "plus":
-            $quantity += 1;
-            break;
-
-        case "minus":
-            if ($quantity > 1) {
-                $quantity -= 1;
-            }
-            break;
-        case "remove":
-            try {
-                $conn = getConnection();
-                $stmt = $conn->prepare("DELETE FROM cart WHERE cart_id = :cart_id");
-                $stmt->bindParam(":cart_id", $cart_id);
-                $stmt->execute();
-
-                header("Location: cart.php");
-                exit;
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            break;
-        case "remove_all":
-            try {
-                $conn = getConnection();
-                $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
-                $stmt->bindParam(":user_id", $user_id);
-                $stmt->execute();
-
-                header("Location: cart.php");
-                exit;
-            } catch (PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-            break;
-
-        default:
-            header("Location: cart.php");
-            exit;
-            break;
-    }
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare("UPDATE cart SET quantity = :quantity WHERE cart_id = :cart_id");
-        $stmt->bindParam(":quantity", $quantity);
-        $stmt->bindParam(":cart_id", $cart_id);
-        $stmt->execute();
-
-        header("Location: cart.php#shopping-cart-$cart_id");
-        exit;
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-    }
-}
 ?>
 
 <!DOCTYPE html>

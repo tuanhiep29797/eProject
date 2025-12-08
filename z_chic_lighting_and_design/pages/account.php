@@ -6,10 +6,7 @@ if (isset($_SESSION["user_id"])) {
 
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("
-        select *
-        from user
-        where user_id = :user_id");
+        $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 

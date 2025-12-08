@@ -1,106 +1,111 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../database/dbhelper.php");
 
-$products = [];
-$total = 0;
-if (isset($_SESSION["user_id"])) {
-    $user_id = $_SESSION["user_id"];
-
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare("
-        select p.*, c.quantity, c.cart_id, c.user_id
-        from product p
-        inner join cart c on c.product_id = p.product_id
-        inner join user u on  u.user_id = c.user_id
-        where u.user_id = :user_id");
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $products = $stmt->fetchAll();
-
-        if ($products == null || count($products) == 0) {
-        echo '<script>
-                alert("Please add product to cart.");
-                window.location.href = "product.php";
-            </script>';
-        }
-
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+    if(!is_login())
+    {
+        header("Location: home_page.php");
     }
-    $conn = null;
-} else {
-    echo '<script>
-        alert("Please log in to view your cart.");
-        window.location.href = "../admin/login.php";
-    </script>';
-    exit();
-}
 
-foreach ($products as $item) {
-    $total += $item['product_price'] * $item['quantity'];
-}
+    $products = [];
+    $total = 0;
+    if (isset($_SESSION["user_id"])) {
+        $user_id = $_SESSION["user_id"];
 
-if (!empty($_POST)) {
-    $fullname = $_POST['fullname'];
-    $phone = $_POST['phone'];
-    $address = $_POST['address'];
+        try {
+            $conn = getConnection();
+            $stmt = $conn->prepare("
+            select p.*, c.quantity, c.cart_id, c.user_id
+            from product p
+            inner join cart c on c.product_id = p.product_id
+            inner join user u on  u.user_id = c.user_id
+            where u.user_id = :user_id");
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
 
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare("
-            INSERT INTO `order` (user_id, total_amount, receiver,phone_number, address)
-            VALUES (:user_id, :total_amount, :receiver,:phone_number, :address)
-        ");
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->bindParam(":total_amount", $total);
-        $stmt->bindParam(":receiver", $fullname);
-        $stmt->bindParam(":phone_number", $phone);
-        $stmt->bindParam(":address", $address);
-        $stmt->execute();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $products = $stmt->fetchAll();
 
-        $stmt = $conn->prepare("
-            SELECT *
-            FROM `order`
-            WHERE user_id = :user_id
-            ORDER BY order_id DESC
-            LIMIT 1
-        ");
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-        $order = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($products == null || count($products) == 0) {
+            echo '<script>
+                    alert("Please add product to cart.");
+                    window.location.href = "product.php";
+                </script>';
+            }
 
-        $orderID = $order['order_id'];
-
-        foreach ($products as $item) {
-        $stmt = $conn->prepare("INSERT INTO order_detail (order_id, product_id, quantity, unit_price)
-                VALUES (:order_id, :product_id, :quantity, :unit_price)");
-        $stmt->bindParam(":order_id", $orderID);
-        $stmt->bindParam(":product_id", $item['product_id']);
-        $stmt->bindParam(":quantity", $item['quantity']);
-        $stmt->bindParam(":unit_price", $item['product_price']);
-
-        $stmt->execute();
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
         }
-
-        $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-
+        $conn = null;
+    } else {
         echo '<script>
-        alert("Thanks you for your payment 😘😘😘");
-        window.location.href = "home_page.php";
+            alert("Please log in to view your cart.");
+            window.location.href = "../admin/login.php";
         </script>';
         exit();
-
-
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
     }
-    $conn = null;
-}
+
+    foreach ($products as $item) {
+        $total += $item['product_price'] * $item['quantity'];
+    }
+
+    if (!empty($_POST)) {
+        $fullname = $_POST['fullname'];
+        $phone = $_POST['phone'];
+        $address = $_POST['address'];
+
+        try {
+            $conn = getConnection();
+            $stmt = $conn->prepare("
+                INSERT INTO `order` (user_id, total_amount, receiver,phone_number, address)
+                VALUES (:user_id, :total_amount, :receiver,:phone_number, :address)
+            ");
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->bindParam(":total_amount", $total);
+            $stmt->bindParam(":receiver", $fullname);
+            $stmt->bindParam(":phone_number", $phone);
+            $stmt->bindParam(":address", $address);
+            $stmt->execute();
+
+            $stmt = $conn->prepare("
+                SELECT *
+                FROM `order`
+                WHERE user_id = :user_id
+                ORDER BY order_id DESC
+                LIMIT 1
+            ");
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
+            $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            $orderID = $order['order_id'];
+
+            foreach ($products as $item) {
+            $stmt = $conn->prepare("INSERT INTO order_detail (order_id, product_id, quantity, unit_price)
+                    VALUES (:order_id, :product_id, :quantity, :unit_price)");
+            $stmt->bindParam(":order_id", $orderID);
+            $stmt->bindParam(":product_id", $item['product_id']);
+            $stmt->bindParam(":quantity", $item['quantity']);
+            $stmt->bindParam(":unit_price", $item['product_price']);
+
+            $stmt->execute();
+            }
+
+            $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
+
+            echo '<script>
+            alert("Thanks you for your payment 😘😘😘");
+            window.location.href = "home_page.php";
+            </script>';
+            exit();
+
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+    }
 ?>
 
 <!DOCTYPE html>

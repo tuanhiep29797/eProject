@@ -199,6 +199,14 @@
 	order by c.category_name, p.product_title
 	";
 
+	const SQL_GET_CART_BY_USER_ID = 
+	"select p.*, c.quantity, c.cart_id, c.user_id
+	from product p
+	inner join cart c on c.product_id = p.product_id
+	inner join user u on  u.user_id = c.user_id
+	where u.user_id = :user_id
+	";
+
 	//SQL ADD TABLE
 
 	const SQL_ADD_USER = 
@@ -336,4 +344,8 @@
 	const SQL_DELETE_BRAND = "delete from brand where brand_id = :brand_id";
 	
 	const SQL_DELETE_PRODUCT = "delete from product where product_id = :product_id";
+
+	const SQL_DELETE_CART = "delete from cart where cart_id = :cart_id";
+
+	const SQL_DELETE_CART_BY_USER_ID = "delete from cart where user_id = :user_id";
 ?>
