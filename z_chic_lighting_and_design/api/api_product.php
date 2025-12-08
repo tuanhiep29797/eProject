@@ -6,7 +6,7 @@
             "Elegant design for living room, sparkling light.",
             5500.00,
             10,
-            "../assets/img/product/1/1.png",
+            "assets/img/product/1/1.png",
             1,
             1,
             "<ul>
@@ -21,7 +21,7 @@
             "European style, suitable for corridors and bedrooms.",
             85.00,
             25,
-            "../assets/img/product/2/1.png",
+            "assets/img/product/2/1.png",
             2,
             5,
             "<ul>
@@ -36,7 +36,7 @@
             "Waterproof, durable cast aluminum shell.",
             120.00,
             15,
-            "../assets/img/product/3/1.png",
+            "assets/img/product/3/1.png",
             3,
             2,
             "<ul>
@@ -51,7 +51,7 @@
             "Combines cooling fan and lighting, quiet motor.",
             480.00,
             8,
-            "../assets/img/product/4/1.png",
+            "assets/img/product/4/1.png",
             4,
             3,
             "<ul>
@@ -66,7 +66,7 @@
             "Minimalist design, artistic curved body.",
             195.00,
             12,
-            "../assets/img/product/5/1.png",
+            "assets/img/product/5/1.png",
             5,
             5,
             "<ul>
@@ -81,7 +81,7 @@
             "Track light, 360 degree flexible angle.",
             45.00,
             50,
-            "../assets/img/product/6/1.png",
+            "assets/img/product/6/1.png",
             6,
             2,
             "<ul>
@@ -96,7 +96,7 @@
             "Flexible, easy to bend for lettering.",
             25.00,
             100,
-            "../assets/img/product/7/1.png",
+            "assets/img/product/7/1.png",
             7,
             4,
             "<ul>
@@ -111,7 +111,7 @@
             "Control 16 million colors via phone.",
             165.00,
             20,
-            "../assets/img/product/8/1.png",
+            "assets/img/product/8/1.png",
             8,
             1,
             "<ul>
@@ -126,7 +126,7 @@
             "Ultra-thin design, perfect for low ceilings.",
             1250.00,
             30,
-            "../assets/img/product/9/1.png",
+            "assets/img/product/9/1.png",
             1,
             2,
             "<ul>
@@ -141,7 +141,7 @@
             "Black iron cage design, retro style.",
             45.00,
             45,
-            "../assets/img/product/10/1.png",
+            "assets/img/product/10/1.png",
             1,
             5,
             "<ul>
@@ -156,7 +156,7 @@
             "Modern waterproof light for exterior walls.",
             95.00,
             20,
-            "../assets/img/product/11/1.png",
+            "assets/img/product/11/1.png",
             2,
             1,
             "<ul>
@@ -171,7 +171,7 @@
             "Focused reading light with USB port.",
             75.00,
             40,
-            "../assets/img/product/12/1.png",
+            "assets/img/product/12/1.png",
             2,
             4,
             "<ul>
@@ -186,7 +186,7 @@
             "Eco-friendly solar garden lights.",
             68.00,
             60,
-            "../assets/img/product/13/1.png",
+            "assets/img/product/13/1.png",
             3,
             4,
             "<ul>
@@ -201,7 +201,7 @@
             "Security light for large backyards.",
             150.00,
             15,
-            "../assets/img/product/14/1.png",
+            "assets/img/product/14/1.png",
             3,
             2,
             "<ul>
@@ -216,7 +216,7 @@
             "Luxury wood finish, silent operation.",
             550.00,
             5,
-            "../assets/img/product/15/1.png",
+            "assets/img/product/15/1.png",
             4,
             3,
             "<ul>
@@ -231,7 +231,7 @@
             "Small diameter fan for smaller rooms.",
             220.00,
             10,
-            "../assets/img/product/16/1.png",
+            "assets/img/product/16/1.png",
             4,
             2,
             "<ul>
@@ -246,7 +246,7 @@
             "Handmade ceramic body, fabric shade.",
             120.00,
             12,
-            "../assets/img/product/17/1.png",
+            "assets/img/product/17/1.png",
             5,
             5,
             "<ul>
@@ -260,7 +260,7 @@
             "Natural bamboo legs, boho style.",
             180.00,
             8,
-            "../assets/img/product/18/1.png",
+            "assets/img/product/18/1.png",
             5,
             5,
             "<ul>
@@ -274,7 +274,7 @@
             "Anti-glare deep recessed spotlight.",
             18.00,
             100,
-            "../assets/img/product/19/1.png",
+            "assets/img/product/19/1.png",
             6,
             1,
             "<ul>
@@ -289,7 +289,7 @@
             "Cylindrical spotlight, no hole cutting.",
             25.00,
             50,
-            "../assets/img/product/20/1.png",
+            "assets/img/product/20/1.png",
             6,
             4,
             "<ul>
@@ -303,7 +303,7 @@
             "App controlled color changing strip.",
             35.00,
             80,
-            "../assets/img/product/21/1.png",
+            "assets/img/product/21/1.png",
             7,
             4,
             "<ul>
@@ -317,7 +317,7 @@
             "Decorative filament bulbs (Pack of 3).",
             20.00,
             40,
-            "../assets/img/product/22/1.png",
+            "assets/img/product/22/1.png",
             7,
             5,
             "<ul>
@@ -331,7 +331,7 @@
             "Adjust brightness/color via phone.",
             950.00,
             25,
-            "../assets/img/product/23/1.png",
+            "assets/img/product/23/1.png",
             8,
             6,
             "<ul>
@@ -345,7 +345,7 @@
             "Backlight for TV and Gaming setup.",
             140.00,
             15,
-            "../assets/img/product/24/1.png",
+            "assets/img/product/24/1.png",
             8,
             1,
             "<ul>
