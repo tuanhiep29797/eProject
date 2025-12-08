@@ -20,88 +20,107 @@
   $conn = null;
 
   // Get filter parameters
-
-
   $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
   $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
 
-  if (isset($_GET['action'])) {
+  // Pagination Config
+  $limit = 9;
+  $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+  $offset = ($page - 1) * $limit;
+  $products = [];
+  $total_products = 0;
 
-    switch ($_GET['action']) {
-      case 'filter':
-        try {
-          $conn = getConnection();
+  try {
+    $conn = getConnection();
 
-          $sql = "SELECT p.*, c.category_name, b.brand_name
-                  FROM product p
-                  INNER JOIN category c ON p.category_id = c.category_id
-                  INNER JOIN brand b ON p.brand_id = b.brand_id
-                  WHERE 1";
-          $params = [];
+    if (isset($_GET['action']) && $_GET['action'] == 'filter') {
+        // Base query parts
+        $where = "WHERE 1";
+        $params = [];
 
-          if (!empty($_GET['category'])) {
+        // Build conditions
+        if (!empty($category_filter)) {
             $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
-            $sql .= " AND p.category_id IN ($placeholders)";
+            $where .= " AND p.category_id IN ($placeholders)";
             $params = array_merge($params, $category_filter);
-          }
+        }
 
-          if (!empty($_GET['brand'])) {
+        if (!empty($brand_filter)) {
             $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
-            $sql .= " AND p.brand_id IN ($placeholders)";
+            $where .= " AND p.brand_id IN ($placeholders)";
             $params = array_merge($params, $brand_filter);
-          }
-          
-        $stmt = $conn->prepare($sql);
+        }
+
+        // 1. Count Total
+        $sql_count = "SELECT COUNT(*) 
+                      FROM product p
+                      INNER JOIN category c ON p.category_id = c.category_id
+                      INNER JOIN brand b ON p.brand_id = b.brand_id
+                      $where";
+        $stmt = $conn->prepare($sql_count);
         $stmt->execute($params);
+        $total_products = $stmt->fetchColumn();
 
-          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          $products = $stmt->fetchAll();
-        } catch (PDOException $e) {
-          echo "Error: " . $e->getMessage();
+        // 2. Get Data with Pagination
+        $sql = "SELECT p.*, c.category_name, b.brand_name
+                FROM product p
+                INNER JOIN category c ON p.category_id = c.category_id
+                INNER JOIN brand b ON p.brand_id = b.brand_id
+                $where
+                LIMIT ? OFFSET ?";
+        
+        $stmt = $conn->prepare($sql);
+        // Bind where params
+        $idx = 1;
+        foreach ($params as $val) {
+            $stmt->bindValue($idx++, $val);
         }
-        $conn = null;
-        break;
+        $stmt->bindValue($idx++, $limit, PDO::PARAM_INT);
+        $stmt->bindValue($idx++, $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-      case 'search':
-      $search = isset($_GET['search']) ? $_GET['search'] : '';
+    } elseif (isset($_GET['action']) && $_GET['action'] == 'search') {
+        $search = isset($_GET['search']) ? $_GET['search'] : '';
+        
+        // 1. Count Total
+        $sql_count = "SELECT COUNT(*) FROM product WHERE product_title LIKE :search";
+        $stmt = $conn->prepare($sql_count);
+        $stmt->execute([':search' => '%' . $search . '%']);
+        $total_products = $stmt->fetchColumn();
 
-      try {
-          $conn = getConnection();
-          $stmt = $conn->prepare("
-              SELECT * FROM product
-              WHERE product_title LIKE :search
-          ");
-          $stmt->execute([
-                    ':search' => '%' . $search . '%'
-                ]);
+        // 2. Get Data
+        $sql = "SELECT * FROM product WHERE product_title LIKE :search LIMIT :limit OFFSET :offset";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':search', '%' . $search . '%');
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          $products = $stmt->fetchAll();
-        } catch (PDOException $e) {
-          echo "Error: " . $e->getMessage();
-        }
-        $conn = null;
-        break;
+    } else {
+        // Default
+        // 1. Count Total
+        $sql_count = "SELECT COUNT(*) FROM product";
+        $stmt = $conn->prepare($sql_count);
+        $stmt->execute();
+        $total_products = $stmt->fetchColumn();
 
-      default:
-        header("Location: #");
-        break;
+        // 2. Get Data
+        $sql = "SELECT * FROM product LIMIT :limit OFFSET :offset";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-  } else {
-    try {
-      $conn = getConnection();
-      $stmt = $conn->prepare(SQL_GET_PRODUCT);
-      $stmt->execute();
+    
+    $total_pages = ceil($total_products / $limit);
 
-      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-      $products = $stmt->fetchAll();
-    } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
-    }
-    $conn = null;
+  } catch (PDOException $e) {
+    echo "Error: " . $e->getMessage();
   }
-
-  $total_products = count($products);
+  $conn = null;
 ?>
 
 

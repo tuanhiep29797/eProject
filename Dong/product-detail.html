@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./Css/product_detail.css">
+</head>
+
+<body>
+
+  <div class="container py-3">
+    <a href="#" class="back-link">
+      <i class="bi bi-chevron-left"></i> Product
+    </a>
+  </div>
+
+  <!-- Product Detail Section -->
+  <section class="product-detail py-4">
+    <div class="container">
+      <div class="product-card">
+        <div class="row g-4">
+          <!-- Product Images -->
+          <div class="col-lg-5">
+            <div class="product-gallery">
+              <div class="main-image">
+                <img src="./img/lamp_02_w500.jpeg" alt="Log Barn vanity lights" id="mainImage">
+              </div>
+              <div class="thumbnail-list">
+                <button class="thumbnail active"
+                  onclick="changeImage(this, './img/lamp_02_w500.jpeg')">
+                  <img src="./img/lamp_01_w100.jpeg" alt="Thumbnail 1">
+                </button>
+                <button class="thumbnail"
+                  onclick="changeImage(this, './img/Lamp_05_w500.jpeg')">
+                  <img src="./img/lamp_04_w100.jpeg" alt="Thumbnail 2">
+                </button>
+                <button class="thumbnail"
+                  onclick="changeImage(this, './img/lamp_06_w500.jpeg')">
+                  <img src="./img/Lamp_03_w100.jpeg" alt="Thumbnail 3">
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product Info -->
+          <div class="col-lg-7">
+            <div class="product-info">
+              <div class="product-meta">
+                <span class="meta-item">Brand: <strong>Philips</strong></span>
+                <span class="meta-item">Category: <strong>Ceiling Lights</strong></span>
+              </div>
+
+              <h1 class="product-title">Log Barn vanity lights</h1>
+
+              <div class="rating-badge">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0</span>
+                <span class="rating-count">(26 Reviews)</span>
+              </div>
+
+              <p class="product-description">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi eos harum dolor
+                laudantium rem! Placeat
+                mollitia quo odit iure est quisquam, dignissimos
+                sequi tempore velis in ipsum.
+              </p>
+
+              <div class="product-price">$29.90</div>
+
+              <div class="product-actions">
+                <button class="btn btn-outline-dark btn-cart">
+                  ADD TO CART
+                </button>
+                <button class="btn btn-dark btn-buy">
+                  BUY NOW
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommendations Section -->
+  <section class="recommendations py-5">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Explore our recomendations</h2>
+        <a href="#" class="view-all">
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+      <div class="row g-4">
+        <!-- Product Card 1 -->
+        <div class="col-6 col-md-4 col-lg">
+          <div class="recommendation-card">
+            <div class="card-image">
+              <img src="./img/lamp_07_w300.jpeg" alt="TWS Bejing">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">TWS Bejing</h5>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0 (26 Reviews)</span>
+              </div>
+              <div class="card-price">$29.90</div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-dark">Add To Chart</button>
+                <button class="btn btn-sm btn-warning">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 2 -->
+        <div class="col-6 col-md-4 col-lg">
+          <div class="recommendation-card">
+            <div class="card-image">
+              <img src="./img/lamp_07_w300.jpeg" alt="TWS Bejing">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">TWS Bejing</h5>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0 (26 Reviews)</span>
+              </div>
+              <div class="card-price">$29.90</div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-dark">Add To Chart</button>
+                <button class="btn btn-sm btn-warning">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 3 -->
+        <div class="col-6 col-md-4 col-lg">
+          <div class="recommendation-card">
+            <div class="card-image">
+              <img src="./img/lamp_07_w300.jpeg" alt="TWS Bejing">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">TWS Bejing</h5>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0 (26 Reviews)</span>
+              </div>
+              <div class="card-price">$29.90</div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-dark">Add To Chart</button>
+                <button class="btn btn-sm btn-warning">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 4 -->
+        <div class="col-6 col-md-4 col-lg">
+          <div class="recommendation-card">
+            <div class="card-image">
+              <img src="./img/lamp_07_w300.jpeg" alt="TWS Bejing">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">TWS Bejing</h5>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0 (26 Reviews)</span>
+              </div>
+              <div class="card-price">$29.90</div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-dark">Add To Chart</button>
+                <button class="btn btn-sm btn-warning">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Card 5 -->
+        <div class="col-6 col-md-4 col-lg">
+          <div class="recommendation-card">
+            <div class="card-image">
+              <img src="./img/lamp_07_w300.jpeg" alt="TWS Bejing">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">TWS Bejing</h5>
+              <div class="card-rating">
+                <i class="bi bi-star-fill"></i>
+                <span>5.0 (26 Reviews)</span>
+              </div>
+              <div class="card-price">$29.90</div>
+              <div class="card-actions">
+                <button class="btn btn-sm btn-dark">Add To Chart</button>
+                <button class="btn btn-sm btn-warning">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function changeImage(thumbnail, imageUrl) {
+
+      document.getElementById('mainImage').src = imageUrl;
+
+
+      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+      thumbnail.classList.add('active');
+    }
+  </script>
+
+</body>
+
+</html>
