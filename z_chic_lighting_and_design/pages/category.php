@@ -178,8 +178,8 @@
               <?php foreach ($products as $product): ?>
                 <?php
                 $image_path = $product['product_thumbnail'];
-                $rating = $product['rating'] ?? 4.8;
-                $reviews = $product['reviews'] ?? '1.2k';
+                $rating = $product['rating'] ?? 5;
+                $reviews = $product['reviews'] ?? '12k';
                 ?>
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
