@@ -14,57 +14,64 @@
     {
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_ORDER_BY_ID);
-        $stmt->bindParam(":order_id", $id);
-        $stmt->execute();
+        $stmt -> bindParam(":order_id", $id);
+        $stmt -> execute();
 
-        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $order_list = $stmt->fetchall();
 
-        if (!$item) {
+        if ($order_list == null || count($order_list) == 0) {
             header("Location: order.php");
             exit;
         }
-    }
-    catch (PDOException $e) {
-        die($e->getMessage());
-    }
-
-    $conn = null;
-
-    $selected[$item["order_status"]] = "selected";
-
-    //update order when submit form
-    if (!empty($_POST)) 
-    {
-        //get new data
-        $order_status = $_POST["order_status"];
-        $receiver     = $_POST["receiver"];
-        $phone_number = $_POST["phone_number"];
-        $address      = $_POST["address"];
-
-        //connection to database and update order
-        try 
+        else
         {
-            $conn = getConnection();
-            $stmt = $conn->prepare(SQL_UPDATE_ORDER);
+            // var_dump($order_list);
+            $item = $order_list[0];
+            // var_dump($item);
 
-            $stmt->bindParam(":order_status", $order_status);
-            $stmt->bindParam(":receiver", $receiver);
-            $stmt->bindParam(":phone_number", $phone_number);
-            $stmt->bindParam(":address", $address);
-            $stmt->bindParam(":order_id", $id);
+            $selected[$item["order_status"]] = "selected";
 
-            $stmt->execute();
+            //update order when submit form
+            if (!empty($_POST)) 
+            {
+                //get new data
+                $order_status = $_POST["order_status"];
+                $receiver     = $_POST["receiver"];
+                $phone_number = $_POST["phone_number"];
+                $address      = $_POST["address"];
 
-            header("Location: order.php");
-            exit;
-        }
-        catch (PDOException $e) 
-        {
-            echo $e->getMessage();
-        }
+                //connection to database and update order
+                try 
+                {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_UPDATE_ORDER);
+
+                    $stmt->bindParam(":order_status", $order_status);
+                    $stmt->bindParam(":receiver", $receiver);
+                    $stmt->bindParam(":phone_number", $phone_number);
+                    $stmt->bindParam(":address", $address);
+                    $stmt->bindParam(":order_id", $id);
+
+                    $stmt->execute();
+
+                    header("Location: order.php");
+                    exit;
+                }
+                catch (PDOException $e) 
+                {
+                    echo $e->getMessage();
+                }
 
         $conn = null;
+        }
+        }   
     }
+    catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
