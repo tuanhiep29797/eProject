@@ -50,19 +50,24 @@
 
                 $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
                 $dataList = $stmt->fetchAll();
+
             }
             catch (PDOException $e)
             {
                 echo $e -> getMessage();
             }
         }
+        echo '<script>
+        alert("Done add your cart.");
+        window.location.href = "' . $_SERVER['HTTP_REFERER'] . '#product_item_' . $product_id . '";
+      </script>';
 
         // header("Location: " . BASE_URL . "");
-        if(isset($_SERVER['HTTP_REFERER'])) {
-            header("Location: " . $_SERVER['HTTP_REFERER'] . "#product_item_" . $product_id);
-        } else {
-            header("Location: " . BASE_URL . "pages/home_page.php");
-        }
+        // if(isset($_SERVER['HTTP_REFERER'])) {
+        //     header("Location: " . $_SERVER['HTTP_REFERER'] . "#product_item_" . $product_id);
+        // } else {
+        //     header("Location: " . BASE_URL . "pages/home_page.php");
+        // }
         exit();
     }
 ?>
