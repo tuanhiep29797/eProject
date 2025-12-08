@@ -12,6 +12,7 @@
         $header_list = $stmt->fetchAll();
 
         $category_list = [];
+        
         foreach ($header_list as $item)
         {   $category_list[$item["category_id"]]["category_name"] = $item["category_name"];
             $category_list[$item["category_id"]]["product"][$item["product_id"]] = $item["product_title"];
@@ -45,6 +46,30 @@
     {
         $block_name = substr($_SESSION["fullname"], 0, 5) . "...";
     }
+
+if (isset($_SESSION["user_id"])) {
+    $user_id = $_SESSION["user_id"];
+
+    try {
+        $conn = getConnection();
+        $stmt = $conn->prepare("
+        SELECT SUM(c.quantity) AS total_quantity
+        FROM cart c
+        WHERE c.user_id = :user_id;
+        ");
+        $stmt->bindParam(":user_id", $user_id);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $count_cart = $stmt->fetchAll();
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+    $total_quantity = $count_cart[0]['total_quantity'];
+} 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -162,11 +187,22 @@
                     </nav>
                 </div>
 
-                <div class="col-lg-2 col-sm-6 col-6 text-end header_right" style="font-size: 20px;">
-
-                    <a href="../pages/cart.php" class="me-3 fs-4 text-dark text-decoration-none">
+                <div class="col-lg-2 col-sm-6 col-6 text-end header_right d-flex justify-content-center align-items-center" style="font-size: 20px;">
+                <div class="position-relative me-3">
+                    <a href="../pages/cart.php" class="fs-4 text-dark text-decoration-none position-relative">
                         <i class="bi bi-cart my-3"></i>
+
+                        <?php if ($total_quantity > 0): ?>
+                            <span class="badge bg-success 
+                                        position-absolute 
+                                        top-0 start-100 translate-middle
+                                        rounded-circle px-2 py-1"
+                                style="font-size: 12px;">
+                                <?= $total_quantity ?>
+                            </span>
+                        <?php endif; ?>
                     </a>
+                </div>
 
                     <!-- account  -->
                     <div class="dropdown d-inline-block position-relative py-3 px-2" id="header_account">
