@@ -1,5 +1,5 @@
 <?php
-    require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../../database/dbhelper.php");
 
     if (!is_login())
     {
@@ -12,18 +12,18 @@
 
         if(!empty($_GET["id"]))
         {
-            $id = $_GET["id"];
+            $product_id = $_GET["id"];
 
             try
             {
                 $conn = getConnection();
                 $stmt = $conn->prepare(SQL_GET_CARD_BY_USER_AND_PRODUCT);
                 $stmt->bindParam(":user_id", $user_id);
-                $stmt->bindParam(":product_id", $id);
+                $stmt->bindParam(":product_id", $product_id);
                 $stmt->execute();
 
                 $add_to_cart_result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-                $dataList = $stmt->fetchAll();
+                $data_list = $stmt->fetchAll();
 
                 if($data_list == null && count($data_list) == 0)
                 {
@@ -57,7 +57,12 @@
             }
         }
 
-        header("Location: " . BASE_URL . "");
+        // header("Location: " . BASE_URL . "");
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "#product_item_" . $product_id);
+        } else {
+            header("Location: " . BASE_URL . "pages/home_page.php");
+        }
         exit();
     }
 ?>

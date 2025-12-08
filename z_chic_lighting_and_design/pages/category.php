@@ -182,7 +182,7 @@
                 $reviews = $product['reviews'] ?? '12k';
                 ?>
                 <div class="col-xl-4 col-md-6">
-                  <div class="product-card">
+                  <div class="product-card" id="product_item_<?= $product['product_id'] ?>">
                     <div class="product-image">
                       <a href="#">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
@@ -215,10 +215,10 @@
                         $<?= number_format($product['product_price'], 2) ?>
                       </div>
                       <div class="product-actions">
-                        <button class="btn btn-add-cart" onclick="addToCart(<?= $product['product_id'] ?>)">
+                        <a class="btn btn-secondary btn-add-cart" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
                           Add To Cart
-                        </button>
-                        <button class="btn btn-buy-now" onclick="buyNow(<?= $product['product_id'] ?>)">
+                        </a>
+                        <button class="btn btn-secondary btn-buy-now" href="product_detail.php?id=<?= $product['product_id'] ?>">
                           Buy Now
                         </button>
                       </div>

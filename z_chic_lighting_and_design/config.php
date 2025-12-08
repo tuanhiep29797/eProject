@@ -12,6 +12,8 @@
 
     //function check Login
     function is_login() {
+        // var_dump($_SESSION);
+        // die();
         if(isset($_SESSION["username"])) {
             return true;
         }

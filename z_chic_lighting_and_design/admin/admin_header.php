@@ -1,3 +1,10 @@
+<?php
+     if(!is_admin())
+    {
+        header("Location: ../pages/home_page.php");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

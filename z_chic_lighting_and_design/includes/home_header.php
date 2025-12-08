@@ -41,8 +41,7 @@
 
     $conn = null;
 
-    // user login (avoid undefined variable)
-    $user = $_SESSION["user"] ?? null;
+    $block_name = substr($_SESSION["fullname"], 0, 5) . "...";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -169,7 +168,7 @@
                     <!-- account  -->
                     <div class="dropdown d-inline-block position-relative py-3 px-2" id="header_account">
                         <a class="text-dark text-decoration-none fs-5" href="#">
-                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". substr($_SESSION["fullname"], 0, 5) . "..." : "") ?>
+                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $block_name : "") ?>
                             <i class="bi bi-person-circle text-primary"></i>
                         </a>
 
