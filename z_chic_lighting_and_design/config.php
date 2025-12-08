@@ -3,7 +3,7 @@
     session_start();
 
     //define var to connect database
-    define("HOST", "127.0.0.1");
+    define("HOST", "localhost");
     define("DBNAME", "db_cl_and_d");
     define("USERNAME", "root");
     define("PASSWORD", "");
