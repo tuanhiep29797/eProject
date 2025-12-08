@@ -7,58 +7,62 @@
         exit;
     }
 
-    $id = $_GET["id"];
+    $category_id = $_GET["id"];
 
     //connection to database and get category by id
     try 
     {
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_CATEGORY_BY_ID);
-        $stmt->bindParam(":category_id", $id);
+        $stmt->bindParam(":category_id", $category_id);
         $stmt->execute();
 
-        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $category_list = $stmt->fetchall();
 
-        if (!$item) {
-            header("Location: category.php");
+        if ($category_list == null || count($category_list) == 0) 
+        {
+            header("Location: brand.php");
             exit;
         }
-    }
-    catch (PDOException $e) {
-        die($e->getMessage());
-    }
+        else
+        {
+            $item = $category_list[0];
+            if (!empty($_POST)) 
+            {   
+                //get new data
+                $category_name      = $_POST["category_name"];
+                $category_thumbnail = $_POST["category_thumbnail"];
 
-    $conn = null;
+                //connection to database and update brand
+                try 
+                {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_UPDATE_BRAND);
 
-    if (!empty($_POST)) 
+                    $stmt->bindParam(":category_name", $category_name);
+                    $stmt->bindParam(":category_thumbnail", $category_thumbnail);
+                    $stmt->bindParam(":category_id", $category_id);
+
+                    $stmt->execute();
+
+                    header("Location: category.php");
+                    exit;
+                }
+                catch (PDOException $e) 
+                {
+                    echo $e->getMessage();
+                }
+            }
+        }
+    }
+    catch (PDOException $e) 
     {
-        //get new data
-        $category_name      = $_POST["category_name"];
-        $category_thumbnail = $_POST["category_thumbnail"];
-
-        //connection to database and update category
-        try 
-        {
-            $conn = getConnection();
-            $stmt = $conn->prepare(SQL_UPDATE_CATEGORY);
-
-            $stmt->bindParam(":category_name", $category_name);
-            $stmt->bindParam(":category_thumbnail", $category_thumbnail);
-            $stmt->bindParam(":category_id", $id);
-
-            $stmt->execute();
-
-            header("Location: category.php");
-            exit;
-        }
-        catch (PDOException $e) 
-        {
-            echo $e->getMessage();
-        }
-
-        $conn = null;
+        echo $e->getMessage();
     }
+    $conn = null;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -123,6 +127,5 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

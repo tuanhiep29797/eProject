@@ -9,7 +9,7 @@
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt->fetchAll();
+        $category_list = $stmt->fetchAll();
     }
     catch (PDOException $e) 
     {
@@ -74,7 +74,7 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach($data_list as $item): ?>
+                    <?php foreach($category_list as $item): ?>
                         <tr>
                             <th><?= $item['category_id'] ?></th>
                             <td><?= $item['category_name'] ?></td>

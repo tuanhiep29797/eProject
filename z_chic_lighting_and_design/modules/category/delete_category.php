@@ -5,14 +5,14 @@
         header("Location: ../home_admin.php");
     }
 
-    $id = $_GET['id'];
+    $category_id = $_GET["id"];
 
     //connection to database and delete category
     try
     {
         $conn = getConnection();
         $stmt = $conn -> prepare(SQL_DELETE_CATEGORY);
-        $stmt -> bindParam(':id', $id);
+        $stmt -> bindParam(":category_id", $category_id);
         $stmt -> execute();
 
         header("Location: ../home_admin.php");

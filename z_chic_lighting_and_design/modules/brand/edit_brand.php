@@ -7,57 +7,60 @@
         exit;
     }
 
-    $id = $_GET["id"];
+    $brand_id = $_GET["id"];
 
     //connection to database and get brand by id
     try 
     {
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_BRAND_BY_ID);
-        $stmt->bindParam(":brand_id", $id);
+        $stmt->bindParam(":brand_id", $brand_id);
         $stmt->execute();
 
-        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $brand_list = $stmt->fetchall();
 
-        if (!$item) {
+        if ($brand_list == null || count($brand_list) == 0) {
             header("Location: brand.php");
             exit;
         }
+        else
+        {
+            $item = $banrd_list[0];
+            if (!empty($_POST)) 
+            {   
+                //get new data
+                $brand_name      = $_POST["brand_name"];
+                $brand_thumbnail = $_POST["brand_thumbnail"];
+
+                //connection to database and update brand
+                try 
+                {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_UPDATE_BRAND);
+
+                    $stmt->bindParam(":brand_name", $brand_name);
+                    $stmt->bindParam(":brand_thumbnail", $brand_thumbnail);
+                    $stmt->bindParam(":brand_id", $brand_id);
+
+                    $stmt->execute();
+
+                    header("Location: brand.php");
+                    exit;
+                }
+                catch (PDOException $e) 
+                {
+                    echo $e->getMessage();
+                }
+            }
+        }
     }
-    catch (PDOException $e) {
-        die($e->getMessage());
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
     }
 
     $conn = null;
-
-    if (!empty($_POST)) 
-    {   
-        //get new data
-        $brand_name      = $_POST["brand_name"];
-        $brand_thumbnail = $_POST["brand_thumbnail"];
-
-        //connection to database and update brand
-        try 
-        {
-            $conn = getConnection();
-            $stmt = $conn->prepare(SQL_UPDATE_BRAND);
-
-            $stmt->bindParam(":brand_name", $brand_name);
-            $stmt->bindParam(":brand_thumbnail", $brand_thumbnail);
-            $stmt->bindParam(":brand_id", $id);
-
-            $stmt->execute();
-
-            header("Location: brand.php");
-            exit;
-        }
-        catch (PDOException $e) 
-        {
-            echo $e->getMessage();
-        }
-
-        $conn = null;
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,7 +1,7 @@
 <?php
      if(!is_admin())
     {
-        header("Location: ../pages/home_page.php");
+        header("Location: ". BASE_URL ."/pages/home_page.php");
     }
 ?>
 

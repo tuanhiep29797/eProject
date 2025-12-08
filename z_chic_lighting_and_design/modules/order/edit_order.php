@@ -7,14 +7,14 @@
         exit;
     }
 
-    $id = $_GET["id"];
+    $order_id = $_GET["id"];
 
     //connection to database and get order by id
     try 
     {
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_ORDER_BY_ID);
-        $stmt -> bindParam(":order_id", $id);
+        $stmt -> bindParam(":order_id", $order_id);
         $stmt -> execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -26,9 +26,7 @@
         }
         else
         {
-            // var_dump($order_list);
             $item = $order_list[0];
-            // var_dump($item);
 
             $selected[$item["order_status"]] = "selected";
 
@@ -62,15 +60,15 @@
                 {
                     echo $e->getMessage();
                 }
-
-        $conn = null;
-        }
+            }
         }   
     }
-    catch (PDOException $e) {
+    catch (PDOException $e) 
+    {
         echo $e->getMessage();
     }
 
+    $conn = null;
     
 ?>
 <!DOCTYPE html>

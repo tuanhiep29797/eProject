@@ -5,14 +5,14 @@
         header("Location: ../home_admin.php");
     }
 
-    $id = $_GET['id'];
+    $product_id = $_GET['id'];
 
     //connection to database and delete product
     try
     {
         $conn = getConnection();
         $stmt = $conn -> prepare(SQL_DELETE_PRODUCT);
-        $stmt -> bindParam(':id', $id);
+        $stmt -> bindParam(':product_id', $product_id);
         $stmt -> execute();
 
         header("Location: ../home_admin.php");

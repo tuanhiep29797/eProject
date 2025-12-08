@@ -175,13 +175,13 @@
 	const SQL_GET_USER = "select * from user";
 
 	const SQL_GET_CATEGORY = "select * from category";
-	const SQL_GET_CATEGORY_BY_ID = "select * from category where category_id = :id";
+	const SQL_GET_CATEGORY_BY_ID = "select * from category where category_id = :category_id";
 
 	const SQL_GET_BRAND = "select * from brand";
-	const SQL_GET_BRAND_BY_ID = "select * from brand where brand_id = :id";
+	const SQL_GET_BRAND_BY_ID = "select * from brand where brand_id = :brand_id";
 
 	const SQL_GET_PRODUCT = "select * from product";
-	const SQL_GET_PRODUCT_BY_ID = "select * from product where product_id = :id";
+	const SQL_GET_PRODUCT_BY_ID = "select * from product where product_id = :product_id";
 
 	const SQL_GET_FEEDBACK = "select * from feedback";
 	
@@ -194,7 +194,7 @@
 
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
 	"select c.category_id, c.category_name, p.product_id, p.product_title
-	from category c join product p
+	from category c join product p 
 	on c.category_id = p.category_id
 	order by c.category_name, p.product_title
 	";

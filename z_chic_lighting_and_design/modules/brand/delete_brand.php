@@ -5,14 +5,14 @@
         header("Location: brand.php");
     }
 
-    $id = $_GET['id'];
+    $brand_id = $_GET['id'];
 
     //connection to database and delete brand
     try
     {
         $conn = getConnection();
         $stmt = $conn -> prepare(SQL_DELETE_BRAND);
-        $stmt -> bindParam(':brand_id', $id);
+        $stmt -> bindParam(':brand_id', $brand_id);
         $stmt -> execute();
 
         header("Location: brand.php");

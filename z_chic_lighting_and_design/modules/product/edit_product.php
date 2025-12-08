@@ -6,70 +6,73 @@
         header("Location: product.php");
         exit;
     }
-
-    $id = $_GET["id"];
+    
+    $product_id = $_GET["id"];
 
     //connection to database and get product by id
     try 
     {
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_PRODUCT_BY_ID);
-        $stmt->bindParam(":product_id", $id);
+        $stmt->bindParam(":product_id", $product_id);
         $stmt->execute();
 
-        $item = $stmt->fetch(PDO::FETCH_ASSOC);
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $product_list = $stmt->fetchall();
 
-        if (!$item) {
+        if ($product_list == null || count($product_list) == 0) 
+        {
             header("Location: product.php");
             exit;
         }
+        else
+        {
+            if (!empty($_POST)) 
+            {   
+                //get new data
+                $product_title       = $_POST["product_title"];
+                $product_description = $_POST["product_description"];
+                $product_price       = $_POST["product_price"];
+                $product_content     = $_POST["product_content"];
+                $product_quantity    = $_POST["product_quantity"];
+                $product_thumbnail   = $_POST["product_thumbnail"];
+                $category_id         = $_POST["category_id"];
+                $brand_id            = $_POST["brand_id"];
+
+                //connection to database and update product
+                try 
+                {
+                    $conn = getConnection();
+                    $stmt = $conn->prepare(SQL_UPDATE_PRODUCT);
+
+                    $stmt->bindParam(":product_title", $product_title);
+                    $stmt->bindParam(":product_description", $product_description);
+                    $stmt->bindParam(":product_price", $product_price);
+                    $stmt->bindParam(":product_content", $product_content);
+                    $stmt->bindParam(":product_quantity", $product_quantity);
+                    $stmt->bindParam(":product_thumbnail", $product_thumbnail);
+                    $stmt->bindParam(":category_id", $category_id);
+                    $stmt->bindParam(":brand_id", $brand_id);
+                    $stmt->bindParam(":product_id", $product_id);
+
+                    $stmt->execute();
+
+                    header("Location: product.php");
+                    exit;
+                }
+                catch (PDOException $e) 
+                {
+                    echo $e->getMessage();
+                }
+            }
+        }
     }
-    catch (PDOException $e) {
-        die($e->getMessage());
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
     }
 
     $conn = null;
-
-    if (!empty($_POST)) 
-    {   
-        //get new data
-        $product_title       = $_POST["product_title"];
-        $product_description = $_POST["product_description"];
-        $product_price       = $_POST["product_price"];
-        $product_content     = $_POST["product_content"];
-        $product_quantity    = $_POST["product_quantity"];
-        $product_thumbnail   = $_POST["product_thumbnail"];
-        $category_id         = $_POST["category_id"];
-        $brand_id            = $_POST["brand_id"];
-
-        //connection to database and update product
-        try 
-        {
-            $conn = getConnection();
-            $stmt = $conn->prepare(SQL_UPDATE_PRODUCT);
-
-            $stmt->bindParam(":product_title", $product_title);
-            $stmt->bindParam(":product_description", $product_description);
-            $stmt->bindParam(":product_price", $product_price);
-            $stmt->bindParam(":product_content", $product_content);
-            $stmt->bindParam(":product_quantity", $product_quantity);
-            $stmt->bindParam(":product_thumbnail", $product_thumbnail);
-            $stmt->bindParam(":category_id", $category_id);
-            $stmt->bindParam(":brand_id", $brand_id);
-            $stmt->bindParam(":id", $id);
-
-            $stmt->execute();
-
-            header("Location: product.php");
-            exit;
-        }
-        catch (PDOException $e) 
-        {
-            echo $e->getMessage();
-        }
-
-        $conn = null;
-    }
 ?>
 
 <!DOCTYPE html>
