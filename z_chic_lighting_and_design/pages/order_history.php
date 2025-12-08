@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/../database/dbhelper.php");
 
 $products = [];
-$count=0;
+$count=1;
 if (isset($_SESSION["id"])) {
     $user_id = $_SESSION["id"];
 
@@ -73,7 +73,30 @@ if (isset($_SESSION["id"])) {
         <div class="shopping-cart-header my-4 text-center">
             <h1>Order History</h1>
         </div>
-        <div class="shopping-cart-product m-5 px-5" style="border: 1px;">
+        <div class="shopping-cart-product m-5 px-5 row" style="border: 1px;">
+            <div class="col-lg-4">
+            <div class="account-card p-4">
+                <h5 class="fw-bold mb-4">Account</h5>
+
+                <a href="account.php" class="account-item">
+                    <i class="bi bi-person"></i>
+                    <div>
+                        <p class="title">My Profile</p>
+                        <span class="desc">Change your profile details & password</span>
+                    </div>
+                </a>
+
+                <a href="#" class="account-item">
+                    <i class="bi bi-bag-check"></i>
+                    <div>
+                        <p class="title">My Orders</p>
+                        <span class="desc">View & Manage orders</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-8">
+
             <table class="table ">
                 <thead>
                     <tr>
@@ -111,6 +134,8 @@ if (isset($_SESSION["id"])) {
                         <?php endforeach; ?>
                 </tbody>
             </table>   
+                    </div>
+
         </div>
     </div>
     </div>

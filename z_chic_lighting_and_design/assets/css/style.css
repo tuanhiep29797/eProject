@@ -339,6 +339,71 @@
   border-radius: 30px;
 }
 
+.account-card {
+    background: var(--background-color-4);
+    border-radius: 18px;
+    width: 100%;            
+    color: #fff;
+}
+
+.account-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    text-decoration: none;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.account-item:last-child {
+    border-bottom: none;
+}
+
+.account-item i {
+    font-size: 24px;
+    color: #fff;
+}
+
+.account-item .title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.account-item .desc {
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+}
+
+.account-item:hover {
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding-left: 8px;
+    transition: 0.2s;
+}
+.account-info-box {
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.09);
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.info-row .label {
+    font-weight: 500;
+    color: #444;
+}
+
+.info-row .value {
+    color: #555;
+}
+
 .header_account_login:hover,
 .header_account_login:hover span,
 .header_account_login:hover i {
