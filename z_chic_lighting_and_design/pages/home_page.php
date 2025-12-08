@@ -129,7 +129,7 @@
                 <div class="col-md-6"> <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
                         <div class="row align-items-center h-100">
                             <div class="col-5 col-sm-4">
-                                <img src="<?= $prod['product_thumbnail']; ?>" class="img-fluid" alt="<?= $prod['product_title']; ?>">
+                                <img src="<?= BASE_URL . $prod['product_thumbnail']; ?>" class="img-fluid" alt="<?= $prod['product_title']; ?>">
                             </div>
                             
                             <div class="col-7 col-sm-8 ps-3 ps-md-4">
