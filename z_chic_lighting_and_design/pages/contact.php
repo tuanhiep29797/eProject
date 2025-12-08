@@ -58,7 +58,7 @@
 
     <div class="page-banner">
         <div class="container">
-            <h2>CONTACT US</h2>
+            <h2>Contact Us</h2>
             <div class="banner-breadcrumb">
                 <a href="home_page.php">Home</a>
 

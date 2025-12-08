@@ -1,86 +1,91 @@
 <?php
-require_once (__DIR__."/../database/dbhelper.php");
+    require_once (__DIR__."/../database/dbhelper.php");
 
-//error variable
-$loginErrors = "";
-
-//check form_type
-if (!empty($_POST["form_type"])) 
+    if (is_login())
     {
+        header("Location: " . BASE_URL . "home_page.php");
+    }
 
-    //handle form login
-    if ($_POST["form_type"] === "login") 
-    {
-        $account = trim($_POST["account"] ?? "");
-        $password = $_POST["password"] ?? "";
+    //error variable
+    $login_error = "";
 
-        if ($account === "") $loginErrors = "Email or Username is required.";
-        if ($password === "") $loginErrors = "Password is required.";
-
-        try 
+    //check form_type
+    if (!empty($_POST["form_type"])) 
         {
-            //search account
-            $conn = getConnection();
-            $stmt = $conn->prepare(SQL_SEARCH_USER);
-            $stmt->bindParam(":account", $account);
-            $stmt->execute();
 
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $dataList = $stmt->fetchAll();
+        //handle form login
+        if ($_POST["form_type"] === "login") 
+        {
+            $account = trim($_POST["account"] ?? "");
+            $password = $_POST["password"] ?? "";
 
-            if ($dataList == null || count($dataList) == 0) 
+            if ($account === "") $login_error = "Email or Username is required.";
+            if ($password === "") $login_error = "Password is required.";
+
+            try 
             {
-                $loginErrors = "Username or Password incorrect.";
-            }
-            else
-            {
-                $user = $dataList[0];
+                //search account
+                $conn = getConnection();
+                $stmt = $conn->prepare(SQL_SEARCH_USER);
+                $stmt->bindParam(":account", $account);
+                $stmt->execute();
 
-                //verify password
-                if (!password_verify($password, $user["password"])) 
-                {
-                    $loginErrors = "Username or Password incorrect.";
-                } 
-                else 
-                {
-                    //save user infomation
-                    $_SESSION["username"] = $user["username"];
-                    $_SESSION["fullname"] = $user["fullname"];
-                    $_SESSION["email"] = $user["email"];
-                    $_SESSION["user_id"] = $user["user_id"];
-                    $_SESSION["role"] = $user["role"];
+                $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+                $dataList = $stmt->fetchAll();
 
-                    //check role
-                    switch ($user["role"])
+                if ($dataList == null || count($dataList) == 0) 
+                {
+                    $login_error = "Username or Password incorrect.";
+                }
+                else
+                {
+                    $user = $dataList[0];
+
+                    //verify password
+                    if (!password_verify($password, $user["password"])) 
                     {
-                        case "admin":
-                            header("Location: home_admin.php");
-                            exit();
-                        case "user":
-                            header("Location: ../pages/home_page.php");
-                            exit();
-                        default:
-                            break;
+                        $login_error = "Username or Password incorrect.";
+                    } 
+                    else 
+                    {
+                        //save user infomation
+                        $_SESSION["username"] = $user["username"];
+                        $_SESSION["fullname"] = $user["fullname"];
+                        $_SESSION["email"] = $user["email"];
+                        $_SESSION["user_id"] = $user["user_id"];
+                        $_SESSION["role"] = $user["role"];
+
+                        //check role
+                        switch ($user["role"])
+                        {
+                            case "admin":
+                                header("Location: home_admin.php");
+                                exit();
+                            case "user":
+                                header("Location: ../pages/home_page.php");
+                                exit();
+                            default:
+                                break;
+                        }
                     }
                 }
+            } 
+            catch (PDOException $e) 
+            {
+                echo "Error: " . $e->getMessage();
             }
-        } 
-        catch (PDOException $e) 
-        {
-            echo "Error: " . $e->getMessage();
+            $conn = null;
         }
-        $conn = null;
-    }
 
 
-    //handle form forget password
-    if ($_POST["form_type"] === "forget") {
-        $email_forget = trim($_POST["email_forget"] ?? "");
-   
-        $forgetErrors = "Hi $email_forget, A password reset email has been sent to your email. Thank you!";
-          
+        //handle form forget password
+        if ($_POST["form_type"] === "forget") {
+            $email_forget = trim($_POST["email_forget"] ?? "");
+    
+            $forgetErrors = "Hi $email_forget, A password reset email has been sent to your email. Thank you!";
+            
+        }
     }
-}
 
 ?>
 
@@ -124,9 +129,9 @@ if (!empty($_POST["form_type"]))
                                 <p id="forget_password">Forget Password?</p>
                                 <button class="btn btn-success w-100 mt-4" type="submit">Login</button>
                             </form>
-                            <?php if (isset($loginErrors)): ?>
+                            <?php if (isset($login_error)): ?>
                                 <div class="text-danger mt-3">
-                                        <p><?= htmlspecialchars($loginErrors) ?></p>
+                                        <p><?= htmlspecialchars($login_error) ?></p>
                                 </div>
                             <?php endif; ?>
                             <div class="register-login d-flex mt-4 justify-content-between">

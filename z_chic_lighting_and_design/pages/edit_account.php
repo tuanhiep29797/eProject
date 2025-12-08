@@ -84,22 +84,25 @@ $conn = null;
 <body>
 
     <!-- include header -->
- <div class="cart">
-        <div class="cart-header">
-            <?php
-            require_once(__DIR__ . "/../includes/home_header.php");
-            ?>
-        </div>
-        <div class="text-center text-white cart-header-text mt-5">
-            <h1 style="font-size:48px">Account</h1>
-            <div class="d-flex justify-content-center align-items-center gap-3 text-center-bottom" style="cursor:pointer">
-                <a href="home_page.php">
-                    <h4 style="color:#26b66a">Home</h4>
-                </a>
-                <h4>></h4>
-                <a href="#">
-                    <h4>Account</h4>
-                </a>
+    <?php
+        require_once (__DIR__."/../includes/home_header.php");
+    ?>
+
+    <div class="page-banner">
+        <div class="container">
+            <h2>Edit Account</h2>
+            
+            <div class="banner-breadcrumb">
+                <a href="home_page.php">Home</a>
+
+                <i class="bi bi-chevron-right"></i>
+        
+                <a href="account.php">Account</a>
+                
+                <i class="bi bi-chevron-right"></i>
+        
+                <a href="#">Edit Account</a>
+                
             </div>
         </div>
     </div>

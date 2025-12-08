@@ -116,25 +116,31 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-    <div class="cart">
-        <div class="cart-header">
-        <?php
-                require_once (__DIR__."/../includes/home_header.php");
-            ?>
-                    </div>
-        <div class="text-center text-white cart-header-text mt-5">
-            <h1 style="font-size:48px">Check Out</h1>
-            <div class="d-flex justify-content-center align-items-center gap-3 text-center-bottom" style="cursor:pointer">
-                <a href="home_page.php">
-                    <h4 style="color:#26b66a">Home</h4>
-                </a>
-                <h4>></h4>
-                <a href="#">
-                    <h4>Check Out</h4>
-                </a>
+    
+    <!-- include header -->
+    <?php
+        require_once (__DIR__."/../includes/home_header.php");
+    ?>
+
+    <div class="page-banner">
+        <div class="container">
+            <h2>Check Out</h2>
+            
+            <div class="banner-breadcrumb">
+                <a href="home_page.php">Home</a>
+                
+                <i class="bi bi-chevron-right"></i>
+        
+                <a href="cart.php">Cart</a>
+
+                <i class="bi bi-chevron-right"></i>
+        
+                <a href="#">Check Out</a>
+                
             </div>
         </div>
     </div>
+
     </div class="container">
     <div class="shopping-cart">
         <div class="shopping-cart-header my-4 text-center">

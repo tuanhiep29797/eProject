@@ -1,10 +1,10 @@
 <?php
-require_once __DIR__ ."/../database/dbhelper.php";
+    require_once __DIR__ ."/../database/dbhelper.php";
 
-if (is_login()) 
-{
-    header("Location: ../pages/home.php");
-}
+    if (is_login())
+    {
+        header("Location: " . BASE_URL . "home_page.php");
+    }
 
 $errors = [];
 
