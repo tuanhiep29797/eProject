@@ -66,14 +66,14 @@ if (!empty($_POST['action'])) {
                 echo "Error: " . $e->getMessage();
             }
             break;
-        case "remove-all":
+        case "remove_all":
             try {
                 $conn = getConnection();
                 $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
                 $stmt->bindParam(":user_id", $user_id);
                 $stmt->execute();
 
-                header("Location: home_page.php");
+                header("Location: cart.php");
                 exit;
             } catch (PDOException $e) {
                 echo "Error: " . $e->getMessage();
@@ -197,9 +197,9 @@ if (!empty($_POST['action'])) {
                     </div>
                     <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
                         <form method="POST">
-                            <button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;" name="action" value="remove-all">Remove All</button>
+                            <button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;" name="action" value="remove_all">Remove All</button>
                         </form>
-                            <a href="./check-out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;" name="action" value="check-out">Check out</button></a>
+                            <a href="./check_out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;">Check out</button></a>
                     </div>
                 </div>
             </div>
