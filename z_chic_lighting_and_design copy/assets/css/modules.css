@@ -1,0 +1,104 @@
+body {
+  background-color: #f5f6f8;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.breadcrumb {
+  background: transparent !important;
+  padding: 0 !important;
+  margin-bottom: 1.25rem;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.breadcrumb-item a {
+  color: #0d6efd;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb-item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-item.active {
+  color: #555;
+  font-weight: 600;
+}
+
+.breadcrumb i {
+  font-size: 15px;
+  opacity: 0.7;
+}
+
+.page-title {
+  font-weight: 700;
+  font-size: 26px;
+  color: #222;
+}
+
+.card-form {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 12px;
+  border: 1px solid #ececec;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+.card-form .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+}
+
+.table-container {
+  margin-top: 25px;
+}
+
+.table {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.table thead tr {
+  background: #1e293b !important;
+  color: white;
+  font-size: 15px;
+}
+
+.table tbody tr:hover {
+  background-color: #f1f5f9;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.btn-sm i {
+  font-size: 16px;
+}
+
+.btn-primary.btn-sm {
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.btn-outline-danger.btn-sm {
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.btn-success i {
+  margin-right: 5px;
+}
+
+.thumb-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}

@@ -1,0 +1,119 @@
+.footer-section {
+  background-color: var(--bg-dark);
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding-top: 70px;
+  padding-bottom: 30px;
+  font-family: "Exo 2", sans-serif;
+  margin-top: 0;
+}
+
+.footer-title {
+  color: var(--text-light);
+  font-family: "Exo 2", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+  position: relative;
+  display: inline-block;
+}
+
+.footer-title::after {
+  content: "";
+  width: 40px;
+  height: 2px;
+  background-color: var(--main-accent);
+  display: block;
+  margin-top: 10px;
+}
+
+.footer-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: block;
+  margin-bottom: 12px;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.footer-link:hover {
+  color: var(--main-accent);
+  padding-left: 5px;
+}
+
+.footer-icon {
+  font-size: 16px;
+  margin-right: 12px;
+  color: var(--main-accent);
+  vertical-align: middle;
+}
+
+.newsletter-input {
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--text-light);
+  height: 45px;
+  border-radius: 4px 0 0 4px;
+}
+
+.newsletter-input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: var(--main-accent);
+  box-shadow: none;
+}
+
+.btn-newsletter {
+  background-color: var(--main-accent);
+  color: var(--text-light);
+  height: 45px;
+  border: none;
+  padding: 0 20px;
+  border-radius: 0 4px 4px 0;
+  transition: 0.3s;
+  font-weight: 600;
+}
+
+.btn-newsletter:hover {
+  background-color: var(--text-light);
+  color: var(--main-accent);
+}
+
+.social-icons a {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--text-light);
+  border-radius: 50%;
+  margin-right: 10px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  background-color: var(--main-accent);
+  transform: translateY(-3px);
+}
+
+.payment-icons i {
+  font-size: 24px;
+  margin-right: 15px;
+  color: var(--text-light);
+  opacity: 0.7;
+}
+
+.copyright-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin-top: 50px;
+  padding-top: 25px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+copyright-section strong {
+  color: var(--text-light);
+}
