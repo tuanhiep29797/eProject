@@ -137,7 +137,7 @@ if (isset($_SESSION["user_id"])) {
                                                     <?php foreach ($items["product"] as $product_id => $product_title): ?>
                                                         <li class="nav-item">
                                                             <a class="nav-link"
-                                                            href="<?= BASE_URL ?>pages/product_detail.php?product=<?= $product_id ?>">
+                                                            href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product_id ?>">
                                                                 <?= htmlspecialchars($product_title) ?>
                                                             </a>
                                                         </li>
