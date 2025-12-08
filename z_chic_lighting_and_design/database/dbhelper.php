@@ -207,6 +207,14 @@
 	where u.user_id = :user_id
 	";
 
+	const SQL_GET_ORDER_BY_USER_ID =
+	"select o.*, od.* , p.product_title, p.product_thumbnail
+    from `order` o
+    inner join order_detail od on od.order_id = o.order_id
+    inner join product p on p.product_id = od.product_id
+    where o.user_id = :user_id
+    ";
+
 	//SQL ADD TABLE
 
 	const SQL_ADD_USER = 

@@ -8,13 +8,7 @@ if (isset($_SESSION["user_id"])) {
 
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("
-            SELECT o.*, od.* , p.product_title, p.product_thumbnail
-            FROM `order` o
-            INNER JOIN order_detail od ON od.order_id = o.order_id
-            INNER JOIN product p ON p.product_id = od.product_id
-            WHERE o.user_id = :user_id
-        ");
+        $stmt = $conn->prepare(SQL_GET_ORDER_BY_USER_ID);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 
@@ -31,9 +25,6 @@ if (isset($_SESSION["user_id"])) {
     </script>';
     exit();
 }
-
-
-
 ?>
 
 <!DOCTYPE html>
