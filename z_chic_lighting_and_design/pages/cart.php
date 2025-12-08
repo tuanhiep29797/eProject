@@ -61,19 +61,6 @@
                     echo "Error: " . $e->getMessage();
                 }
                 break;
-            case "remove_all":
-                try {
-                    $conn = getConnection();
-                    $stmt = $conn->prepare(SQL_DELETE_CART_BY_USER_ID);
-                    $stmt->bindParam(":user_id", $user_id);
-                    $stmt->execute();
-
-                    header("Location: cart.php");
-                    exit;
-                } catch (PDOException $e) {
-                    echo "Error: " . $e->getMessage();
-                }
-                break;
 
             default:
                 header("Location: cart.php");
@@ -130,13 +117,13 @@
         </div>
     </div>
 
-    </div class="container">
+    <div class="container">
     <div class="shopping-cart">
         <div class="shopping-cart-header my-4 text-center">
             <h1>Shopping Cart</h1>
         </div>
         <div class="shopping-cart-search my-4 mb-5">
-            <form action="GET">
+            <form method="GET">
                 <div class="shopping-cart-search_input">
                     <label for="search_cart"><i class="bi bi-search"></i></label>
                     <input type="text" placeholder="Search on cart" name="search_cart" id="search_cart" />
@@ -194,9 +181,7 @@
                         <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>$</sup></span>
                     </div>
                     <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
-                        <form method="POST">
-                            <button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;" name="action" value="remove_all">Remove All</button>
-                        </form>
+                            <a href="./product.php"><button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;">Product</button></a>
                             <a href="./check_out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;">Check out</button></a>
                     </div>
                 </div>

@@ -94,10 +94,6 @@
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
-            echo '<script>
-            alert("Thanks you for your payment 😘😘😘");
-            window.location.href = "home_page.php";
-            </script>';
             exit();
 
 

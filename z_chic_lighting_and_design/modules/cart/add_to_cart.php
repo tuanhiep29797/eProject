@@ -59,17 +59,13 @@
                 echo $e -> getMessage();
             }
         }
-        echo '<script>
-        alert("Done add your cart.");
-        window.location.href = "' . $_SERVER['HTTP_REFERER'] . '#product_item_' . $product_id . '";
-      </script>';
 
-        // header("Location: " . BASE_URL . "");
-        // if(isset($_SERVER['HTTP_REFERER'])) {
-        //     header("Location: " . $_SERVER['HTTP_REFERER'] . "#product_item_" . $product_id);
-        // } else {
-        //     header("Location: " . BASE_URL . "pages/home_page.php");
-        // }
+        header("Location: " . BASE_URL . "");
+        if(isset($_SERVER['HTTP_REFERER'])) {
+            header("Location: " . $_SERVER['HTTP_REFERER'] . "#product_item_" . $product_id);
+        } else {
+            header("Location: " . BASE_URL . "pages/home_page.php");
+        }
         exit();
     }
 ?>

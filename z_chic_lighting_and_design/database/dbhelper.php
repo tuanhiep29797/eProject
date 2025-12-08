@@ -332,7 +332,7 @@
 	const SQL_UPDATE_CART = 
 	"update cart 
 	set quantity = :quantity
-	where user_id = :user_id and product_id = :product_id
+	where user_id = :user_id and cart_id = :cart_id
 	";
 
 	//SQL DELETE TABLE
