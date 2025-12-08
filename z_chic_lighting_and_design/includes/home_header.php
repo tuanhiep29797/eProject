@@ -192,7 +192,7 @@ if (isset($_SESSION["user_id"])) {
                     <a href="../pages/cart.php" class="fs-4 text-dark text-decoration-none position-relative">
                         <i class="bi bi-cart my-3"></i>
 
-                        <?php if ($total_quantity > 0): ?>
+                        <?php if (isset($total_quantity) && $total_quantity > 0): ?>
                             <span class="badge bg-success 
                                         position-absolute 
                                         top-0 start-100 translate-middle

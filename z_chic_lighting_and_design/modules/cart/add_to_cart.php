@@ -27,10 +27,12 @@
 
                 if($data_list == null && count($data_list) == 0)
                 {
+                    $sql = SQL_ADD_CART;
                     $quantity = 1;
                 }
                 else
                 {
+                    $sql = SQL_UPDATE_CART;
                     $quantity = $data_list[0]["quantity"] + 1;
                 }
             }
@@ -42,7 +44,7 @@
             try
             {
                 $conn = getConnection();
-                $stmt = $conn->prepare(SQL_ADD_CART);
+                $stmt = $conn->prepare($sql);
                 $stmt->bindParam(":user_id", $user_id);
                 $stmt->bindParam(":product_id", $product_id);
                 $stmt->bindParam(":quantity", $quantity);

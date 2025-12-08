@@ -321,6 +321,12 @@
 	where feedback_id = :feedback_id
 	";
 
+	const SQL_UPDATE_CART = 
+	"update cart 
+	set quantity = :quantity
+	where user_id = :user_id and product_id = :product_id
+	";
+
 	//SQL DELETE TABLE
 
 	const SQL_DELETE_USER = "delete from user where user_id = :user_id";
