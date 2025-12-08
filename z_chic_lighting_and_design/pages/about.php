@@ -89,7 +89,7 @@
             <h3 class="text-white mb-4 fw-bold text-uppercase">Introduction Video</h3>
             <p class="text-white-50 mb-5">Discover our showroom and working process</p>
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/a2mEGoCZEzU?list=RDa2mEGoCZEzU" title="Gods Ft NewJeans | THEREON REMIX | Nhạc Hot Tik Tok Việt Nam 2023 | Nhạc Dành Cho Faker" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>" </iframe>
+                <iframe src="https://www.youtube.com/embed/UH27YDBjNFU?list=RDVFjb8lDVW04" title="[Vietsub - Pinyin] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>
