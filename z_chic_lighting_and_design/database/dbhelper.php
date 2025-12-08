@@ -190,6 +190,8 @@
 
 	const SQL_GET_GALLERY = "select * from gallery";
 
+	const SQL_GET_CARD_BY_USER_AND_PRODUCT = "select * from cart where user_id = :user_id and product_id = :product_id";
+
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
 	"select c.category_id, c.category_name, p.product_id, p.product_title
 	from category c join product p

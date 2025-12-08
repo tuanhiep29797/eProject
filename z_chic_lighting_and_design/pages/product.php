@@ -1,108 +1,107 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+  require_once(__DIR__ . "/../database/dbhelper.php");
 
-try {
-  $conn = getConnection();
-  $stmt = $conn->prepare(SQL_GET_CATEGORY);
-  $stmt->execute();
-
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $categories = $stmt->fetchAll();
-
-  $stmt = $conn->prepare(SQL_GET_BRAND);
-  $stmt->execute();
-
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $brands = $stmt->fetchAll();
-} catch (PDOException $e) {
-  echo "Error: " . $e->getMessage();
-}
-$conn = null;
-
-// Get filter parameters
-
-
-$category_filter = isset($_GET['category']) ? $_GET['category'] : [];
-$brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
-
-if (isset($_GET['action'])) {
-
-  switch ($_GET['action']) {
-    case 'filter':
-      try {
-        $conn = getConnection();
-
-        $sql = "SELECT p.*, c.category_name, b.brand_name
-                FROM product p
-                INNER JOIN category c ON p.category_id = c.category_id
-                INNER JOIN brand b ON p.brand_id = b.brand_id
-                WHERE 1";
-        $params = [];
-
-        if (!empty($_GET['category'])) {
-          $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
-          $sql .= " AND p.category_id IN ($placeholders)";
-          $params = array_merge($params, $category_filter);
-        }
-
-        if (!empty($_GET['brand'])) {
-          $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
-          $sql .= " AND p.brand_id IN ($placeholders)";
-          $params = array_merge($params, $brand_filter);
-        }
-        
-      $stmt = $conn->prepare($sql);
-      $stmt->execute($params);
-
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $products = $stmt->fetchAll();
-      } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-      }
-      $conn = null;
-      break;
-
-    case 'search':
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare("
-            SELECT * FROM product
-            WHERE product_title LIKE :search
-        ");
-        $stmt->execute([
-                  ':search' => '%' . $search . '%'
-              ]);
-
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $products = $stmt->fetchAll();
-      } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
-      }
-      $conn = null;
-      break;
-
-    default:
-      header("Location: #");
-      break;
-  }
-} else {
   try {
     $conn = getConnection();
-    $stmt = $conn->prepare(SQL_GET_PRODUCT);
+    $stmt = $conn->prepare(SQL_GET_CATEGORY);
     $stmt->execute();
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $products = $stmt->fetchAll();
+    $categories = $stmt->fetchAll();
+
+    $stmt = $conn->prepare(SQL_GET_BRAND);
+    $stmt->execute();
+
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $brands = $stmt->fetchAll();
   } catch (PDOException $e) {
     echo "Error: " . $e->getMessage();
   }
   $conn = null;
-}
 
-$total_products = count($products);
+  // Get filter parameters
 
+
+  $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
+  $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
+
+  if (isset($_GET['action'])) {
+
+    switch ($_GET['action']) {
+      case 'filter':
+        try {
+          $conn = getConnection();
+
+          $sql = "SELECT p.*, c.category_name, b.brand_name
+                  FROM product p
+                  INNER JOIN category c ON p.category_id = c.category_id
+                  INNER JOIN brand b ON p.brand_id = b.brand_id
+                  WHERE 1";
+          $params = [];
+
+          if (!empty($_GET['category'])) {
+            $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
+            $sql .= " AND p.category_id IN ($placeholders)";
+            $params = array_merge($params, $category_filter);
+          }
+
+          if (!empty($_GET['brand'])) {
+            $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
+            $sql .= " AND p.brand_id IN ($placeholders)";
+            $params = array_merge($params, $brand_filter);
+          }
+          
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
+
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      case 'search':
+      $search = isset($_GET['search']) ? $_GET['search'] : '';
+
+      try {
+          $conn = getConnection();
+          $stmt = $conn->prepare("
+              SELECT * FROM product
+              WHERE product_title LIKE :search
+          ");
+          $stmt->execute([
+                    ':search' => '%' . $search . '%'
+                ]);
+
+          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+          $products = $stmt->fetchAll();
+        } catch (PDOException $e) {
+          echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        break;
+
+      default:
+        header("Location: #");
+        break;
+    }
+  } else {
+    try {
+      $conn = getConnection();
+      $stmt = $conn->prepare(SQL_GET_PRODUCT);
+      $stmt->execute();
+
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    } catch (PDOException $e) {
+      echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+  }
+
+  $total_products = count($products);
 ?>
 
 
@@ -123,9 +122,24 @@ $total_products = count($products);
 <body>
 
   <!-- include header -->
-    <?php
-        require_once (__DIR__."/../includes/home_header.php");
-    ?>
+  <?php
+      require_once (__DIR__."/../includes/home_header.php");
+  ?>
+
+  <div class="page-banner">
+    <div class="container">
+        <h2>Product</h2>
+        
+        <div class="banner-breadcrumb">
+            <a href="home_page.php">Home</a>
+            
+            <i class="bi bi-chevron-right"></i>
+    
+            <a href="#">Product</a>
+            
+        </div>
+    </div>
+  </div>
 
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
@@ -202,13 +216,13 @@ $total_products = count($products);
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card">
                     <div class="product-image">
-                      <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                      <a href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product['product_id'] ?>">
                         <img src="<?= $image_path ?>" alt="<?= htmlspecialchars($product['product_title']) ?>">
                       </a>
                     </div>
                     <div class="product-info">
                       <h5 class="product-name">
-                        <a href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product['product_id'] ?>">
                           <?= htmlspecialchars($product['product_title']) ?>
                         </a>
                       </h5>
@@ -216,10 +230,10 @@ $total_products = count($products);
                         $<?= number_format($product['product_price'], 2) ?>
                       </div>
                       <div class="product-actions">
-                        <button class="btn btn-add-cart" onclick="addToCart(<?= $product['product_id'] ?>)">
+                        <a class="btn btn-secondary btn-add-cart" href="<?= BASE_URL ?>modules/cart/add_to_card.php?id=<?= $product['product_id'] ?>">
                           Add To Cart
-                        </button>
-                        <button class="btn btn-buy-now" onclick="buyNow(<?= $product['product_id'] ?>)">
+                        </a>
+                        <button class="btn btn-secondary btn-buy-now" href="product_detail.php?id=<?= $product['product_id'] ?>">
                           Buy Now
                         </button>
                       </div>
