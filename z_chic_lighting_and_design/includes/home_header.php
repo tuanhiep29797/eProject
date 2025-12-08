@@ -40,8 +40,11 @@
     }
 
     $conn = null;
-
-    $block_name = substr($_SESSION["fullname"], 0, 5) . "...";
+    $block_name ="";
+    if (is_login())
+    {
+        $block_name = substr($_SESSION["fullname"], 0, 5) . "...";
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
