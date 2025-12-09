@@ -40,7 +40,7 @@
                 LEFT JOIN category c ON c.category_id = p.category_id
                 WHERE p.product_id != :product_id
                 ORDER BY RAND()
-                LIMIT 5
+                LIMIT 6
                 ");
             $stmt->bindParam(":product_id", $product_id);
             $stmt->execute();
@@ -99,7 +99,7 @@
               
               <i class="bi bi-chevron-right"></i>
       
-              <a href="#"><?= htmlspecialchars($product_item["product_title"]) ?>?></a>
+              <a href="#"><?= htmlspecialchars($product_item["product_title"]) ?></a>
               
           </div>
       </div>
@@ -111,36 +111,30 @@
       <div class="product-card">
         <div class="row g-4">
           <!-- Product Images -->
-          <div class="col-lg-5">
-            <div id="carouselExampleIndicators" class="carousel slide">
-              <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-              </div>
-              <div class="carousel-inner">
+          <div class="col-lg-6">
 
-                <?php foreach($product_img_list as $product_img):?>
-                  <div class="carousel-item active">
-                    <img src="<?= BASE_URL . $product_img["url"] ?>" class="d-block rounded" alt="Product Image">
+            <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <?php foreach($product_img_list as $index => $product_img):?>
+                  <div class="carousel-item <?= $index === 0 ? "active" : ""?>" data-bs-interval="2000">
+                    <img src="<?= BASE_URL . $product_img["url"] ?>" class="d-block w-100" style="height: 700px; object-fit: cover;" alt="Product Image">
                   </div>
                 <?php endforeach;?>
-
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
+      
           </div>
 
           <!-- Product Info -->
-          <div class="col-lg-7">
+          <div class="col-lg-6">
             <div class="product-info">
               <div class="product-meta">
                 <span class="meta-item">Brand: <strong><?= $product_item['brand_name'] ?></strong></span>
@@ -149,7 +143,7 @@
 
               <h1 class="product-title">      
                 <?= $product_item['product_title'] ?>
-            </h1>
+              </h1>
 
               <div class="rating-badge">
                 <i class="bi bi-star-fill"></i>
@@ -167,12 +161,12 @@
               <div class="product-price">$<?= number_format($product_item['product_price'])?></div>
 
               <div class="product-actions">
-                <button class="btn btn-outline-dark btn-cart">
-                  ADD TO CART
-                </button>
-                <button class="btn btn-dark btn-buy">
-                  BUY NOW
-                </button>
+                <a href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
+                  <button class="btn btn-outline-dark btn-cart">
+                    <i class="bi bi-cart-plus"></i>             
+                    ADD TO CART
+                  </button>
+                </a>
               </div>
             </div>
           </div>
@@ -189,10 +183,10 @@
       </div>
 
       <div class="row g-4">
-        <?php for ($i = 0; $i < 5; $i++): 
+        <?php for ($i = 0; $i <= 5; $i++): 
             $product_item = $random_products[$i];
         ?>
-        <div class="col-6 col-md-4 col-lg">
+        <div class="col-6 col-md-2 col-lg-2">
         <div class="recommendation-card">
             <div class="card-image">
             <img src="<?= BASE_URL . $product_item['product_thumbnail'] ?>" alt="<?= $product_item['product_thumbnail'] ?>">
@@ -208,7 +202,9 @@
                 <a href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
                     <button class="btn btn-sm btn-dark">Add To Cart</button>
                 </a>
-                <button class="btn btn-sm btn-warning">Buy Now</button>
+                <a href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product_item['product_id'] ?>">
+                  <button class="btn btn-sm btn-warning">Buy Now</button>
+                </a>
             </div>
             </div>
         </div>
@@ -217,6 +213,12 @@
       </div>
     </div>
   </section>
+
+  <!-- include footer -->
+  <?php
+      require_once (__DIR__."/../includes/home_footer.php");
+  ?>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   
 </body>
