@@ -1,5 +1,6 @@
 <?php
 
+
 $company_info = [
     "name" => "LICERIA & CO",
     "desc" => "We provide modern, energy-saving, and highly aesthetic lighting solutions for your home.",
@@ -26,6 +27,8 @@ $guides = [
 ];
 ?>
 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +38,10 @@ $guides = [
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="./css/footer.css">
+    
 </head>
 <body>
+    
 
 <footer class="footer-section">
     <div class="container">
@@ -112,6 +117,7 @@ $guides = [
             </div>
         </div>
     </div>
+    
 </footer>
 
 </body>

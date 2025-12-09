@@ -94,9 +94,8 @@
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
+            header('Location: product.php');
             exit();
-
-
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
