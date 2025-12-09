@@ -24,6 +24,15 @@
                 </script>';
             }
 
+            $product_item = $product_detail_list[0];
+
+            $stmt = $conn -> prepare("select * from product_img where product_id = :product_id");
+            $stmt->bindParam(":product_id", $product_id);
+            $stmt->execute();
+
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $product_img_list = $stmt->fetchAll();
+
             $stmt = $conn->prepare("
                 SELECT p.*, b.brand_name, c.category_name
                 FROM product p
@@ -39,21 +48,21 @@
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $random_products = $stmt->fetchAll();
 
-
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
         }
         $conn = null;
 
-
-
-
-    } else {
-        echo '<script>
-            alert("Product detail not found.");
-            window.location.href = "product.php";
-        </script>';
-        exit();
+    } 
+    else 
+    {
+      echo '<script>
+          alert("Product detail not found.");
+          window.location.href = "product.php";
+      </script>';
+      exit();
     }
 
 ?>
@@ -64,22 +73,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Page</title>
-
+  <title>Product Detail</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/product_detail.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/product_detail.css?v=<?= time() ?>">
 </head>
 
 <body>
 
-  <div class="container py-3">
-    <a href="product.php" class="back-link">
-      <i class="bi bi-chevron-left"></i> Product
-    </a>
+  <!-- include header -->
+  <?php
+      require_once (__DIR__."/../includes/home_header.php");
+  ?>
+
+  <div class="page-banner">
+      <div class="container">
+          <h2>Product Detail</h2>
+          
+          <div class="banner-breadcrumb">
+              <a href="home_page.php">Home</a>
+
+              <i class="bi bi-chevron-right"></i>
+      
+              <a href="product.php">Product</a>
+              
+              <i class="bi bi-chevron-right"></i>
+      
+              <a href="#"><?= htmlspecialchars($product_item["product_title"]) ?>?></a>
+              
+          </div>
+      </div>
   </div>
 
   <!-- Product Detail Section -->
@@ -89,41 +112,43 @@
         <div class="row g-4">
           <!-- Product Images -->
           <div class="col-lg-5">
-            <div class="product-gallery">
-            <?php foreach($product_detail_list as $item): ?>
+            <div id="carouselExampleIndicators" class="carousel slide">
+              <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+              </div>
+              <div class="carousel-inner">
 
-              <div class="main-image">
-                <img src="<?= $item['product_thumbnail'] ?>" alt="$item[" id="mainImage">
+                <?php foreach($product_img_list as $product_img):?>
+                  <div class="carousel-item active">
+                    <img src="<?= BASE_URL . $product_img["url"] ?>" class="d-block rounded" alt="Product Image">
+                  </div>
+                <?php endforeach;?>
+
               </div>
-              <div class="thumbnail-list">
-                <button class="thumbnail active"
-                  onclick="changeImage(this, './img/lamp_02_w500.jpeg')">
-                  <img src="./img/lamp_01_w100.jpeg" alt="Thumbnail 1">
-                </button>
-                <button class="thumbnail"
-                  onclick="changeImage(this, './img/Lamp_05_w500.jpeg')">
-                  <img src="./img/lamp_04_w100.jpeg" alt="Thumbnail 2">
-                </button>
-                <button class="thumbnail"
-                  onclick="changeImage(this, './img/lamp_06_w500.jpeg')">
-                  <img src="./img/Lamp_03_w100.jpeg" alt="Thumbnail 3">
-                </button>
-              </div>
-            <?php endforeach; ?>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
 
           <!-- Product Info -->
           <div class="col-lg-7">
-            <?php foreach($product_detail_list as $item): ?>
             <div class="product-info">
               <div class="product-meta">
-                <span class="meta-item">Brand: <strong><?= $item['brand_name'] ?></strong></span>
-                <span class="meta-item">Category: <strong><?= $item['category_name'] ?></strong></span>
+                <span class="meta-item">Brand: <strong><?= $product_item['brand_name'] ?></strong></span>
+                <span class="meta-item">Category: <strong><?= $product_item['category_name'] ?></strong></span>
               </div>
 
               <h1 class="product-title">      
-                <?= $item['product_title'] ?>
+                <?= $product_item['product_title'] ?>
             </h1>
 
               <div class="rating-badge">
@@ -133,13 +158,13 @@
               </div>
 
               <p class="product-description">
-                <?= $item['product_description'] ?>
+                <?= $product_item['product_description'] ?>
               </p>
               <p class="product-description">
-                <?= $item['product_content'] ?>
+                <?= $product_item['product_content'] ?>
               </p>
 
-              <div class="product-price">$<?= number_format($item['product_price'])?></div>
+              <div class="product-price">$<?= number_format($product_item['product_price'])?></div>
 
               <div class="product-actions">
                 <button class="btn btn-outline-dark btn-cart">
@@ -151,7 +176,6 @@
               </div>
             </div>
           </div>
-            <?php endforeach; ?>
         </div>
       </div>
     </div>
@@ -166,22 +190,22 @@
 
       <div class="row g-4">
         <?php for ($i = 0; $i < 5; $i++): 
-            $item = $random_products[$i];
+            $product_item = $random_products[$i];
         ?>
         <div class="col-6 col-md-4 col-lg">
         <div class="recommendation-card">
             <div class="card-image">
-            <img src="<?= $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>">
+            <img src="<?= BASE_URL . $product_item['product_thumbnail'] ?>" alt="<?= $product_item['product_thumbnail'] ?>">
             </div>
             <div class="card-body">
-            <h5 class="card-title"><?= $item['product_title'] ?></h5>
+            <h5 class="card-title"><?= $product_item['product_title'] ?></h5>
             <div class="card-rating">
                 <i class="bi bi-star-fill"></i>
                 <span>5.0 (26 Reviews)</span>
             </div>
-            <div class="card-price">$<?= number_format($item['product_price']) ?></div>
+            <div class="card-price">$<?= number_format($product_item['product_price']) ?></div>
             <div class="card-actions">
-                <a href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $item['product_id'] ?>">
+                <a href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
                     <button class="btn btn-sm btn-dark">Add To Cart</button>
                 </a>
                 <button class="btn btn-sm btn-warning">Buy Now</button>
@@ -194,17 +218,7 @@
     </div>
   </section>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    function changeImage(thumbnail, imageUrl) {
-
-      document.getElementById('mainImage').src = imageUrl;
-
-
-      document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
-      thumbnail.classList.add('active');
-    }
-  </script>
-
+  
 </body>
 
 </html>
