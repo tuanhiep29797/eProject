@@ -283,6 +283,14 @@
 	(:url)
 	";
 
+	const SQL_ADD_PRODUCT_IMG = 
+	"insert into product_img (product_id, url)
+	values
+	(:product_id, :url)
+	";
+
+
+
 	//SQL UPDATE TABLE
 
 	const SQL_UPDATE_USER = 
