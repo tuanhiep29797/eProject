@@ -27,6 +27,8 @@
         }
         else
         {
+            $editing_product = $product_list[0];
+            
             if (!empty($_POST)) 
             {   
                 //get new data
@@ -120,49 +122,49 @@
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input type="text" class="form-control" name="product_title"
-                               value="<?= htmlspecialchars($item["product_title"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_title"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Description</label>
                         <input type="text" class="form-control" name="product_description"
-                               value="<?= htmlspecialchars($item["product_description"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_description"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Price</label>
                         <input type="number" class="form-control" name="product_price"
-                               value="<?= htmlspecialchars($item["product_price"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_price"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Content</label>
                         <input type="text" class="form-control" name="product_content"
-                               value="<?= htmlspecialchars($item["product_content"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_content"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Quantity</label>
                         <input type="number" class="form-control" name="product_quantity"
-                               value="<?= htmlspecialchars($item["product_quantity"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_quantity"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail</label>
                         <input type="text" class="form-control" name="product_thumbnail"
-                               value="<?= htmlspecialchars($item["product_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["product_thumbnail"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Category ID</label>
                         <input type="text" class="form-control" name="category_id"
-                               value="<?= htmlspecialchars($item["category_id"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["category_id"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Brand ID</label>
                         <input type="text" class="form-control" name="brand_id"
-                               value="<?= htmlspecialchars($item["brand_id"]) ?>">
+                               value="<?= htmlspecialchars($editing_product["brand_id"]) ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Product</button>

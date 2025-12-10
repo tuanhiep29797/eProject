@@ -27,7 +27,7 @@
         }
         else
         {
-            $item = $category_list[0];
+            $editing_category = $category_list[0];
             if (!empty($_POST)) 
             {   
                 //get new data
@@ -108,13 +108,13 @@
                     <div class="mb-3">
                         <label class="form-label">Category Name</label>
                         <input type="text" class="form-control" name="category_name"
-                               value="<?= htmlspecialchars($item["category_name"]) ?>" required>
+                               value="<?= htmlspecialchars($editing_category["category_name"]) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail URL</label>
                         <input type="text" class="form-control" name="category_thumbnail"
-                               value="<?= htmlspecialchars($item["category_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($editing_category["category_thumbnail"]) ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Category</button>

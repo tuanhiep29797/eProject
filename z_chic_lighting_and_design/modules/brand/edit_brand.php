@@ -26,7 +26,7 @@
         }
         else
         {
-            $item = $banrd_list[0];
+            $editing_brand = $banrd_list[0];
             if (!empty($_POST)) 
             {   
                 //get new data
@@ -107,13 +107,13 @@
                     <div class="mb-3">
                         <label class="form-label">Brand Name</label>
                         <input type="text" class="form-control" name="brand_name"
-                               value="<?= htmlspecialchars($item["brand_name"]) ?>" required>
+                               value="<?= htmlspecialchars($editing_brand["brand_name"]) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail URL</label>
                         <input type="text" class="form-control" name="brand_thumbnail"
-                               value="<?= htmlspecialchars($item["brand_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($editing_brand["brand_thumbnail"]) ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Brand</button>

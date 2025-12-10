@@ -26,9 +26,9 @@
         }
         else
         {
-            $item = $order_list[0];
+            $editing_order = $order_list[0];
 
-            $selected[$item["order_status"]] = "selected";
+            $selected[$editing_order["order_status"]] = "selected";
 
             //update order when submit form
             if (!empty($_POST)) 
@@ -115,7 +115,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">User ID</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($item["user_id"]) ?>" disabled>
+                        <input type="text" class="form-control" value="<?= htmlspecialchars($editing_order["user_id"]) ?>" disabled>
                     </div>
 
                     <div class="mb-3">
@@ -132,29 +132,29 @@
                     <div class="mb-3">
                         <label class="form-label">Receiver</label>
                         <input type="text" class="form-control" name="receiver"
-                               value="<?= htmlspecialchars($item["receiver"]) ?>">
+                               value="<?= htmlspecialchars($editing_order["receiver"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Phone Number</label>
                         <input type="text" class="form-control" name="phone_number"
-                               value="<?= htmlspecialchars($item["phone_number"]) ?>">
+                               value="<?= htmlspecialchars($editing_order["phone_number"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Address</label>
                         <input type="text" class="form-control" name="address"
-                               value="<?= htmlspecialchars($item["address"]) ?>">
+                               value="<?= htmlspecialchars($editing_order["address"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Total Amount</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($item["total_amount"]) ?>" disabled>
+                        <input type="text" class="form-control" value="<?= htmlspecialchars($editing_order["total_amount"]) ?>" disabled>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Order Date</label>
-                        <input type="text" class="form-control" value="<?= htmlspecialchars($item["order_date"]) ?>" disabled>
+                        <input type="text" class="form-control" value="<?= htmlspecialchars($editing_order["order_date"]) ?>" disabled>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Order</button>
