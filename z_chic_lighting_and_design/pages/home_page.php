@@ -33,6 +33,7 @@
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $brand_list = $stmt->fetchAll();
+        var_dump($brand_list);
     }
     catch (PDOException $e) 
     {
