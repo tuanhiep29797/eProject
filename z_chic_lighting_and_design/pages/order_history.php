@@ -110,7 +110,7 @@ if (isset($_SESSION["user_id"])) {
                     <?php foreach ($order_history as $item): ?>
                     <tr class="align-middle">
                         <td><?= $count++ ?></td>
-                        <td><img src="<?= $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" /></td>
+                        <td><img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" /></td>
                         <td><?= $item['product_title'] ?></td>
                         <td><?= $item['quantity'] ?></td>
                         <td><?= number_format($item['unit_price']) ?></td>

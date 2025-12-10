@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="container about-section">
+    <div class="container about-section mt-5 pt-5">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="img-box">

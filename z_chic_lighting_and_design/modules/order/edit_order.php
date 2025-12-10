@@ -49,7 +49,7 @@
                     $stmt->bindParam(":receiver", $receiver);
                     $stmt->bindParam(":phone_number", $phone_number);
                     $stmt->bindParam(":address", $address);
-                    $stmt->bindParam(":order_id", $id);
+                    $stmt->bindParam(":order_id", $order_id);
 
                     $stmt->execute();
 

@@ -48,7 +48,7 @@
 
     <!-- body order management page -->
     <div class="container table-container mt-4">
-        <form method="post">
+        <form method="post" action = 'save_order.php' >
         
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h2 class="page-title">
@@ -56,10 +56,10 @@
                 Order Management
             </h2>
 
-            <a href="add_user.php" class="btn btn-success">
+            <button type='submit' class="btn btn-success">
                 <i class="bi bi-patch-check-fill"></i>
                 Save All
-            </a>
+            </button>
         </div>
 
         <div class="table-responsive">
@@ -76,14 +76,13 @@
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <?php foreach($order_list as $item): ?>
                         <?php
                             $selected = [];
                             $selected[$item["order_status"]] = "selected";
                         ?>
-                        <input type="hidden" name="order_id" value="<?= $item["order_id"] ?>">
+                        <input type="hidden" name="order_id[]" value="<?= $item["order_id"] ?>">
                         <tr>
                             <th><?= $item["order_id"] ?></th>
                             <td>$<?= number_format($item["total_amount"],2) ?></td>
@@ -91,7 +90,7 @@
                             <td><?= $item["phone_number"] ?></td>
                             <td><?= $item["address"] ?></td>
                             <td>    
-                                <select class="form-select" name="order_status"
+                                <select class="form-select" name="order_status[]"
                                     style="color:<?= isset($selected["pending"]) || isset($selected["cancelled"]) ? 
                                                 "red" :
                                                 (isset($selected["processing"]) ? "orange" :

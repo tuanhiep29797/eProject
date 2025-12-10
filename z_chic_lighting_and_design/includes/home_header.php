@@ -79,10 +79,10 @@ if (isset($_SESSION["user_id"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/variables.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/fonts.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/header.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/banner.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/variables.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/fonts.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/header.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/banner.css?v=<?= time() ?>">
     <title>Home Header</title>
 </head>
 
@@ -157,7 +157,7 @@ if (isset($_SESSION["user_id"])) {
                                 <div class="p-2 nav-item_category">
                                     <?php foreach ($category_list as $index_category_id => $items): ?>
                                         <a class="dropdown-item py-2"
-                                        href="<?= BASE_URL?>pages/category.php?category=<?= $index_category_id ?>">
+                                        href="<?= BASE_URL?>pages/category.php?category%5B%5D=<?= $index_category_id ?>&action=filter">
                                             <?= htmlspecialchars($items["category_name"]) ?>
                                         </a>
                                     <?php endforeach ?>
@@ -172,7 +172,7 @@ if (isset($_SESSION["user_id"])) {
                                 <div class=" p-2 nav-item_brand">
                                     <?php foreach ($brand_list as $brand): ?>
                                         <a class="dropdown-item py-2"
-                                        href="<?= BASE_URL?>/pages/brand.php?brand=<?= $brand["brand_id"] ?>">
+                                        href="<?= BASE_URL?>/pages/brand.php?brand%5B%5D=<?= $brand["brand_id"] ?>&action=filter">
                                             <?= htmlspecialchars($brand["brand_name"]) ?>
                                         </a>
                                     <?php endforeach ?>

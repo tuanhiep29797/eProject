@@ -94,7 +94,7 @@
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
-            header('Location: product.php');
+            header('Location: order_history.php');
             exit();
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -165,7 +165,7 @@
                     <?php foreach ($products as $item): ?>
                         <div class="sc-product row align-items-center mx-5 mt-4" id="shopping-cart-<?= $item['cart_id'] ?>">
                             <div class="sc-product-img col-lg-2 my-2">
-                                <img src="<?= $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" />
+                                <img src="  <?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" />
                             </div>
                             <div class="sc-product-text col-lg-6 text-right">
                                 <h5 class='fw-bold'><?= $item['product_title'] ?></h5>
