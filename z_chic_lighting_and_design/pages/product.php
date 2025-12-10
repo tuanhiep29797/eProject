@@ -25,6 +25,7 @@ $conn = null;
 // Get filter parameters
 $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
 $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
+
 // Pagination Config
 $limit = 9;
 $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
@@ -122,6 +123,7 @@ try {
         </script>";
 }
 $conn = null;
+
 ?>
 
 

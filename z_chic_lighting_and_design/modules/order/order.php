@@ -9,7 +9,7 @@
         $stmt -> execute();
 
         $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt -> fetchAll();
+        $order_list = $stmt -> fetchAll();
     }
     catch (PDOException $e)
     {
@@ -48,18 +48,22 @@
 
     <!-- body order management page -->
     <div class="container table-container mt-4">
-
-        <h2 class="page-title mb-4">
-            <i class="bi bi-bag-check-fill me-2"></i>
-            Order Management
-        </h2>
-
+        <form method="post">
+        <div class="d-flex justify-content-between my-3">
+            <h2 class="page-title mb-4">
+                <i class="bi bi-bag-check-fill me-2"></i>
+                Order Management
+            </h2>
+            <button type="submit" class="btn btn-success py-2 px-3 fs-6 fw-bold">
+                <i class="bi bi-patch-check-fill"></i>
+                Save All
+            </button>
+        </div>
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped align-middle">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Order ID</th>
-                        <th scope="col">User ID</th>
                         <th scope="col">Status</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col">Receiver</th>
@@ -71,11 +75,29 @@
                 </thead>
 
                 <tbody>
-                    <?php foreach($data_list as $item): ?>
+                    <?php foreach($order_list as $item): ?>
+                        <?php
+                            $selected = [];
+                            $selected[$item["order_status"]] = "selected";
+                        ?>
+                        <input type="hidden" name="order_id" value="<?= $item["order_id"] ?>">
                         <tr>
                             <th><?= $item["order_id"] ?></th>
-                            <td><?= $item["user_id"] ?></td>
-                            <td><?= $item["order_status"] ?></td>
+                            <td>    
+                                <select class="form-select" name="order_status"
+                                    style="color:<?= isset($selected["pending"]) || isset($selected["cancelled"]) ? 
+                                                "red" :
+                                                (isset($selected["processing"]) ? "orange" :
+                                                    (isset($selected["shipped"]) ? "brown" : "green"))?>;"
+                                >
+
+                                    <option style="color:red;" <?= $selected["pending"]  ?? "" ?> value="pending">⏰Pending</option>
+                                    <option style="color:orange;" <?= $selected["processing"] ?? "" ?> value="processing">📦Processing</option>
+                                    <option style="color:brown;" <?= $selected["shipped"]    ?? "" ?> value="shipped">🚕Shipped</option>
+                                    <option style="color:green;" <?= $selected["delivered"]  ?? "" ?> value="delivered">✅Delivered</option>
+                                    <option style="color:red;" <?= $selected["cancelled"]  ?? "" ?> value="cancelled">❌Cancelled</option>
+                                </select>
+                            </td>
                             <td><?= $item["total_amount"] ?></td>
                             <td><?= $item["receiver"] ?></td>
                             <td><?= $item["phone_number"] ?></td>
@@ -87,6 +109,10 @@
                                    class="btn btn-primary btn-sm">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
+                                <a href="order_detail.php?id=<?= $item["order_id"] ?>" 
+                                   class="btn btn-info btn-sm text-white">
+                                    <i class='bi bi-eye-fill'></i>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -94,7 +120,7 @@
 
             </table>
         </div>
-
+        </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

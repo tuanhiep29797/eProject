@@ -5,12 +5,12 @@
     $msgType = "";
 
     if (!empty($_POST)) {
-        $name    = trim($_POST['username'] ?? '');
+        $username    = trim($_POST['username'] ?? '');
         $email   = trim($_POST['email'] ?? '');
-        $phone   = trim($_POST['phone_number'] ?? '');
+        $phone_number   = trim($_POST['phone_number'] ?? '');
         $content = trim($_POST['content'] ?? '');
 
-        if ($name && $email && $phone && $content) 
+        if ($username && $email && $phone_number && $content) 
         {
             try 
             {
@@ -18,7 +18,7 @@
                 $stmt = $conn->prepare(SQL_ADD_FEEDBACK);
                 $stmt -> bindParam(":username", $username);
                 $stmt -> bindParam(":email", $email);
-                $stmt -> bindParam(":phone", $phone);
+                $stmt -> bindParam(":phone_number", $phone_number);
                 $stmt -> bindParam(":content", $content);
                 $stmt->execute();
                 
