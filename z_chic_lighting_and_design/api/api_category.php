@@ -1,7 +1,7 @@
 <?php
     $categories = 
     [
-        ["Ceiling Lights", "assets/img/category/ceciling_lights/category_ceiling_light_1.png"],
+        ["Ceiling Lights", "assets/img/category/ceiling_lights/category_ceiling_lights_1.png"],
         ["Wall Lights", "assets/img/category/wall_lights/category_wall_lights_1.png"],
         ["Outdoor Lights", "assets/img/category/outdoor_lights/category_outdoor_lights_1.png"],
         ["Fans", "assets/img/category/fans/category_fans_1.png"],

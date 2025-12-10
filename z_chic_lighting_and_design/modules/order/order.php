@@ -5,7 +5,7 @@
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_ORDER);
+        $stmt = $conn -> prepare(SQL_GET_ORDER . " order by order_id desc");
         $stmt -> execute();
 
         $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
@@ -49,26 +49,29 @@
     <!-- body order management page -->
     <div class="container table-container mt-4">
         <form method="post">
-        <div class="d-flex justify-content-between my-3">
-            <h2 class="page-title mb-4">
-                <i class="bi bi-bag-check-fill me-2"></i>
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="page-title">
+                <i class="bi bi-boxes me-2"></i>
                 Order Management
             </h2>
-            <button type="submit" class="btn btn-success py-2 px-3 fs-6 fw-bold">
+
+            <a href="add_user.php" class="btn btn-success">
                 <i class="bi bi-patch-check-fill"></i>
                 Save All
-            </button>
+            </a>
         </div>
+
         <div class="table-responsive">
             <table class="table table-bordered table-hover table-striped align-middle">
                 <thead class="table-dark">
                     <tr>
                         <th scope="col">Order ID</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Total Amount</th>
                         <th scope="col">Receiver</th>
                         <th scope="col">Phone Number</th>
                         <th scope="col">Address</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Order Date</th>
                         <th scope="col">Action</th>
                     </tr>
@@ -83,6 +86,10 @@
                         <input type="hidden" name="order_id" value="<?= $item["order_id"] ?>">
                         <tr>
                             <th><?= $item["order_id"] ?></th>
+                            <td>$<?= number_format($item["total_amount"],2) ?></td>
+                            <td><?= $item["receiver"] ?></td>
+                            <td><?= $item["phone_number"] ?></td>
+                            <td><?= $item["address"] ?></td>
                             <td>    
                                 <select class="form-select" name="order_status"
                                     style="color:<?= isset($selected["pending"]) || isset($selected["cancelled"]) ? 
@@ -98,11 +105,7 @@
                                     <option style="color:red;" <?= $selected["cancelled"]  ?? "" ?> value="cancelled">❌Cancelled</option>
                                 </select>
                             </td>
-                            <td><?= $item["total_amount"] ?></td>
-                            <td><?= $item["receiver"] ?></td>
-                            <td><?= $item["phone_number"] ?></td>
-                            <td><?= $item["address"] ?></td>
-                            <td><?= date("H:i:s d/m/Y", strtotime($item["order_date"])) ?></td>
+                            <td><?= date("H:i d/m/Y", strtotime($item["order_date"])) ?></td>
 
                             <td>
                                 <a href="edit_order.php?id=<?= $item["order_id"] ?>" 

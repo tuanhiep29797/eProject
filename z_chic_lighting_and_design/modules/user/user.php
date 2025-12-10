@@ -86,7 +86,7 @@
                             <td><?= $item['email'] ?></td>
                             <td><?= $item['phone_number'] ?></td>
                             <td><?= $item['role'] ?></td>
-                            <td><?= date("H:i:s d/m/Y", strtotime($item["created_at"])) ?></td>
+                            <td><?= date("H:i d/m/Y", strtotime($item["created_at"])) ?></td>
                             <td>
                                 <div class="d-flex gap-2">
                                     <a href="edit_user.php?id=<?= $item['user_id'] ?>" 

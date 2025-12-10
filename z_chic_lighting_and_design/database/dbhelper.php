@@ -192,6 +192,13 @@
 
 	const SQL_GET_CARD_BY_USER_AND_PRODUCT = "select * from cart where user_id = :user_id and product_id = :product_id";
 
+	const SQL_GET_PRODUCT_AS_CAT_AND_BRAND = 
+	"select p.*, c.category_name, b.brand_name
+	from product p 
+	left join category c on p.category_id = c.category_id
+	left join brand b on p.brand_id = b.brand_id
+	";
+
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
 	"select c.category_id, c.category_name, p.product_id, p.product_title
 	from category c join product p 

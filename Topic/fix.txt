@@ -1,0 +1,27 @@
+Admin
+
+Home
+    Bootstrap lại
+
+User
+    Chia lại cột
+Add user
+Edit user
+    Sửa lại bt5 cho đẹp
+
+Order
+    Chia lại cột
+Edit Order
+    Sửa lại bt5 cho đẹp
+
+Category
+Brand
+    Chia lại cột
+
+Edit Category
+Edit Brand
+Edit Product
+Add Category
+Add Brand
+Add Product
+    Thêm TinyMCE để có thể thêm ảnh và thêm cái thanh có thể chỉnh chữ được

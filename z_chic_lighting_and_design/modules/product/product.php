@@ -5,7 +5,7 @@
     try 
     {
         $conn = getConnection();
-        $stmt = $conn->prepare(SQL_GET_PRODUCT);
+        $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND);
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -67,14 +67,13 @@
                 <thead class="table-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Content</th>
-                        <th>Quantity</th>
                         <th>Thumbnail</th>
+                        <th>Title</th>
+                        <th>Content</th>
                         <th>Category</th>
                         <th>Brand</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -83,19 +82,18 @@
                     <?php foreach($data_list as $item): ?>
                         <tr>
                             <th><?= $item['product_id'] ?></th>
-                            <td><?= $item['product_title'] ?></td>
-                            <td><?= $item['product_description'] ?></td>
-                            <td><?= $item['product_price'] ?></td>
-                            <td><?= $item['product_content'] ?></td>
-                            <td><?= $item['product_quantity'] ?></td>
                             <td>
-                                <img src="<?= $item['product_thumbnail'] ?>" 
+                                <img src="<?=BASE_URL . $item['product_thumbnail'] ?>" 
                                     alt="Product Image"
                                      style="width: 60px; height: 60px; object-fit: cover;" 
                                      class="rounded">
                             </td>
-                            <td><?= $item['category_id'] ?></td>
-                            <td><?= $item['brand_id'] ?></td>
+                            <td><?= $item['product_title'] ?></td>
+                            <td><?= $item['product_content'] ?></td>
+                            <td><?= $item['category_name'] ?></td>
+                            <td><?= $item['brand_name'] ?></td>
+                            <td>$<?= number_format($item['product_price'], 2) ?></td>
+                            <td><?= $item['product_quantity'] ?></td>
 
                             <td>
                                 <div class="d-flex gap-2">

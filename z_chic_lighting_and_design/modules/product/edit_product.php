@@ -19,6 +19,20 @@
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $product_list = $stmt->fetchall();
+        
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_CATEGORY);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $category_list = $stmt->fetchall();
+
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_BRAND);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $brand_list = $stmt->fetchall();
 
         if ($product_list == null || count($product_list) == 0) 
         {
@@ -157,14 +171,20 @@
 
                     <div class="mb-3">
                         <label class="form-label">Category ID</label>
-                        <input type="text" class="form-control" name="category_id"
-                               value="<?= htmlspecialchars($editing_product["category_id"]) ?>">
+                        <select class="form-select" name="category_id">
+                            <?php foreach($category_list as $item): ?>
+                                <option value="<?= $item["category_id"]?>" <?= $editing_product["category_id"] == $item["category_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["category_name"]) ?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Brand ID</label>
-                        <input type="text" class="form-control" name="brand_id"
-                               value="<?= htmlspecialchars($editing_product["brand_id"]) ?>">
+                        <select class="form-select" name="brand_id">
+                            <?php foreach($brand_list as $item): ?>
+                                <option value="<?= $item["brand_id"]?>" <?= $editing_product["brand_id"] == $item["brand_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["brand_name"]) ?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Product</button>

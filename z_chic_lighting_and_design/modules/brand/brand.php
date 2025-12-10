@@ -80,7 +80,7 @@
                             <td><?= $item['brand_name'] ?></td>
 
                             <td>
-                                <img src="<?= $item['brand_thumbnail'] ?>" 
+                                <img src="<?=BASE_URL . $item['brand_thumbnail'] ?>" 
                                      alt="Brand Image"
                                      style="width: 70px; height: 70px; object-fit: cover;"
                                      class="rounded border">

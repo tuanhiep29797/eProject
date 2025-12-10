@@ -28,7 +28,7 @@
     try 
     {
         $conn = getConnection();
-        $stmt = $conn->prepare(SQL_GET_FEEDBACK);
+        $stmt = $conn->prepare(SQL_GET_FEEDBACK . " order by created_at desc");
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -109,7 +109,7 @@
                             <td><?= $item["phone_number"] ?></td>
                             <td><?= $item["content"] ?></td>
                             <td><?= $status ?></td>
-                            <td><?= date("H:i:s d/m/Y", strtotime($item["created_at"])) ?></td>
+                            <td><?= date("H:i d/m/Y", strtotime($item["created_at"])) ?></td>
 
                             <td>
                                 <?php if ($item["status"] === "new"): ?>

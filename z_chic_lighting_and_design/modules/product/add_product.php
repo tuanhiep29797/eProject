@@ -1,5 +1,25 @@
 <?php
     require_once __DIR__."/../../database/dbhelper.php";
+    try
+    {
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_CATEGORY);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $category_list = $stmt->fetchall();
+
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_GET_BRAND);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $brand_list = $stmt->fetchall();
+    }
+    catch (PDOException $e) 
+    {
+        echo $e->getMessage();
+    }
 
     if (!empty($_POST)) 
     {
@@ -15,6 +35,7 @@
 
         //connection to database and add product
         try {
+
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_ADD_PRODUCT);
 
@@ -114,13 +135,23 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Category ID</label>
-                        <input type="number" class="form-control" name="category_id" required>
+                        <label class="form-label">Category</label>
+                        <select class="form-select" name="category_id">
+                            <option value="">--Choose Category--</option>
+                            <?php foreach($category_list as $item): ?>
+                                <option value="<?= $item["category_id"]?>"?><?= htmlspecialchars($item["category_name"]) ?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Brand ID</label>
-                        <input type="number" class="form-control" name="brand_id" required>
+                        <label class="form-label">Brand</label>
+                        <select class="form-select" name="brand_id">
+                            <option value="">--Choose Brand--</option>
+                            <?php foreach($brand_list as $item): ?>
+                                <option value="<?= $item["brand_id"]?>"><?= htmlspecialchars($item["brand_name"]) ?></option>
+                            <?php endforeach;?>
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Add Product</button>
