@@ -26,7 +26,7 @@
         <div class="row align-items-center">
 
             <div class="col-xl-2 col-md-3 col-12 d-flex justify-content-start mb-2 mb-md-0">
-                <a href="<?= BASE_URL ?>admin/home_admin.php">
+                <a href="<?= BASE_URL ?>pages/home_page.php">
                     <img src="<?= BASE_URL ?>assets/img/home/img_logo.png" alt="Logo" class="logo-box">
                 </a>
             </div>

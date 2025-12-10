@@ -117,7 +117,7 @@
               <div class="carousel-inner">
                 <?php foreach($product_img_list as $index => $product_img):?>
                   <div class="carousel-item <?= $index === 0 ? "active" : ""?>" data-bs-interval="2000">
-                    <img src="<?= BASE_URL . $product_img["url"] ?>" class="d-block w-100" style="height: 700px; object-fit: cover;" alt="Product Image">
+                    <img src="<?= BASE_URL . $product_img["url"] ?>" class="d-block w-100" style="height: 500px; object-fit: cover;" alt="Product Image">
                   </div>
                 <?php endforeach;?>
               </div>

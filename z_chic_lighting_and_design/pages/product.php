@@ -14,8 +14,10 @@
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $brands = $stmt->fetchAll();
-  } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+  }
+  catch (PDOException $e) 
+  {
+    echo $e->getMessage();
   }
   $conn = null;
 
@@ -269,14 +271,14 @@
                         <a class="btn btn-secondary btn-add-cart" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
                           Add To Cart
                         </a>
-                        <button class="btn btn-secondary btn-buy-now" href="product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a class="btn btn-secondary btn-buy-now" href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id']?>">
                           Buy Now
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
                 </div>
-              <?php endforeach; ?>
+              <?php endforeach; ?>s
             <?php else: ?>
               <div class="col-12">
                 <div class="no-products text-center py-5">
