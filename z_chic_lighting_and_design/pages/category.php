@@ -175,7 +175,7 @@
             <?php if ($products && count($products) > 0): ?>
               <?php foreach ($products as $product): ?>
                 <?php
-                $image_path = $product['product_thumbnail'];
+                $image_path = BASE_URL . $product['product_thumbnail'];
                 $rating = $product['rating'] ?? 5;
                 $reviews = $product['reviews'] ?? '12k';
                 ?>
