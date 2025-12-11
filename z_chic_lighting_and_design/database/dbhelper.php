@@ -198,7 +198,6 @@
 	on c.category_id = p.category_id
 	order by c.category_name, p.product_title
 	";
-
 	
 	const SQL_GET_CART = "select * from cart";
 	const SQL_GET_CART_BY_USER_AND_PRODUCT = SQL_GET_CART . " where user_id = :user_id and product_id = :product_id";
@@ -213,6 +212,7 @@
 
 	const SQL_GET_ORDER = "select * from `order`";
 	const SQL_GET_ORDER_BY_ID = SQL_GET_ORDER . " where order_id = :order_id";
+	const SQL_GET_ORDER_BY_USER = SQL_GET_ORDER . " where user_id = :user_id";
 
 	const SQL_GET_ORDER_BY_USER_ID =
 	"select o.*, od.* , p.product_title, p.product_thumbnail
@@ -291,6 +291,12 @@
     "insert into `order` (user_id, order_status, total_amount, receiver, phone_number, address) 
     values 
 	(:user_id, :order_status, :total_amount, :receiver, :phone_number, :address)
+	";
+
+	const SQL_ADD_NEW_ORDER = 
+	"insert into `order` (user_id, total_amount, receiver, phone_number, address) 
+    values 
+	(:user_id, :total_amount, :receiver, :phone_number, :address)
 	";
 
 	const SQL_ADD_ORDER_DETAIL = 

@@ -13,12 +13,7 @@
 
         try {
             $conn = getConnection();
-            $stmt = $conn->prepare("
-            select p.*, c.quantity, c.cart_id, c.user_id
-            from product p
-            inner join cart c on c.product_id = p.product_id
-            inner join user u on  u.user_id = c.user_id
-            where u.user_id = :user_id");
+            $stmt = $conn->prepare(SQL_GET_CART_BY_USER_ID);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
@@ -55,10 +50,7 @@
 
         try {
             $conn = getConnection();
-            $stmt = $conn->prepare("
-                INSERT INTO `order` (user_id, total_amount, receiver,phone_number, address)
-                VALUES (:user_id, :total_amount, :receiver,:phone_number, :address)
-            ");
+            $stmt = $conn->prepare(SQL_ADD_NEW_ORDER);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->bindParam(":total_amount", $total);
             $stmt->bindParam(":receiver", $fullname);
@@ -66,12 +58,9 @@
             $stmt->bindParam(":address", $address);
             $stmt->execute();
 
-            $stmt = $conn->prepare("
-                SELECT *
-                FROM `order`
-                WHERE user_id = :user_id
-                ORDER BY order_id DESC
-                LIMIT 1
+            $stmt = $conn->prepare(SQL_GET_ORDER_BY_USER . 
+            "order by order_id desc
+            limit 1
             ");
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
@@ -80,8 +69,7 @@
             $orderID = $order['order_id'];
 
             foreach ($products as $item) {
-            $stmt = $conn->prepare("INSERT INTO order_detail (order_id, product_id, quantity, unit_price)
-                    VALUES (:order_id, :product_id, :quantity, :unit_price)");
+            $stmt = $conn->prepare(SQL_ADD_ORDER_DETAIL);
             $stmt->bindParam(":order_id", $orderID);
             $stmt->bindParam(":product_id", $item['product_id']);
             $stmt->bindParam(":quantity", $item['quantity']);
@@ -90,7 +78,7 @@
             $stmt->execute();
             }
 
-            $stmt = $conn->prepare("DELETE FROM cart WHERE user_id = :user_id");
+            $stmt = $conn->prepare("SQL_DELETE_CART_BY_USER_ID");
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
