@@ -7,10 +7,7 @@ if (isset($_SESSION["user_id"])) {
 
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("
-        select *
-        from user
-        where user_id = :user_id");
+        $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 
@@ -37,24 +34,18 @@ $conn = null;
         $username     = $_POST["username"];
         $email        = $_POST["email"];
         $phone_number = $_POST["phone_number"];
+        $role = $_SESSION["role"];
 
 
         try 
         {
             $conn = getConnection();
-            $stmt = $conn->prepare('
-                UPDATE user 
-                SET 
-                    fullname = :fullname,
-                    username = :username,
-                    email = :email,
-                    phone_number = :phone_number
-                WHERE user_id = :user_id
-            ');
+            $stmt = $conn->prepare(SQL_UPDATE_USER);
             $stmt->bindParam(":fullname", $fullname);
             $stmt->bindParam(":username", $username);
             $stmt->bindParam(":email", $email);
             $stmt->bindParam(":phone_number", $phone_number);
+            $stmt->bindParam(":role", $role);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 

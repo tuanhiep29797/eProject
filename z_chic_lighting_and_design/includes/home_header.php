@@ -47,11 +47,7 @@ if (isset($_SESSION["user_id"])) {
 
     try {
         $conn = getConnection();
-        $stmt = $conn->prepare("
-        SELECT SUM(c.quantity) AS total_quantity
-        FROM cart c
-        WHERE c.user_id = :user_id;
-        ");
+        $stmt = $conn->prepare(SQL_GET_SUM_QUANTITY_IN_CART);
         $stmt->bindParam(":user_id", $user_id);
         $stmt->execute();
 

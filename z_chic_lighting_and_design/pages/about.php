@@ -10,7 +10,7 @@
     <title>About Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../assets/css/about.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/about.css?v=<?= time() ?>">
     <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
 </head>
 <body>
@@ -37,7 +37,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="img-box">
-                    <img src="../assets/img/home/img_about_1.png" alt="Chic Lighting & Design">
+                    <img src="<?= BASE_URL ?>assets/img/home/img_about_1.png" alt="Chic Lighting & Design">
                 </div>
             </div>
             <div class="col-lg-6 ps-lg-5">
@@ -76,7 +76,7 @@
 
                 <div class="col-lg-6 order-1 order-lg-2">
                     <div class="img-box">
-                        <img src="../assets/img/home/img_about_2.png" alt="Why Choose Us">
+                        <img src="<?= BASE_URL ?>assets/img/home/img_about_2.png" alt="Why Choose Us">
                     </div>
                 </div>
             </div>

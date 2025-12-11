@@ -18,10 +18,7 @@
         for($i = 0; $i < count($order_id); $i++){
             $id = $order_id[$i];
             $status = $order_status[$i];
-            $stmt = $conn->prepare("update `order` 
-            set order_status = :order_status
-            where order_id = :order_id
-            ");
+            $stmt = $conn->prepare(SQL_UPDATE_ORDER_STATUS);
             $stmt->bindParam(":order_status", $status);
             $stmt->bindParam(":order_id", $id);
             $stmt->execute();

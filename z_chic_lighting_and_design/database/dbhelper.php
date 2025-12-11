@@ -181,18 +181,7 @@
 
 	const SQL_GET_PRODUCT = "select * from product";
 	const SQL_GET_PRODUCT_BY_ID = SQL_GET_PRODUCT . " where product_id = :product_id";
-
-	const SQL_GET_FEEDBACK = "select * from feedback";
-	
-	const SQL_GET_ORDER = "select * from `order`";
-	const SQL_GET_ORDER_BY_ID = SQL_GET_ORDER . " where order_id = :order_id";
-
-	const SQL_GET_GALLERY = "select * from gallery";
-
-	const SQL_GET_PRODUCT_IMG_BY_ID = "";
-
-	const SQL_GET_CART = "select * from cart";
-	const SQL_GET_CART_BY_USER_AND_PRODUCT = SQL_GET_CART . " where user_id = :user_id and product_id = :product_id";
+	const SQL_SEARCH_PRODUCT = SQL_GET_PRODUCT . " where product_title like :search";
 
 	const SQL_GET_PRODUCT_AS_CAT_AND_BRAND = 
 	"select p.*, c.category_name, b.brand_name
@@ -201,12 +190,18 @@
 	left join brand b on p.brand_id = b.brand_id
 	";
 
+	const SQL_GET_PRODUCT_AS_C_AND_B_BY_ID = SQL_GET_PRODUCT_AS_CAT_AND_BRAND . " where p.product_id = :product_id";
+
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
 	"select c.category_id, c.category_name, p.product_id, p.product_title
 	from category c join product p 
 	on c.category_id = p.category_id
 	order by c.category_name, p.product_title
 	";
+
+	
+	const SQL_GET_CART = "select * from cart";
+	const SQL_GET_CART_BY_USER_AND_PRODUCT = SQL_GET_CART . " where user_id = :user_id and product_id = :product_id";
 
 	const SQL_GET_CART_BY_USER_ID = 
 	"select p.*, c.quantity, c.cart_id, c.user_id
@@ -215,6 +210,9 @@
 	inner join user u on  u.user_id = c.user_id
 	where u.user_id = :user_id
 	";
+
+	const SQL_GET_ORDER = "select * from `order`";
+	const SQL_GET_ORDER_BY_ID = SQL_GET_ORDER . " where order_id = :order_id";
 
 	const SQL_GET_ORDER_BY_USER_ID =
 	"select o.*, od.* , p.product_title, p.product_thumbnail
@@ -230,6 +228,20 @@
     join product p on od.product_id = p.product_id
     where od.order_id = :order_id
 	";
+
+	const SQL_GET_SUM_QUANTITY_IN_CART =
+	"select sum(c.quantity) as total_quantity
+	from cart c
+	where c.user_id = :user_id
+	";
+
+	const SQL_GET_FEEDBACK = "select * from feedback";
+	
+
+	const SQL_GET_GALLERY = "select * from gallery";
+
+	const SQL_GET_PRODUCT_IMG = "select * from product_img";
+	const SQL_GET_PRODUCT_IMG_BY_PRODUCT = SQL_GET_PRODUCT_IMG . " where product_id = :product_id";
 
 	//SQL ADD TABLE
 
@@ -344,6 +356,12 @@
 		category_id = :category_id,
 		brand_id = :brand_id
 	where product_id = :product_id
+	";
+
+	const SQL_UPDATE_ORDER_STATUS = 
+	"update `order`
+	set order_status = :order_status
+	where order_id = :order_id
 	";
 
 	const SQL_UPDATE_ORDER = 

@@ -5,12 +5,7 @@ if (isset($_GET['id'])) {
   $product_id = intval($_GET['id']);
   try {
     $conn = getConnection();
-    $stmt = $conn->prepare("
-                SELECT p.*, b.brand_name, c.category_name
-                FROM product p
-                inner join brand b on b.brand_id =p.brand_id
-                inner join category c on c.category_id =p.category_id
-                WHERE p.product_id = :product_id");
+    $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_C_AND_B_BY_ID);
     $stmt->bindParam(":product_id", $product_id);
     $stmt->execute();
 
@@ -26,22 +21,18 @@ if (isset($_GET['id'])) {
 
     $product_item = $product_detail_list[0];
 
-    $stmt = $conn->prepare("select * from product_img where product_id = :product_id");
+    $stmt = $conn->prepare(SQL_GET_PRODUCT_IMG_BY_PRODUCT);
     $stmt->bindParam(":product_id", $product_id);
     $stmt->execute();
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $product_img_list = $stmt->fetchAll();
 
-    $stmt = $conn->prepare("
-                SELECT p.*, b.brand_name, c.category_name
-                FROM product p
-                LEFT JOIN brand b ON b.brand_id = p.brand_id
-                LEFT JOIN category c ON c.category_id = p.category_id
-                WHERE p.product_id != :product_id
-                ORDER BY RAND()
-                LIMIT 6
-                ");
+    $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND . 
+              "where p.product_id != :product_id
+              order by rand()
+              limit 6
+              ");
     $stmt->bindParam(":product_id", $product_id);
     $stmt->execute();
 

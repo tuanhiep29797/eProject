@@ -27,9 +27,9 @@
         try {
           $conn = getConnection();
 
-          $sql = "SELECT p.*, c.brand_name
+          $sql = "SELECT p.*, b.brand_name
                   FROM product p
-                  INNER JOIN brand c ON p.brand_id = c.brand_id
+                  INNER JOIN brand b ON p.brand_id = b.brand_id
                   WHERE 1";
           $params = [];
 
@@ -55,13 +55,8 @@
 
       try {
           $conn = getConnection();
-          $stmt = $conn->prepare("
-              SELECT * FROM product
-              WHERE product_title LIKE :search
-          ");
-          $stmt->execute([
-                    ':search' => '%' . $search . '%'
-                ]);
+          $stmt = $conn->prepare(SQL_SEARCH_PRODUCT);
+          $stmt->execute([':search' => '%' . $search . '%']);
 
           $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
           $products = $stmt->fetchAll();
