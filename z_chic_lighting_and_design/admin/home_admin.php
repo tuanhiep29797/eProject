@@ -1,5 +1,31 @@
 <?php
     require_once (__DIR__."/../config.php");
+
+if ($_POST["form_type"] === "login") 
+        {
+        $account = trim($_POST["account"] ?? "");
+        $password = $_POST["password"] ?? "";
+
+        if ($account === "") $login_error = "Email or Username is required.";
+        if ($password === "") $login_error = "Password is required.";
+}
+ try 
+    {
+        //search account
+        $conn = getConnection();
+        $stmt = $conn->prepare(SQL_SEARCH_USER);
+        $stmt->bindParam(":account", $account);
+        $stmt->execute();
+
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $dataList = $stmt->fetchAll();
+    } 
+    catch (PDOException $e) 
+    {
+        echo "Error: " . $e->getMessage();
+    }
+    $conn = null;
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

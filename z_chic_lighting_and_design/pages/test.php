@@ -1,41 +1,39 @@
-<?php
-var_dump($_POST['test']);
-
-?>
-
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>CKEditor Demo</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- TinyMCE -->
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/8/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '#tiny',
-            plugins: 'lists link image code table',
-            toolbar: 'undo redo | bold italic underline | numlist bullist | link image | code',
-
-            forced_root_block : false,
-            forced_br_newlines : true,
-            forced_p_newlines : false
-        });
-
-    </script>
+    <script src="https://cdn.ckeditor.com/4.22.1/full/ckeditor.js"></script>
 </head>
 <body>
-  <div>
-    <?= $_POST['test'] ?>
-    <form method='POST'>
-        <textarea id="tiny" name='test'></textarea>
-    <button type = 'submit'>oki</button>
-    </form>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<form method="POST">
+    <textarea name="content" id="editor"><?php echo $_POST['content'] ?? ''; ?></textarea>
+    <button type="submit">Lưu</button>
+</form>
+
+<h3>HTML thật render ra:</h3>
+<div style="border:1px solid #ccc;padding:10px;">
+    <?php echo $_POST['content'] ?? ''; ?>
+</div>
+
+<h3>Mã HTML thô:</h3>
+<pre style="border:1px solid #ccc;padding:10px; white-space: pre-wrap;">
+<?php
+    if (!empty($_POST['content'])) {
+        echo htmlspecialchars($_POST['content']); 
+    }
+?>
+</pre>
+
+<script>
+    CKEDITOR.replace('editor', {
+        extraAllowedContent: '*(*);*{*}',
+        enterMode: CKEDITOR.ENTER_BR,
+        shiftEnterMode: CKEDITOR.ENTER_P
+    });
+</script>
+
 </body>
 </html>
