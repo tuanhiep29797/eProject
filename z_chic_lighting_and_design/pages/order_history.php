@@ -114,7 +114,7 @@ if (isset($_SESSION["user_id"])) {
                         <td><img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" /></td>
                         <td><?= $item['product_title'] ?></td>
                         <td><?= $item['quantity'] ?></td>
-                        <td><?= number_format($item['unit_price']) ?></td>
+                        <td>$<?= number_format($item['unit_price'], 2) ?></td>
                         <?php if( $item['order_status'] === 'pending'):?>
                             <td style="color:red;"><i class="bi bi-circle-fill"></i> Pending</td>
                         <?php elseif( $item['order_status'] === 'processing'):?>

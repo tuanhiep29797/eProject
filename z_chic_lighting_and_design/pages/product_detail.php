@@ -13,13 +13,14 @@ if (isset($_GET['id'])) {
     $product_detail_list = $stmt->fetchAll();
 
     if ($product_detail_list == null || count($product_detail_list) == 0) {
-      echo '<script>
-                    alert("Product detail not found.");
-                    window.location.href = "product.php";
-                </script>';
+      echo  '<script>
+                alert("Product detail not found.");
+                window.location.href = "product.php";
+            </script>';
     }
 
     $product_item = $product_detail_list[0];
+    $is_OOS = boolval($product_item["product_quantity"] == 0);
 
     $stmt = $conn->prepare(SQL_GET_PRODUCT_IMG_BY_PRODUCT);
     $stmt->bindParam(":product_id", $product_id);
@@ -29,7 +30,7 @@ if (isset($_GET['id'])) {
     $product_img_list = $stmt->fetchAll();
 
     $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND . 
-              "where p.product_id != :product_id
+              "where p.product_id != :product_id and p.product_quantity > 0
               order by rand()
               limit 6
               ");
@@ -148,14 +149,19 @@ if (isset($_GET['id'])) {
                 <?= $product_item['product_content'] ?>
               </p>
 
-              <div class="product-price">$<?= number_format($product_item['product_price'], 2) ?></div>
+              <div class="product-price">
+                <?php if(!$is_OOS):?>
+                  <h5>In stock: <?= $product_item["product_quantity"] ?></h5>
+                  $<?= number_format($product_item['product_price'], 2) ?>
+                <?php else: ?>
+                  Out of Stock
+                <?php endif;?>
+              </div>
 
               <div class="product-actions">
-                <a href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
-                  <button class="btn btn-outline-dark btn-cart">
+                <a class="btn btn-outline-primary btn-cart <?= $is_OOS ? "disabled" : "" ?>" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
                     <i class="bi bi-cart-plus"></i>
                     ADD TO CART
-                  </button>
                 </a>
               </div>
             </div>

@@ -39,52 +39,64 @@
         exit();
     }
 
-    foreach ($products as $item) {
+    foreach ($products as $item) 
+    {
         $total += $item['product_price'] * $item['quantity'];
     }
 
     if (!empty($_POST)) {
         $fullname = $_POST['fullname'];
-        $phone = $_POST['phone'];
+        $phone_number = $_POST['phone_number'];
         $address = $_POST['address'];
 
-        try {
+        try 
+        {
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_ADD_NEW_ORDER);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->bindParam(":total_amount", $total);
             $stmt->bindParam(":receiver", $fullname);
-            $stmt->bindParam(":phone_number", $phone);
+            $stmt->bindParam(":phone_number", $phone_number);
             $stmt->bindParam(":address", $address);
             $stmt->execute();
 
             $stmt = $conn->prepare(SQL_GET_ORDER_BY_USER . 
-            "order by order_id desc
+            " order by order_id desc
             limit 1
             ");
+
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
-            $order = $stmt->fetch(PDO::FETCH_ASSOC);
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $order = $stmt->fetch();
 
             $orderID = $order['order_id'];
 
-            foreach ($products as $item) {
-            $stmt = $conn->prepare(SQL_ADD_ORDER_DETAIL);
-            $stmt->bindParam(":order_id", $orderID);
-            $stmt->bindParam(":product_id", $item['product_id']);
-            $stmt->bindParam(":quantity", $item['quantity']);
-            $stmt->bindParam(":unit_price", $item['product_price']);
+            foreach ($products as $item) 
+            {
+                $stmt = $conn->prepare(SQL_ADD_ORDER_DETAIL);
+                $stmt->bindParam(":order_id", $orderID);
+                $stmt->bindParam(":product_id", $item['product_id']);
+                $stmt->bindParam(":quantity", $item['quantity']);
+                $stmt->bindParam(":unit_price", $item['product_price']);
+                $stmt->execute();
 
-            $stmt->execute();
+                $new_product_quantity = $item["product_quantity"] - $item["quantity"];
+                $stmt = $conn->prepare(SQL_UPDATE_PRODUCT_QUANTITY);
+                $stmt->bindParam(":product_id", $item['product_id']);
+                $stmt->bindParam(":product_quantity", $new_product_quantity);
+                $stmt->execute();
             }
 
-            $stmt = $conn->prepare("SQL_DELETE_CART_BY_USER_ID");
+            $stmt = $conn->prepare(SQL_DELETE_CART_BY_USER_ID);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
 
             header('Location: order_history.php');
             exit();
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
         }
         $conn = null;
@@ -144,7 +156,7 @@
                             <label class="my-2 form-label " for="fullname">Fullname</label>
                             <input type="text" placeholder="Fullname" name="fullname" id="fullname" required class="form-control py-3 mb-4">
                             <label class="my-2 form-label " for="fullname">Phone Number</label>
-                            <input type="number" placeholder="Phone number" name="phone" required class="form-control py-3 mb-4">
+                            <input type="number" placeholder="Phone number" name="phone_number" required class="form-control py-3 mb-4">
                             <label class="my-2 form-label " for="fullname">Address</label>
                             <input type="text" placeholder="Address" name="address" required class="form-control py-3 mb-4">
                         </div>
@@ -158,7 +170,7 @@
                             </div>
                             <div class="sc-product-text col-lg-6 text-right">
                                 <h5 class='fw-bold'><?= $item['product_title'] ?></h5>
-                                <p class="">Price <span class="text-success fw-semibold"> <?= number_format($item['product_price']) ?><sup>$</sup></span></p>
+                                <p class="">Price <span class="text-success fw-semibold">$<?= number_format($item['product_price'], 2) ?></span></p>
                             </div>
                             <div class="sc-product-quantity col-lg-2 text-right">
                                 <p class="">Quantity</p>
@@ -166,7 +178,7 @@
                             </div>
                             <div class="sc-product-total col-lg-2 text-right">
                                 <p class="">Total</p>
-                                <span class="text-success fw-semibold"><?= number_format($item['product_price'] * $item['quantity']) ?></span>
+                                <span class="text-success fw-semibold">$<?= number_format($item['product_price'] * $item['quantity'], 2) ?></span>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -177,7 +189,7 @@
                                     <h3 class="fw-bold m-0">Total Amount:</h3>
                                 </div>
                                 <div class="sc-total-number col-lg-5 text-center">
-                                    <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>$</sup></span>
+                                    <span class="text-success fw-bold" style="font-size:24px">$<?= number_format($total, 2) ?></span>
                                 </div>
                                 <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
                                     <button type="submit" class="btn btn-outline-white bg-dark text-light me-3 fw-bold p-3 px-4" style="border-radius: 20px;">Payment</button>

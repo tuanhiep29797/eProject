@@ -235,6 +235,8 @@
                 $image_path = BASE_URL . $product['product_thumbnail'];
                 $rating = $product['rating'] ?? 5;
                 $reviews = $product['reviews'] ?? '12k';
+                $quantity = $product['product_quantity'];
+                $is_OOS = $quantity == 0;
                 ?>
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card" id="product_item_<?= $product['product_id'] ?>">
@@ -268,13 +270,18 @@
                         <span class="review-count"><?= $rating ?> (<?= $reviews ?> Reviews)</span>
                       </div>
                       <div class="product-price">
-                        $<?= number_format($product['product_price'], 2) ?>
+                        <?php if(!$is_OOS):?>
+                          $<?= number_format($product['product_price'], 2) ?>
+                        <?php else: ?>
+                          Out of Stock
+                        <?php endif;?>
                       </div>
                       <div class="product-actions">
-                        <a class="btn btn-secondary btn-add-cart" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
+                        <a class="btn btn-outline-primary btn-add-cart <?= $is_OOS ? "disabled" : "" ?>"  href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
+                          <i class="bi bi-cart-plus-fill"></i>  
                           Add To Cart
                         </a>
-                        <a class="btn btn-secondary btn-buy-now" href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
+                        <a class="btn btn-dark btn-buy-now" href="<?= BASE_URL ?>/pages/product_detail.php?id=<?= $product['product_id'] ?>">
                           Buy Now
                         </a>
                       </div>

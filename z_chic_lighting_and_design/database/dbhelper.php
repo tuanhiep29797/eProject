@@ -396,6 +396,12 @@
 	where product_id = :product_id
 	";
 
+	const SQL_UPDATE_PRODUCT_QUANTITY =
+	"update product
+	set product_quantity = :product_quantity
+	where product_id = :product_id
+	";
+
 	const SQL_UPDATE_ORDER_STATUS = 
 	"update `order`
 	set order_status = :order_status

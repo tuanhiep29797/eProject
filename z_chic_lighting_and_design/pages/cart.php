@@ -3,10 +3,12 @@
 
     $products = [];
     $total = 0;
-    if (isset($_SESSION["user_id"])) {
+    if (isset($_SESSION["user_id"])) 
+    {
         $user_id = $_SESSION["user_id"];
 
-        try {
+        try 
+        {
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_GET_CART_BY_USER_ID);
             $stmt->bindParam(":user_id", $user_id);
@@ -14,7 +16,10 @@
 
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $products = $stmt->fetchAll();
-        } catch (PDOException $e) {
+
+        } 
+        catch (PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
         }
         $conn = null;
@@ -28,30 +33,37 @@
         exit();
     }
 
-    foreach ($products as $item) {
+    foreach ($products as $item) 
+    {
         $total += $item['product_price'] * $item['quantity'];
     }
-    if (!empty($_POST['action'])) {
+    if (!empty($_POST['action'])) 
+    {
         $cart_id = $_POST["cart_id"];
-        foreach ($products as $item) {
-            if ($item['cart_id'] == $cart_id) {
+        foreach ($products as $item) 
+        {
+            if ($item['cart_id'] == $cart_id) 
+            {
                 $quantity = $item['quantity'];
                 break;
             }
         }
         $action = $_POST["action"];
-        switch ($action) {
+        switch ($action) 
+        {
             case "plus":
-                $quantity += 1;
+                    $quantity += 1;
                 break;
 
             case "minus":
-                if ($quantity > 1) {
+                if ($quantity > 1) 
+                {
                     $quantity -= 1;
                 }
                 break;
             case "remove":
-                try {
+                try 
+                {
                     $conn = getConnection();
                     $stmt = $conn->prepare(SQL_DELETE_CART);
                     $stmt->bindParam(":cart_id", $cart_id);
@@ -59,7 +71,9 @@
 
                     header("Location: cart.php");
                     exit;
-                } catch (PDOException $e) {
+                } 
+                catch (PDOException $e) 
+                {
                     echo "Error: " . $e->getMessage();
                 }
                 break;
@@ -69,7 +83,9 @@
                 exit;
                 break;
         }
-        try {
+
+        try 
+        {
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_UPDATE_CART);
             $stmt->bindParam(":quantity", $quantity);
@@ -79,7 +95,9 @@
 
             header("Location: cart.php#shopping-cart-$cart_id");
             exit;
-        } catch (PDOException $e) {
+        } 
+        catch (PDOException $e) 
+        {
             echo "Error: " . $e->getMessage();
         }
     }
@@ -128,28 +146,31 @@
                         <div class="sc-product-img col-lg-2 my-2">
                             <img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" />
                         </div>
-                        <div class="sc-product-text col-lg-3 text-right">
+                        <div class="sc-product-text col-lg-2 text-right">
                             <h5 class="fw-bold"><?= $item['product_title'] ?></h5>
-                            <p class="m-0"><?= $item['product_description'] ?></p>
                         </div>
                         <div class="sc-product-price col-lg-2 text-right">
                             <p class="">Price</p>
-                            <span class="text-success fw-semibold"> <?= number_format($item['product_price']) ?><sup>$</sup></span>
+                            <span class="text-success fw-semibold">$<?= number_format($item['product_price'],2) ?></span>
                         </div>
                         <div class="sc-product-quantity col-lg-2 text-right">
                             <p class="">Quantity</p>
                             <form method="POST" class="cart-item-form">
                                 <input type="hidden" name="cart_id" value="<?= $item['cart_id'] ?>">
                                 <div class="sc-product-quantity-edit d-flex align-items-center gap-2">
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" name="action" value="minus">−</button>
+                                    <button type="submit" class="btn btn-success btn-sm" <?= $item['quantity'] > 1 ? "" : "disabled"?> name="action" value="minus">−</button>
                                     <span class="text-success fw-semibold"> <?= $item['quantity'] ?></span>
-                                    <button type="submit" class="btn btn-outline-dark btn-sm" name="action" value="plus">+</button>
+                                    <button type="submit" class="btn btn-success btn-sm" <?= $item['quantity'] == $item['product_quantity'] ? "disabled" : ""?> name="action" value="plus">+</button>
                                 </div>
                             </form>
                         </div>
                         <div class="sc-product-total col-lg-2 text-right">
                             <p class="">Total</p>
-                            <span class="text-success fw-semibold"><?= number_format($item['product_price'] * $item['quantity']) ?></span>
+                            <span class="text-success fw-semibold">$<?= number_format($item['product_price'] * $item['quantity'],2) ?></span>
+                        </div>
+                        <div class="sc-product-total col-lg-1 text-right">
+                            <p class="">In Stock</p>
+                            <span class="text-success fw-semibold"><?= number_format($item['product_quantity']) ?></span>
                         </div>
                         <div class="sc-product-action col-lg-1 d-flex justify-content-start px-0">
                             <form method="POST">
@@ -169,7 +190,7 @@
                             <h3 class="fw-bold m-0">Total Amount:</h3>
                         </div>
                         <div class="sc-total-number col-lg-6 text-center">
-                            <span class="text-success fw-bold" style="font-size:24px"> <?= number_format($total) ?><sup>$</sup></span>
+                            <span class="text-success fw-bold" style="font-size:24px">$<?= number_format($total,2)?></span>
                         </div>
                         <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
                                 <a href="./product.php"><button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;">Product</button></a>
