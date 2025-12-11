@@ -26,10 +26,10 @@
             $products = $stmt->fetchAll();
 
             if ($products == null || count($products) == 0) {
-            echo '<script>
-                    alert("Please add product to cart.");
-                    window.location.href = "product.php";
-                </script>';
+            echo    '<script>
+                        alert("Please add product to cart.");
+                        window.location.href = "product.php";
+                    </script>';
             }
 
         } catch (PDOException $e) {
@@ -37,10 +37,10 @@
         }
         $conn = null;
     } else {
-        echo '<script>
-            alert("Please log in to view your cart.");
-            window.location.href = "../admin/login.php";
-        </script>';
+        echo   '<script>
+                    alert("Please log in to view your cart.");
+                    window.location.href = "../admin/login.php";
+                </script>';
         exit();
     }
 
