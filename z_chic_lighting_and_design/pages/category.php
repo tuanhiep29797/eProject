@@ -17,78 +17,105 @@
   $conn = null;
 
   // Get filter parameters
-
   $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
 
-  if (isset($_GET['action'])) {
+  //pagination config
+  $limit = 9;
+  $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+  $offset = ($page - 1) * $limit;
+  $products = [];
+  $total_products = 0;
+  $total_pages = 0;
 
-    switch ($_GET['action']) {
-      case 'filter':
-        try {
-          $conn = getConnection();
+  try
+  {
+    $conn = getConnection();
+    if (isset($_GET['action']) && $_GET['action'] == 'filter')
+    {
+      //base sql
+      $where = "WHERE 1";
+      $params = [];
 
-          $sql = "SELECT p.*, c.category_name
-                  FROM product p
-                  INNER JOIN category c ON p.category_id = c.category_id
-                  WHERE 1";
-          $params = [];
+      //build conditions
+      if (!empty($category_filter)) 
+      {
+        $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
+        $where .= " AND p.category_id IN ($placeholders)";
+        $params = array_merge($params, $category_filter);
+      }
 
-          if (!empty($_GET['category'])) {
-            $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
-            $sql .= " AND p.category_id IN ($placeholders)";
-            $params = array_merge($params, $category_filter);
-          }
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT_FILTER_CATEGORY . $where);
+      $stmt->execute($params);
+      $total_products = $stmt->fetchColumn();
 
-        $stmt = $conn->prepare($sql);
-        $stmt->execute($params);
-
-          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          $products = $stmt->fetchAll();
-        } catch (PDOException $e) {
-          echo "Error: " . $e->getMessage();
-        }
-        $conn = null;
-        break;
-
-      case 'search':
-      $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-      try {
-          $conn = getConnection();
-          $stmt = $conn->prepare("
-              SELECT * FROM product
-              WHERE product_title LIKE :search
-          ");
-          $stmt->execute([
-                    ':search' => '%' . $search . '%'
-                ]);
-
-          $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-          $products = $stmt->fetchAll();
-        } catch (PDOException $e) {
-          echo "Error: " . $e->getMessage();
-        }
-        $conn = null;
-        break;
-
-      default:
-        header("Location: #");
-        break;
-    }
-  } else {
-    try {
-      $conn = getConnection();
-      $stmt = $conn->prepare(SQL_GET_PRODUCT);
+      //get data
+      $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CATEGORY . $where . " limit ? offset ?");
+      $idx = 1;
+      foreach ($params as $val) 
+      {
+        $stmt->bindValue($idx++, $val);
+      }
+      $stmt->bindValue($idx++, $limit, PDO::PARAM_INT);
+      $stmt->bindValue($idx++, $offset, PDO::PARAM_INT);
       $stmt->execute();
 
-      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
       $products = $stmt->fetchAll();
-    } catch (PDOException $e) {
-      echo "Error: " . $e->getMessage();
     }
-    $conn = null;
-}
+
+    elseif (isset($_GET['action']) && $_GET['action'] == 'search')
+    {
+      $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT_SEARCH);
+      $stmt->bindValue(':search', '%' . $search . '%');
+      $stmt->execute();
+      $total_products = $stmt->fetchColumn();
+
+      ///get data
+      $stmt = $conn->prepare(SQL_SEARCH_PRODUCT . " limit :limit offset :offset");
+      $stmt->bindValue(':search', '%' . $search . '%');
+      $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+      $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    }
+
+     else 
+    {
+      //default
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT);
+      $stmt->execute();
+      $total_products = $stmt->fetchColumn();
+
+      //get data
+      $stmt = $conn->prepare(SQL_GET_PRODUCT . " limit :limit offset :offset");
+      $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+      $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    }
+
+    $total_pages = ceil($total_products / $limit);
+  } 
+  catch (PDOException $e) 
+  {
+    echo "<script>
+            console.error(" . json_encode($e->getMessage()) . ");
+          </script>";
+  }
+
+  $conn = null;
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

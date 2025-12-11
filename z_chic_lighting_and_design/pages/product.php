@@ -1,131 +1,132 @@
 <?php
+  require_once(__DIR__ . "/../database/dbhelper.php");
 
-require_once(__DIR__ . "/../database/dbhelper.php");
+  try {
+    $conn = getConnection();
+    $stmt = $conn->prepare(SQL_GET_CATEGORY);
+    $stmt->execute();
 
-try {
-  $conn = getConnection();
-  $stmt = $conn->prepare(SQL_GET_CATEGORY);
-  $stmt->execute();
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $categories = $stmt->fetchAll();
 
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $categories = $stmt->fetchAll();
+    $stmt = $conn->prepare(SQL_GET_BRAND);
+    $stmt->execute();
 
-  $stmt = $conn->prepare(SQL_GET_BRAND);
-  $stmt->execute();
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $brands = $stmt->fetchAll();
+  } catch (PDOException $e) {
+    echo "<script>
+            console.error(" . json_encode($e->getMessage()) . ");
+          </script>";
+  }
+  $conn = null;
 
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $brands = $stmt->fetchAll();
-} catch (PDOException $e) {
-  echo "<script>
-          console.error(" . json_encode($e->getMessage()) . ");
-        </script>";
-}
-$conn = null;
+  //get data filter
+  $category_filter = isset($_GET['category']) ? $_GET['category'] : [];
+  $brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
 
-// Get filter parameters
-$category_filter = isset($_GET['category']) ? $_GET['category'] : [];
-$brand_filter = isset($_GET['brand']) ? $_GET['brand'] : [];
+  //pagination config
+  $limit = 9;
+  $page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
+  $offset = ($page - 1) * $limit;
+  $products = [];
+  $total_products = 0;
+  $total_pages = 0;
 
-// Pagination Config
-$limit = 9;
-$page = isset($_GET['page']) && is_numeric($_GET['page']) ? max(1, (int)$_GET['page']) : 1;
-$offset = ($page - 1) * $limit;
-$products = [];
-$total_products = 0;
+  try {
+    $conn = getConnection();
 
-try {
-  $conn = getConnection();
+    if (isset($_GET['action']) && $_GET['action'] == 'filter') 
+    {
+      //base sql
+      $where = " where 1";
+      $params = [];
 
-  if (isset($_GET['action']) && $_GET['action'] == 'filter') {
-    // Base query parts
-    $where = "WHERE 1";
-    $params = [];
+      //build conditions
+      if (!empty($category_filter)) 
+      {
+        $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
+        $where .= " AND p.category_id IN ($placeholders)";
+        $params = array_merge($params, $category_filter);
+      }
 
-    // Build conditions
-    if (!empty($category_filter)) {
-      $placeholders = implode(',', array_fill(0, count($category_filter), '?'));
-      $where .= " AND p.category_id IN ($placeholders)";
-      $params = array_merge($params, $category_filter);
+      if (!empty($brand_filter)) 
+      {
+        $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
+        $where .= " AND p.brand_id IN ($placeholders)";
+        $params = array_merge($params, $brand_filter);
+      }
+
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT_FILTER_CAT_BRAND . $where);
+      $stmt->execute($params);
+      $total_products = $stmt->fetchColumn();
+
+      //get data
+      $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND . $where . " limit ? offset ?");
+      $idx = 1;
+      foreach ($params as $val) 
+      {
+        $stmt->bindValue($idx++, $val);
+      }
+      $stmt->bindValue($idx++, $limit, PDO::PARAM_INT);
+      $stmt->bindValue($idx++, $offset, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
     }
 
-    if (!empty($brand_filter)) {
-      $placeholders = implode(',', array_fill(0, count($brand_filter), '?'));
-      $where .= " AND p.brand_id IN ($placeholders)";
-      $params = array_merge($params, $brand_filter);
+    elseif (isset($_GET['action']) && $_GET['action'] == 'search') 
+    {
+      $search = isset($_GET['search']) ? trim($_GET['search']) : '';
+
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT_SEARCH);
+      $stmt->bindValue(':search', '%' . $search . '%');
+      $stmt->execute();
+      $total_products = $stmt->fetchColumn();
+
+      //get data
+      $stmt = $conn->prepare(SQL_SEARCH_PRODUCT . " limit :limit offset :offset");
+      $stmt->bindValue(':search', '%' . $search . '%');
+      $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+      $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
+    } 
+    
+    else 
+    {
+      //default
+      //count total
+      $stmt = $conn->prepare(SQL_COUNT_PRODUCT);
+      $stmt->execute();
+      $total_products = $stmt->fetchColumn();
+
+      //get data
+      $stmt = $conn->prepare(SQL_GET_PRODUCT . " limit :limit offset :offset");
+      $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+      $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+      $stmt->execute();
+
+      $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
+      $products = $stmt->fetchAll();
     }
 
-    // 1. Count Total
-    $sql_count = "SELECT COUNT(*) 
-                      FROM product p
-                      INNER JOIN category c ON p.category_id = c.category_id
-                      INNER JOIN brand b ON p.brand_id = b.brand_id
-                      $where";
-    $stmt = $conn->prepare($sql_count);
-    $stmt->execute($params);
-    $total_products = $stmt->fetchColumn();
-
-    // 2. Get Data with Pagination
-    $sql = "SELECT p.*, c.category_name, b.brand_name
-                FROM product p
-                INNER JOIN category c ON p.category_id = c.category_id
-                INNER JOIN brand b ON p.brand_id = b.brand_id
-                $where
-                LIMIT ? OFFSET ?";
-
-    $stmt = $conn->prepare($sql);
-    // Bind where params
-    $idx = 1;
-    foreach ($params as $val) {
-      $stmt->bindValue($idx++, $val);
-    }
-    $stmt->bindValue($idx++, $limit, PDO::PARAM_INT);
-    $stmt->bindValue($idx++, $offset, PDO::PARAM_INT);
-    $stmt->execute();
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  } elseif (isset($_GET['action']) && $_GET['action'] == 'search') {
-    $search = isset($_GET['search']) ? $_GET['search'] : '';
-
-    // 1. Count Total
-    $sql_count = "SELECT COUNT(*) FROM product WHERE product_title LIKE :search";
-    $stmt = $conn->prepare($sql_count);
-    $stmt->execute([':search' => '%' . $search . '%']);
-    $total_products = $stmt->fetchColumn();
-
-    // 2. Get Data
-    $sql = "SELECT * FROM product WHERE product_title LIKE :search LIMIT :limit OFFSET :offset";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(':search', '%' . $search . '%');
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-  } else {
-    // Default
-    // 1. Count Total
-    $sql_count = "SELECT COUNT(*) FROM product";
-    $stmt = $conn->prepare($sql_count);
-    $stmt->execute();
-    $total_products = $stmt->fetchColumn();
-
-    // 2. Get Data
-    $sql = "SELECT * FROM product LIMIT :limit OFFSET :offset";
-    $stmt = $conn->prepare($sql);
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $total_pages = ceil($total_products / $limit);
+  } 
+  catch (PDOException $e) 
+  {
+    echo "<script>
+            console.error(" . json_encode($e->getMessage()) . ");
+          </script>";
   }
 
-  $total_pages = ceil($total_products / $limit);
-} catch (PDOException $e) {
-  echo "<script>
-          console.error(" . json_encode($e->getMessage()) . ");
-        </script>";
-}
-$conn = null;
-
+  $conn = null;
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,8 +137,8 @@ $conn = null;
   <title>Product - Chic Lighting</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../assets/css/banner.css?v=<?= time() ?>">
-  <link rel="stylesheet" href="<?= BASE_URL ?>/../assets/css/product.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/banner.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/product.css?v=<?= time() ?>">
   <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
 </head>
 
@@ -280,7 +281,7 @@ $conn = null;
                     </div>
                   </div>
                 </div>
-                <?php endforeach; ?>s
+                <?php endforeach; ?>
               <?php else: ?>
                 <div class="col-12">
                   <div class="no-products text-center py-5">

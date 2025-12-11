@@ -186,11 +186,43 @@
 	const SQL_GET_PRODUCT_AS_CAT_AND_BRAND = 
 	"select p.*, c.category_name, b.brand_name
 	from product p 
-	left join category c on p.category_id = c.category_id
-	left join brand b on p.brand_id = b.brand_id
+	inner join category c on p.category_id = c.category_id
+	inner join brand b on p.brand_id = b.brand_id
 	";
 
 	const SQL_GET_PRODUCT_AS_C_AND_B_BY_ID = SQL_GET_PRODUCT_AS_CAT_AND_BRAND . " where p.product_id = :product_id";
+
+	const SQL_COUNT_PRODUCT = "select count(*) from product";
+
+	const SQL_COUNT_PRODUCT_FILTER_CAT_BRAND = 
+	"select count(*) from product p
+	inner join category c on p.category_id = c.category_id
+	inner join brand b on p.brand_id = b.brand_id
+	";
+
+	const SQL_COUNT_PRODUCT_SEARCH = "select count(*) from product where product_title like :search";
+
+	const SQL_COUNT_PRODUCT_FILTER_BRAND = 
+	"select count(*) from product p
+	inner join brand b on p.brand_id = b.brand_id
+	";
+
+	const SQL_GET_PRODUCT_AS_BRAND = 
+	"select p.*, b.brand_name
+	from product p
+	inner join brand b on p.brand_id = b.brand_id
+	";
+
+	const SQL_COUNT_PRODUCT_FILTER_CATEGORY = 
+	"select count(*) from product p
+	inner join category c on p.category_id = c.category_id
+	";
+
+	const SQL_GET_PRODUCT_AS_CATEGORY = 
+	"select p.*, c.category_name
+	from product p
+	inner join category c on p.category_id = c.category_id
+	";
 
 	const SQL_GET_CATEGORY_AS_PRODUCT = 
 	"select c.category_id, c.category_name, p.product_id, p.product_title
