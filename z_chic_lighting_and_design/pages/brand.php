@@ -98,8 +98,9 @@
   <title>Product - Chic Lighting</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-  <link rel="stylesheet" href="../assets/css/banner.css">
-  <link rel="stylesheet" href="../assets/css/product.css">
+  <link rel="stylesheet" href="../assets/css/banner.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="../assets/css/product.css?v=<?= time() ?>">
+  <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
 </head>
 
 <body>
@@ -293,7 +294,8 @@
     <?php
         require_once (__DIR__."/../includes/home_footer.php");
     ?>
-      
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

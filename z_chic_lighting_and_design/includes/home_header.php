@@ -41,12 +41,7 @@
     }
 
     $conn = null;
-    $block_name ="";
-    if (is_login())
-    {
-        $block_name = substr($_SESSION["fullname"], 0, 5) . "...";
-    }
-
+    
 if (isset($_SESSION["user_id"])) {
     $user_id = $_SESSION["user_id"];
 
@@ -68,7 +63,6 @@ if (isset($_SESSION["user_id"])) {
     $conn = null;
     $total_quantity = $count_cart[0]['total_quantity'];
 } 
-
 
 ?>
 <!DOCTYPE html>
@@ -206,8 +200,8 @@ if (isset($_SESSION["user_id"])) {
 
                     <!-- account  -->
                     <div class="dropdown d-inline-block position-relative py-3 px-2" id="header_account">
-                        <a class="text-dark text-decoration-none fs-5" href="#">
-                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $block_name : "") ?>
+                        <a class="text-dark text-decoration-none fs-5 text-truncate w-100" href="#">
+                            <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $_SESSION["fullname"] : "") ?>
                             <i class="bi bi-person-circle text-primary"></i>
                         </a>
 

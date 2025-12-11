@@ -35,9 +35,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Detail</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="../../assets/css/modules.css">
+    <link rel="stylesheet" href="../../assets/css/modules.css?v=<?= time() ?>">
+    <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
 </head>
 
 <body>
