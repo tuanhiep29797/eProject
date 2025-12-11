@@ -166,31 +166,33 @@
 
 	//SQL GET TABLE
 
-	const SQL_SEARCH_USER = "select * from user where email = :account or username = :account";
-	const SQL_SEARCH_USER_BY_EMAIL ="select * from user where email = :email";
-	const SQL_SEARCH_USER_BY_USERNAME ="select * from user where username = :username";
-
-	const SQL_GET_USER_BY_ID = "select * from user where user_id = :user_id";
-
 	const SQL_GET_USER = "select * from user";
 
+	const SQL_SEARCH_USER = SQL_GET_USER . " where email = :account or username = :account";
+	const SQL_SEARCH_USER_BY_EMAIL = SQL_GET_USER . " where email = :email";
+	const SQL_SEARCH_USER_BY_USERNAME = SQL_GET_USER . " where username = :username";
+	const SQL_GET_USER_BY_ID = SQL_GET_USER . " where user_id = :user_id";
+
 	const SQL_GET_CATEGORY = "select * from category";
-	const SQL_GET_CATEGORY_BY_ID = "select * from category where category_id = :category_id";
+	const SQL_GET_CATEGORY_BY_ID = SQL_GET_CATEGORY . " where category_id = :category_id";
 
 	const SQL_GET_BRAND = "select * from brand";
-	const SQL_GET_BRAND_BY_ID = "select * from brand where brand_id = :brand_id";
+	const SQL_GET_BRAND_BY_ID = SQL_GET_BRAND . " where brand_id = :brand_id";
 
 	const SQL_GET_PRODUCT = "select * from product";
-	const SQL_GET_PRODUCT_BY_ID = "select * from product where product_id = :product_id";
+	const SQL_GET_PRODUCT_BY_ID = SQL_GET_PRODUCT . " where product_id = :product_id";
 
 	const SQL_GET_FEEDBACK = "select * from feedback";
 	
 	const SQL_GET_ORDER = "select * from `order`";
-	const SQL_GET_ORDER_BY_ID = "select * from `order` where order_id = :order_id";
+	const SQL_GET_ORDER_BY_ID = SQL_GET_ORDER . " where order_id = :order_id";
 
 	const SQL_GET_GALLERY = "select * from gallery";
 
-	const SQL_GET_CARD_BY_USER_AND_PRODUCT = "select * from cart where user_id = :user_id and product_id = :product_id";
+	const SQL_GET_PRODUCT_IMG_BY_ID = "";
+
+	const SQL_GET_CART = "select * from cart";
+	const SQL_GET_CART_BY_USER_AND_PRODUCT = SQL_GET_CART . " where user_id = :user_id and product_id = :product_id";
 
 	const SQL_GET_PRODUCT_AS_CAT_AND_BRAND = 
 	"select p.*, c.category_name, b.brand_name

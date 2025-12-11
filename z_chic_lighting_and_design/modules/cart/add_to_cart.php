@@ -17,7 +17,7 @@
             try
             {
                 $conn = getConnection();
-                $stmt = $conn->prepare(SQL_GET_CARD_BY_USER_AND_PRODUCT);
+                $stmt = $conn->prepare(SQL_GET_CART_BY_USER_AND_PRODUCT);
                 $stmt->bindParam(":user_id", $user_id);
                 $stmt->bindParam(":product_id", $product_id);
                 $stmt->execute();
