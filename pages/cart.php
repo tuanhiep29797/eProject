@@ -182,10 +182,10 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-            <div class="shopping-cart-total">
-                <div class="row px-4 mx-5 my-5">
-                    <div class="sc-total ms-lg-5 ms-sm-0 d-flex align-items-center">
+
+            <div class="shopping-cart-total mx-5">
+
+                 <div class="sc-total my-lg-5 d-flex align-items-center px-4">
                         <div class="sc-total-text col-lg-2 text-center">
                             <h3 class="fw-bold m-0">Total Amount:</h3>
                         </div>
@@ -197,8 +197,11 @@
                                 <a href="./check_out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;">Check out</button></a>
                         </div>
                     </div>
+                                    
                 </div>
+
             </div>
+
         </div>
     </div>
 
