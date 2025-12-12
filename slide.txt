@@ -1,0 +1,5 @@
+size màn hình: xl và sm
+
+1. giới thiệu thành viên
+2. đề tài, chức năng trong dự án EDA DBDiagram
+3. công nghệ sử dụng trong dự án
