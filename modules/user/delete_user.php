@@ -6,14 +6,14 @@
         header("Location: user.php");
     }
 
-    $id = $_GET['id'];
+    $user_id = $_GET['id'];
 
     //connection to database and delete user
     try
     {
         $conn = getConnection();
         $stmt = $conn -> prepare(SQL_DELETE_USER);
-        $stmt -> bindParam(':user_id', $id);
+        $stmt -> bindParam(':user_id', $user_id);
         $stmt -> execute();
 
         header("Location: user.php");
