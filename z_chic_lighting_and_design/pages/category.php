@@ -243,7 +243,7 @@
                         $<?= number_format($product['product_price'], 2) ?>
                       </div>
                       <div class="product-actions">
-                         <a class="btn btn-outline-primary btn-add-cart <?= $is_OOS ? "disabled" : "" ?>"  href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
+                         <a class="btn btn-outline-success btn-add-cart <?= $is_OOS ? "disabled" : "" ?>"  href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product['product_id'] ?>">
                           <i class="bi bi-cart-plus-fill"></i>  
                           Add To Cart
                         </a>

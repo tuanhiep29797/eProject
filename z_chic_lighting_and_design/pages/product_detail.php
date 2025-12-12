@@ -159,7 +159,7 @@ if (isset($_GET['id'])) {
               </div>
 
               <div class="product-actions">
-                <a class="btn btn-outline-primary btn-cart <?= $is_OOS ? "disabled" : "" ?>" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
+                <a class="btn btn-outline-success btn-cart <?= $is_OOS ? "disabled" : "" ?>" href="<?= BASE_URL ?>modules/cart/add_to_cart.php?id=<?= $product_item['product_id'] ?>">
                     <i class="bi bi-cart-plus"></i>
                     ADD TO CART
                 </a>

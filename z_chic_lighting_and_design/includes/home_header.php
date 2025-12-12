@@ -198,7 +198,7 @@ if (isset($_SESSION["user_id"])) {
                     <div class="dropdown d-inline-block position-relative py-3 px-2" id="header_account">
                         <a class="text-dark text-decoration-none fs-5 text-truncate w-100" href="#">
                             <?= htmlspecialchars(isset($_SESSION["fullname"]) ? "Hi, ". $_SESSION["fullname"] : "") ?>
-                            <i class="bi bi-person-circle text-primary"></i>
+                            <i class="bi bi-person-circle text-success"></i>
                         </a>
 
                         <ul class="dropdown-menu dropdown-menu-end shadow header_account_item">
