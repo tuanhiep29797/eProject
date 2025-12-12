@@ -18,14 +18,18 @@ if (isset($_SESSION["user_id"])) {
         echo "Error: " . $e->getMessage();
     }
 
+    $order_history = array_reverse($order_history);
+
     $order_id_list = [];
     foreach ($order_history as $item) {
+        $order_id_list[$item['order_id']]['order_id'] = $item['receiver'];
         $order_id_list[$item['order_id']]['receiver'] = $item['receiver'];
         $order_id_list[$item['order_id']]['phone_number'] = $item['phone_number'];
         $order_id_list[$item['order_id']]['address'] = $item['address'];
         $order_id_list[$item['order_id']]['order_status'] = $item['order_status'];
         $order_id_list[$item['order_id']]['order_date'] = $item['order_date'];
     }
+
     $conn = null;
 } else {
     echo '<script>
