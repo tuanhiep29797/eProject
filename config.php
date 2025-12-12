@@ -8,7 +8,7 @@
     define("USERNAME", "root");
     define("PASSWORD", "");
 
-    define("BASE_URL", "http://localhost/eProject/z_chic_lighting_and_design/");
+    define("BASE_URL", "http://localhost/eProject/");
 
     //function check Login
     function is_login() {
