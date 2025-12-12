@@ -113,7 +113,8 @@
                                             }
                                         case "cancelled":
                                             echo '<option style="color:red;" value="cancelled"' . $selected["cancelled"] . '>❌ Cancelled</option>';
-                                    } ?>
+                                    } 
+                                    ?>
                                         
                                 </select>
                             </td>
