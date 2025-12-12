@@ -8,7 +8,7 @@
         ["Home Accents", "assets/img/category/home_accents/category_home_accents_1.png"],
         ["LED - Spotlights","assets/img/category/led_spotlights/category_led_spotlights_1.png"],
         ["LED - Decorative Lights","assets/img/category/led_decorative_lights/category_led_decorative_lights_1.png"],
-        ["LED - Smart Lights","assets/img/category/led_smart_lights/category_led_smart_lights_1.png"]
+        ["LED - Smart Lights","assets/img/category/led_smart_lights/categoty_led_smart_lights_1.png"]
     ];
 
         try 

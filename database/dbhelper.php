@@ -66,6 +66,7 @@
 		product_content TEXT,
 		product_quantity INT NOT NULL DEFAULT 0,
 		product_thumbnail VARCHAR(255),
+		product_slug VARCHAR(255),
 
 		category_id INT,
 		brand_id INT,
@@ -188,6 +189,7 @@
 	from product p 
 	inner join category c on p.category_id = c.category_id
 	inner join brand b on p.brand_id = b.brand_id
+	order by p.product_id
 	";
 
 	const SQL_GET_PRODUCT_AS_C_AND_B_BY_ID = SQL_GET_PRODUCT_AS_CAT_AND_BRAND . " where p.product_id = :product_id";
@@ -302,9 +304,9 @@
 	";
 
 	const SQL_ADD_PRODUCT = 
-	"insert into product(product_title, product_description, product_price, product_content, product_quantity, product_thumbnail, category_id, brand_id) 
+	"insert into product(product_title, product_description, product_price, product_content, product_quantity, product_thumbnail, category_id, brand_id, product_slug) 
 	values
-	(:product_title, :product_description, :product_price, :product_content, :product_quantity, :product_thumbnail, :category_id, :brand_id)
+	(:product_title, :product_description, :product_price, :product_content, :product_quantity, :product_thumbnail, :category_id, :brand_id, :product_slug)
 	";
 
 	const SQL_ADD_FEEDBACK = 

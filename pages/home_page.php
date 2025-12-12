@@ -9,7 +9,7 @@
         $stmt->execute();
 
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $data_list = $stmt->fetchAll();
+        $prod_list = $stmt->fetchAll();
     }
     catch (PDOException $e) 
     {
@@ -20,7 +20,7 @@
     $products = [];
     for ($i = 1; $i <= 4; $i++)
     {
-        $products[] = $data_list[rand(0, count($data_list) - 1)];
+        $products[] = $prod_list[rand(0, count($prod_list) - 1)];
     }
 
     //connection to data base and get brand
@@ -126,14 +126,18 @@
             
             <div class="row g-4">
                 <?php foreach($products as $prod): ?>
-                <div class="col-md-6"> <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
+
+                <div class="col-md-6"> 
+                    <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
                         <div class="row align-items-center h-100">
                             <div class="col-5 col-sm-4">
-                                <img src="<?= BASE_URL . $prod["product_thumbnail"]; ?>" class="img-fluid" alt="<?= $prod["product_title"]; ?>">
+                                <a href="product_detail.php?id=<?= $prod["product_id"] ?>">
+                                    <img src="<?= BASE_URL . $prod["product_thumbnail"]; ?>" class="img-fluid" alt="<?= $prod["product_title"]; ?>">
+                                </a>
                             </div>
                             
                             <div class="col-7 col-sm-8 ps-3 ps-md-4">
-                                <h5 class="fw-bold font-serif mb-2 text-truncate"><?= $prod["product_title"]; ?></h5>
+                                <a class="fw-bold font-serif mb-2 text-truncate text-decoration-none text-dark" href="product_detail.php?id=<?= $prod["product_id"] ?>"><?= $prod["product_title"]; ?></a>
                                 <p class="text-muted small mb-3 d-none d-sm-block">
                                     <?= $prod["product_description"]; ?>
                                 </p>

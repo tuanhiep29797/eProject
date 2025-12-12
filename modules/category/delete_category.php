@@ -2,7 +2,7 @@
     require_once (__DIR__."/../../database/dbhelper.php");
     if(empty($_GET))
     {
-        header("Location: ../home_admin.php");
+        header("Location: category.php");
     }
 
     $category_id = $_GET["id"];
@@ -15,7 +15,7 @@
         $stmt -> bindParam(":category_id", $category_id);
         $stmt -> execute();
 
-        header("Location: ../home_admin.php");
+        header("Location: category.php");
     }
     catch (PDOException $e)
     {
