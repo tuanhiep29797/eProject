@@ -97,12 +97,24 @@
                                                 (isset($selected["processing"]) ? "orange" :
                                                     (isset($selected["shipped"]) ? "brown" : "green"))?>;"
                                 >
-
-                                    <option style="color:red;" <?= $selected["pending"]  ?? "" ?> value="pending">⏰Pending</option>
-                                    <option style="color:orange;" <?= $selected["processing"] ?? "" ?> value="processing">📦Processing</option>
-                                    <option style="color:brown;" <?= $selected["shipped"]    ?? "" ?> value="shipped">🚕Shipped</option>
-                                    <option style="color:green;" <?= $selected["delivered"]  ?? "" ?> value="delivered">✅Delivered</option>
-                                    <option style="color:red;" <?= $selected["cancelled"]  ?? "" ?> value="cancelled">❌Cancelled</option>
+                                    <?php switch ($item["order_status"])
+                                    {
+                                        case "pending":
+                                            echo '<option style="color:red;" selected value="pending">⏰ Pending</option>';
+                                        case "processing":
+                                            echo '<option style="color:orange;" value="processing"' . $selected["processing"] . '>📦 Processing</option>';
+                                        case "shipped":
+                                            echo '<option style="color:brown;" value="shipped"' . $selected["shipped"] . '>🚕 Shipped</option>';
+                                        case "delivered":
+                                            echo '<option style="color:green;" value="delivered"' . $selected["delivered"] . '>✅ Delivered</option>';
+                                            if(isset($selected["delivered"]))
+                                            {
+                                                break;
+                                            }
+                                        case "cancelled":
+                                            echo '<option style="color:red;" value="cancelled"' . $selected["cancelled"] . '>❌ Cancelled</option>';
+                                    } ?>
+                                        
                                 </select>
                             </td>
                             <td><?= date("H:i d/m/Y", strtotime($item["order_date"])) ?></td>
