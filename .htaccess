@@ -1,0 +1,19 @@
+RewriteEngine On
+
+RewriteRule ^home$ /pages/home_page.php [L]
+
+RewriteRule ^about-us$ pages/about.php [L]
+RewriteRule ^gallery$ pages/gallery.php [L]
+RewriteRule ^contact-us$ pages/contact.php [L]
+
+RewriteRule ^product$ pages/product.php [L]
+RewriteRule ^category$ pages/category.php [L]
+RewriteRule ^brand$ pages/brand.php [L]
+RewriteRule ^order-history$ pages/order_history.php [L]
+
+RewriteRule ^product/([a-zA-Z0-9\-]+)$ pages/product_detail.php?slug=$1 [L,QSA]
+
+RewriteRule ^user$ pages/account.php [L]
+RewriteRule ^user/cart$ pages/cart.php [L]
+RewriteRule ^user/check-out$ pages/check_out.php [L]
+RewriteRule ^user/edit$ pages/edit_account.php [L]

@@ -13,7 +13,7 @@
                 <li><strong>Power:</strong> 60W</li>
                 <li><strong>Material:</strong> K9 Crystal</li>
                 <li><strong>Style:</strong> Luxury European</li>
-            </ul>"
+            </ul>",
         ],
 
         [
@@ -368,6 +368,7 @@
                 $category_id = $item[5];
                 $brand_id = $item[6];
                 $product_content = $item[7];
+                $product_slug = createSlug($product_title);
 
                 $stmt = $conn -> prepare(SQL_ADD_PRODUCT);
                 $stmt -> bindParam(':product_title', $product_title);        
@@ -378,6 +379,7 @@
                 $stmt -> bindParam(':product_thumbnail', $product_thumbnail);        
                 $stmt -> bindParam(':category_id', $category_id);        
                 $stmt -> bindParam(':brand_id', $brand_id);        
+                $stmt -> bindParam(':product_slug', $product_slug);        
                 $stmt -> execute();
             }
         }
