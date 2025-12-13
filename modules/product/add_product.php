@@ -32,6 +32,7 @@
         $product_thumbnail   = $_POST["product_thumbnail"];
         $category_id         = $_POST["category_id"];
         $brand_id            = $_POST["brand_id"];
+        $product_slug        = create_slug($product_title);
 
         //connection to database and add product
         try {
@@ -47,6 +48,7 @@
             $stmt->bindParam(":product_thumbnail", $product_thumbnail);
             $stmt->bindParam(":category_id", $category_id);
             $stmt->bindParam(":brand_id", $brand_id);
+            $stmt->bindParam(":product_slug", $product_slug);
 
             $stmt->execute();
 

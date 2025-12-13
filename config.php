@@ -27,7 +27,7 @@
     }
 
     //function create slug
-    function createSlug($string)
+    function create_slug($string)
     {
         $string = strtolower(trim($string));
         $string = preg_replace('/[^a-z0-9]+/', '-', $string);

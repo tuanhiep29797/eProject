@@ -368,7 +368,7 @@
                 $category_id = $item[5];
                 $brand_id = $item[6];
                 $product_content = $item[7];
-                $product_slug = createSlug($product_title);
+                $product_slug = create_slug($product_title);
 
                 $stmt = $conn -> prepare(SQL_ADD_PRODUCT);
                 $stmt -> bindParam(':product_title', $product_title);        
