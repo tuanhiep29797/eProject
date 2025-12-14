@@ -1,30 +1,37 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../database/dbhelper.php");
 
-if (isset($_SESSION["user_id"])) {
-    $user_id = $_SESSION["user_id"];
+    if (isset($_SESSION["user_id"])) 
+    {
+        $user_id = $_SESSION["user_id"];
 
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
+        try 
+        {
+            $conn = getConnection();
+            $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
 
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $userList = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $userList = $stmt->fetchAll();
+        } 
+        catch (PDOException $e) 
+        {
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+        }
+        $conn = null;
+    } 
+    else 
+    {
+        echo '<script>
+                alert("Please log in to view your cart.");
+                window.location.href = "../admin/login.php";
+            </script>';
+        exit();
     }
     $conn = null;
-} else {
-    echo '<script>
-        alert("Please log in to view your cart.");
-        window.location.href = "../admin/login.php";
-    </script>';
-    exit();
-}
-$conn = null;
-
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +54,7 @@ $conn = null;
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Account</h2>
@@ -62,9 +70,10 @@ $conn = null;
         </div>
     </div>
 
+    <!-- body -->
     <div class="container">
         <div class="shopping-cart-header my-4 text-center">
-                <h1>Account</h1>
+            <h1>Account</h1>
         </div>
         <div class="row mx-5 my-3">
 
@@ -116,14 +125,13 @@ $conn = null;
                     <a href='edit_account.php'><button class="btn btn-success mt-4">Edit Profile</button></a>
                 </div>
             </div>
-
         </div>
     </div>
 
 
     <!-- include footer -->
     <?php
-    require_once(__DIR__ . "/../includes/home_footer.php");
+        require_once(__DIR__ . "/../includes/home_footer.php");
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

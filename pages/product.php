@@ -1,7 +1,9 @@
 <?php
   require_once(__DIR__ . "/../database/dbhelper.php");
 
-  try {
+  // get data category and brand
+  try 
+  {
     $conn = getConnection();
     $stmt = $conn->prepare(SQL_GET_CATEGORY);
     $stmt->execute();
@@ -14,7 +16,9 @@
 
     $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
     $brands = $stmt->fetchAll();
-  } catch (PDOException $e) {
+  } 
+  catch (PDOException $e) 
+  {
     echo "<script>
             console.error(" . json_encode($e->getMessage()) . ");
           </script>";
@@ -36,6 +40,7 @@
   try {
     $conn = getConnection();
 
+    // action filter
     if (isset($_GET['action']) && $_GET['action'] == 'filter') 
     {
       //base sql
@@ -76,7 +81,7 @@
       $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
       $products = $stmt->fetchAll();
     }
-
+    // action search
     elseif (isset($_GET['action']) && $_GET['action'] == 'search') 
     {
       $search = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -97,10 +102,10 @@
       $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
       $products = $stmt->fetchAll();
     } 
-    
+
+    // no cation
     else 
     {
-      //default
       //count total
       $stmt = $conn->prepare(SQL_COUNT_PRODUCT);
       $stmt->execute();
@@ -149,6 +154,7 @@
   require_once(__DIR__ . "/../includes/home_header.php");
   ?>
 
+  <!-- banner -->
   <div class="page-banner">
     <div class="container">
       <h2>Product</h2>
@@ -164,9 +170,10 @@
     </div>
   </div>
 
+  <!-- body -->
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
-      <!-- Page Header -->
+      <!-- page header -->
       <div class="row align-items-center mb-4">
         <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
@@ -184,11 +191,11 @@
       </div>
 
       <div class="row">
-        <!-- Sidebar Filters -->
+        <!-- sidebar filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
 
-            <!-- Filter by Category -->
+            <!-- filter by category -->
             <div class="filter-section mb-4">
               <h6 class="filter-title">Category:</h6>
               <div class="filter-options">
@@ -204,7 +211,7 @@
               </div>
             </div>
 
-            <!-- Filter by Brand -->
+            <!-- filter by brand -->
             <div class="filter-section mb-4">
               <h6 class="filter-title">Brand:</h6>
               <div class="filter-options">
@@ -226,7 +233,7 @@
           </form>
         </div>
 
-        <!-- Product Grid -->
+        <!-- product grid -->
         <div class="col-xl-9 col-md-8">
           <div class="row g-4">
             <?php if ($products && count($products) > 0): ?>
@@ -300,7 +307,7 @@
               <?php endif; ?>
           </div>
 
-          <!-- Pagination -->
+          <!-- pagination -->
           <?php if ($total_pages > 1): ?>
             <nav class="pagination-wrapper mt-5">
               <ul class="pagination justify-content-center">
@@ -355,7 +362,7 @@
 
     <!-- include footer -->
     <?php
-    require_once(__DIR__ . "/../includes/home_footer.php");
+      require_once(__DIR__ . "/../includes/home_footer.php");
     ?>
   </main>
 

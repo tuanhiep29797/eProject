@@ -17,7 +17,10 @@
     }
     catch (PDOException $e) 
     {
-        echo $e->getMessage();
+        echo "<script>
+                console.error(" . json_encode($e->getMessage()) . ");
+            </script>";
+        exit();
     }
 
     $conn = null;
@@ -43,6 +46,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- body -->
     <div class="page-banner">
         <div class="container">
             <h2>GALLERY</h2>
@@ -58,6 +62,7 @@
         </div>
     </div>
 
+    <!-- body -->
     <div class='d-flex align-items-center'>
         <div class="d-inline-block bg-dark px-4 py-2 rounded-pill shadow-sm text-center mx-auto">
             <a href="download_gallery.php" 

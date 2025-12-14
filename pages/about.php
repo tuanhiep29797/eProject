@@ -19,6 +19,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>About Us</h2>
@@ -33,6 +34,8 @@
             </div>
         </div>
     </div>
+
+    <!-- body -->
     <div class="container about-section mt-5 pt-5">
         <div class="row align-items-center">
             <div class="col-lg-6">

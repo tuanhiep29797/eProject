@@ -1,55 +1,65 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+  require_once(__DIR__ . "/../database/dbhelper.php");
 
-if (isset($_GET['id'])) {
-  $product_id = intval($_GET['id']);
-  try {
-    $conn = getConnection();
-    $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_C_AND_B_BY_ID);
-    $stmt->bindParam(":product_id", $product_id);
-    $stmt->execute();
+  // get data product
+  if (isset($_GET['id'])) 
+  {
+    $product_id = intval($_GET['id']);
+    try 
+    {
+      $conn = getConnection();
+      $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_C_AND_B_BY_ID);
+      $stmt->bindParam(":product_id", $product_id);
+      $stmt->execute();
 
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $product_detail_list = $stmt->fetchAll();
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $product_detail_list = $stmt->fetchAll();
 
-    if ($product_detail_list == null || count($product_detail_list) == 0) {
-      echo  '<script>
-                alert("Product detail not found.");
-                window.location.href = "product.php";
-            </script>';
+      if ($product_detail_list == null || count($product_detail_list) == 0) {
+        echo  '<script>
+                  alert("Product detail not found.");
+                  window.location.href = "product.php";
+              </script>';
+      }
+
+      $product_item = $product_detail_list[0];
+      $is_OOS = boolval($product_item["product_quantity"] == 0);
+
+      $stmt = $conn->prepare(SQL_GET_PRODUCT_IMG_BY_PRODUCT);
+      $stmt->bindParam(":product_id", $product_id);
+      $stmt->execute();
+
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $product_img_list = $stmt->fetchAll();
+
+      $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND . 
+                "where p.product_id != :product_id and p.product_quantity > 0
+                order by rand()
+                limit 6
+                ");
+      $stmt->bindParam(":product_id", $product_id);
+      $stmt->execute();
+
+      $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+      $random_products = $stmt->fetchAll();
+    } 
+    catch (PDOException $e) 
+    {
+      echo "<script>
+              console.error(" . json_encode($e->getMessage()) . ");
+          </script>";
+      exit();
     }
-
-    $product_item = $product_detail_list[0];
-    $is_OOS = boolval($product_item["product_quantity"] == 0);
-
-    $stmt = $conn->prepare(SQL_GET_PRODUCT_IMG_BY_PRODUCT);
-    $stmt->bindParam(":product_id", $product_id);
-    $stmt->execute();
-
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $product_img_list = $stmt->fetchAll();
-
-    $stmt = $conn->prepare(SQL_GET_PRODUCT_AS_CAT_AND_BRAND . 
-              "where p.product_id != :product_id and p.product_quantity > 0
-              order by rand()
-              limit 6
-              ");
-    $stmt->bindParam(":product_id", $product_id);
-    $stmt->execute();
-
-    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-    $random_products = $stmt->fetchAll();
-  } catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
+    $conn = null;
+  } 
+  else 
+  {
+    echo '<script>
+            alert("Product detail not found.");
+            window.location.href = "product.php";
+        </script>';
+    exit();
   }
-  $conn = null;
-} else {
-  echo '<script>
-          alert("Product detail not found.");
-          window.location.href = "product.php";
-      </script>';
-  exit();
-}
 
 ?>
 
@@ -73,6 +83,7 @@ if (isset($_GET['id'])) {
   require_once(__DIR__ . "/../includes/home_header.php");
   ?>
 
+  <!-- banner -->
   <div class="page-banner">
     <div class="container">
       <h2>Product Detail</h2>
@@ -93,7 +104,7 @@ if (isset($_GET['id'])) {
   </div>
 
 
-  <!-- Product Detail Section -->
+  <!-- <body -->
   <section class="product-detail">
     <div class="container">
       <a href="product.php" class="back-btn text-decoration-none text-secondary mb-4 fw-bold">
@@ -101,7 +112,7 @@ if (isset($_GET['id'])) {
       </a>
       <div class="product-card">
         <div class="row g-4">
-          <!-- Product Images -->
+          <!-- product images -->
           <div class="col-lg-6">
 
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
@@ -124,7 +135,7 @@ if (isset($_GET['id'])) {
 
           </div>
 
-          <!-- Product Info -->
+          <!-- product info -->
           <div class="col-lg-6">
             <div class="product-info">
               <div class="product-meta">
@@ -171,7 +182,7 @@ if (isset($_GET['id'])) {
     </div>
   </section>
 
-  <!-- Recommendations Section -->
+  <!-- recommendations section -->
   <section class="recommendations py-5">
     <div class="container">
       <div class="section-header">
@@ -214,7 +225,7 @@ if (isset($_GET['id'])) {
 
   <!-- include footer -->
   <?php
-  require_once(__DIR__ . "/../includes/home_footer.php");
+    require_once(__DIR__ . "/../includes/home_footer.php");
   ?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

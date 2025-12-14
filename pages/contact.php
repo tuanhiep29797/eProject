@@ -1,9 +1,11 @@
 <?php
     require_once (__DIR__.'/../database/dbhelper.php');
- 
+    
+
     $msg = "";
     $msgType = "";
 
+    // get data from form
     if (!empty($_POST)) {
         $username    = trim($_POST['username'] ?? '');
         $email   = trim($_POST['email'] ?? '');
@@ -57,6 +59,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Contact Us</h2>
@@ -70,6 +73,7 @@
         </div>
     </div>
 
+    <!-- body -->
     <div class="top-map-section">
         <div class="container">
             <div class="map-frame">
@@ -161,7 +165,7 @@
         </div>
     </div>
 
-     <!-- include footer -->
+    <!-- include footer -->
     <?php
         require_once (__DIR__."/../includes/home_footer.php");
     ?>

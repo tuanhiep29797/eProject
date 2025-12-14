@@ -1,31 +1,42 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../database/dbhelper.php");
 
+    //get user data
+    if (isset($_SESSION["user_id"])) 
+    {
+        $user_id = $_SESSION["user_id"];
 
-if (isset($_SESSION["user_id"])) {
-    $user_id = $_SESSION["user_id"];
+        try 
+        {
+            $conn = getConnection();
+            $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
 
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare(SQL_GET_USER_BY_ID);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
-
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $userList = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $userList = $stmt->fetchAll();
+        } 
+        catch (PDOException $e) 
+        {
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
+        }
+        $conn = null;
+    } 
+    else 
+    {
+        echo '<script>
+            alert("Please log in to view your cart.");
+            window.location.href = "../admin/login.php";
+        </script>';
+        exit();
     }
-    $conn = null;
-} else {
-    echo '<script>
-        alert("Please log in to view your cart.");
-        window.location.href = "../admin/login.php";
-    </script>';
-    exit();
-}
-$conn = null;
 
+    $conn = null;
+
+    
     if (!empty($_POST)) 
     {
         $user_id = $_SESSION["id"];
@@ -35,7 +46,6 @@ $conn = null;
         $email        = $_POST["email"];
         $phone_number = $_POST["phone_number"];
         $role = $_SESSION["role"];
-
 
         try 
         {
@@ -52,8 +62,12 @@ $conn = null;
             header("Location: account.php");
             exit;
         }
-        catch (PDOException $e) {
-            echo $e->getMessage();
+        catch (PDOException $e) 
+        {
+              echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
         }
 
         $conn = null;
@@ -79,6 +93,7 @@ $conn = null;
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Edit Account</h2>
@@ -140,6 +155,8 @@ $conn = null;
             </div>
         </div>
     </div>
+
+    <!-- include footer -->
     <?php
     require_once(__DIR__ . "/../includes/home_footer.php");
     ?>

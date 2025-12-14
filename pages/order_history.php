@@ -1,43 +1,55 @@
 <?php
-require_once(__DIR__ . "/../database/dbhelper.php");
+    require_once(__DIR__ . "/../database/dbhelper.php");
 
-$products = [];
-$count = 1;
-if (isset($_SESSION["user_id"])) {
-    $user_id = $_SESSION["user_id"];
+    $products = [];
+    $count = 1;
 
-    try {
-        $conn = getConnection();
-        $stmt = $conn->prepare(SQL_GET_ORDER_BY_USER_ID);
-        $stmt->bindParam(":user_id", $user_id);
-        $stmt->execute();
+    //get order data
+    if (isset($_SESSION["user_id"])) 
+    {
+        $user_id = $_SESSION["user_id"];
 
-        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $order_history = $stmt->fetchAll();
-    } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        try 
+        {
+            $conn = getConnection();
+            $stmt = $conn->prepare(SQL_GET_ORDER_BY_USER_ID);
+            $stmt->bindParam(":user_id", $user_id);
+            $stmt->execute();
+
+            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $order_history = $stmt->fetchAll();
+        } 
+        catch (PDOException $e) 
+        {
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
+        }
+
+        $order_history = array_reverse($order_history);
+
+        $order_id_list = [];
+        foreach ($order_history as $item) 
+        {
+            $order_id_list[$item['order_id']]['order_id'] = $item['receiver'];
+            $order_id_list[$item['order_id']]['receiver'] = $item['receiver'];
+            $order_id_list[$item['order_id']]['phone_number'] = $item['phone_number'];
+            $order_id_list[$item['order_id']]['address'] = $item['address'];
+            $order_id_list[$item['order_id']]['order_status'] = $item['order_status'];
+            $order_id_list[$item['order_id']]['order_date'] = $item['order_date'];
+        }
+
+        $conn = null;
+    } 
+    else 
+    {
+        echo '<script>
+            alert("Please log in");
+            window.location.href = "../admin/login.php";
+        </script>';
+        exit();
     }
-
-    $order_history = array_reverse($order_history);
-
-    $order_id_list = [];
-    foreach ($order_history as $item) {
-        $order_id_list[$item['order_id']]['order_id'] = $item['receiver'];
-        $order_id_list[$item['order_id']]['receiver'] = $item['receiver'];
-        $order_id_list[$item['order_id']]['phone_number'] = $item['phone_number'];
-        $order_id_list[$item['order_id']]['address'] = $item['address'];
-        $order_id_list[$item['order_id']]['order_status'] = $item['order_status'];
-        $order_id_list[$item['order_id']]['order_date'] = $item['order_date'];
-    }
-
-    $conn = null;
-} else {
-    echo '<script>
-        alert("Please log in");
-        window.location.href = "../admin/login.php";
-    </script>';
-    exit();
-}
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +72,7 @@ if (isset($_SESSION["user_id"])) {
     require_once(__DIR__ . "/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Order History</h2>
@@ -79,6 +92,7 @@ if (isset($_SESSION["user_id"])) {
         </div>
     </div>
 
+    <!-- body -->
     </div class="container">
     <div class="shopping-cart">
         <div class="shopping-cart-header my-4 text-center">
@@ -123,7 +137,7 @@ if (isset($_SESSION["user_id"])) {
                 <tbody>
                     <?php foreach ($order_id_list as $order_id => $info): ?>
                         
-                        <!-- ROW ORDER -->
+                        <!-- row order -->
                         <tr>
                             <td><?= $count++ ?></td>
                             <td><?= $info['receiver'] ?></td>
@@ -160,7 +174,7 @@ if (isset($_SESSION["user_id"])) {
                             </td>
                         </tr>
 
-                        <!-- ROW ITEMS COLLAPSE -->
+                        <!-- row item collapse -->
                         <tr class="collapse" id="order<?= $order_id ?>">
                             <td colspan="7" class="bg-light">
                                 <table class="table table-sm mb-0">
@@ -203,8 +217,10 @@ if (isset($_SESSION["user_id"])) {
         </div>
     </div>
     </div>
+
+    <!-- include footer -->
     <?php
-    require_once(__DIR__ . "/../includes/home_footer.php");
+        require_once(__DIR__ . "/../includes/home_footer.php");
     ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>

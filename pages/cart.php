@@ -3,6 +3,8 @@
 
     $products = [];
     $total = 0;
+
+    // get user infomation
     if (isset($_SESSION["user_id"])) 
     {
         $user_id = $_SESSION["user_id"];
@@ -20,7 +22,9 @@
         } 
         catch (PDOException $e) 
         {
-            echo "Error: " . $e->getMessage();
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
         }
         $conn = null;
     } 
@@ -33,10 +37,13 @@
         exit();
     }
 
+    //calculate total
     foreach ($products as $item) 
     {
         $total += $item['product_price'] * $item['quantity'];
     }
+
+    //plus minus and remove button
     if (!empty($_POST['action'])) 
     {
         $cart_id = $_POST["cart_id"];
@@ -74,7 +81,10 @@
                 } 
                 catch (PDOException $e) 
                 {
-                    echo "Error: " . $e->getMessage();
+                    echo "<script>
+                            console.error(" . json_encode($e->getMessage()) . ");
+                        </script>";
+                    exit();
                 }
                 break;
 
@@ -98,7 +108,10 @@
         } 
         catch (PDOException $e) 
         {
-            echo "Error: " . $e->getMessage();
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
         }
     }
 ?>
@@ -123,6 +136,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Cart</h2>
@@ -138,6 +152,7 @@
         </div>
     </div>
 
+    <!-- body -->
     <div class="container">
         <div class="shopping-cart">
             <div class="shopping-cart-product mt-4">

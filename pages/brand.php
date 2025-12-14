@@ -1,18 +1,22 @@
 <?php
   require_once(__DIR__ . "/../database/dbhelper.php");
 
+  //get brand data
   try 
   {
-  $conn = getConnection();
-  $stmt = $conn->prepare(SQL_GET_BRAND);
-  $stmt->execute();
+    $conn = getConnection();
+    $stmt = $conn->prepare(SQL_GET_BRAND);
+    $stmt->execute();
 
-  $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-  $brands = $stmt->fetchAll();
+    $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+    $brands = $stmt->fetchAll();
   } 
   catch (PDOException $e) 
   {
-    echo "Error: " . $e->getMessage();
+    echo "<script>
+              console.error(" . json_encode($e->getMessage()) . ");
+          </script>";
+    exit();
   }
   $conn = null;
 
@@ -30,6 +34,8 @@
   try
   {
     $conn = getConnection();
+
+    //action filter
     if (isset($_GET['action']) && $_GET['action'] == 'filter')
     {
       //base sql
@@ -64,6 +70,7 @@
       $products = $stmt->fetchAll();
     }
 
+    // action search
     elseif (isset($_GET['action']) && $_GET['action'] == 'search')
     {
       $search = isset($_GET['search']) ? trim($_GET['search']) : '';
@@ -85,9 +92,9 @@
       $products = $stmt->fetchAll();
     }
 
-     else 
+    //no action
+    else 
     {
-      //default
       //count total
       $stmt = $conn->prepare(SQL_COUNT_PRODUCT);
       $stmt->execute();
@@ -110,6 +117,7 @@
     echo "<script>
             console.error(" . json_encode($e->getMessage()) . ");
           </script>";
+    exit();
   }
 
   $conn = null;
@@ -121,7 +129,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product - Chic Lighting</title>
+  <title>Product</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
   <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/banner.css?v=<?= time() ?>">
@@ -136,6 +144,7 @@
       require_once (__DIR__."/../includes/home_header.php");
   ?>
 
+  <!-- banner -->
   <div class="page-banner">
       <div class="container">
           <h2>Brand</h2>
@@ -151,9 +160,10 @@
       </div>
   </div>
 
+  <!-- body -->
   <main class="product-page">
     <div class="container-fluid px-4 px-xl-5 py-4">
-      <!-- Page Header -->
+      <!-- page header -->
       <div class="row align-items-center mb-4">
         <div class="col-xl-6">
           <p class="subtitle mb-1 display-2">Give All You Need</p>
@@ -171,11 +181,9 @@
       </div>
 
       <div class="row">
-        <!-- Sidebar Filters -->
+        <!-- sidebar filters -->
         <div class="col-xl-3 col-md-4">
           <form action="" method="GET" id="filterForm">
-
-            <!-- Filter by Brand -->
             <div class="filter-section mb-4">
               <h6 class="filter-title">Filter by brand:</h6>
               <div class="filter-options">
@@ -191,22 +199,22 @@
                   <?php endforeach; ?>
                 <?php endif; ?>
               </div>
-                  </div>
+            </div>
             <button type="submit" class="btn bg-dark text-white w-100" name="action" value="filter">Apply Filter</button>
           </form>
         </div>
 
-        <!-- Product Grid -->
+        <!-- product grid -->
         <div class="col-xl-9 col-md-8">
           <div class="row g-4">
             <?php if ($products && count($products) > 0): ?>
               <?php foreach ($products as $product): ?>
                 <?php
-                $image_path = BASE_URL . $product['product_thumbnail'];
-                $rating = $product['rating'] ?? 5;
-                $reviews = $product['reviews'] ?? '12k';
-                $quantity = $product['product_quantity'];
-                $is_OOS = $quantity == 0;
+                  $image_path = BASE_URL . $product['product_thumbnail'];
+                  $rating = $product['rating'] ?? 5;
+                  $reviews = $product['reviews'] ?? '12k';
+                  $quantity = $product['product_quantity'];
+                  $is_OOS = $quantity == 0;
                 ?>
                 <div class="col-xl-4 col-md-6">
                   <div class="product-card" id="product_item_<?= $product['product_id'] ?>">
@@ -224,10 +232,10 @@
                       <div class="product-rating">
                         <div class="stars">
                           <?php
-                          $full_stars = floor($rating);
-                          $half_star = ($rating - $full_stars) >= 0.5;
-                          for ($s = 0; $s < $full_stars; $s++): ?>
-                            <i class="bi bi-star-fill"></i>
+                            $full_stars = floor($rating);
+                            $half_star = ($rating - $full_stars) >= 0.5;
+                            for ($s = 0; $s < $full_stars; $s++): ?>
+                              <i class="bi bi-star-fill"></i>
                           <?php endfor; ?>
                           <?php if ($half_star): ?>
                             <i class="bi bi-star-half"></i>
@@ -269,7 +277,7 @@
             <?php endif; ?>
           </div>
 
-          <!-- Pagination -->
+          <!-- pagination -->
           <?php if ($total_pages > 1): ?>
             <nav class="pagination-wrapper mt-5">
               <ul class="pagination justify-content-center">
@@ -281,13 +289,12 @@
                 </li>
 
                 <?php
-                $start_page = max(1, $page - 2);
-                $end_page = min($total_pages, $page + 2);
-
-                if ($start_page > 1): ?>
-                  <li class="page-item">
-                    <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => 1])) ?>">1</a>
-                  </li>
+                  $start_page = max(1, $page - 2);
+                  $end_page = min($total_pages, $page + 2);
+                  if ($start_page > 1): ?>
+                    <li class="page-item">
+                      <a class="page-link" href="?<?= http_build_query(array_merge($_GET, ['page' => 1])) ?>">1</a>
+                    </li>
                   <?php if ($start_page > 2): ?>
                     <li class="page-item disabled"><span class="page-link">...</span></li>
                   <?php endif; ?>

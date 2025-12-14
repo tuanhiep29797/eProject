@@ -1,17 +1,21 @@
 <?php
     require_once(__DIR__ . "/../database/dbhelper.php");
 
+    //check login
     if(!is_login())
     {
         header("Location: home_page.php");
     }
-
+    
+    //get cart data
     $products = [];
     $total = 0;
-    if (isset($_SESSION["user_id"])) {
+    if (isset($_SESSION["user_id"])) 
+    {
         $user_id = $_SESSION["user_id"];
 
-        try {
+        try 
+        {
             $conn = getConnection();
             $stmt = $conn->prepare(SQL_GET_CART_BY_USER_ID);
             $stmt->bindParam(":user_id", $user_id);
@@ -20,18 +24,25 @@
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
             $products = $stmt->fetchAll();
 
-            if ($products == null || count($products) == 0) {
-            echo    '<script>
+            if ($products == null || count($products) == 0) 
+            {
+                echo '<script>
                         alert("Please add product to cart.");
                         window.location.href = "product.php";
                     </script>';
+                exit();
             }
-
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
+        } catch (PDOException $e) 
+        {
+            echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
         }
         $conn = null;
-    } else {
+    } 
+    else 
+    {
         echo   '<script>
                     alert("Please log in to view your cart.");
                     window.location.href = "../admin/login.php";
@@ -39,11 +50,13 @@
         exit();
     }
 
+    //calculator total
     foreach ($products as $item) 
     {
         $total += $item['product_price'] * $item['quantity'];
     }
 
+    // create order
     if (!empty($_POST)) {
         $fullname = $_POST['fullname'];
         $phone_number = $_POST['phone_number'];
@@ -88,6 +101,7 @@
                 $stmt->execute();
             }
 
+            //delete cart
             $stmt = $conn->prepare(SQL_DELETE_CART_BY_USER_ID);
             $stmt->bindParam(":user_id", $user_id);
             $stmt->execute();
@@ -97,7 +111,10 @@
         } 
         catch (PDOException $e) 
         {
-            echo "Error: " . $e->getMessage();
+           echo "<script>
+                    console.error(" . json_encode($e->getMessage()) . ");
+                </script>";
+            exit();
         }
         $conn = null;
     }
@@ -123,6 +140,7 @@
         require_once (__DIR__."/../includes/home_header.php");
     ?>
 
+    <!-- banner -->
     <div class="page-banner">
         <div class="container">
             <h2>Check Out</h2>
@@ -142,6 +160,7 @@
         </div>
     </div>
 
+    <!-- body -->
     </div class="container">
     <div class="shopping-cart">
         <div class="shopping-cart-header my-4 text-center">
@@ -202,7 +221,8 @@
         </form>
     </div>
     </div>
-
+    
+    <!-- include footer -->
     <?php
         require_once (__DIR__."/../includes/home_footer.php");
     ?>
