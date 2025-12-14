@@ -71,21 +71,21 @@
     </div>
 
     <!-- body -->
-    <div class="container">
-        <div class="shopping-cart-header my-4 text-center">
+    <div class="container px-3 px-md-4">
+        <div class="shopping-cart-header my-3 my-md-4 text-center">
             <h1>Account</h1>
         </div>
-        <div class="row mx-5 my-3">
+        <div class="row mx-0 mx-md-3 mx-xl-5 my-3">
 
-            <div class="col-lg-4">
-                <div class="account-card p-4">
-                    <h5 class="fw-bold mb-4">Account</h5>
+            <div class="col-12 col-md-4 col-xl-4 mb-4 mb-xl-0">
+                <div class="account-card p-3 p-md-4">
+                    <h5 class="fw-bold mb-3 mb-md-4">Account</h5>
 
                     <a href="#" class="account-item">
                         <i class="bi bi-person"></i>
                         <div>
                             <p class="title">My Profile</p>
-                            <span class="desc">Change your profile details & password</span>
+                            <span class="desc d-none d-md-block">Change your profile details & password</span>
                         </div>
                     </a>
 
@@ -93,14 +93,14 @@
                         <i class="bi bi-bag-check"></i>
                         <div>
                             <p class="title">My Orders</p>
-                            <span class="desc">View & Manage orders</span>
+                            <span class="desc d-none d-md-block">View & Manage orders</span>
                         </div>
                     </a>
                 </div>
             </div>
 
-            <div class="col-lg-8">
-                <div class="account-info-box mt-4">
+            <div class="col-12 col-md-8 col-xl-8">
+                <div class="account-info-box mt-0 mt-xl-4">
                     <?php foreach($userList as $item): ?>
                     <h3 class="fw-bold mb-4">Account information</h3>
                     <div class="info-row">

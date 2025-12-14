@@ -114,9 +114,9 @@
     </div>
 
     <!-- body -->
-    <div class="container my-5 ">
+    <div class="container my-4 my-md-5 px-3 px-md-4">
         <div class="row justify-content-center">
-            <div class="col-xl-8 col-md-10">
+            <div class="col-12 col-md-10 col-xl-8">
 
                 <h2 class="page-title">
                     <i class="bi bi-person-circle me-2"></i>

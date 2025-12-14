@@ -172,14 +172,14 @@
 
   <!-- body -->
   <main class="product-page">
-    <div class="container-fluid px-4 px-xl-5 py-4">
+    <div class="container-fluid px-3 px-md-4 px-xl-5 py-3 py-md-4">
       <!-- page header -->
-      <div class="row align-items-center mb-4">
-        <div class="col-xl-6">
-          <p class="subtitle mb-1 display-2">Give All You Need</p>
+      <div class="row align-items-center mb-3 mb-md-4">
+        <div class="col-12 col-md-12 col-xl-6 mb-3 mb-xl-0">
+          <p class="subtitle mb-1 display-6">Give All You Need</p>
           <h1 class="page-title">Product</h1>
         </div>
-        <div class="col-xl-6">
+        <div class="col-12 col-md-12 col-xl-6">
           <form action="" method="GET" class="search-form">
             <div class="input-group">
               <input type="text" class="form-control" name="search" placeholder="Search on stuffbus"
@@ -192,7 +192,7 @@
 
       <div class="row">
         <!-- sidebar filters -->
-        <div class="col-xl-3 col-md-4">
+        <div class="col-12 col-md-4 col-xl-3 mb-4 mb-xl-0">
           <form action="" method="GET" id="filterForm">
 
             <!-- filter by category -->
@@ -234,8 +234,8 @@
         </div>
 
         <!-- product grid -->
-        <div class="col-xl-9 col-md-8">
-          <div class="row g-4">
+        <div class="col-12 col-md-8 col-xl-9">
+          <div class="row g-3 g-md-4">
             <?php if ($products && count($products) > 0): ?>
               <?php foreach ($products as $product): ?>
                 <?php
@@ -245,7 +245,7 @@
                 $quantity = $product['product_quantity'];
                 $is_OOS = $quantity == 0;
                 ?>
-                <div class="col-xl-4 col-md-6">
+                <div class="col-12 col-md-6 col-xl-4">
                   <div class="product-card" id="product_item_<?= $product['product_id'] ?>">
                     <div class="product-image">
                       <a href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product['product_id'] ?>">

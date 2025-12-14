@@ -36,14 +36,14 @@
     </div>
 
     <!-- body -->
-    <div class="container about-section mt-5 pt-5">
+    <div class="container about-section mt-4 mt-md-5 pt-4 pt-md-5">
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            <div class="col-12 col-md-12 col-xl-6 mb-4 mb-xl-0">
                 <div class="img-box">
                     <img src="<?= BASE_URL ?>assets/img/home/img_about_1.png" alt="Chic Lighting & Design">
                 </div>
             </div>
-            <div class="col-lg-6 ps-lg-5">
+            <div class="col-12 col-md-12 col-xl-6 ps-xl-5">
                 <div class="about-content">
                     <span class="sub-title">OUR STORY</span>
                     <h2 class="main-title">CHIC LIGHTING & DESIGN</h2>
@@ -58,10 +58,10 @@
         </div>
     </div>
 
-    <div class="why-section">
+    <div class="why-section py-4 py-md-5">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6 pe-lg-5 order-2 order-lg-1">
+                <div class="col-12 col-md-12 col-xl-6 pe-xl-5 order-2 order-xl-1">
                     <div class="about-content">
                         <span class="sub-title">WHY CHOOSE US</span>
                         <h2 class="main-title">We Bring The Best For Your Home</h2>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 order-1 order-lg-2">
+                <div class="col-12 col-md-12 col-xl-6 order-1 order-xl-2 mb-4 mb-xl-0">
                     <div class="img-box">
                         <img src="<?= BASE_URL ?>assets/img/home/img_about_2.png" alt="Why Choose Us">
                     </div>

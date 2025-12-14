@@ -63,8 +63,8 @@
     </div>
 
     <!-- body -->
-    <div class='d-flex align-items-center'>
-        <div class="d-inline-block bg-dark px-4 py-2 rounded-pill shadow-sm text-center mx-auto">
+    <div class='d-flex align-items-center mt-3 mt-md-4'>
+        <div class="d-inline-block bg-dark px-3 px-md-4 py-2 rounded-pill shadow-sm text-center mx-auto">
             <a href="download_gallery.php" 
             class="text-decoration-none text-white fw-bold text-uppercase small">
             Download Gallery <i class="bi bi-cloud-arrow-down ms-1"></i>

@@ -105,15 +105,15 @@
 
 
   <!-- <body -->
-  <section class="product-detail">
-    <div class="container">
-      <a href="product.php" class="back-btn text-decoration-none text-secondary mb-4 fw-bold">
+  <section class="product-detail py-3 py-md-4">
+    <div class="container px-3 px-md-4">
+      <a href="product.php" class="back-btn text-decoration-none text-secondary mb-3 mb-md-4 fw-bold d-inline-block">
         <i class="bi bi-chevron-left me-1"></i> Product
       </a>
       <div class="product-card">
-        <div class="row g-4">
+        <div class="row g-3 g-md-4">
           <!-- product images -->
-          <div class="col-lg-6">
+          <div class="col-12 col-md-12 col-xl-6">
 
             <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
@@ -136,7 +136,7 @@
           </div>
 
           <!-- product info -->
-          <div class="col-lg-6">
+          <div class="col-12 col-md-12 col-xl-6">
             <div class="product-info">
               <div class="product-meta">
                 <span class="meta-item">Brand: <strong><?= $product_item['brand_name'] ?></strong></span>
@@ -183,17 +183,17 @@
   </section>
 
   <!-- recommendations section -->
-  <section class="recommendations py-5">
-    <div class="container">
+  <section class="recommendations py-4 py-md-5">
+    <div class="container px-3 px-md-4">
       <div class="section-header">
-        <h2 class="section-title">Explore our recomendations</h2>
+        <h2 class="section-title fs-4">Explore our recomendations</h2>
       </div>
 
-      <div class="row g-4">
+      <div class="row g-3 g-md-4">
         <?php for ($i = 0; $i <= 5; $i++):
           $product_item = $random_products[$i];
         ?>
-          <div class="col-6 col-md-2 col-lg-2">
+          <div class="col-6 col-md-4 col-xl-2">
             <div class="recommendation-card">
               <a class="text-decoration-none" href="<?= BASE_URL ?>pages/product_detail.php?id=<?= $product_item['product_id'] ?>">
                 <div class="card-image">
