@@ -93,21 +93,21 @@
     </div>
 
     <!-- body -->
-    </div class="container">
+    <div class="container px-3 px-md-4">
     <div class="shopping-cart">
-        <div class="shopping-cart-header my-4 text-center">
+        <div class="shopping-cart-header my-3 my-md-4 text-center">
             <h1>Order History</h1>
         </div>
-        <div class="shopping-cart-product m-5 px-5 row" style="border: 1px;">
-            <div class="col-lg-4">
-                <div class="account-card p-4">
-                    <h5 class="fw-bold mb-4">Account</h5>
+        <div class="shopping-cart-product m-0 m-md-3 m-xl-5 px-0 px-md-3 px-xl-5 row g-4" style="border: 1px;">
+            <div class="col-12 col-md-4 col-xl-4 mb-4 mb-xl-0">
+                <div class="account-card p-3 p-md-4">
+                    <h5 class="fw-bold mb-3 mb-md-4">Account</h5>
 
                     <a href="account.php" class="account-item">
                         <i class="bi bi-person"></i>
                         <div>
                             <p class="title">My Profile</p>
-                            <span class="desc">Change your profile details & password</span>
+                            <span class="desc d-none d-md-block">Change your profile details & password</span>
                         </div>
                     </a>
 
@@ -115,21 +115,22 @@
                         <i class="bi bi-bag-check"></i>
                         <div>
                             <p class="title">My Orders</p>
-                            <span class="desc">View & Manage orders</span>
+                            <span class="desc d-none d-md-block">View & Manage orders</span>
                         </div>
                     </a>
                 </div>
             </div>
-            <div class="col-lg-8">
+            <div class="col-12 col-md-8 col-xl-8">
+            <div class="table-responsive">
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th>STT</th>
+                        <th class="d-none d-md-table-cell">STT</th>
                         <th>Receiver</th>
-                        <th>Phone</th>
-                        <th>Address</th>
+                        <th class="d-none d-xl-table-cell">Phone</th>
+                        <th class="d-none d-xl-table-cell">Address</th>
                         <th>Status</th>
-                        <th>Date</th>
+                        <th class="d-none d-md-table-cell">Date</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -139,10 +140,10 @@
                         
                         <!-- row order -->
                         <tr>
-                            <td><?= $count++ ?></td>
+                            <td class="d-none d-md-table-cell"><?= $count++ ?></td>
                             <td><?= $info['receiver'] ?></td>
-                            <td><?= $info['phone_number'] ?></td>
-                            <td><?= $info['address'] ?></td>
+                            <td class="d-none d-xl-table-cell"><?= $info['phone_number'] ?></td>
+                            <td class="d-none d-xl-table-cell"><?= $info['address'] ?></td>
 
                             <td>
                                 <?php if ($info['order_status'] === 'pending'): ?>
@@ -163,13 +164,14 @@
                                 <?php endif; ?>
                             </td>
 
-                            <td><?= $info['order_date'] ?></td>
+                            <td class="d-none d-md-table-cell"><?= $info['order_date'] ?></td>
 
                             <td>
                                 <button class="btn btn-outline-success btn-sm"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#order<?= $order_id ?>">
-                                    View Items
+                                    <span class="d-none d-md-inline">View Items</span>
+                                    <i class="bi bi-eye d-md-none"></i>
                                 </button>
                             </td>
                         </tr>
@@ -213,6 +215,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            </div>
             </div>
         </div>
     </div>

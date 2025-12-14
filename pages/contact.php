@@ -82,17 +82,17 @@
         </div>
     </div>
 
-    <div class="contact-main-section">
+    <div class="contact-main-section py-4 py-md-5">
         <div class="container">
             
-            <div class="section-header-text">
+            <div class="section-header-text text-center text-md-start">
                 <h3>Contact Us</h3>
                 <p>Any questions or remarks? Just write us a message!</p>
             </div>
 
-            <div class="row g-5">
+            <div class="row g-4 g-md-5">
                 
-                <div class="col-xl-5"> 
+                <div class="col-12 col-md-12 col-xl-5"> 
                     <div class="black-border-box">
                         
                         <ul class="info-list">
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-7"> 
+                <div class="col-12 col-md-12 col-xl-7"> 
                     <div class="black-border-box">
                         <h3 class="form-title">Send a Message</h3>
 
@@ -134,11 +134,11 @@
 
                         <form method="POST">
                             <div class="row">
-                                <div class="col-md-6 form-group-custom">
+                                <div class="col-12 col-md-6 col-xl-6 form-group-custom">
                                     <label class="form-label">Full Name</label>
                                     <input type="text" name="username" class="form-control" required>
                                 </div>
-                                <div class="col-md-6 form-group-custom">
+                                <div class="col-12 col-md-6 col-xl-6 form-group-custom">
                                     <label class="form-label">Phone</label>
                                     <input type="text" name="phone_number" class="form-control">
                                 </div>

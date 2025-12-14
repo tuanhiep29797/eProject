@@ -161,57 +161,57 @@
     </div>
 
     <!-- body -->
-    </div class="container">
+    <div class="container px-3 px-md-4">
     <div class="shopping-cart">
-        <div class="shopping-cart-header my-4 text-center">
+        <div class="shopping-cart-header my-3 my-md-4 text-center">
             <h1>Check Out</h1>
         </div>
         <form method="POST">
-            <div class="check-out row">
-                <div class="check-out-left col-4">
-                    <h2 class="text-center fw-bold">PAYMENT INFORMATION</h2>
-                    <div class="ms-5">
-                        <div class="form-group fw-bold ">
-                            <label class="my-2 form-label " for="fullname">Fullname</label>
-                            <input type="text" placeholder="Fullname" name="fullname" id="fullname" required class="form-control py-3 mb-4">
-                            <label class="my-2 form-label " for="fullname">Phone Number</label>
-                            <input type="number" placeholder="Phone number" name="phone_number" required class="form-control py-3 mb-4">
-                            <label class="my-2 form-label " for="fullname">Address</label>
-                            <input type="text" placeholder="Address" name="address" required class="form-control py-3 mb-4">
+            <div class="check-out row g-4">
+                <div class="check-out-left col-12 col-md-12 col-xl-4">
+                    <h2 class="text-center fw-bold fs-5">PAYMENT INFORMATION</h2>
+                    <div class="ms-0 ms-md-3 ms-xl-5">
+                        <div class="form-group fw-bold">
+                            <label class="my-2 form-label" for="fullname">Fullname</label>
+                            <input type="text" placeholder="Fullname" name="fullname" id="fullname" required class="form-control py-2 py-md-3 mb-3 mb-md-4">
+                            <label class="my-2 form-label" for="phone_number">Phone Number</label>
+                            <input type="number" placeholder="Phone number" name="phone_number" required class="form-control py-2 py-md-3 mb-3 mb-md-4">
+                            <label class="my-2 form-label" for="address">Address</label>
+                            <input type="text" placeholder="Address" name="address" required class="form-control py-2 py-md-3 mb-3 mb-md-4">
                         </div>
                     </div>
                 </div>
-                <div class="shopping-cart-product mt-4 col-8 px-5">
+                <div class="shopping-cart-product mt-0 mt-xl-4 col-12 col-md-12 col-xl-8 px-0 px-md-3 px-xl-5">
                     <?php foreach ($products as $item): ?>
-                        <div class="sc-product row align-items-center mx-5 mt-4" id="shopping-cart-<?= $item['cart_id'] ?>">
-                            <div class="sc-product-img col-lg-2 my-2">
-                                <img src="  <?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" style="width:70px; height:70px; object-fit:cover; margin:10px;" />
+                        <div class="sc-product row align-items-center mx-0 mx-md-3 mx-xl-5 mt-3 mt-md-4 p-2 p-md-3" id="shopping-cart-<?= $item['cart_id'] ?>">
+                            <div class="sc-product-img col-4 col-md-3 col-xl-2 my-2">
+                                <img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" class="img-fluid rounded" style="max-width:70px; height:70px; object-fit:cover;" />
                             </div>
-                            <div class="sc-product-text col-lg-6 text-right">
-                                <h5 class='fw-bold'><?= $item['product_title'] ?></h5>
-                                <p class="">Price <span class="text-success fw-semibold">$<?= number_format($item['product_price'], 2) ?></span></p>
+                            <div class="sc-product-text col-8 col-md-9 col-xl-6 text-right">
+                                <h5 class='fw-bold fs-6'><?= $item['product_title'] ?></h5>
+                                <p class="mb-0 small">Price <span class="text-success fw-semibold">$<?= number_format($item['product_price'], 2) ?></span></p>
                             </div>
-                            <div class="sc-product-quantity col-lg-2 text-right">
-                                <p class="">Quantity</p>
+                            <div class="sc-product-quantity col-6 col-md-6 col-xl-2 text-right mt-2 mt-xl-0">
+                                <p class="mb-1 small">Quantity</p>
                                 <span class="text-success fw-semibold"> <?= $item['quantity'] ?></span>
                             </div>
-                            <div class="sc-product-total col-lg-2 text-right">
-                                <p class="">Total</p>
+                            <div class="sc-product-total col-6 col-md-6 col-xl-2 text-right mt-2 mt-xl-0">
+                                <p class="mb-1 small">Total</p>
                                 <span class="text-success fw-semibold">$<?= number_format($item['product_price'] * $item['quantity'], 2) ?></span>
                             </div>
                         </div>
                     <?php endforeach; ?>
                     <div class="shopping-cart-total">
-                        <div class="row my-5 me-5">
-                            <div class="sc-total ms-lg-5 ms-sm-0 d-flex align-items-center">
-                                <div class="sc-total-text col-lg-3 text-center">
-                                    <h3 class="fw-bold m-0">Total Amount:</h3>
+                        <div class="row my-4 my-md-5 me-0 me-md-3 me-xl-5">
+                            <div class="sc-total ms-0 ms-xl-5 d-flex flex-column flex-md-row align-items-center">
+                                <div class="sc-total-text col-12 col-md-4 col-xl-3 text-center mb-2 mb-md-0">
+                                    <h3 class="fw-bold m-0 fs-5">Total Amount:</h3>
                                 </div>
-                                <div class="sc-total-number col-lg-5 text-center">
+                                <div class="sc-total-number col-12 col-md-4 col-xl-5 text-center mb-3 mb-md-0">
                                     <span class="text-success fw-bold" style="font-size:24px">$<?= number_format($total, 2) ?></span>
                                 </div>
-                                <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
-                                    <button type="submit" class="btn btn-outline-white bg-dark text-light me-3 fw-bold p-3 px-4" style="border-radius: 20px;">Payment</button>
+                                <div class="sc-total-action col-12 col-md-4 col-xl-4 d-flex justify-content-center justify-content-md-end gap-3">
+                                    <button type="submit" class="btn btn-outline-white bg-dark text-light fw-bold p-2 p-md-3 px-3 px-md-4 w-100 w-md-auto" style="border-radius: 20px;">Payment</button>
                                 </div>
                             </div>
                         </div>

@@ -79,15 +79,15 @@
     </div>
 
     <!-- body -->
-    <div class="container py-5 my-3 my-md-5">
-        <div class="row align-items-center mb-5 gx-lg-5">
-            <div class="col-lg-6 mb-4 mb-lg-0">
+    <div class="container py-4 py-md-5 my-3 my-xl-5">
+        <div class="row align-items-center mb-4 mb-xl-5 gx-xl-5">
+            <div class="col-12 col-md-12 col-xl-6 mb-4 mb-xl-0">
                 <div class="img-wrapper">
                     <img src="../assets/img/home/image_01.png" alt="Interior Design" class="story-img shadow-sm">
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="ps-lg-4 text-secondary">
+            <div class="col-12 col-md-12 col-xl-6">
+                <div class="ps-xl-4 text-secondary">
                     <h2>CHIC LIGHTING & DESIGN</h2>
                     <p class="lh-xl mb-3">
                         <p>Welcome to Chic Lighting & Design where we believe that lighting is not merely functional, but an art form. We specialize in providing high-end, unique decorative lighting fixtures, carefully curated from leading designers, aiming to create an inspirational, luxurious, and distinctly personalized living and working environment for you.</p>
@@ -106,9 +106,9 @@
         <div class="container">
             <h2 class="section-title fw-bold mb-4 mb-md-5 font-serif text-uppercase text-center text-md-start">BRANDS</h2>
 
-            <div class="row g-4 justify-content-center ">
+            <div class="row g-3 g-md-4 justify-content-center ">
             <?php foreach ($brand_list as $item): ?>
-            <div class="col-6 col-md-4 col-lg-2 text-center">
+            <div class="col-6 col-md-4 col-xl-2 text-center">
 
                 <div class="brand-card product-card bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center justify-content-center">
                     <a href="brand.php?brand%5B%5D=<?= $item["brand_id"]?>&action=filter"
@@ -132,26 +132,26 @@
         <div class="container">
             <h2 class="section-title fw-bold mb-4 mb-md-5 font-serif text-uppercase text-center text-md-start">BEST SELLER</h2>
             
-            <div class="row g-4">
+            <div class="row g-3 g-md-4">
                 <?php foreach($products as $prod): ?>
-                    <div class="col-md-6"> 
+                    <div class="col-12 col-md-6 col-xl-6"> 
                         <div class="card product-card h-100 border p-3 p-md-4 shadow-sm bg-white">
                             <div class="row align-items-center h-100">
-                                <div class="col-5 col-sm-4">
+                                <div class="col-5 col-md-4 col-xl-4">
                                     <a href="product_detail.php?id=<?= $prod["product_id"] ?>">
                                         <img src="<?= BASE_URL . $prod["product_thumbnail"]; ?>" class="img-fluid" alt="<?= $prod["product_title"]; ?>">
                                     </a>
                                 </div>
                                 
-                                <div class="col-7 col-sm-8 ps-3 ps-md-4">
-                                    <a class="fw-bold font-serif mb-2 text-truncate text-decoration-none text-dark" href="product_detail.php?id=<?= $prod["product_id"] ?>"><?= $prod["product_title"]; ?></a>
-                                    <p class="text-muted small mb-3 d-none d-sm-block">
+                                <div class="col-7 col-md-8 col-xl-8 ps-3 ps-md-4 overflow-hidden">
+                                    <a class="d-block fw-bold font-serif mb-2 text-truncate text-decoration-none text-dark" href="product_detail.php?id=<?= $prod["product_id"] ?>"><?= $prod["product_title"]; ?></a>
+                                    <p class="text-muted small mb-3 d-none d-md-block">
                                         <?= $prod["product_description"]; ?>
                                     </p>
-                                    <p class="text-muted small mb-2 d-block d-sm-none text-truncate">Description here...</p>
+                                    <p class="text-muted small mb-2 d-block d-md-none text-truncate">Description here...</p>
 
-                                    <div class="d-flex flex-wrap align-items-center justify-content-between mt-auto">
-                                        <span class="fw-bold fs-5 mb-2 mb-sm-0 me-2">$<?= $prod["product_price"]; ?></span>
+                                    <div class="d-flex flex-column flex-md-row flex-wrap align-items-start align-items-md-center justify-content-between mt-auto">
+                                        <span class="fw-bold fs-6 mb-2 mb-md-0 me-2">$<?= $prod["product_price"]; ?></span>
                                         
                                         <div class="d-flex align-items-center gap-2">
                                             <a href="product_detail.php?id=<?= $prod["product_id"] ?>" class="btn btn-dark btn-sm rounded-0 px-3 py-1 text-uppercase" style="font-size: 12px;">Buy</a>

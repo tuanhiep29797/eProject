@@ -153,23 +153,23 @@
     </div>
 
     <!-- body -->
-    <div class="container">
+    <div class="container px-3 px-md-4">
         <div class="shopping-cart">
-            <div class="shopping-cart-product mt-4">
+            <div class="shopping-cart-product mt-3 mt-md-4">
                 <?php foreach ($products as $item): ?>
-                    <div class="sc-product row align-items-center px-4 mx-5 mt-4" id="shopping-cart-<?= $item['cart_id']?>" >
-                        <div class="sc-product-img col-lg-2 my-2">
-                            <img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" />
+                    <div class="sc-product row align-items-center px-2 px-md-4 mx-0 mx-md-3 mx-xl-5 mt-3 mt-md-4" id="shopping-cart-<?= $item['cart_id']?>" >
+                        <div class="sc-product-img col-4 col-md-3 col-xl-2 my-2">
+                            <img src="<?= BASE_URL . $item['product_thumbnail'] ?>" alt="<?= $item['product_thumbnail'] ?>" class="img-fluid" />
                         </div>
-                        <div class="sc-product-text col-lg-2 text-right">
-                            <h5 class="fw-bold"><?= $item['product_title'] ?></h5>
+                        <div class="sc-product-text col-8 col-md-9 col-xl-2 text-right">
+                            <h5 class="fw-bold fs-6"><?= $item['product_title'] ?></h5>
                         </div>
-                        <div class="sc-product-price col-lg-2 text-right">
-                            <p class="">Price</p>
+                        <div class="sc-product-price col-6 col-md-4 col-xl-2 text-right mt-2 mt-xl-0">
+                            <p class="mb-1 small">Price</p>
                             <span class="text-success fw-semibold">$<?= number_format($item['product_price'],2) ?></span>
                         </div>
-                        <div class="sc-product-quantity col-lg-2 text-right">
-                            <p class="">Quantity</p>
+                        <div class="sc-product-quantity col-6 col-md-4 col-xl-2 text-right mt-2 mt-xl-0">
+                            <p class="mb-1 small">Quantity</p>
                             <form method="POST" class="cart-item-form">
                                 <input type="hidden" name="cart_id" value="<?= $item['cart_id'] ?>">
                                 <div class="sc-product-quantity-edit d-flex align-items-center gap-2">
@@ -179,18 +179,18 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="sc-product-total col-lg-2 text-right">
-                            <p class="">Total</p>
+                        <div class="sc-product-total col-6 col-md-4 col-xl-2 text-right mt-2 mt-xl-0">
+                            <p class="mb-1 small">Total</p>
                             <span class="text-success fw-semibold">$<?= number_format($item['product_price'] * $item['quantity'],2) ?></span>
                         </div>
-                        <div class="sc-product-total col-lg-1 text-right">
-                            <p class="">In Stock</p>
+                        <div class="sc-product-total col-6 col-md-6 col-xl-1 text-right mt-2 mt-xl-0">
+                            <p class="mb-1 small">In Stock</p>
                             <span class="text-success fw-semibold"><?= number_format($item['product_quantity']) ?></span>
                         </div>
-                        <div class="sc-product-action col-lg-1 d-flex justify-content-start px-0">
+                        <div class="sc-product-action col-12 col-md-6 col-xl-1 d-flex justify-content-end mt-3 mt-xl-0">
                             <form method="POST">
                                 <input type="hidden" name="cart_id" value="<?= $item['cart_id'] ?>">
-                                <button type="submit" name="action" value="remove" class="btn btn-outline-dark">
+                                <button type="submit" name="action" value="remove" class="btn btn-outline-dark btn-sm px-3">
                                     Remove
                                 </button>
                             </form>
@@ -198,18 +198,26 @@
                     </div>
                 <?php endforeach; ?>
 
-            <div class="shopping-cart-total mx-5">
+            <div class="shopping-cart-total mx-0 mx-md-3 mx-xl-5">
 
-                 <div class="sc-total my-lg-5 d-flex align-items-center px-4">
-                        <div class="sc-total-text col-lg-2 text-center">
-                            <h3 class="fw-bold m-0">Total Amount:</h3>
-                        </div>
-                        <div class="sc-total-number col-lg-6 text-center">
-                            <span class="text-success fw-bold" style="font-size:24px">$<?= number_format($total,2)?></span>
-                        </div>
-                        <div class="sc-total-action col-lg-4 d-flex justify-content-end gap-3">
-                                <a href="./product.php"><button class="btn btn-outline-dark fw-bold p-3" style="border-radius: 20px;">Product</button></a>
-                                <a href="./check_out.php"><button class="btn btn-outline-white bg-dark text-light me-2 fw-bold p-3 " style="border-radius: 20px;">Check out</button></a>
+                 <div class="sc-total my-4 my-md-5 px-2 px-md-4 py-3 rounded bg-light">
+                        <div class="row align-items-center g-3">
+                            <div class="col-12 col-md-4 col-xl-3 text-center text-md-start">
+                                <h3 class="fw-bold m-0 fs-5">Total Amount:</h3>
+                            </div>
+                            <div class="col-12 col-md-4 col-xl-5 text-center">
+                                <span class="text-success fw-bold fs-4">$<?= number_format($total,2)?></span>
+                            </div>
+                            <div class="col-12 col-md-4 col-xl-4">
+                                <div class="d-flex flex-row justify-content-center justify-content-md-end gap-2">
+                                    <a href="./product.php" class="text-decoration-none" style="flex: 1; max-width: 130px;">
+                                        <button class="btn btn-outline-dark fw-bold py-2 w-100" style="border-radius: 20px;">Product</button>
+                                    </a>
+                                    <a href="./check_out.php" class="text-decoration-none" style="flex: 1; max-width: 130px;">
+                                        <button class="btn bg-dark text-light fw-bold py-2 w-100" style="border-radius: 20px;">Check out</button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                                     
