@@ -75,6 +75,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/modules.css?v=<?= time() ?>">
     <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
+    <script src="../js/tinymce/tinymce.min.js"></script>
 </head>
 
 <body>
@@ -124,7 +125,12 @@
 
                     <div class="mb-3">
                         <label class="form-label">Content</label>
-                        <textarea class="form-control" name="product_content"></textarea>
+                        <textarea 
+                            id="product_content"
+                            class="form-control"
+                            name="product_content"
+                            rows="10"
+                        ></textarea>                    
                     </div>
 
                     <div class="mb-3">
@@ -165,6 +171,24 @@
             </div>
         </div>
     </div>
+    <script>
+    tinymce.init({
+        selector: '#product_content',
+        license_key: 'gpl',
+        height: 400,
+        menubar: false,
+        plugins: 'lists link image table code',
+        toolbar: `
+            undo redo |
+            bold italic underline |
+            alignleft aligncenter alignright |
+            bullist numlist |
+            link image table |
+            code
+        `,
+        content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

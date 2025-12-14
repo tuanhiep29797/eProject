@@ -18,7 +18,7 @@
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $category_list = $stmt->fetchall();
+        $category_list = $stmt->fetch();
 
         if ($category_list == null || count($category_list) == 0) 
         {
@@ -38,7 +38,7 @@
                 try 
                 {
                     $conn = getConnection();
-                    $stmt = $conn->prepare(SQL_UPDATE_BRAND);
+                    $stmt = $conn->prepare(SQL_UPDATE_CATEGORY);
 
                     $stmt->bindParam(":category_name", $category_name);
                     $stmt->bindParam(":category_thumbnail", $category_thumbnail);
@@ -109,13 +109,13 @@
                     <div class="mb-3">
                         <label class="form-label">Category Name</label>
                         <input type="text" class="form-control" name="category_name"
-                               value="<?= htmlspecialchars($editing_category["category_name"]) ?>" required>
+                               value="<?= htmlspecialchars($category_list["category_name"]) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail URL</label>
                         <input type="text" class="form-control" name="category_thumbnail"
-                               value="<?= htmlspecialchars($editing_category["category_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($category_list["category_thumbnail"]) ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Category</button>

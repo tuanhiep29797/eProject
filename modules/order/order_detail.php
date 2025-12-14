@@ -111,7 +111,7 @@
                                     <td><?= $row["order_id"] ?></td>
                                     <td><?= $row["product_title"] ?></td>
                                     <td>
-                                        <img src="<?= $row["product_thumbnail"] ?>" 
+                                        <img src="<?= BASE_URL . $row["product_thumbnail"] ?>" 
                                              style="width:60px; height:60px; object-fit:cover"
                                              class="rounded border">
                                     </td>
@@ -127,7 +127,7 @@
             </div>
         </div>
 
-        <a href="order.php" class="btn btn-secondary mt-3">
+        <a href="order.php" class="btn btn-secondary mb-4 mt-3 py-3 px-4">
             <i class="bi bi-arrow-left"></i> Back
         </a>
 

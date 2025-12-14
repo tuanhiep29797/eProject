@@ -168,6 +168,7 @@
 	//SQL GET TABLE
 
 	const SQL_GET_USER = "select * from user";
+	const SQL_GET_COUNT_USER = "select count(*) from user";
 
 	const SQL_SEARCH_USER = SQL_GET_USER . " where email = :account or username = :account";
 	const SQL_SEARCH_USER_BY_EMAIL = SQL_GET_USER . " where email = :email";
@@ -177,8 +178,8 @@
 	const SQL_GET_CATEGORY = "select * from category";
 	const SQL_GET_CATEGORY_BY_ID = SQL_GET_CATEGORY . " where category_id = :category_id";
 
-	const SQL_GET_BRAND = "select * from brand";
-	const SQL_GET_BRAND_BY_ID = SQL_GET_BRAND . " where brand_id = :brand_id";
+	const SQL_GET_BRAND = "select * from `brand`";
+	const SQL_GET_BRAND_BY_ID = "select * from `brand` where brand_id = :brand_id";
 
 	const SQL_GET_PRODUCT = "select * from product";
 	const SQL_GET_PRODUCT_BY_ID = SQL_GET_PRODUCT . " where product_id = :product_id";
@@ -244,6 +245,7 @@
 	";
 
 	const SQL_GET_ORDER = "select * from `order`";
+	const SQL_COUNT_ORDER = "select count(*) from `order`";
 	const SQL_GET_ORDER_BY_ID = SQL_GET_ORDER . " where order_id = :order_id";
 	const SQL_GET_ORDER_BY_USER = SQL_GET_ORDER . " where user_id = :user_id";
 

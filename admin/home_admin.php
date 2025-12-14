@@ -73,7 +73,7 @@ $conn = null;
         <div class="d-flex">
             <?php require_once("admin_side_bar.php"); ?>
 
-            <div class="py-4">
+            <div class="py-4 m-auto">
 
                 <!-- TITLE -->
                 <h2 class="text-center fw-bold mb-4">
@@ -85,11 +85,8 @@ $conn = null;
 
                     <!-- TOP BAR -->
                     <div class="d-flex justify-content-between align-items-center mb-4 ">
-
                         <!-- TODO: thay bằng tên admin từ PHP -->
                         <h3 class="fw-bold">Hello, Admin 👋</h3>
-
-
                     </div>
 
                     <!-- TOP FOUR CARDS -->

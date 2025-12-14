@@ -1,12 +1,31 @@
 <?php
     require_once (__DIR__."/../../database/dbhelper.php");
-    
+
+    $limit = 10;
+    $page = isset($_GET['page']) && is_numeric($_GET['page'])
+        ? max(1, (int)$_GET['page'])
+        : 1;
+    $offset = ($page - 1) * $limit;
+
+    $total_orders = 0;
+    $total_pages = 0;
+
     // connect database and get order table
     try
     {
         $conn = getConnection();
-        $stmt = $conn -> prepare(SQL_GET_ORDER . " order by order_id desc");
-        $stmt -> execute();
+
+        $stmt = $conn->prepare(SQL_COUNT_ORDER);
+        $stmt->execute();
+        $total_orders = $stmt->fetchColumn();
+        $total_pages = ceil($total_orders / $limit);
+
+        $stmt = $conn->prepare(
+            SQL_GET_ORDER . " ORDER BY order_id DESC LIMIT :limit OFFSET :offset"
+        );
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
 
         $result = $stmt -> setFetchMode(PDO::FETCH_ASSOC);
         $order_list = $stmt -> fetchAll();
@@ -136,8 +155,56 @@
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
-
             </table>
+            <?php if ($total_pages > 1): ?>
+            <nav class="mt-4">
+                <ul class="pagination justify-content-center">
+
+                    <!-- Previous -->
+                    <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">Previous</a>
+                    </li>
+
+                    <?php
+                    $start = max(1, $page - 2);
+                    $end   = min($total_pages, $page + 2);
+                    ?>
+
+                    <?php if ($start > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=1">1</a>
+                        </li>
+                        <?php if ($start > 2): ?>
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        <?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php for ($i = $start; $i <= $end; $i++): ?>
+                        <li class="page-item <?= $i == $page ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($end < $total_pages): ?>
+                        <?php if ($end < $total_pages - 1): ?>
+                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                        <?php endif; ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?= $total_pages ?>">
+                                <?= $total_pages ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+
+                    <!-- Next -->
+                    <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">Next</a>
+                    </li>
+
+                </ul>
+            </nav>
+            <?php endif; ?>
+
         </div>
         </form>
     </div>

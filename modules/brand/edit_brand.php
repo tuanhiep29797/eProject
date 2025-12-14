@@ -7,7 +7,7 @@
         exit;
     }
 
-    $brand_id = $_GET["id"];
+    $brand_id = $_GET["id"]; 
 
     //connection to database and get brand by id
     try 
@@ -18,7 +18,8 @@
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $brand_list = $stmt->fetchall();
+        $brand_list = $stmt->fetch();
+
 
         if ($brand_list == null || count($brand_list) == 0) {
             header("Location: brand.php");
@@ -107,13 +108,13 @@
                     <div class="mb-3">
                         <label class="form-label">Brand Name</label>
                         <input type="text" class="form-control" name="brand_name"
-                               value="<?= htmlspecialchars($editing_brand["brand_name"]) ?>" required>
+                               value="<?= htmlspecialchars($brand_list["brand_name"]) ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail URL</label>
                         <input type="text" class="form-control" name="brand_thumbnail"
-                               value="<?= htmlspecialchars($editing_brand["brand_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($brand_list["brand_thumbnail"]) ?>">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Brand</button>
