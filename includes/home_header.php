@@ -88,16 +88,14 @@ if (isset($_SESSION["user_id"])) {
                 </div>
 
                 <!-- menu -->
-                <div class="col-lg-8 col-sm-6 col-6">
+                <div class="col-lg-8 col-md-6 col-6">
                     <nav class="navbar navbar-expand-lg p-0">
 
-                        <button class="navbar-toggler" type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#mainNavbar">
+                        <button class="navbar-toggler" type="button" id="navbarToggler">
                             <i class="bi bi-list fs-2 text-dark"></i>
                         </button>
 
-                        <div class="collapse navbar-collapse" id="mainNavbar">
+                        <div class="navbar-collapse" id="mainNavbar">
                         <ul class="navbar-nav gap-3 mx-auto">
                             <li class="nav-item py-3 mx-2">
                                 <a class="nav-link text-success fw-bold" href="<?= BASE_URL?>pages/home_page.php">Home</a>
@@ -227,5 +225,23 @@ if (isset($_SESSION["user_id"])) {
     </header>
 
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+     
+     <script>
+        // Toggle navbar menu on mobile
+        document.getElementById('navbarToggler').addEventListener('click', function() {
+            const navbar = document.getElementById('mainNavbar');
+            navbar.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const navbar = document.getElementById('mainNavbar');
+            const toggler = document.getElementById('navbarToggler');
+            
+            if (!navbar.contains(e.target) && !toggler.contains(e.target)) {
+                navbar.classList.remove('show');
+            }
+        });
+     </script>
 </body>
 </html>
