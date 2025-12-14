@@ -71,8 +71,8 @@
             <p class="mb-4 text-white-50 mx-auto">
                 Where Light Becomes Art — A Touch That Illuminates Your Soul
             </p>
-            <div class="d-inline-block bg-white px-4 py-2 rounded-pill shadow-sm">
-                <a href="product.php" class="text-decoration-none text-dark fw-bold text-uppercase small">To Order <i class="bi bi-arrow-right ms-1"></i></a>
+            <div class="d-inline-block bg-white rounded-pill shadow-sm">
+                <a href="product.php" class="text-decoration-none text-dark fw-bold text-uppercase small"><button class='btn btn-light px-4 py-2 text-bold' style="border-radius: 20px;font-weight:bold;">Order <i class="bi bi-arrow-right ms-1"></i></button></a>
             </div>
         </div>
 
@@ -95,8 +95,8 @@
                     <p class="lh-xl mb-3">
                         Premium Quality: Every lighting product we offer undergoes rigorous inspection for material quality, durability, and lighting performance, ensuring lasting value for our customers.
                     </p>
-                    <div class="d-inline-block bg-dark px-4 py-2 rounded-pill shadow-sm">
-                        <a href="about.php" class="text-decoration-none text-white fw-bold text-uppercase small">About Us <i class="bi bi-arrow-right ms-1"></i></a>
+                    <div class="d-inline-block rounded-pill shadow-sm">
+                        <a href="about.php" class="text-decoration-none text-dark fw-bold text-uppercase small"><button class='btn btn-dark px-4 py-3 text-bold' style="border-radius: 20px;font-weight:bold;">About Us <i class="bi bi-arrow-right ms-1"></i></button></a>
                     </div>
                 </div>
             </div>
