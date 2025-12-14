@@ -1,5 +1,5 @@
 <?php if (!empty($breadcrumb)): ?>
-    <div class="container mt-3">
+    <div class="mt-3">
         <nav aria-label="breadcrumb" class="mt-3">
             <ol class="breadcrumb align-items-center">
 
