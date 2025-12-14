@@ -189,7 +189,6 @@
 	from product p 
 	inner join category c on p.category_id = c.category_id
 	inner join brand b on p.brand_id = b.brand_id
-	order by p.product_id
 	";
 
 	const SQL_GET_PRODUCT_AS_C_AND_B_BY_ID = SQL_GET_PRODUCT_AS_CAT_AND_BRAND . " where p.product_id = :product_id";
