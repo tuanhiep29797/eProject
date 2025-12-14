@@ -102,3 +102,6 @@ body {
   border-radius: 6px;
   border: 1px solid #ddd;
 }
+.table-container {
+    min-width: 0;
+}
