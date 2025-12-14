@@ -36,8 +36,14 @@
     <?php
         require_once __DIR__."/../../admin/admin_header.php"; 
     ?>
+    <div class="container-fluid">
+        <div class="row g-0">
+            <div class="col-auto bg-dark">
+                <?php require_once(__DIR__ . "/../../admin/admin_side_bar.php"); ?>
+            </div>
 
-    <!-- breadcrumb -->
+    <!-- body order management page -->
+    <div class="col overflow-hidden p-4">
     <?php
         $breadcrumb = 
         [
@@ -46,9 +52,6 @@
         ];
         require_once __DIR__."/../../admin/admin_breadcrumb.php"; 
     ?>
-
-    <!-- body order management page -->
-    <div class="container table-container mt-4">
         <form method="post" action = 'save_order.php' >
         
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -89,7 +92,7 @@
                             <td>$<?= number_format($item["total_amount"],2) ?></td>
                             <td><?= $item["receiver"] ?></td>
                             <td><?= $item["phone_number"] ?></td>
-                            <td><?= $item["address"] ?></td>
+                            <td style="width: 230px;"><?= $item["address"] ?></td>
                             <td>    
                                 <select class="form-select" name="order_status[]"
                                     style="color:<?= isset($selected["pending"]) || isset($selected["cancelled"]) ? 
@@ -137,6 +140,8 @@
             </table>
         </div>
         </form>
+    </div>
+    </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" ></script>
