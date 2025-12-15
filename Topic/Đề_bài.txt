@@ -1,0 +1,67 @@
+The portal will be designed as a Single-Page-Application and responsive Website with
+a set of pages and menus that represent choice of activities to be performed. The
+pages, menus, and other visual elements must be designed in a visually appealing
+manner with attractive fonts, colors, and animations.
+
+All of these should also be laid out in a responsive manner
+The Web site is to be created based on the following requirements.
+
+Cổng thông tin sẽ được thiết kế dưới dạng Ứng dụng Một Trang và Website đáp ứng, với
+một tập hợp các trang và menu thể hiện các hoạt động được lựa chọn.
+Các trang, menu và các yếu tố trực quan khác phải được thiết kế một cách hấp dẫn, với phông chữ, màu sắc và hình ảnh động bắt mắt.
+
+Tất cả những yếu tố này cũng phải được trình bày theo cách đáp ứng.
+Trang web sẽ được xây dựng dựa trên các yêu cầu sau.
+
+1. The Top of the Page should be presented with a suitable logo and images
+   of Lights &amp; Chandeliers.
+2. The site must contain the various sections such as CEILING LIGHTS, WALL
+   LIGHTS, LAMPS, OUTDOOR LIGHTS, FANS and HOME ACCENTS etc.
+3. Section on LED Lights should be provided with various products listed such
+   as Spot Lights, Decoration Lights, Smart Lights etc.
+4. Specification and Pricing of Lights should be added along with the images.
+5. A menu on the Top with all sections listed should be provided.
+
+6. Website should provide section filter for various brands offered in the
+   store.
+7. Gallery section should be added for viewing different images.
+8. Feedback must be allowed to enter by the viewer
+9. Site map, Gallery, About us, FAQ link, Contact us must be added.
+10. The complete description must be allowed to get download as pdf or doc
+    file.
+11. Section for various offers in the store should be provided with listing of
+    offers with details.
+
+1. Đầu trang nên được trình bày logo và hình ảnh phù hợp của Đèn & Đèn chùm.
+2. Trang web phải bao gồm các mục khác nhau như ĐÈN TRẦN, ĐÈN TƯỜNG, ĐÈN, ĐÈN NGOÀI TRỜI, QUẠT và ĐIỂM NHẤN NHÀ, v.v.
+3. Mục Đèn LED nên được cung cấp với các sản phẩm khác nhau được liệt kê như Đèn chiếu điểm, Đèn trang trí, Đèn thông minh, v.v.
+4. Thông số kỹ thuật và giá cả của đèn nên được thêm vào cùng với hình ảnh.
+5. Một menu ở đầu trang liệt kê tất cả các mục.
+
+6. Trang web nên cung cấp bộ lọc mục cho các thương hiệu khác nhau được cung cấp trong cửa hàng.
+7. Nên thêm mục Thư viện ảnh để xem các hình ảnh khác nhau.
+8. Người xem phải cho phép phản hồi.
+9. Cần thêm Sơ đồ trang web, Thư viện ảnh, Giới thiệu, Liên kết Câu hỏi thường gặp, Liên hệ.
+10. Phải cho phép tải xuống mô tả đầy đủ dưới dạng tệp pdf hoặc doc.
+
+11. Phần dành cho các ưu đãi khác nhau trong cửa hàng nên được cung cấp kèm danh sách
+ưu đãi kèm thông tin chi tiết.
+
+Over and above this, the portal should implement the following functionalities:
+
+ Display a continuous scrolling ticker at the bottom of the page with current date,
+time, and location (hint: Use geolocation features of HTML5).
+ Display a visitor count at the top right corner of the page beside a logo image.
+ The menu options should change color on hover and also after clicking.
+ Fade in and fade out options can be used for the menus.
+
+
+Ngoài ra, cổng thông tin nên triển khai các chức năng sau:
+
+ Hiển thị một thanh cuộn liên tục ở cuối trang với ngày, giờ và vị trí hiện tại (gợi ý: Sử dụng tính năng định vị địa lý của HTML5).
+
+ Hiển thị số lượng khách truy cập ở góc trên bên phải của trang, bên cạnh hình ảnh logo.
+
+ Các tùy chọn menu nên đổi màu khi di chuột qua và sau khi nhấp vào.
+
+ Có thể sử dụng tùy chọn mờ dần và mờ dần cho các menu.
