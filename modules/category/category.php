@@ -22,7 +22,7 @@ try {
 
     // lấy category theo trang
     $stmt = $conn->prepare(
-        SQL_GET_CATEGORY . " ORDER BY category_id DESC LIMIT :limit OFFSET :offset"
+        SQL_GET_CATEGORY . " order by category_id desc limit :limit offset :offset"
     );
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
     $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);

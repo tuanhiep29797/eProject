@@ -18,21 +18,21 @@
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $product_list = $stmt->fetchall();
+        $product_list = $stmt->fetch();
         
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_CATEGORY);
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $category_list = $stmt->fetchall();
+        $category_list = $stmt->fetchAll();
 
         $conn = getConnection();
         $stmt = $conn->prepare(SQL_GET_BRAND);
         $stmt->execute();
 
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        $brand_list = $stmt->fetchall();
+        $brand_list = $stmt->fetchAll();
 
         if ($product_list == null || count($product_list) == 0) 
         {
@@ -41,8 +41,6 @@
         }
         else
         {
-            $editing_product = $product_list[0];
-            
             if (!empty($_POST)) 
             {   
                 //get new data
@@ -138,19 +136,19 @@
                     <div class="mb-3">
                         <label class="form-label">Title</label>
                         <input type="text" class="form-control" name="product_title"
-                               value="<?= htmlspecialchars($editing_product["product_title"]) ?>">
+                               value="<?= htmlspecialchars($product_list["product_title"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Description</label>
                         <input type="text" class="form-control" name="product_description"
-                               value="<?= htmlspecialchars($editing_product["product_description"]) ?>">
+                               value="<?= htmlspecialchars($product_list["product_description"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Price</label>
                         <input type="number" class="form-control" name="product_price"
-                               value="<?= htmlspecialchars($editing_product["product_price"]) ?>">
+                               value="<?= htmlspecialchars($product_list["product_price"]) ?>">
                     </div>
 
                         <label class="form-label">Content</label>
@@ -159,25 +157,25 @@
                             name="product_content"
                             class="form-control"
                             rows="10"
-                        ><?= $editing_product["product_content"] ?></textarea>
+                        ><?= $product_list["product_content"] ?></textarea>
 
                     <div class="mb-3">
                         <label class="form-label">Quantity</label>
                         <input type="number" class="form-control" name="product_quantity"
-                               value="<?= htmlspecialchars($editing_product["product_quantity"]) ?>">
+                               value="<?= htmlspecialchars($product_list["product_quantity"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Thumbnail</label>
                         <input type="text" class="form-control" name="product_thumbnail"
-                               value="<?= htmlspecialchars($editing_product["product_thumbnail"]) ?>">
+                               value="<?= htmlspecialchars($product_list["product_thumbnail"]) ?>">
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Category ID</label>
                         <select class="form-select" name="category_id">
                             <?php foreach($category_list as $item): ?>
-                                <option value="<?= $item["category_id"]?>" <?= $editing_product["category_id"] == $item["category_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["category_name"]) ?></option>
+                                <option value="<?= $item["category_id"]?>" <?= $product_list["category_id"] == $item["category_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["category_name"]) ?></option>
                             <?php endforeach;?>
                         </select>
                     </div>
@@ -186,7 +184,7 @@
                         <label class="form-label">Brand ID</label>
                         <select class="form-select" name="brand_id">
                             <?php foreach($brand_list as $item): ?>
-                                <option value="<?= $item["brand_id"]?>" <?= $editing_product["brand_id"] == $item["brand_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["brand_name"]) ?></option>
+                                <option value="<?= $item["brand_id"]?>" <?= $product_list["brand_id"] == $item["brand_id"] ? "selected" : "" ?>><?= htmlspecialchars($item["brand_name"]) ?></option>
                             <?php endforeach;?>
                         </select>
                     </div>

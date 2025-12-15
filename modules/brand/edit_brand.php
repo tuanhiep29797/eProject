@@ -27,7 +27,7 @@
         }
         else
         {
-            $editing_brand = $banrd_list[0];
+            $editing_brand = $brand_list[0];
             if (!empty($_POST)) 
             {   
                 //get new data

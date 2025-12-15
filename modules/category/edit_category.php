@@ -27,7 +27,6 @@
         }
         else
         {
-            $editing_category = $category_list[0];
             if (!empty($_POST)) 
             {   
                 //get new data
