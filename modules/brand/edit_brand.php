@@ -117,7 +117,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Brand</button>
-                    <a href="<?= BASE_URL ?>admi/brand" class="btn btn-secondary ms-2">Cancel</a>
+                    <a href="<?= BASE_URL ?>admin/brand" class="btn btn-secondary ms-2">Cancel</a>
 
                 </form>
 
