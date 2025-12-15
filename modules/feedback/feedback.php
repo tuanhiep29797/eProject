@@ -1,6 +1,17 @@
 <?php
 require_once(__DIR__ . "/../../database/dbhelper.php");
 
+//get all feedback
+$limit = 10;
+$page = isset($_GET['page']) && is_numeric($_GET['page'])
+    ? max(1, (int)$_GET['page'])
+    : 1;
+
+$offset = ($page - 1) * $limit;
+
+$total_feedback = 0;
+$total_pages = 0;
+
 if (isset($_GET["read_id"])) {
     $read_id = $_GET["read_id"];
 
@@ -14,23 +25,12 @@ if (isset($_GET["read_id"])) {
         $stmt->bindParam(":feedback_id", $read_id);
         $stmt->execute();
 
-        header("Location: feedback.php");
+        header("Location: feedback.php?page=$page");
         exit;
     } catch (PDOException $e) {
         echo $e->getMessage();
     }
 }
-
-//get all feedback
-$limit = 10;
-$page = isset($_GET['page']) && is_numeric($_GET['page'])
-    ? max(1, (int)$_GET['page'])
-    : 1;
-
-$offset = ($page - 1) * $limit;
-
-$total_feedback = 0;
-$total_pages = 0;
 
 try {
     $conn = getConnection();
