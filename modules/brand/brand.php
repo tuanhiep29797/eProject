@@ -91,7 +91,7 @@ $conn = null;
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Thumbnail</th>
-                                <th>Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
 
@@ -99,7 +99,6 @@ $conn = null;
                             <?php foreach ($data_list as $item): ?>
                                 <tr>
                                     <th><?= $item['brand_id'] ?></th>
-
                                     <td><?= $item['brand_name'] ?></td>
 
                                     <td>

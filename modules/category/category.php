@@ -91,7 +91,7 @@ $conn = null;
                                 <th>ID</th>
                                 <th>Name</th>
                                 <th>Thumbnail</th>
-                                <th>Action</th>
+                                <th style="width: 130px;">Action</th>
                             </tr>
                         </thead>
 

@@ -14,7 +14,7 @@
             $stmt->execute();
 
             $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
-            $userList = $stmt->fetchAll();
+            $user_list = $stmt->fetchAll();
         } 
         catch (PDOException $e) 
         {
@@ -39,7 +39,7 @@
     
     if (!empty($_POST)) 
     {
-        $user_id = $_SESSION["id"];
+        $user_id = $_SESSION["user_id"];
         // get data from form
         $fullname     = $_POST["fullname"];
         $username     = $_POST["username"];
@@ -125,7 +125,7 @@
 
                 <!-- add form -->
                 <form method="post" class="card-form">
-                <?php foreach ($userList as $item): ?>
+                <?php foreach ($user_list as $item): ?>
 
                     <div class="mb-3">
                         <label class="form-label">Fullname</label>

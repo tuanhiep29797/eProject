@@ -103,9 +103,9 @@ if (!empty($_POST)) {
 
         <!-- register start  -->
         <div class="container">
-            <div class="row mt-3">
+            <div class="row my-3">
                 <div class="col-lg-5 col-sm-12 col-md-6 col-12" style="margin:auto;">
-                    <div class="login-form wpx mt-4">
+                    <div class="login-form wpx my-4 ">
                         <h3 class="text-center pt-3 text-uppercase">Register</h3>
                         <div class="form-login ">
                             <form method="POST">
@@ -143,7 +143,7 @@ if (!empty($_POST)) {
             </div>
         </div>
     </div>
-
+                                            
     <!-- include footer -->
     <?php
         require_once __DIR__ . "/../includes/home_footer.php";

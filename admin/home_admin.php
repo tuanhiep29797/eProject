@@ -128,20 +128,22 @@ $conn = null;
                         <!-- TODO: gắn doanh thu từ PHP -->
                         <div class="col">
                             <a href='<?= BASE_URL ?>admin/order' class='text-decoration-none text-dark'>
-
                             <div class="card dashboard-card p-3">
                                 <div class="icon-box green"><i class="bi bi-cash-stack"></i></div>
                                 <h6 class="mt-2">Total Amount</h6>
                                 <p class="value">$<?= number_format($total_amount,2) ?></p>
                             </div>
+                            </a>
                         </div>
 
                     </div>
 
                     <div class="row mt-4 g-4">
-                        <div class="col-xl-8">
+                        <div class="col-xl-8"> 
                             <div class="card p-3 text-left" style="height: auto;">
-                                <h5 class="fw-bold mb-4">All Orders</h5>
+                                <a href='<?= BASE_URL ?>admin/order' class='text-decoration-none text-dark'>
+                                    <h5 class="fw-bold mb-4">All Orders</h5>
+                                </a>
                                 <table class="table table-bordered table-hover table-striped align-middle">
                                     <thead class="table-dark">
                                         <tr>
@@ -200,7 +202,9 @@ $conn = null;
                         <!-- Chart area 2 -->
                         <div class="col-xl-4">
                             <div class="card text-left p-3" style="height: auto;">
-                                <h5 class="fw-bold mb-4">New Feedback</h5>
+                                <a href='<?= BASE_URL ?>admin/feedback' class='text-decoration-none text-dark'>
+                                    <h5 class="fw-bold mb-4">New Feedback</h5>
+                                </a>
                                 <table class="table table-bordered table-hover table-striped align-middle">
                                     <thead class="table-dark">
                                         <tr>
@@ -227,17 +231,12 @@ $conn = null;
 
                                         <?php endforeach; ?>
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
-
                     </div>
-
                 </main>
             </div>
-
-
         </div>
     </div>
 

@@ -91,7 +91,7 @@
             <h3 class="text-white mb-4 fw-bold text-uppercase">Introduction Video</h3>
             <p class="text-white-50 mb-5">Discover our showroom and working process</p>
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/UH27YDBjNFU?list=RDVFjb8lDVW04" title="[Vietsub - Pinyin] Tháp Rơi Tự Do - LBI Lợi Bỉ | 跳楼机 - LBI利比" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                <iframe width="916" height="515" src="https://www.youtube.com/embed/rKX383X8lGU" title="Design Expert’s Guide to Lighting Your Interior | Tricks of the Trade" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
     </div>
