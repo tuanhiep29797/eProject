@@ -1,0 +1,54 @@
+RewriteEngine On
+RewriteBase /ChicLightingAndDesign/
+
+RewriteRule ^home$ pages/home_page.php [L]
+
+RewriteRule ^about-us$ pages/about.php [L]
+RewriteRule ^gallery$ pages/gallery.php [L]
+RewriteRule ^contact-us$ pages/contact.php [L]
+
+RewriteRule ^product$ pages/product.php [L,QSA]
+RewriteRule ^category$ pages/category.php [L,QSA]
+RewriteRule ^brand$ pages/brand.php [L,QSA]
+
+RewriteRule ^product/([a-zA-Z0-9\-]+)$ pages/product_detail.php?slug=$1 [L,QSA]
+
+RewriteRule ^user/infomation$ pages/account.php [L]
+RewriteRule ^user/cart$ pages/cart.php [L]
+RewriteRule ^check-out$ pages/check_out.php [L]
+RewriteRule ^user/edit$ pages/edit_account.php [L]
+RewriteRule ^user/order-history$ pages/order_history.php [L]
+
+
+RewriteRule ^admin/dashboard$ admin/home_admin.php [L]
+RewriteRule ^login$ admin/login.php [L]
+RewriteRule ^register$ admin/register.php [L]
+RewriteRule ^logout$ admin/logout.php [L]
+
+RewriteRule ^admin/category$ modules/category/category.php [L]
+RewriteRule ^admin/category/create$ modules/category/add_category.php [L]
+RewriteRule ^admin/category/edit/([0-9]+)$ modules/category/edit_category.php?id=$1 [L,QSA]
+RewriteRule ^admin/category/delete/([0-9]+)$ modules/category/delete_category.php?id=$1 [L,QSA]
+
+RewriteRule ^admin/brand$ modules/brand/brand.php [L]
+RewriteRule ^admin/brand/create$ modules/brand/add_brand.php [L]
+RewriteRule ^admin/brand/edit/([0-9]+)$ modules/brand/edit_brand.php?id=$1 [L,QSA]
+RewriteRule ^admin/brand/delete/([0-9]+)$ modules/brand/delete_brand.php?id=$1 [L,QSA]
+
+RewriteRule ^admin/product$ modules/product/product.php [L]
+RewriteRule ^admin/product/create$ modules/product/add_product.php [L]
+RewriteRule ^admin/product/edit/([0-9]+)$ modules/product/edit_product.php?id=$1 [L,QSA]
+RewriteRule ^admin/product/delete/([0-9]+)$ modules/product/delete_product.php?id=$1 [L,QSA]
+
+RewriteRule ^admin/order$ modules/order/order.php [L]
+RewriteRule ^admin/order/order-detail/([0-9]+)$ modules/order/order_detail.php?id=$1 [L]
+RewriteRule ^admin/order/edit/([0-9]+)$ modules/order/edit_order.php?id=$1 [L,QSA]
+RewriteRule ^admin/order/save$ modules/order/save_order.php [L]
+
+RewriteRule ^admin/user$ modules/user/user.php [L]
+RewriteRule ^admin/user/create$ modules/user/add_user.php [L]
+RewriteRule ^admin/user/edit/([0-9]+)$ modules/user/edit_user.php?id=$1 [L,QSA]
+RewriteRule ^admin/user/delete/([0-9]+)$ modules/user/delete_user.php?id=$1 [L,QSA]
+
+RewriteRule ^admin/feedback$ modules/feedback/feedback.php [L]
+
