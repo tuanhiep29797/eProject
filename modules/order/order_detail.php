@@ -19,7 +19,8 @@
         $stmt = $conn->prepare(SQL_GET_ORDER_DETAIL);
         $stmt->bindParam(":order_id", $order_id);
         $stmt->execute();
-        $order_detail = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $order_detail = $stmt->fetchAll();
 
     } catch (PDOException $e) {
         echo "Error: " . $e->getMessage();
