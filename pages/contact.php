@@ -97,7 +97,7 @@
                         
                         <ul class="info-list">
                             <li class="info-item-vertical">
-                            <img src="../assets/img/home/img_contact_us_instagram.png" class="img-icon-custom" alt="Address">
+                            <img src="<?= BASE_URL ?>assets/img/home/img_contact_us_instagram.png" class="img-icon-custom" alt="Address">
                                 <div class="info-content">
                                     <h5>Info</h5>
                                     <p>Chic Lighting & Design</p> 
@@ -105,7 +105,7 @@
                                 </div>                           
                             </li>
                             <li class="info-item-vertical">
-                                <img src="../assets/img/home/img_contact_us_map.png" class="img-icon-custom" alt="Address">
+                                <img src="<?= BASE_URL ?>assets/img/home/img_contact_us_map.png" class="img-icon-custom" alt="Address">
                                 <div class="info-content">
                                     <h5>Address</h5>
                                     <p>No. 160, Tran Duy Hung Street, Hanoi City</p>
@@ -113,7 +113,7 @@
                             </li>
 
                             <li class="info-item-vertical">
-                                <img src="../assets/img/home/img_contact_us_whatsapp.png" class="img-icon-custom" alt="Phone">
+                                <img src="<?= BASE_URL ?>assets/img/home/img_contact_us_whatsapp.png" class="img-icon-custom" alt="Phone">
                                 <div class="info-content">
                                     <h5>Phone</h5>
                                     <p>(+84) 123 456 789</p>
