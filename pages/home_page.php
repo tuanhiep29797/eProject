@@ -72,10 +72,9 @@
                 Where Light Becomes Art — A Touch That Illuminates Your Soul
             </p>
             <div class="d-inline-block bg-white rounded-pill shadow-sm">
-                <a href="product.php" class="text-decoration-none text-dark fw-bold text-uppercase small"><button class='btn btn-light px-4 py-2 text-bold' style="border-radius: 20px;font-weight:bold;">Order <i class="bi bi-arrow-right ms-1"></i></button></a>
+                <a href="product.php" class="text-decoration-none text-dark fw-bold text-uppercase small"><button class='btn btn-light px-4 py-2 text-bold' style="border-radius: 20px;font-weight:bold;">To Order <i class="bi bi-arrow-right ms-1"></i></button></a>
             </div>
         </div>
-
     </div>
 
     <!-- body -->
