@@ -75,7 +75,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>assets/css/modules.css?v=<?= time() ?>">
     <link rel="website icon" type="png" href="<?= BASE_URL ?>assets/img/home/logo.png?v=<?= time() ?>">
-    <script src="../js/tinymce/tinymce.min.js"></script>
+    <script src="<?= BASE_URL ?>modules/js/tinymce/tinymce.min.js"></script>
 </head>
 
 <body>
