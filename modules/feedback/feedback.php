@@ -132,7 +132,7 @@ $conn = null;
 
                                     <td>
                                         <?php if ($item["status"] === "new"): ?>
-                                            <a href="feedback.php?read_id=<?= $item['feedback_id'] ?>"
+                                            <a href="feedback.php?page=<?= $page ?>&read_id=<?= $item['feedback_id'] ?>"
                                                 class="btn btn-sm btn-primary">
                                                 <i class="bi bi-check2-circle"></i> Mark as Read
                                             </a>
