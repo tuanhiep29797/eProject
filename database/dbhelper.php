@@ -23,8 +23,6 @@
 	//SQL create database
 	const SQL_CREATE_DATABASE = "create database if not exists db_cl_and_d";
 
-	const SQL_LOGIN = "select * from user where email = :email and password = :password";
-
 	//SQL create table
 	const SQL_CREATE_TABLE_USER = 
 	"create table if not exists user 
