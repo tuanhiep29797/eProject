@@ -14,9 +14,10 @@
         $category_list = [];
         
         foreach ($header_list as $item)
-        {   $category_list[$item["category_id"]]["category_name"] = $item["category_name"];
+        {   
+            $category_list[$item["category_id"]]["category_name"] = $item["category_name"];
             $category_list[$item["category_id"]]["product"][$item["product_slug"]] = $item["product_title"];
-        } 
+        }
     }
     catch (PDOException $e) 
     {

@@ -7,9 +7,9 @@ RewriteRule ^about-us$ pages/about.php [L]
 RewriteRule ^gallery$ pages/gallery.php [L]
 RewriteRule ^contact-us$ pages/contact.php [L]
 
-RewriteRule ^product$ pages/product.php [L,QSA]
-RewriteRule ^category$ pages/category.php [L,QSA]
-RewriteRule ^brand$ pages/brand.php [L,QSA]
+RewriteRule ^product$ pages/product.php [L]
+RewriteRule ^category$ pages/category.php [L]
+RewriteRule ^brand$ pages/brand.php [L]
 
 RewriteRule ^product/([a-zA-Z0-9\-]+)$ pages/product_detail.php?slug=$1 [L,QSA]
 

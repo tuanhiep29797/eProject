@@ -24,7 +24,6 @@
             $stmt->execute();
         }
 
-
         header("Location:" . BASE_URL . "admin/order");
         exit;
     }

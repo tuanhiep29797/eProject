@@ -110,7 +110,7 @@
             <div class="col-6 col-md-4 col-xl-2 text-center">
 
                 <div class="brand-card product-card bg-white rounded shadow-sm h-100 d-flex flex-column align-items-center justify-content-center">
-                    <a href="<?= BASE_URL ?>prand?brand%5B%5D=<?= $item["brand_id"]?>&action=filter"
+                    <a href="<?= BASE_URL ?>brand?brand%5B%5D=<?= $item["brand_id"]?>&action=filter"
                        class="fw-semibold text-decoration-none brand-link text-dark p-3">
                     <img src="<?= BASE_URL . $item["brand_thumbnail"] ?>"
                          alt="<?= $item["brand_name"] ?>"
